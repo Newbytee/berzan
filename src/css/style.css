@@ -56,9 +56,25 @@ nav {
 
 @media screen and (orientation: portrait) {
     
+    .navButton {
+        
+        display: none;
+        
+    }
+    
     #wrapper {
     
         width: 100%;
+        
+    }
+    
+    #identity {
+        
+        text-align: center;
+        
+        padding-top: 2vh;
+        
+        color: #FFFFFF;
         
     }
     
