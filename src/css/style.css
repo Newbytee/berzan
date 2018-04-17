@@ -9,15 +9,46 @@ nav {
 
 #wrapper {
     
+    margin-left: auto;
+    margin-right: auto;
     
+}
+
+#schedule {
+    
+    width: 100%;
     
 }
 
 @media screen and (orientation: landscape) {
     
+    nav {
+        
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: stretch;
+        
+    }
+    
+    .navButton {
+        
+        display: flex;
+        align-items: center;
+        
+        margin: 5px;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 10px;
+        
+        color: #FFFFFF;
+        background-color: #123456;
+        
+    }
+    
     #wrapper {
     
-        width: 60%;
+        width: 80%;
         
     }
     
