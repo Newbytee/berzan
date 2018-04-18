@@ -20,6 +20,15 @@ nav {
     
 }
 
+#identity {
+    
+    padding-top: 1.5vh;
+    font-size: 3vh;
+        
+    color: #FFFFFF;
+    
+}
+
 @media screen and (orientation: landscape) {
     
     nav {
@@ -52,6 +61,14 @@ nav {
         
     }
     
+    #identity {
+        
+        position: absolute;
+        
+        right: 1%;
+        
+    }
+    
 }
 
 @media screen and (orientation: portrait) {
@@ -71,10 +88,6 @@ nav {
     #identity {
         
         text-align: center;
-        
-        padding-top: 2vh;
-        
-        color: #FFFFFF;
         
     }
     
