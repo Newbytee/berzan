@@ -56,16 +56,23 @@ input {
 
     .navButton {
 
+        transition: 0.5s;
+
         display: flex;
         align-items: center;
         cursor: pointer;
 
-        margin: 5px;
-        padding-left: 5px;
-        padding-right: 5px;
-        border-radius: 10px;
+        margin: 0 5px;
+        padding: 0 15px;
 
         color: #FFFFFF;
+
+    }
+
+    .navButton:hover {
+
+        transition: 0.5s;
+
         background-color: #123456;
 
     }
