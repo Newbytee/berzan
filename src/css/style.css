@@ -1,101 +1,101 @@
 nav {
-    
+
     height: 8vh;
     width: 100%;
 
     background-color: #490A3D;
-    
+
 }
 
 #wrapper {
-    
+
     margin-left: auto;
     margin-right: auto;
-    
+
 }
 
 #schedule {
-    
+
     width: 100%;
-    
+
 }
 
 #identity {
-    
+
     padding-top: 1.5vh;
     font-size: 3vh;
-        
-    color: #FFFFFF;
     
+    color: #FFFFFF;
+
 }
 
 #searchClass {
-    
+
     cursor: pointer;
-    
+
 }
 
 @media screen and (orientation: landscape) {
-    
+
     nav {
-        
+
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: stretch;
-        
+
     }
-    
+
     .navButton {
-        
+
         display: flex;
         align-items: center;
         cursor: pointer;
-        
+
         margin: 5px;
         padding-left: 5px;
         padding-right: 5px;
         border-radius: 10px;
-        
+
         color: #FFFFFF;
         background-color: #123456;
-        
+
     }
-    
+
     #wrapper {
-    
+
         width: 80%;
-        
+
     }
-    
+
     #identity {
         
         position: absolute;
-        
+
         right: 1%;
-        
+
     }
-    
+
 }
 
 @media screen and (orientation: portrait) {
-    
+
     .navButton {
-        
+
         display: none;
-        
+
     }
-    
+
     #wrapper {
-    
+
         width: 100%;
-        
+
     }
-    
+
     #identity {
-        
+
         text-align: center;
-        
+
     }
-    
+
 }
