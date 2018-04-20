@@ -29,6 +29,12 @@ nav {
     
 }
 
+#searchClass {
+    
+    cursor: pointer;
+    
+}
+
 @media screen and (orientation: landscape) {
     
     nav {
