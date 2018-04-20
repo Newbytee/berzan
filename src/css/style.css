@@ -7,6 +7,13 @@ nav {
 
 }
 
+input {
+    
+    width: 20%;
+    max-width: 100px;
+    
+}
+
 #wrapper {
 
     margin-left: auto;
