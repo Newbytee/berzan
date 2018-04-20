@@ -44,6 +44,7 @@ nav {
         
         display: flex;
         align-items: center;
+        cursor: pointer;
         
         margin: 5px;
         padding-left: 5px;

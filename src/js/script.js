@@ -15,6 +15,19 @@ let schedule = document.getElementById("schedule");
 let viewScheduleButton = document.getElementById("searchClass");
 let viewScheduleField = document.getElementById("classNameField");
 let viewScheduleWeekField = document.getElementById("weekNumberField");
+let navigationButtons = document.getElementsByClassName("navButton");
+let nNavigationButtons = navigationButtons.length;
+
+for (let i = 0; i < nNavigationButtons; i++) {
+
+    navigationButtons[i].addEventListener("click", function() {
+
+        alert("hi");
+        //open settings
+
+    });
+
+}
 
 if (!(localStorage.getItem("savedClassName") === null)) {
     
