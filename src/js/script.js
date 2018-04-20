@@ -29,6 +29,12 @@ for (let i = 0; i < nNavigationButtons; i++) {
 
 }
 
+viewScheduleButton.addEventListener("click", function() {
+    
+    changeSchedule();
+    
+});
+
 if (!(localStorage.getItem("savedClassName") === null)) {
     
     className = localStorage.getItem("savedClassName");
@@ -36,7 +42,7 @@ if (!(localStorage.getItem("savedClassName") === null)) {
 } else {
     
     alert("Du har inte ställt in en standardklass att visa, detta kan göras i inställningarna");
-    
+
 }
 
 function changeSchedule() {
