@@ -5,6 +5,7 @@ Date.prototype.getWeek = function() {
     return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
 };
 
+let iframeContent = document.getElementById("contentIframe");
 let firstLoad = true;
 let date = new Date();
 let currentPage;
@@ -12,10 +13,7 @@ let className = "Te16G";
 let day = date.getDay();
 let week = date.getWeek();
 let url;
-let schedule = document.getElementById("schedule");
-let viewScheduleButton = document.getElementById("searchClass");
-let viewScheduleField = document.getElementById("classNameField");
-let viewScheduleWeekField = document.getElementById("weekNumberField");
+let titleName = document.getElementById("titleName");
 let navigationButtons = document.getElementsByClassName("navButton");
 let contentPages = document.getElementsByClassName("contentPage");
 let nNavigationButtons = navigationButtons.length;
@@ -59,8 +57,6 @@ if (!(localStorage.getItem("savedClassName") === null)) {
 
 }
 
-contentPages[currentPage].style.display = "block";
-
 function changeSchedule() {
 
     try {
@@ -98,13 +94,67 @@ function changePage(pageNumber) {
         
         case 0:
             history.pushState(stateObj, "Schema", "schedule.html");
+            titleName.innerHTML = "Schema";
+            drawPage(0);
             break;
         case 1:
             history.pushState(stateObj, "Inställningar", "settings.html");
+            titleName.innerHTML = "Inställningar";
+            drawPage(1);
             break;
         
     }
     
 }
 
+function drawPage(number) {
+    
+    for (let i = 0; i < nContentPages; i++) {
+        
+        contentPages[i].style.display = (i === number ? "block" : "none");
+        
+    }
+    
+}
+
+function loadPage(number) {
+    
+    let iframeDocument = iframeContent.contentDocument || iframeContent.contentWindow.document;
+    let schedule = iframeDocument.getElementById("schedule");
+    let viewScheduleButton = iframeDocument.getElementById("searchClass");
+    let viewScheduleField = iframeDocument.getElementById("classNameField");
+    let viewScheduleWeekField = iframeDocument.getElementById("weekNumberField");
+    
+    function changeSchedule() {
+
+    try {
+        
+        week = viewScheduleWeekField.value;
+        
+    } catch (e) {
+        
+        console.log(e);
+        
+    }
+    
+    if (week === "") week = date.getWeek();
+    
+    if (!(firstLoad)) {
+        
+        className = viewScheduleField.value;
+        
+    } else {
+        
+        firstLoad = false;
+        
+    }
+    
+    url = "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&id=" + className + "&period=&week=" + week + "&colors=32&day=0&width=" + "1000" + "&height=" + "1000" + "";
+    schedule.src = url;
+
+    }
+    
+}
+
+changePage(1);
 changeSchedule();
