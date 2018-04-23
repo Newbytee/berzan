@@ -19,6 +19,15 @@ let contentPages = document.getElementsByClassName("contentPage");
 let nNavigationButtons = navigationButtons.length;
 let nContentPages = contentPages.length;
 
+iframeContent.onload = function(argument) {
+
+    let iFrameID = document.getElementById('contentIframe');
+        if(iFrameID) {
+            iFrameID.height = "";
+            iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
+    
+};
+
 for (let i = 0; i < nNavigationButtons; i++) {
 
     navigationButtons[i].addEventListener("click", function() {
@@ -107,7 +116,7 @@ function changePage(pageNumber) {
     
 }
 
-function drawPage(number) {
+/*function drawPage(number) {
     
     for (let i = 0; i < nContentPages; i++) {
         
@@ -115,7 +124,7 @@ function drawPage(number) {
         
     }
     
-}
+}*/
 
 function loadPage(number) {
     
@@ -125,7 +134,15 @@ function loadPage(number) {
     let viewScheduleField = iframeDocument.getElementById("classNameField");
     let viewScheduleWeekField = iframeDocument.getElementById("weekNumberField");
     
-    function changeSchedule() {
+}
+
+function changeSchedule() {
+    
+    let iframeDocument = iframeContent.contentDocument || iframeContent.contentWindow.document;
+    let schedule = iframeDocument.getElementById("schedule");
+    let viewScheduleButton = iframeDocument.getElementById("searchClass");
+    let viewScheduleField = iframeDocument.getElementById("classNameField");
+    let viewScheduleWeekField = iframeDocument.getElementById("weekNumberField");
 
     try {
         
@@ -152,8 +169,6 @@ function loadPage(number) {
     url = "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&id=" + className + "&period=&week=" + week + "&colors=32&day=0&width=" + "1000" + "&height=" + "1000" + "";
     schedule.src = url;
 
-    }
-    
 }
 
 changePage(1);
