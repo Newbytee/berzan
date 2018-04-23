@@ -7,6 +7,7 @@ Date.prototype.getWeek = function() {
 
 let firstLoad = true;
 let date = new Date();
+let currentPage;
 let className = "Te16G";
 let day = date.getDay();
 let week = date.getWeek();
@@ -16,7 +17,9 @@ let viewScheduleButton = document.getElementById("searchClass");
 let viewScheduleField = document.getElementById("classNameField");
 let viewScheduleWeekField = document.getElementById("weekNumberField");
 let navigationButtons = document.getElementsByClassName("navButton");
+let contentPages = document.getElementsByClassName("contentPage");
 let nNavigationButtons = navigationButtons.length;
+let nContentPages = contentPages.length;
 
 for (let i = 0; i < nNavigationButtons; i++) {
 
@@ -35,15 +38,28 @@ viewScheduleButton.addEventListener("click", function() {
     
 });
 
+if (!(localStorage.getItem("favouritePage") === null)) {
+    
+    currentPage = Number(localStorage.getItem("favouritePage"));
+    
+} else {
+    
+    currentPage = 0;
+    
+}
+
 if (!(localStorage.getItem("savedClassName") === null)) {
     
     className = localStorage.getItem("savedClassName");
     
 } else {
-    
+
+    //replace with something less intrusive later    
     alert("Du har inte ställt in en standardklass att visa, detta kan göras i inställningarna");
 
 }
+
+contentPages[currentPage].style.display = "block";
 
 function changeSchedule() {
 
@@ -57,11 +73,7 @@ function changeSchedule() {
         
     }
     
-    if (week === "") {
-        
-        week = date.getWeek();
-        
-    }
+    if (week === "") week = date.getWeek();
     
     if (!(firstLoad)) {
         
@@ -76,6 +88,23 @@ function changeSchedule() {
     url = "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&id=" + className + "&period=&week=" + week + "&colors=32&day=0&width=" + "1000" + "&height=" + "1000" + "";
     schedule.src = url;
 
+}
+
+function changePage(pageNumber) {
+    
+    let stateObj = { foo: "bar" };
+    
+    switch (pageNumber) {
+        
+        case 0:
+            history.pushState(stateObj, "Schema", "schedule.html");
+            break;
+        case 1:
+            history.pushState(stateObj, "Inställningar", "settings.html");
+            break;
+        
+    }
+    
 }
 
 changeSchedule();
