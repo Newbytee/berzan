@@ -26,7 +26,7 @@ iframeContent.onload = function(argument) {
             iFrameID.height = "";
             iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
     
-};
+}};
 
 for (let i = 0; i < nNavigationButtons; i++) {
 
