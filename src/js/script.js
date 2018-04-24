@@ -17,7 +17,7 @@ let titleName = document.getElementById("titleName");
 let navigationButtons = document.getElementsByClassName("navButton");
 let contentPages = document.getElementsByClassName("contentPage");
 let nNavigationButtons = navigationButtons.length;
-let nContentPages = contentPages.length;
+//let nContentPages = contentPages.length;
 
 iframeContent.onload = function(argument) {
 
@@ -28,6 +28,26 @@ iframeContent.onload = function(argument) {
     
 }};
 
+let scheduleIframe = function() {
+    
+    let iframeDocument = iframeContent.contentDocument || iframeContent.contentWindow.document;
+    let schedule = iframeDocument.getElementById("schedule");
+    let viewScheduleButton = iframeDocument.getElementById("searchClass");
+    let viewScheduleField = iframeDocument.getElementById("classNameField");
+    
+    return {
+      
+        doc: iframeDocument,
+        sched: schedule,
+        schedBtn: viewScheduleButton,
+        schedField: viewScheduleField,
+        
+    };
+    
+};
+
+//switch(currentPage)
+
 for (let i = 0; i < nNavigationButtons; i++) {
 
     navigationButtons[i].addEventListener("click", function() {
@@ -37,6 +57,12 @@ for (let i = 0; i < nNavigationButtons; i++) {
 
     });
 
+}
+
+switch(currentPage) {
+    
+    
+    
 }
 
 viewScheduleButton.addEventListener("click", function() {
@@ -67,6 +93,12 @@ if (!(localStorage.getItem("savedClassName") === null)) {
 }
 
 function changeSchedule() {
+    
+    let iframeDocument = iframeContent.contentDocument || iframeContent.contentWindow.document;
+    let schedule = iframeDocument.getElementById("schedule");
+    let viewScheduleButton = iframeDocument.getElementById("searchClass");
+    let viewScheduleField = iframeDocument.getElementById("classNameField");
+    let viewScheduleWeekField = iframeDocument.getElementById("weekNumberField");
 
     try {
         
@@ -136,39 +168,10 @@ function loadPage(number) {
     
 }
 
-function changeSchedule() {
+function loadSchedule() {
     
-    let iframeDocument = iframeContent.contentDocument || iframeContent.contentWindow.document;
-    let schedule = iframeDocument.getElementById("schedule");
-    let viewScheduleButton = iframeDocument.getElementById("searchClass");
-    let viewScheduleField = iframeDocument.getElementById("classNameField");
-    let viewScheduleWeekField = iframeDocument.getElementById("weekNumberField");
-
-    try {
-        
-        week = viewScheduleWeekField.value;
-        
-    } catch (e) {
-        
-        console.log(e);
-        
-    }
     
-    if (week === "") week = date.getWeek();
     
-    if (!(firstLoad)) {
-        
-        className = viewScheduleField.value;
-        
-    } else {
-        
-        firstLoad = false;
-        
-    }
-    
-    url = "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&id=" + className + "&period=&week=" + week + "&colors=32&day=0&width=" + "1000" + "&height=" + "1000" + "";
-    schedule.src = url;
-
 }
 
 changePage(1);
