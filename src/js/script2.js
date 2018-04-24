@@ -39,6 +39,7 @@ let scheduleIframe = function() {
     let viewScheduleButton = iframeDocument.getElementById("searchClass");
     let viewScheduleField = iframeDocument.getElementById("classNameField");
     let viewScheduleWeekField = iframeDocument.getElementById("weekNumberField");
+    console.log(typeof(viewScheduleButton));
     
     return {
         
@@ -50,7 +51,7 @@ let scheduleIframe = function() {
         
     }
     
-}
+};
 
 function viewSchedule(clickInit) {
     
