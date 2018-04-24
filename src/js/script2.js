@@ -77,16 +77,28 @@ function viewSchedule(clickInit) {
     url = "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&id=" + className + "&period=&week=" + week + "&colors=32&day=0&width=" + "1000" + "&height=" + "1000" + "";
     schedIframe.sched.src = url;
     
+    schedIframe.sched.onload = function() {
+    
+        let iFrameID = document.getElementById('contentIframe');
+        if(iFrameID) {
+            iFrameID.height = "";
+            iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
+    
+        }
+        
+    }
+    
 }
 
 function prepareSchedule() {
     
     let schedIframe = scheduleIframe();
+    
     schedIframe.schedBtn.addEventListener("click", function() {
-        
-        viewSchedule(true);
-        
-    });
+    
+    viewSchedule(true);
+    
+    });    
 
 }
 
