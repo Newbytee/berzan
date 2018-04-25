@@ -11,6 +11,7 @@ let url;
 let date = new Date();
 let navigationButtons = document.getElementsByClassName("navButton");
 let navigationButtonsLength = navigationButtons.length;
+let iframeContent = document.getElementById("contentIframe");
 
 for (let i = 0; i < navigationButtonsLength; i++) {
     
@@ -40,6 +41,8 @@ let scheduleIframe = function() {
     let viewScheduleField = iframeDocument.getElementById("classNameField");
     let viewScheduleWeekField = iframeDocument.getElementById("weekNumberField");
     console.log(typeof(viewScheduleButton));
+
+    let test = 1;
     
     return {
         
@@ -48,6 +51,8 @@ let scheduleIframe = function() {
         schedBtn: viewScheduleButton,
         schedField: viewScheduleField,
         weekField: viewScheduleWeekField,
+
+        test: test,
         
     }
     
@@ -75,7 +80,7 @@ function viewSchedule(clickInit) {
         
     }
     
-    url = "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&id=" + className + "&period=&week=" + week + "&colors=32&day=0&width=" + "1000" + "&height=" + "1000" + "";
+    url = "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=" + className + "&period=&week=" + week + "&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=921&height=872&maxwidth=921&maxheight=872";
     schedIframe.sched.src = url;
     
     schedIframe.sched.onload = function() {
@@ -94,13 +99,19 @@ function viewSchedule(clickInit) {
 function prepareSchedule() {
     
     let schedIframe = scheduleIframe();
-    
+
+    console.log(schedIframe.test);
+
     schedIframe.schedBtn.addEventListener("click", function() {
-    
-    viewSchedule(true);
-    
-    });    
+
+        viewSchedule(true);
+
+    });
 
 }
 
-prepareSchedule();
+iframeContent.onload = function() {
+
+    prepareSchedule();
+
+};
