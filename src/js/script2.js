@@ -1,5 +1,7 @@
 "use strict";
 
+alert("Fråga om Berzan-färg");
+
 Date.prototype.getWeek = function() {
     let onejan = new Date(this.getFullYear(), 0, 1);
     return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
@@ -40,9 +42,6 @@ let scheduleIframe = function() {
     let viewScheduleButton = iframeDocument.getElementById("searchClass");
     let viewScheduleField = iframeDocument.getElementById("classNameField");
     let viewScheduleWeekField = iframeDocument.getElementById("weekNumberField");
-    console.log(typeof(viewScheduleButton));
-
-    let test = 1;
     
     return {
         
@@ -51,8 +50,6 @@ let scheduleIframe = function() {
         schedBtn: viewScheduleButton,
         schedField: viewScheduleField,
         weekField: viewScheduleWeekField,
-
-        test: test,
         
     }
     

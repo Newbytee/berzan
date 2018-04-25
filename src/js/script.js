@@ -1,5 +1,5 @@
 'use strict';
-
+//this script does not work in more recent revisions of the hthml file, probably won't work with older ones either
 Date.prototype.getWeek = function() {
     let onejan = new Date(this.getFullYear(), 0, 1);
     return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
