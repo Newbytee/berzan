@@ -88,7 +88,7 @@ function viewSchedule(clickInit) {
         let iFrameID = document.getElementById('contentIframe');
         if(iFrameID) {
             iFrameID.height = "";
-            iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
+            iFrameID.height = (iFrameID.contentWindow.document.body.scrollHeight + 4) + "px";
     
         }
         

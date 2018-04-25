@@ -27,6 +27,12 @@ input {
 
 }
 
+#contentIframe {
+    
+    overflow: hidden;
+    
+}
+
 #schedule {
 
     width: 100%;
