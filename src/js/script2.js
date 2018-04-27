@@ -20,11 +20,15 @@ for (let i = 0; i < navigationButtonsLength; i++) {
         switch(i) {
             
         case 0:
-            alert("schedule");
+            prepareSchedule();
             break;
         case 1:
-            alert("settings");
+            alert("Lunch");
             break;
+        case 2: 
+            alert("Övrigt");
+        case 3:
+            alert("Inställningar");
             
         }
         
@@ -53,7 +57,7 @@ let scheduleIframe = function() {
     
 };
 
-let lunchIframeObj = function() {
+let lunchIframe = function() {
     
     
     
@@ -102,7 +106,7 @@ function prepareSchedule() {
 
 function prepareLunch() {
     
-    let lunchIframe = lunchIframeObj();
+    lunchIframe();
     
 }
 
