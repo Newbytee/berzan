@@ -1,129 +1,86 @@
 nav {
-
     height: 8vh;
     width: 100%;
-
-    background-color: #490A3D; /* "Berzan-färgen": #A1274C */
-
+    background-color: #490A3D; /* "Berzan-färgen": #A1274C, den jag valde: #490A3D */
 }
 
 input {
-    
     width: 20%;
     max-width: 100px;
-    
 }
 
 #wrapper {
-
     margin-left: auto;
     margin-right: auto;
-
 }
 
 #contentIframe {
-    
     overflow: hidden;
     border: none;
-    
 }
 
 #schedule {
-
     width: 100%;
-
 }
 
 #identity {
-
     padding-top: 1.5vh;
     font-size: 3vh;
-    
     color: #FFFFFF;
-
 }
 
 #searchClass {
-
     border-color: #F0F0F0;
     cursor: pointer;
-
 }
 
 #contentIframe {
-    
     width: 100%;
-    
 }
 
 @media screen and (orientation: landscape) {
-
     nav {
-
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: stretch;
-
     }
 
     .navButton {
-
         transition: 0.5s;
-
         display: flex;
         align-items: center;
         cursor: pointer;
-
         margin: 0 5px;
         padding: 0 15px;
-
         color: #FFFFFF;
-
     }
 
     .navButton:hover {
-
         transition: 0.5s;
-
         background-color: #123456;
-
     }
 
     #wrapper {
-
         width: 80%;
-
     }
 
     #identity {
-        
         position: absolute;
-
         right: 1%;
-
     }
-
 }
 
 @media screen and (orientation: portrait) {
-
     .navButton {
-
         display: none;
-
     }
 
     #wrapper {
-
         width: 100%;
-
     }
 
     #identity {
-
         text-align: center;
-
     }
-
 }
