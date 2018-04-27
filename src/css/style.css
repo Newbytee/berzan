@@ -30,6 +30,7 @@ input {
 #contentIframe {
     
     overflow: hidden;
+    border: none;
     
 }
 
