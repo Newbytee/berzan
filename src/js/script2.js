@@ -75,11 +75,7 @@ function viewSchedule(clickInit) {
     
     if (week === "") week = date.getWeek();
     
-    if (clickInit) {
-        
-        className = schedIframe.schedField.value;
-        
-    }
+    if (clickInit) className = schedIframe.schedField.value;
     
     url = "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=" + className + "&period=&week=" + week + "&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=921&height=872&maxwidth=921&maxheight=872";
     schedIframe.sched.src = url;
@@ -97,10 +93,8 @@ function viewSchedule(clickInit) {
 }
 
 function prepareSchedule() {
-    
-    let schedIframe = scheduleIframeObj();
 
-    schedIframe.schedBtn.addEventListener("click", function() {
+    scheduleIframeObj().schedBtn.addEventListener("click", function() {
 
         viewSchedule(true);
 
