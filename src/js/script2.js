@@ -32,7 +32,7 @@ for (let i = 0; i < navigationButtonsLength; i++) {
     
 }
 
-let scheduleIframe = function() {
+let scheduleIframeObj = function() {
     
     let iframeContent = document.getElementById("contentIframe");
     let iframeDocument = iframeContent.contentDocument || iframeContent.contentWindow.document;
@@ -49,13 +49,19 @@ let scheduleIframe = function() {
         schedField: viewScheduleField,
         weekField: viewScheduleWeekField,
         
-    }
+    };
+    
+};
+
+let lunchIframeObj = function() {
+    
+    
     
 };
 
 function viewSchedule(clickInit) {
     
-    let schedIframe = scheduleIframe();
+    let schedIframe = scheduleIframeObj();
     
     try {
         
@@ -87,15 +93,13 @@ function viewSchedule(clickInit) {
     
         }
         
-    }
+    };
     
 }
 
 function prepareSchedule() {
     
-    let schedIframe = scheduleIframe();
-
-    console.log(schedIframe.test);
+    let schedIframe = scheduleIframeObj();
 
     schedIframe.schedBtn.addEventListener("click", function() {
 
@@ -105,8 +109,31 @@ function prepareSchedule() {
 
 }
 
-iframeContent.onload = function() {
+function prepareLunch() {
+    
+    let lunchIframe = lunchIframeObj();
+    
+}
 
-    prepareSchedule();
+iframeContent.onload = function() {
+    
+    if (localStorage.getItem("startPage")) {
+        
+        switch(localStorage.getItem("startPage")) {
+            
+        case "schedule":
+            prepareSchedule();
+            break;
+        case "lunch":
+            prepareLunch();
+            break;
+            
+        }
+        
+    } else {
+        
+        prepareSchedule();
+        
+    }
 
 };
