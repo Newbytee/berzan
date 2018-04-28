@@ -19,7 +19,7 @@ for (let i = 0; i < navigationButtonsLength; i++) {
             prepareSchedule();
             break;
         case 1:
-            alert("Lunch");
+            prepareLunch();
             break;
         case 2: 
             alert("Övrigt");
@@ -54,7 +54,7 @@ let lunchIframe = function() {
     
 };
 
-function viewSchedule(clickInit) {
+function viewSchedule(clickInit = false) {
     try {
         week = scheduleIframe().weekField.value;
     } catch (e) {
@@ -65,11 +65,11 @@ function viewSchedule(clickInit) {
     if (clickInit) className = scheduleIframe().schedField.value;
 
     scheduleIframe().sched.src = "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=" + className + "&period=&week=" + week + "&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=921&height=872&maxwidth=921&maxheight=872";
-    scheduleIframe().sched.onload = function() {
+    scheduleIframe().sched.onload = () => {
         let iFrameID = document.getElementById('contentIframe');
         if(iFrameID) iFrameID.height = (iFrameID.contentWindow.document.body.scrollHeight + 4) + "px";
     };
-    scheduleIframe().sched.onerror = function() {
+    scheduleIframe().sched.onerror = () => {
         alert("Schemat kunde inte laddas. Kolla din anslutning, och stäng av eventuella adblockers.");
     };
 }
@@ -82,10 +82,11 @@ function prepareSchedule() {
 }
 
 function prepareLunch() {
-    lunchIframe();
+    scheduleIframe().src = "../html/lunch.html";
+    alert("Lunch foo");
 }
 
-iframeContent.onload = function() {
+iframeContent.onload = () => {
     if (localStorage.getItem("startPage")) {
         switch(localStorage.getItem("startPage")) {
         case "schedule":
