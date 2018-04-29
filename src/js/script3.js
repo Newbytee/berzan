@@ -39,4 +39,12 @@ switch(localStorage.getItem("startPage")) {
     case "lunch":
         loadPage(1);
         break;
+    case "etc":
+        loadPage(2);
+        break;
+    case "settings":
+        loadPage(3);
+        break;
+    default:
+        loadPage();
 }
