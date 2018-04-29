@@ -7,22 +7,36 @@ Date.prototype.getWeek = function() {
 
 let navigationButtons = document.getElementsByClassName("navButton");
 let navigationButtonsLength = navigationButtons.length;
+let contentIframe = document.getElementById("contentIframe");
 
 for (let i = 0; i < navigationButtonsLength; i++) {
     navigationButtons[i].addEventListener("click", () => {
-        switch(i) {
-        case 0:
-            //schedule
-            break;
-        }
-    })
+        loadPage(i);
+    });
 }
 
-function loadPage() {
-    
+function loadPage(page = 0) {
+    switch (page) {
+        case 0:
+            contentIframe.src = "html/schedule.html";
+            break;
+        case 1:
+            contentIframe.src = "html/lunch.html";
+            break;
+        case 2:
+            contentIframe.src = "html/etc.html";
+            break;
+        case 3:
+            contentIframe.src = "html/settings.html";
+            break;
+    }
 }
 
 switch(localStorage.getItem("startPage")) {
-case "schedule":
-    loadPage()
+    case "schedule":
+        loadPage(0);
+        break;
+    case "lunch":
+        loadPage(1);
+        break;
 }
