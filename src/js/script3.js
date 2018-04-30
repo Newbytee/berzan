@@ -51,7 +51,7 @@ function loadSchedulePage() {
                 if (keyName === "Enter") {
                     viewSchedule(true);
                 }
-            })
+            });
         }
     };
 }
