@@ -13,6 +13,14 @@ h1 {
     font-weight: normal;
 }
 
+strong {
+    font-size: 5vh;
+}
+
+.settingsDiv {
+    width: 100%;
+}
+
 #wrapper {
     margin-left: auto;
     margin-right: auto;
@@ -23,7 +31,8 @@ h1 {
     border: none;
 }
 
-#schedule {
+#schedule, #contentIframe {
+    margin-top: 0.5vh;
     width: 100%;
 }
 
@@ -36,11 +45,6 @@ h1 {
 #searchClass {
     border-color: #F0F0F0;
     cursor: pointer;
-}
-
-#contentIframe {
-    margin-top: 0.5vh;
-    width: 100%;
 }
 
 @media screen and (orientation: landscape) {

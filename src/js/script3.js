@@ -73,9 +73,9 @@ function viewSchedule(clickInit = false) {
     if (currentWeek === "") currentWeek = date.getWeek();
     if (clickInit) className = classInputField.value;
 
-    schedule.src = "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=" + className + "&period=&week=" + currentWeek + "&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=921&height=872&maxwidth=921&maxheight=872";
+    schedule.src = "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=" + className + "&period=&week=" + currentWeek + "&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=921&height=490&maxwidth=921&maxheight=872";
     schedule.onload = () => {
-        contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 4) + "px";
+        contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 15) + "px";
     }
 }
 
