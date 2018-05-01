@@ -27,6 +27,7 @@ strong {
 }
 
 #contentIframe {
+    height: 90vh;
     overflow: hidden;
     border: none;
 }
