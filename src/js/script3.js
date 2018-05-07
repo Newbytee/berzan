@@ -22,7 +22,7 @@ function loadPage(page = 0) {
             loadSchedulePage();
             break;
         case 1:
-            contentIframe.src = "html/lunch.html";
+            loadLunchPage();
             break;
         case 2:
             contentIframe.src = "html/etc.html";
@@ -77,6 +77,11 @@ function viewSchedule(clickInit = false) {
     schedule.onload = () => {
         contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 15) + "px";
     }
+}
+
+function loadLunchPage() {
+    contentIframe.src = "html/lunch.html";
+    fetch("https://skolmaten.se/berzeliusskolan/?fmt=json").then(response => response.json().then(obj => console.log(obj)));
 }
 
 switch(localStorage.getItem("startPage")) {
