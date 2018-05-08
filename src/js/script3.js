@@ -28,7 +28,7 @@ function loadPage(page = 0) {
             contentIframe.src = "html/etc.html";
             break;
         case 3:
-            contentIframe.src = "html/settings.html";
+            loadSettings();
             break;
     }
 }
@@ -81,7 +81,21 @@ function viewSchedule(clickInit = false) {
 
 function loadLunchPage() {
     contentIframe.src = "https://skolmaten.se/berzeliusskolan";
-    fetch("https://skolmaten.se/berzeliusskolan/?fmt=json").then(response => response.json().then(obj => console.log(obj)));
+    //fetch("https://skolmaten.se/berzeliusskolan/?fmt=json").then(response => response.json().then(obj => console.log(obj)));
+}
+
+function loadSettings() {
+    contentIframe.src = "html/settings.html";
+    contentIframe.onload = () => {
+        const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
+        const changeStartpageButtons = iframeDocument.getElementsByClassName("startPagePicker");
+        
+        for (let i = 0; i < changeStartpageButtons.length; i++) {
+            changeStartpageButtons[i].addEventListener("click", () => {
+                //TODO: add startpage-change code
+            });
+        }
+    };
 }
 
 switch(localStorage.getItem("startPage")) {

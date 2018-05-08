@@ -2,6 +2,7 @@ nav {
     height: 8vh;
     width: 100%;
     background-color: #490A3D; /* "Berzan-färgen": #A1274C, den jag valde: #490A3D */
+    position: fixed;
 }
 
 input {
@@ -17,7 +18,7 @@ strong {
     font-size: 5vh;
 }
 
-.settingsDiv {
+.settingsDiv, #schedule, #contentIframe {
     width: 100%;
 }
 
@@ -27,14 +28,14 @@ strong {
 }
 
 #contentIframe {
+    margin-top: 8.5vh;
     height: 90vh;
     overflow: hidden;
     border: none;
 }
 
-#schedule, #contentIframe {
+#schedule {
     margin-top: 0.5vh;
-    width: 100%;
 }
 
 #identity {
@@ -67,7 +68,7 @@ strong {
 
     .navButton:hover {
         transition: 0.5s;
-        background-color: #FFFFFFAA; /* #123456 */
+        background-color: #FFFFFF66; /* #123456 */
     }
 
     #wrapper {
