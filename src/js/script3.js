@@ -80,7 +80,7 @@ function viewSchedule(clickInit = false) {
 }
 
 function loadLunchPage() {
-    contentIframe.src = "html/lunch.html";
+    contentIframe.src = "https://skolmaten.se/berzeliusskolan";
     fetch("https://skolmaten.se/berzeliusskolan/?fmt=json").then(response => response.json().then(obj => console.log(obj)));
 }
 

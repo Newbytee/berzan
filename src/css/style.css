@@ -61,14 +61,13 @@ strong {
         display: flex;
         align-items: center;
         cursor: pointer;
-        margin: 0 5px;
-        padding: 0 15px;
+        padding: 0 20px;
         color: #FFFFFF;
     }
 
     .navButton:hover {
         transition: 0.5s;
-        background-color: #123456;
+        background-color: #FFFFFFAA; /* #123456 */
     }
 
     #wrapper {
