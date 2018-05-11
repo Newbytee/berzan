@@ -1,6 +1,5 @@
 nav {
     height: 8vh;
-    width: 100%;
     background-color: #490A3D; /* "Berzan-färgen": #A1274C, den jag valde: #490A3D */
     position: fixed;
 }
@@ -18,8 +17,14 @@ strong {
     font-size: 5vh;
 }
 
-.settingsDiv, #schedule, #contentIframe {
+nav, .settingsDiv, #schedule, #contentIframe {
     width: 100%;
+}
+
+.identity {
+    padding-top: 1.5vh;
+    font-size: 3vh;
+    color: #FFFFFF;
 }
 
 #wrapper {
@@ -38,25 +43,16 @@ strong {
     margin-top: 0.5vh;
 }
 
-#identity {
-    padding-top: 1.5vh;
-    font-size: 3vh;
-    color: #FFFFFF;
-}
-
 #searchClass {
     border-color: #F0F0F0;
     cursor: pointer;
 }
 
-@media screen and (orientation: landscape) {
-    nav {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: stretch;
-    }
+#desktopNav, #mobileDiv {
+    display: none;
+}
 
+@media screen and (orientation: landscape) {
     .navButton {
         transition: 0.5s;
         display: flex;
@@ -70,14 +66,22 @@ strong {
         transition: 0.5s;
         background-color: #FFFFFF66; /* #123456 */
     }
+    
+    .identity {
+        position: absolute;
+        right: 1%;
+    }
+
+    #desktopNav {
+        height: 8vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: stretch;
+    }
 
     #wrapper {
         width: 80%;
-    }
-
-    #identity {
-        position: absolute;
-        right: 1%;
     }
 }
 
@@ -86,11 +90,23 @@ strong {
         display: none;
     }
 
-    #wrapper {
-        width: 100%;
+    .identity {
+        text-align: center;
+    }
+    
+    #hamburgerSvg {
+        position: absolute;
+        margin-top: 2vh;
+        margin-left: 5%;
+        width: 10%;
+        color: white;
+    }
+    
+    #mobileDiv {
+        display: block;
     }
 
-    #identity {
-        text-align: center;
+    #wrapper {
+        width: 100%;
     }
 }
