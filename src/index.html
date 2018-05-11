@@ -8,13 +8,14 @@
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 	<link id="theme" rel="stylesheet" href="" type="text/css">
 	<link rel="manifest" href="manifest.json">
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
 	<script defer src="js/script3.js"></script>
     <script defer src="https://skolmaten.se/berzeliusskolan/?fmt=json"></script>
 	<script defer src="http://www.myothersite.com/get_data?callback=myFunction"></script>
 	<title id="titleName">Berzan</title>
 </head>
 <body>
-	<nav>
+	<nav id="menu">
 		<div id="desktopNav">
 			<div class="navButton">Schema</div>
 			<div class="navButton">Lunch</div>
@@ -23,7 +24,7 @@
 			<h1 class="identity">Berzan</h1>
 		</div>
 		<div id="mobileDiv">
-			<svg id="hamburgerSvg" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+			<svg class="" id="hamburgerSvg" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
 				<g>
 					<title>background</title>
 					<rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
@@ -39,6 +40,9 @@
 	<div id="wrapper">
         <noscript><div style="display:flex;justify-content:center;align-items:center;"><strong>Please enable JavaScript to use this web-app.</strong></div></noscript>
 		<iframe id="contentIframe" src=""></iframe>
+	</div>
+	<div id="panel">
+		
 	</div>
 </body>
 </html>

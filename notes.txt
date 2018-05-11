@@ -1,3 +1,6 @@
 http://web.archive.org/web/20060519050636/http://www.novasoftware.se/schedulewebservice/service.asmx
 
 Använd dig av iframe?
+
+Lägg till credits
+- https://github.com/Mango/slideout
