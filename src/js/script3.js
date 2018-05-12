@@ -5,12 +5,12 @@ Date.prototype.getWeek = function() {
     return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
 };
 
-const slideout = new Slideout({
+/*const slideout = new Slideout({
     'panel': document.getElementById('panel'),
     'menu': document.getElementById('menu'),
     'padding': 256,
     'tolerance': 70
-});
+});*/
 
 const navigationButtons = document.getElementsByClassName("navButton");
 const navigationButtonsLength = navigationButtons.length;
