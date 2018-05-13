@@ -154,7 +154,7 @@ body {
     }
 
     #panel {
-        box-shadow: -5px 0 10px #888888
+        box-shadow: -5px 0 30px 10px #888888;
     }
 
     #contentIframe {
