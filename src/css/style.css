@@ -156,10 +156,6 @@ body {
         text-transform: uppercase;
     }
 
-    .mobileNavButton:first-child {
-
-    }
-
     .mobileNavButton:hover {
         transition: 0.5s;
         background-color: #00000066; /* #123456 */
@@ -174,7 +170,6 @@ body {
         margin-top: 2vh;
         margin-left: 5%;
         width: 10%;
-        color: white;
     }
 
     #panel {
