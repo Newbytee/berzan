@@ -49,7 +49,7 @@ nav, .settingsDiv, #schedule, #contentIframe {
 }
 
 #hiddenMenu {
-    background-color: #AAAAAA;
+    background-color: #EEEEEE;
 }
 
 #desktopNav, #mobileDiv {
@@ -151,6 +151,10 @@ body {
         margin-left: 5%;
         width: 10%;
         color: white;
+    }
+
+    #panel {
+        box-shadow: -5px 0 10px #888888
     }
 
     #contentIframe {
