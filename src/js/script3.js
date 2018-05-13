@@ -5,31 +5,31 @@ Date.prototype.getWeek = function() {
     return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
 };
 
-try {
-    const slideout = new Slideout({
-        'panel': document.getElementById('panel'),
-        'menu': document.getElementById('hiddenMenu'),
-        'padding': 256,
-        'tolerance': 0
-    });
 
-    document.getElementById("hamburgerSvg").addEventListener("click", () => {
-        slideout.toggle();
-    });
-} catch (e) {
-    console.log(e);
-}
+const slideout = new Slideout({
+    'panel': document.getElementById('panel'),
+    'menu': document.getElementById('hiddenMenu'),
+    'padding': 256,
+    'tolerance': 0
+});
+
+document.getElementById("hamburgerSvg").addEventListener("click", () => {
+    slideout.toggle();
+});
 
 const navigationButtons = document.getElementsByClassName("navButton");
+const mobileNavButtons = document.getElementsByClassName("mobileNavButton");
 const navigationButtonsLength = navigationButtons.length;
 const contentIframe = document.getElementById("contentIframe");
 const date = new Date();
 
-
-
 for (let i = 0; i < navigationButtonsLength; i++) {
     navigationButtons[i].addEventListener("click", () => {
         loadPage(i);
+    });
+    mobileNavButtons[i].addEventListener("click", () => {
+        loadPage(i);
+        slideout.close();
     });
 }
 
@@ -90,7 +90,7 @@ function viewSchedule(clickInit = false) {
     if (currentWeek === "") currentWeek = date.getWeek();
     if (clickInit) className = classInputField.value;
 
-    schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=921&height=490&maxwidth=921&maxheight=872`;
+    schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=921&height=490`;
     schedule.onload = () => {
         contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 15) + "px";
     }
