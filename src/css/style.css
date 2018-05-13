@@ -48,6 +48,10 @@ nav, .settingsDiv, #schedule, #contentIframe {
     cursor: pointer;
 }
 
+#hiddenMenu {
+    background-color: #AAAAAA;
+}
+
 #desktopNav, #mobileDiv {
     display: none;
 }
@@ -147,6 +151,11 @@ body {
         margin-left: 5%;
         width: 10%;
         color: white;
+    }
+
+    #contentIframe {
+        width: 95%;
+        margin-left: 2.5%;
     }
     
     #mobileDiv {
