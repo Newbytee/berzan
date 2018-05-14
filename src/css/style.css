@@ -50,6 +50,7 @@ nav, .settingsDiv, #schedule, #contentIframe {
 
 #hiddenMenu {
     background-color: #EEEEEE;
+    overflow:hidden;
 }
 
 #desktopNav, #mobileDiv {
