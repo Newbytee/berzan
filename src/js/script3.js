@@ -109,7 +109,23 @@ function loadSettings() {
         
         for (let i = 0; i < changeStartpageButtons.length; i++) {
             changeStartpageButtons[i].addEventListener("click", () => {
-                //TODO: add startpage-change code
+                switch (i) {
+                    case 0:
+                        localStorage.setItem("startPage", "schedule");
+                        break;
+                    case 1:
+                        localStorage.setItem("startPage", "lunch");
+                        break;
+                    case 2:
+                        localStorage.setItem("startPage", "etc");
+                        break;
+                    case 3:
+                        localStorage.setItem("startPage", "settings");
+                        break;
+                    default:
+                        localStorage.setItem("startPage", "schedule");
+                        break;
+                }
             });
         }
     };
