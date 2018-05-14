@@ -17,6 +17,12 @@ document.getElementById("hamburgerSvg").addEventListener("click", () => {
     slideout.toggle();
 });
 
+window.onresize = () => {
+    if ((window.innerHeight/window.innerWidth) < 1) {
+        slideout.close();
+    }
+}
+
 const navigationButtons = document.getElementsByClassName("navButton");
 const mobileNavButtons = document.getElementsByClassName("mobileNavButton");
 const navigationButtonsLength = navigationButtons.length;
