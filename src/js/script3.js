@@ -21,6 +21,7 @@ const navigationButtons = document.getElementsByClassName("navButton");
 const mobileNavButtons = document.getElementsByClassName("mobileNavButton");
 const navigationButtonsLength = navigationButtons.length;
 const contentIframe = document.getElementById("contentIframe");
+const pageTitle = document.getElementById("titleName");
 const date = new Date();
 let scheduleHeight = (window.innerWidth/window.innerHeight) * 1000;
 
@@ -31,7 +32,8 @@ window.onresize = () => {
     } else {
         scheduleHeight = 900;
     }
-}
+    viewSchedule(true);
+};
 
 window.onload = () => {
     if ((window.innerHeight/window.innerWidth) < 1) {
@@ -39,7 +41,7 @@ window.onload = () => {
     } else {
         scheduleHeight = 900;
     }
-}
+};
 
 for (let i = 0; i < navigationButtonsLength; i++) {
     navigationButtons[i].addEventListener("click", () => {
@@ -70,6 +72,7 @@ function loadPage(page = 0) {
 
 function loadSchedulePage() {
     contentIframe.src = "html/schedule.html";
+    pageTitle.innerHTML = "Schema - Berzan";
     contentIframe.onload = () => {
         const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
         const inputFields = iframeDocument.getElementsByClassName("inputField");
@@ -111,16 +114,19 @@ function viewSchedule(clickInit = false) {
     schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=921&height=${scheduleHeight}`;
     schedule.onload = () => {
         contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 15) + "px";
+        iframeDocument.getElementById("schedule").style.display = "block";
     }
 }
 
 function loadLunchPage() {
     contentIframe.src = "https://skolmaten.se/berzeliusskolan";
+    pageTitle.innerHTML = "Lunch - Berzan";
     //fetch("https://skolmaten.se/berzeliusskolan/?fmt=json").then(response => response.json().then(obj => console.log(obj)));
 }
 
 function loadSettings() {
     contentIframe.src = "html/settings.html";
+    pageTitle.innerHTML = "Inställningar - Berzan";
     contentIframe.onload = () => {
         const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
         const changeStartpageButtons = iframeDocument.getElementsByClassName("startPagePicker");

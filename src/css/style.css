@@ -41,6 +41,7 @@ nav, .settingsDiv, #schedule, #contentIframe {
 
 #schedule {
     margin-top: 0.5vh;
+    display: none;
 }
 
 #searchClass {
@@ -143,11 +144,12 @@ body {
 
 @media screen and (orientation: portrait) {
     .mobileNavButton {
+        transition: 0.5s;
         width: 100%;
         height: 10vh;
         padding-top: 2vh;
         padding-bottom: 2vh;
-        padding-left: 10%;
+        padding-left: 5%;
         font-size: 4vh;
         font-weight: lighter;
         display: flex;
@@ -155,6 +157,7 @@ body {
         background-color: #CCCCCC;
         color: #000000;
         text-transform: uppercase;
+        cursor: pointer;
     }
 
     .mobileNavButton:hover {
