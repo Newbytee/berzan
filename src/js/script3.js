@@ -5,7 +5,6 @@ Date.prototype.getWeek = function() {
     return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
 };
 
-
 const slideout = new Slideout({
     'panel': document.getElementById('panel'),
     'menu': document.getElementById('hiddenMenu'),
@@ -93,6 +92,14 @@ function loadSchedulePage() {
                     viewSchedule(true);
                 }
             });
+            inputFields[i].addEventListener("blur", () => {
+                console.log("hi");
+                sessionStorage.setItem("inputField" + i, inputFields[i].value);
+            });
+        }
+
+        for (let i = 0; i < inputFields.length; i++) {
+            if (sessionStorage.getItem("inputField" + i)) inputFields[i].value = sessionStorage.getItem("inputField" + i);
         }
     };
 }
@@ -112,11 +119,8 @@ function viewSchedule(clickInit = false) {
         console.log(e);
     }
 
-    if (currentWeek === "") {
-        currentWeek = date.getWeek();
-    } else {
-        sessionStorage.setItem("weekField", currentWeek);
-    }
+    if (currentWeek === "") currentWeek = date.getWeek();
+
     if (clickInit) className = classInputField.value;
 
     schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=921&height=${scheduleHeight}`;
