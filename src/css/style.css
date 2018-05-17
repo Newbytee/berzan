@@ -171,14 +171,15 @@ body {
     
     #hamburgerSvg {
         position: absolute;
-        margin-top: 4vh;
+        margin-top: 2vh;
         margin-left: 5%;
+        height: 4vh;
     }
 
-    #iconCenterDiv {
+    /*#iconCenterDiv {
         display: flex;
         align-items: center;
-    }
+    }*/
 
     #panel {
         box-shadow: -5px 0 30px 10px #888888;
