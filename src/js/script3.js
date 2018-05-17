@@ -78,6 +78,10 @@ function loadSchedulePage() {
         const inputFields = iframeDocument.getElementsByClassName("inputField");
         const searchButton = iframeDocument.getElementById("searchClass");
 
+        for (let i = 0; i < inputFields.length; i++) {
+            if (sessionStorage.getItem("inputField" + i)) inputFields[i].value = sessionStorage.getItem("inputField" + i);
+        }
+
         searchButton.addEventListener("click", () => {
             scheduleInit = true;
             viewSchedule(true);
@@ -92,15 +96,13 @@ function loadSchedulePage() {
                     viewSchedule(true);
                 }
             });
+
             inputFields[i].addEventListener("blur", () => {
-                console.log("hi");
                 sessionStorage.setItem("inputField" + i, inputFields[i].value);
             });
         }
 
-        for (let i = 0; i < inputFields.length; i++) {
-            if (sessionStorage.getItem("inputField" + i)) inputFields[i].value = sessionStorage.getItem("inputField" + i);
-        }
+        if (inputFields[1].value !== "") viewSchedule(true);
     };
 }
 
