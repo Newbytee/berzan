@@ -6,10 +6,10 @@ Date.prototype.getWeek = function() {
 };
 
 const slideout = new Slideout({
-    'panel': document.getElementById('panel'),
-    'menu': document.getElementById('hiddenMenu'),
-    'padding': 256,
-    'tolerance': 0
+    "panel": document.getElementById("panel"),
+    "menu": document.getElementById("hiddenMenu"),
+    "padding": 256,
+    "tolerance": 0
 });
 
 document.getElementById("hamburgerSvg").addEventListener("click", () => {
@@ -185,3 +185,5 @@ switch(localStorage.getItem("startPage")) {
     default:
         loadPage();
 }
+
+if (location.protocol !== "https:") console.log("Jag skulle uppskatta om ni uppgraderade till HTTPS. Kan inte registrera service-workers annars. https://letsencrypt.org/getting-started/ :^)");
