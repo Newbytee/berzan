@@ -24,6 +24,7 @@ const contentIframe = document.getElementById("contentIframe");
 const pageTitle = document.getElementById("titleName");
 const date = new Date();
 let scheduleHeight = (window.innerWidth/window.innerHeight) * 1000;
+let scheduleInit = false;
 
 window.onresize = () => {
     if ((window.innerHeight/window.innerWidth) < 1) {
@@ -79,6 +80,7 @@ function loadSchedulePage() {
         const searchButton = iframeDocument.getElementById("searchClass");
 
         searchButton.addEventListener("click", () => {
+            scheduleInit = true;
             viewSchedule(true);
         });
 
@@ -87,6 +89,7 @@ function loadSchedulePage() {
                 const keyName = event.key;
 
                 if (keyName === "Enter") {
+                    scheduleInit = true;
                     viewSchedule(true);
                 }
             });
@@ -95,6 +98,7 @@ function loadSchedulePage() {
 }
 
 function viewSchedule(clickInit = false) {
+    if (scheduleInit === false) return;
     const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
     const weekInputField = iframeDocument.getElementById("weekNumberField");
     const classInputField = iframeDocument.getElementById("classNameField");
