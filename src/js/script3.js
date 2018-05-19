@@ -5,6 +5,15 @@ Date.prototype.getWeek = function() {
     return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
 };
 
+const navigationButtons = document.getElementsByClassName("navButton");
+const mobileNavButtons = document.getElementsByClassName("mobileNavButton");
+const navigationButtonsLength = navigationButtons.length;
+const contentIframe = document.getElementById("contentIframe");
+const pageTitle = document.getElementById("titleName");
+const date = new Date();
+let scheduleHeight = (window.innerWidth/window.innerHeight) * 1000;
+let scheduleInit = false;
+
 const slideout = new Slideout({
     "panel": document.getElementById("panel"),
     "menu": document.getElementById("hiddenMenu"),
@@ -15,15 +24,6 @@ const slideout = new Slideout({
 document.getElementById("hamburgerSvg").addEventListener("click", () => {
     slideout.toggle();
 });
-
-const navigationButtons = document.getElementsByClassName("navButton");
-const mobileNavButtons = document.getElementsByClassName("mobileNavButton");
-const navigationButtonsLength = navigationButtons.length;
-const contentIframe = document.getElementById("contentIframe");
-const pageTitle = document.getElementById("titleName");
-const date = new Date();
-let scheduleHeight = (window.innerWidth/window.innerHeight) * 1000;
-let scheduleInit = false;
 
 window.onresize = () => {
     if ((window.innerHeight/window.innerWidth) < 1) {
@@ -128,6 +128,7 @@ function viewSchedule(clickInit = false) {
     schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=921&height=${scheduleHeight}`;
     schedule.onload = () => {
         contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 15) + "px";
+        //iframeDocument.getElementById("iframePanel").createElement
         iframeDocument.getElementById("schedule").style.display = "block";
     }
 }

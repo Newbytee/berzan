@@ -17,7 +17,7 @@ strong {
     font-size: 5vh;
 }
 
-nav, .settingsDiv, #schedule, #contentIframe {
+nav, #schedule, #contentIframe {
     width: 100%;
 }
 
@@ -56,6 +56,10 @@ nav, .settingsDiv, #schedule, #contentIframe {
 
 #desktopNav, #mobileDiv {
     display: none;
+}
+
+#weekNumberField:out-of-range {
+    background-color: #AA0000;
 }
 
 /* start of Slideout.js CSS */
@@ -140,6 +144,8 @@ body {
     #wrapper {
         width: 80%;
     }
+
+
 }
 
 @media screen and (orientation: portrait) {
@@ -165,15 +171,30 @@ body {
         background-color: #00000066; /* #123456 */
     }
 
+    .inputField, #searchClass {
+        display: none;
+    }
+
     .identity {
         text-align: center;
     }
-    
-    #hamburgerSvg {
+
+    .settingsDiv {
+        width: 100%;
+    }
+
+    #hamburgerSvg, #calendarSvg {
         position: absolute;
         margin-top: 2vh;
-        margin-left: 5%;
         height: 4vh;
+    }
+    
+    #hamburgerSvg {
+        margin-left: 5%;
+    }
+
+    #calendarSvg {
+        margin-left: 75%;
     }
 
     #panel {
