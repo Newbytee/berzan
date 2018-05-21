@@ -9,10 +9,6 @@ input {
     max-width: 100px;
 }
 
-h1 {
-    font-weight: normal;
-}
-
 strong {
     font-size: 5vh;
 }
@@ -25,6 +21,7 @@ nav, #schedule, #contentIframe {
     padding-top: 1.5vh;
     font-size: 3vh;
     color: #FFFFFF;
+    font-weight: normal;
 }
 
 #wrapper {
@@ -109,7 +106,7 @@ body {
 
 /* end of Slideout.js CSS */
 
-@media screen and (orientation: landscape) {
+@media screen and (min-width: 768px) {
     .navButton {
         transition: 0.5s;
         display: flex;
@@ -148,7 +145,7 @@ body {
 
 }
 
-@media screen and (orientation: portrait) {
+@media screen and (max-width: 768px) {
     .mobileNavButton {
         transition: 0.5s;
         width: 100%;
@@ -171,9 +168,9 @@ body {
         background-color: #00000066; /* #123456 */
     }
 
-    .inputField, #searchClass {
+    /*.inputField, #searchClass {
         display: none;
-    }
+    }*/
 
     .identity {
         text-align: center;

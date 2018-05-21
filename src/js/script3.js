@@ -73,6 +73,7 @@ function loadPage(page = 0) {
 function loadSchedulePage() {
     contentIframe.src = "html/schedule.html";
     pageTitle.innerHTML = "Schema - Berzan";
+    sessionStorage.setItem("inputField0", date.getWeek());
     contentIframe.onload = () => {
         const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
         const inputFields = iframeDocument.getElementsByClassName("inputField");
