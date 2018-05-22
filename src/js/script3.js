@@ -67,6 +67,9 @@ function loadPage(page = 0) {
         case 3:
             loadSettings();
             break;
+        case 4:
+            contentIframe.src = "html/about.html";
+            break;
     }
 }
 

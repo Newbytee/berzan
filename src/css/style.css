@@ -180,18 +180,11 @@ body {
         width: 100%;
     }
 
-    #hamburgerSvg, #calendarSvg {
+    #hamburgerSvg {
         position: absolute;
         margin-top: 2vh;
         height: 4vh;
-    }
-    
-    #hamburgerSvg {
         margin-left: 5%;
-    }
-
-    #calendarSvg {
-        margin-left: 75%;
     }
 
     #panel {
