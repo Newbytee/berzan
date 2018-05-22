@@ -36,11 +36,25 @@ nav, #schedule, #contentIframe {
 #splashScreen h1 {
     padding-top: 30vh;
     font-size: 10vh;
-    color: #FFFFFF;
     z-index: 15;
 }
 
 #splashScreen h2 {
+    margin-bottom: 40vh;
+}
+
+#splashScreen noscript div {
+    color: #FFFFFF;
+    padding-top:20vh;
+    z-index: 20;
+    display: inline;
+}
+
+#splashScreen p {
+    display: inline;
+}
+
+#splashScreen h2, #splashScreen h1, #splashScreen p {
     color: #FFFFFF;
 }
 
