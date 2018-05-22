@@ -191,4 +191,6 @@ switch(localStorage.getItem("startPage")) {
         loadPage();
 }
 
+document.getElementById("splashScreen").style.display = "none";
+
 if (location.protocol !== "https:") console.log("Jag skulle uppskatta om ni uppgraderade till HTTPS. Kan inte registrera service-workers annars. https://letsencrypt.org/getting-started/ :^)");

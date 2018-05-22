@@ -24,6 +24,26 @@ nav, #schedule, #contentIframe {
     font-weight: normal;
 }
 
+#splashScreen {
+    position: absolute;
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #490A3D;
+    z-index: 15;
+}
+
+#splashScreen h1 {
+    padding-top: 30vh;
+    font-size: 10vh;
+    color: #FFFFFF;
+    z-index: 15;
+}
+
+#splashScreen h2 {
+    color: #FFFFFF;
+}
+
 #wrapper {
     margin-left: auto;
     margin-right: auto;
