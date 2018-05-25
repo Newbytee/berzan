@@ -93,6 +93,10 @@ nav, #schedule, #contentIframe {
     background-color: #AA0000;
 }
 
+#aboutInformationDiv {
+    margin-top: 3vh;
+}
+
 /* start of Slideout.js CSS */
 
 body {
