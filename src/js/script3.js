@@ -64,12 +64,14 @@ function loadPage(page = 0) {
             break;
         case 2:
             contentIframe.src = "html/etc.html";
+            pageTitle.innerHTML = "Övrigt - Berzan";
             break;
         case 3:
             loadSettings();
             break;
         case 4:
             contentIframe.src = "html/about.html";
+            pageTitle.innerHTML = "Om - Berzan";
             break;
     }
 }
