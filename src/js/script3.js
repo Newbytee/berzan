@@ -149,6 +149,8 @@ function loadSettings() {
     contentIframe.onload = () => {
         const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
         const changeStartpageButtons = iframeDocument.getElementsByClassName("startPagePicker");
+        const classSaveField = iframeDocument.getElementById("defaultClass");
+        const hasSavedField = iframeDocument.getElementById("hasSaved");
         
         for (let i = 0; i < changeStartpageButtons.length; i++) {
             changeStartpageButtons[i].addEventListener("click", () => {
@@ -171,6 +173,14 @@ function loadSettings() {
                 }
             });
         }
+
+        iframeDocument.getElementById("saveButtonThingy").addEventListener("click", () => {
+            localStorage.setItem("defaultClass", classSaveField.value);
+            hasSavedField.innerText = "Sparat!";
+            setTimeout(() => {
+                hasSavedField.innerText = null;
+            }, 2000);
+        });
     };
 }
 
