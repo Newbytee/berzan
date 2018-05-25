@@ -175,7 +175,7 @@ function loadSettings() {
         }
 
         iframeDocument.getElementById("saveButtonThingy").addEventListener("click", () => {
-            localStorage.setItem("defaultClass", classSaveField.value);
+            localStorage.setItem("inputField1", classSaveField.value);
             hasSavedField.innerText = "Sparat!";
             setTimeout(() => {
                 hasSavedField.innerText = null;
