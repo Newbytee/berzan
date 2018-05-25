@@ -13,6 +13,7 @@ const pageTitle = document.getElementById("titleName");
 const date = new Date();
 let scheduleHeight = (window.innerWidth/window.innerHeight) * 1000;
 let scheduleInit = false;
+let firstScheduleLoad = true;
 
 const slideout = new Slideout({
     "panel": document.getElementById("panel"),
@@ -85,7 +86,15 @@ function loadSchedulePage() {
         for (let i = 0; i < inputFields.length; i++) {
             if (sessionStorage.getItem("inputField" + i)) inputFields[i].value = sessionStorage.getItem("inputField" + i);
         }
-
+        
+        if (firstScheduleLoad && localStorage.getItem("defaultClass")) {
+            inputFields[1].value = localStorage.getItem("defaultClass");
+            firstScheduleLoad = false;
+        }
+        
+        console.log(inputFields[1].value);
+        
+        
         searchButton.addEventListener("click", () => {
             scheduleInit = true;
             viewSchedule(true);
@@ -105,8 +114,14 @@ function loadSchedulePage() {
                 sessionStorage.setItem("inputField" + i, inputFields[i].value);
             });
         }
-
-        if (inputFields[1].value !== "") viewSchedule(true);
+        
+        setTimeout(() => {
+            if (inputFields[1].value.length !== 0) {
+            scheduleInit = true;
+            viewSchedule(true);
+            sessionStorage.setItem("inputField1", inputFields[1].value);
+        }
+        }, 0);
     };
 }
 
@@ -126,7 +141,6 @@ function viewSchedule(clickInit = false) {
     }
 
     if (currentWeek === "") currentWeek = date.getWeek();
-
     if (clickInit) className = classInputField.value;
 
     schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=921&height=${scheduleHeight}`;
@@ -175,8 +189,14 @@ function loadSettings() {
         }
 
         iframeDocument.getElementById("saveButtonThingy").addEventListener("click", () => {
-            localStorage.setItem("inputField1", classSaveField.value);
-            hasSavedField.innerText = "Sparat!";
+            if (classSaveField.value !== "") {
+                localStorage.setItem("defaultClass", classSaveField.value);
+                hasSavedField.innerText = "Sparat!";
+            } else {
+                localStorage.removeItem("defaultClass");
+                hasSavedField.innerText = "Standardklass borttagen!";
+            }
+            
             setTimeout(() => {
                 hasSavedField.innerText = null;
             }, 2000);
