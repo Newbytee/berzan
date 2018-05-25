@@ -131,7 +131,7 @@ function viewSchedule(clickInit = false) {
 
     schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=921&height=${scheduleHeight}`;
     schedule.onload = () => {
-        contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 15) + "px";
+        contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 5) + "vh";
         //iframeDocument.getElementById("iframePanel").createElement
         iframeDocument.getElementById("schedule").style.display = "block";
     }
