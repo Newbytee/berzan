@@ -92,9 +92,6 @@ function loadSchedulePage() {
             firstScheduleLoad = false;
         }
         
-        console.log(inputFields[1].value);
-        
-        
         searchButton.addEventListener("click", () => {
             scheduleInit = true;
             viewSchedule(true);
@@ -120,7 +117,7 @@ function loadSchedulePage() {
             scheduleInit = true;
             viewSchedule(true);
             sessionStorage.setItem("inputField1", inputFields[1].value);
-        }
+            }
         }, 0);
     };
 }
