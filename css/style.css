@@ -16,6 +16,7 @@ strong {
 select {
     float: right;
     height: 30px;
+    width: 85px;
 }
 
 button {
@@ -146,6 +147,14 @@ nav, #schedule, #contentIframe {
 
 #desktopNav, #mobileDiv {
     display: none;
+}
+
+#weekNumberField {
+    min-width: 50px;
+}
+
+#classNameField {
+    min-width: 60px;
 }
 
 #weekNumberField:out-of-range {
