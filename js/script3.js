@@ -12,6 +12,7 @@ const contentIframe = document.getElementById("contentIframe");
 const pageTitle = document.getElementById("titleName");
 const date = new Date();
 let scheduleHeight = (window.innerWidth/window.innerHeight) * 1000;
+let scheduleWidth = 1883;
 let scheduleInit = false;
 let firstScheduleLoad = true;
 
@@ -27,21 +28,12 @@ document.getElementById("hamburgerSvg").addEventListener("click", () => {
 });
 
 window.onresize = () => {
-    if ((window.innerHeight/window.innerWidth) < 1) {
-        slideout.close();
-        scheduleHeight = 490;
-    } else {
-        scheduleHeight = 900;
-    }
+    resizeSchedule();
     viewSchedule(true);
 };
 
 window.onload = () => {
-    if ((window.innerHeight/window.innerWidth) < 1) {
-        scheduleHeight = 490;
-    } else {
-        scheduleHeight = 900;
-    }
+    resizeSchedule();
 };
 
 for (let i = 0; i < navigationButtonsLength; i++) {
@@ -52,6 +44,17 @@ for (let i = 0; i < navigationButtonsLength; i++) {
         loadPage(i);
         slideout.close();
     });
+}
+
+function resizeSchedule() {
+    if ((window.innerHeight/window.innerWidth) < 1) {
+        slideout.close();
+        scheduleHeight = window.innerHeight;
+        scheduleWidth = window.innerWidth;
+    } else {
+        scheduleHeight = window.innerHeight;
+        scheduleWidth = window.innerWidth;
+    }
 }
 
 function loadPage(page = 0) {
@@ -142,7 +145,7 @@ function viewSchedule(clickInit = false) {
     if (currentWeek === "") currentWeek = date.getWeek();
     if (clickInit) className = classInputField.value;
 
-    schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=921&height=${scheduleHeight}`;
+    schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=${scheduleWidth}&height=${scheduleHeight}`;
     schedule.onload = () => {
         contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 5) + "vh";
         //iframeDocument.getElementById("iframePanel").createElement

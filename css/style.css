@@ -29,11 +29,21 @@ nav, #schedule, #contentIframe {
     color: #FFFFFF;
     border-radius: 10px;
     padding: 10px;
+
+}
+
+.startPagePicker {
+    margin-bottom: 5px;
+}
+
+#hasSaved {
+    transition: all 1s;
 }
 
 #contentContainer {
     display: flex;
     flex-wrap: wrap;
+    transition: all 4s;
 }
 
 #splashScreen {
@@ -85,6 +95,7 @@ nav, #schedule, #contentIframe {
 #schedule {
     margin-top: 0.5vh;
     display: none;
+    height: 95vh;
 }
 
 #searchClass {
