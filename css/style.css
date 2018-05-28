@@ -24,6 +24,18 @@ nav, #schedule, #contentIframe {
     font-weight: normal;
 }
 
+.contentDiv {
+    background-color: #7F3571;
+    color: #FFFFFF;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#contentContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 #splashScreen {
     position: absolute;
     text-align: center;
@@ -168,8 +180,14 @@ body {
         right: 1%;
     }
 
-    .settingsDiv {
+    .contentDiv {
+        width: 30%;
+        margin-right: 0.5vh;
+        margin-bottom: 0.5vh;
+    }
 
+    #contentContainer {
+        justify-content: flex-start;
     }
 
     #desktopNav {
@@ -188,7 +206,6 @@ body {
 @media screen and (max-width: 768px) {
     .mobileNavButton {
         transition: 0.5s;
-        width: 100%;
         height: 10vh;
         padding-top: 2vh;
         padding-bottom: 2vh;
@@ -208,15 +225,19 @@ body {
         background-color: #00000066; /* #123456 */
     }
 
-    /*.inputField, #searchClass {
-        display: none;
-    }*/
-
     .identity {
         text-align: center;
     }
 
-    .settingsDiv {
+    .contentDiv {
+        margin-bottom: 3vw;
+    }
+
+    .contentDiv:first-of-type {
+        margin-top: 2vw;
+    }
+
+    .mobileNavButton, .settingsDiv, .contentDiv, #wrapper {
         width: 100%;
     }
 
@@ -235,12 +256,12 @@ body {
         width: 95%;
         margin-left: 2.5%;
     }
+
+    #contentContainer {
+        justify-content: space-between;
+    }
     
     #mobileDiv {
         display: block;
-    }
-
-    #wrapper {
-        width: 100%;
     }
 }
