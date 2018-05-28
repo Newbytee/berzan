@@ -57,6 +57,15 @@ function resizeSchedule() {
     }
 }
 
+function showSnackbar(text = "NOTEXT") {
+    const snackbar = document.getElementById("snackbar");
+    snackbar.innerHTML = text;
+    snackbar.className = "show";
+    setTimeout(() => {
+        snackbar.className = snackbar.className.replace("show", "");
+    }, 3000)
+}
+
 function loadPage(page = 0) {
     switch(page) {
         case 0:
@@ -166,7 +175,6 @@ function loadSettings() {
         const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
         const changeStartpageButtons = iframeDocument.getElementsByClassName("startPagePicker");
         const classSaveField = iframeDocument.getElementById("defaultClass");
-        const hasSavedField = iframeDocument.getElementById("hasSaved");
         
         for (let i = 0; i < changeStartpageButtons.length; i++) {
             changeStartpageButtons[i].addEventListener("click", () => {
@@ -193,15 +201,11 @@ function loadSettings() {
         iframeDocument.getElementById("saveButtonThingy").addEventListener("click", () => {
             if (classSaveField.value !== "") {
                 localStorage.setItem("defaultClass", classSaveField.value);
-                hasSavedField.innerText = "Sparat!";
+                showSnackbar("Sparat");
             } else {
                 localStorage.removeItem("defaultClass");
-                hasSavedField.innerText = "Standardklass borttagen!";
+                showSnackbar("Standardklass borttagen");
             }
-            
-            setTimeout(() => {
-                hasSavedField.innerText = null;
-            }, 2000);
         });
     };
 }
