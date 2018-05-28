@@ -104,15 +104,16 @@ function loadSchedulePage() {
         for (let i = 0; i < inputFields.length; i++) {
             if (sessionStorage.getItem("inputField" + i)) inputFields[i].value = sessionStorage.getItem("inputField" + i);
         }
-
-        dayDropdown.onchange = function() {
-            viewSchedule(true);
-        };
         
         if (firstScheduleLoad && localStorage.getItem("defaultClass")) {
             inputFields[1].value = localStorage.getItem("defaultClass");
             firstScheduleLoad = false;
         }
+
+        dayDropdown.onchange = function() {
+            scheduleInit = true;
+            viewSchedule(true);
+        };
         
         searchButton.addEventListener("click", () => {
             scheduleInit = true;
