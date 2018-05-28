@@ -17,6 +17,15 @@ nav, #schedule, #contentIframe {
     width: 100%;
 }
 
+button {
+    padding: 3px 10px;
+    background-color: #FFFFFF;
+}
+
+button:active {
+    background-color: #888888;
+}
+
 .identity {
     padding-top: 1.5vh;
     font-size: 3vh;
@@ -34,6 +43,10 @@ nav, #schedule, #contentIframe {
 
 .startPagePicker {
     margin-bottom: 5px;
+}
+
+.dropdown {
+    display: inline-block;
 }
 
 #hasSaved {
