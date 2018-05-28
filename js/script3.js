@@ -188,9 +188,6 @@ function loadSettings() {
                     case 2:
                         localStorage.setItem("startPage", "etc");
                         break;
-                    case 3:
-                        localStorage.setItem("startPage", "settings");
-                        break;
                     default:
                         localStorage.setItem("startPage", "schedule");
                         break;
@@ -198,7 +195,7 @@ function loadSettings() {
             });
         }
 
-        iframeDocument.getElementById("saveButtonThingy").addEventListener("click", () => {
+        function saveDefaultClass() {
             if (classSaveField.value !== "") {
                 localStorage.setItem("defaultClass", classSaveField.value);
                 showSnackbar("Sparat");
@@ -206,6 +203,18 @@ function loadSettings() {
                 localStorage.removeItem("defaultClass");
                 showSnackbar("Standardklass borttagen");
             }
+        }
+
+        classSaveField.addEventListener("keydown", (event) => {
+            const keyName = event.key;
+
+            if (keyName === "Enter") {
+                saveDefaultClass();
+            }
+        });
+
+        iframeDocument.getElementById("saveButtonThingy").addEventListener("click", () => {
+            saveDefaultClass();
         });
     };
 }

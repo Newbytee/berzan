@@ -13,10 +13,6 @@ strong {
     font-size: 5vh;
 }
 
-nav, #schedule, #contentIframe {
-    width: 100%;
-}
-
 button {
     border: 1px solid #000000;
     border-radius: 0;
@@ -37,6 +33,10 @@ button:active {
     transition: 0.5s;
 }
 
+nav, #schedule, #contentIframe {
+    width: 100%;
+}
+
 .identity {
     padding-top: 1.5vh;
     font-size: 3vh;
@@ -45,6 +45,7 @@ button:active {
 }
 
 .contentDiv {
+    text-align: center;
     background-color: #7F3571;
     color: #FFFFFF;
     border-radius: 10px;
@@ -55,6 +56,14 @@ button:active {
     background-color: #FFFFFF77;
 }
 
+.contentDiv a:link, .contentDiv a:visited {
+    color: #00bfa5;
+}
+
+.contentDiv input {
+    width: 100px;
+}
+
 .startPagePicker {
     margin-bottom: 5px;
 }
@@ -63,14 +72,9 @@ button:active {
     display: inline-block;
 }
 
-#hasSaved {
-    transition: all 1s;
-}
-
 #contentContainer {
     display: flex;
     flex-wrap: wrap;
-    transition: all 4s;
 }
 
 #splashScreen {
