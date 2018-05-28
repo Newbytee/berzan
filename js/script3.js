@@ -67,21 +67,21 @@ function loadPage(page = 0) {
             break;
         case 2:
             contentIframe.src = "html/etc.html";
-            pageTitle.innerHTML = "Övrigt - Berzan";
+            pageTitle.innerHTML = "Övrigt - Berzan.js";
             break;
         case 3:
             loadSettings();
             break;
         case 4:
             contentIframe.src = "html/about.html";
-            pageTitle.innerHTML = "Om - Berzan";
+            pageTitle.innerHTML = "Om - Berzan.js";
             break;
     }
 }
 
 function loadSchedulePage() {
     contentIframe.src = "html/schedule.html";
-    pageTitle.innerHTML = "Schema - Berzan";
+    pageTitle.innerHTML = "Schema - Berzan.js";
     sessionStorage.setItem("inputField0", date.getWeek());
     contentIframe.onload = () => {
         const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
@@ -155,13 +155,13 @@ function viewSchedule(clickInit = false) {
 
 function loadLunchPage() {
     contentIframe.src = "https://skolmaten.se/berzeliusskolan";
-    pageTitle.innerHTML = "Lunch - Berzan";
+    pageTitle.innerHTML = "Lunch - Berzan.js";
     //fetch("https://skolmaten.se/berzeliusskolan/?fmt=json").then(response => response.json().then(obj => console.log(obj)));
 }
 
 function loadSettings() {
     contentIframe.src = "html/settings.html";
-    pageTitle.innerHTML = "Inställningar - Berzan";
+    pageTitle.innerHTML = "Inställningar - Berzan.js";
     contentIframe.onload = () => {
         const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
         const changeStartpageButtons = iframeDocument.getElementsByClassName("startPagePicker");

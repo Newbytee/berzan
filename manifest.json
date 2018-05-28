@@ -1,8 +1,8 @@
 {
-  "name": "Berzan-app",
-  "short_name": "Berzan",
+  "name": "Berzan.js",
+  "short_name": "Berzan.js",
   "display": "standalone",
   "background_color": "#490A3D",
   "theme_color": "#490A3D",
-  "start_url": "/stefan/"
+  "start_url": "/"
 }
