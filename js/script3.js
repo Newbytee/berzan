@@ -85,6 +85,9 @@ function loadPage(page = 0) {
             contentIframe.src = "html/about.html";
             pageTitle.innerHTML = "Om - Berzan.js";
             break;
+        default:
+            loadSchedulePage();
+            break;
     }
 }
 
@@ -96,10 +99,15 @@ function loadSchedulePage() {
         const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
         const inputFields = iframeDocument.getElementsByClassName("inputField");
         const searchButton = iframeDocument.getElementById("searchClass");
+        const dayDropdown = iframeDocument.getElementById("dayDropdown");
 
         for (let i = 0; i < inputFields.length; i++) {
             if (sessionStorage.getItem("inputField" + i)) inputFields[i].value = sessionStorage.getItem("inputField" + i);
         }
+
+        dayDropdown.onchange = function() {
+            viewSchedule(true);
+        };
         
         if (firstScheduleLoad && localStorage.getItem("defaultClass")) {
             inputFields[1].value = localStorage.getItem("defaultClass");
@@ -125,6 +133,16 @@ function loadSchedulePage() {
                 sessionStorage.setItem("inputField" + i, inputFields[i].value);
             });
         }
+
+        if (window.innerWidth < 768) {
+            if (date.getDay() < 6) {
+                dayDropdown.selectedIndex = date.getDay();
+            } else {
+                dayDropdown.selectedIndex = 1;
+            }
+        } else {
+            dayDropdown.selectedIndex = 0;
+        }
         
         setTimeout(() => {
             if (inputFields[1].value.length !== 0) {
@@ -141,8 +159,10 @@ function viewSchedule(clickInit = false) {
     const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
     const weekInputField = iframeDocument.getElementById("weekNumberField");
     const classInputField = iframeDocument.getElementById("classNameField");
+    const dayDropdown = iframeDocument.getElementById("dayDropdown");
     const schedule = iframeDocument.getElementById("schedule");
     let currentWeek;
+    let weekDay;
     let className;
 
     try {
@@ -151,10 +171,34 @@ function viewSchedule(clickInit = false) {
         console.log(e);
     }
 
+    switch(dayDropdown.selectedIndex) {
+        case 0:
+            weekDay = 0;
+            break;
+        case 1:
+            weekDay = 1;
+            break;
+        case 2:
+            weekDay = 2;
+            break;
+        case 3:
+            weekDay = 4;
+            break;
+        case 4:
+            weekDay = 8;
+            break;
+        case 5:
+            weekDay = 16;
+            break;
+        default:
+            weekDay = 0;
+            break;
+    }
+
     if (currentWeek === "") currentWeek = date.getWeek();
     if (clickInit) className = classInputField.value;
 
-    schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=0&width=${scheduleWidth}&height=${scheduleHeight}`;
+    schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${scheduleWidth}&height=${scheduleHeight}`;
     schedule.onload = () => {
         contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 5) + "vh";
         //iframeDocument.getElementById("iframePanel").createElement
