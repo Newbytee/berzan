@@ -188,7 +188,7 @@ function loadSettings() {
         }
 
         iframeDocument.getElementById("saveButtonThingy").addEventListener("click", () => {
-            if (classSaveField.value !== "") {
+            if (classSaveField.value.length !== 0) {
                 localStorage.setItem("defaultClass", classSaveField.value);
                 hasSavedField.innerText = "Sparat!";
             } else {
