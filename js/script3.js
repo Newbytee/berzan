@@ -181,15 +181,19 @@ function loadSettings() {
                 switch (i) {
                     case 0:
                         localStorage.setItem("startPage", "schedule");
+                        showSnackbar("Startsida bytt till schema");
                         break;
                     case 1:
                         localStorage.setItem("startPage", "lunch");
+                        showSnackbar("Startsida bytt till lunch");
                         break;
                     case 2:
                         localStorage.setItem("startPage", "etc");
+                        showSnackbar("Startsida bytt till övrigt");
                         break;
                     default:
                         localStorage.setItem("startPage", "schedule");
+                        showSnackbar("Startsida bytt till schema");
                         break;
                 }
             });
@@ -198,7 +202,7 @@ function loadSettings() {
         function saveDefaultClass() {
             if (classSaveField.value !== "") {
                 localStorage.setItem("defaultClass", classSaveField.value);
-                showSnackbar("Sparat");
+                showSnackbar(classSaveField.value + " sparad som standardklass");
             } else {
                 localStorage.removeItem("defaultClass");
                 showSnackbar("Standardklass borttagen");
