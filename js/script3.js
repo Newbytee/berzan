@@ -108,7 +108,7 @@ function loadSchedulePage() {
         }
         
         if ((window.innerHeight/window.innerWidth) < 1) {
-            searchButton.innerHTML = "Visa Schema";
+            searchButton.innerHTML = "Visa schema";
         } else {
             searchButton.innerHTML = "Visa";
         }
