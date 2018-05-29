@@ -11,8 +11,8 @@ const navigationButtonsLength = navigationButtons.length;
 const contentIframe = document.getElementById("contentIframe");
 const pageTitle = document.getElementById("titleName");
 const date = new Date();
-let scheduleHeight = (window.innerWidth/window.innerHeight) * 1000;
-let scheduleWidth = 1883;
+let scheduleHeight = window.innerHeight;
+let scheduleWidth = window.innerWidth;
 let scheduleInit = false;
 let firstScheduleLoad = true;
 
@@ -47,13 +47,10 @@ for (let i = 0; i < navigationButtonsLength; i++) {
 }
 
 function resizeSchedule() {
+    scheduleHeight = window.innerHeight;
+    scheduleWidth = window.innerWidth;
     if ((window.innerHeight/window.innerWidth) < 1) {
         slideout.close();
-        scheduleHeight = window.innerHeight;
-        scheduleWidth = window.innerWidth;
-    } else {
-        scheduleHeight = window.innerHeight;
-        scheduleWidth = window.innerWidth;
     }
 }
 
@@ -63,7 +60,7 @@ function showSnackbar(text = "NOTEXT") {
     snackbar.className = "show";
     setTimeout(() => {
         snackbar.className = snackbar.className.replace("show", "");
-    }, 3000)
+    }, 3000);
 }
 
 function loadPage(page = 0) {
@@ -108,6 +105,12 @@ function loadSchedulePage() {
         if (firstScheduleLoad && localStorage.getItem("defaultClass")) {
             inputFields[1].value = localStorage.getItem("defaultClass");
             firstScheduleLoad = false;
+        }
+        
+        if ((window.innerHeight/window.innerWidth) < 1) {
+            searchButton.innerHTML = "Visa Schema";
+        } else {
+            searchButton.innerHTML = "Visa";
         }
 
         dayDropdown.onchange = function() {
