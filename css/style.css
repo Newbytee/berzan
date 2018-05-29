@@ -150,7 +150,7 @@ nav, #schedule, #contentIframe {
 }
 
 #weekNumberField {
-    min-width: 50px;
+    min-width: 20px;
 }
 
 #classNameField {
