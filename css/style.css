@@ -54,6 +54,7 @@ nav, #schedule, #contentIframe {
 .contentDiv {
     text-align: center;
     background-color: #7F3571;
+    box-shadow: 0 0 5px 2px #888888;
     color: #FFFFFF;
     border-radius: 10px;
     padding: 10px;
@@ -329,14 +330,17 @@ body {
     }
 
     .contentDiv {
+        margin-left: auto;
+        margin-right: auto;
         margin-bottom: 3vw;
+        width: 97%;
     }
 
     .contentDiv:first-of-type {
-        margin-top: 2vw;
+        margin-top: 3vw;
     }
 
-    .mobileNavButton, .settingsDiv, .contentDiv, #wrapper {
+    .mobileNavButton, #wrapper {
         width: 100%;
     }
 
