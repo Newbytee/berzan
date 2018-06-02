@@ -48,7 +48,10 @@ function resizeSchedule() {
 
 function showSnackbar(text) {
     const snackbar = document.getElementById("snackbar");
-    if (snackbar.className.includes("show")) return false;
+    if (snackbar.className.includes("show")) {
+        snackbar.innerHTML = text;
+        return;
+    }
     snackbar.innerHTML = text;
     snackbar.className = "show";
     setTimeout(() => {
