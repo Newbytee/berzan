@@ -27,11 +27,7 @@ document.getElementById("hamburgerSvg").addEventListener("click", () => {
 
 window.onresize = () => {
     resizeSchedule();
-    viewSchedule(true);
-};
-
-window.onload = () => {
-    resizeSchedule();
+    viewSchedule(true, false);
 };
 
 for (let i = 0; i < navigationButtonsLength; i++) {
@@ -109,12 +105,16 @@ function loadSchedulePage() {
             searchButton.innerHTML = "Visa";
         }
 
+        inputFields[0].onchange = function() {
+            viewSchedule(true);
+        };
+
         dayDropdown.onchange = function() {
             scheduleInit = true;
             viewSchedule(true);
         };
         
-        searchButton.addEventListener("click", () => {
+        searchButton.addEventListener("click", function() {
             scheduleInit = true;
             viewSchedule(true);
         });
@@ -154,7 +154,7 @@ function loadSchedulePage() {
     };
 }
 
-function viewSchedule(clickInit = false) {
+function viewSchedule(clickInit = false, prompt = true) {
     if (scheduleInit === false) return;
     const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
     const weekInputField = iframeDocument.getElementById("weekNumberField");
@@ -165,11 +165,7 @@ function viewSchedule(clickInit = false) {
     let weekDay;
     let className;
 
-    try {
-        currentWeek = weekInputField.value;
-    } catch (e) {
-        console.log(e);
-    }
+    currentWeek = weekInputField.value;
 
     switch(dayDropdown.selectedIndex) {
         case 0:
@@ -198,11 +194,15 @@ function viewSchedule(clickInit = false) {
     if (currentWeek === "") currentWeek = date.getWeek();
     if (clickInit) className = classInputField.value;
 
-    schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
-    schedule.onload = () => {
-        contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 5) + "vh";
-        //iframeDocument.getElementById("iframePanel").createElement
-        iframeDocument.getElementById("schedule").style.display = "block";
+    if (className.length > 0) {
+        schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
+        schedule.onload = () => {
+            contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 5) + "vh";
+            //iframeDocument.getElementById("iframePanel").createElement
+            iframeDocument.getElementById("schedule").style.display = "block";
+        }
+    } else if (prompt === true) {
+        showSnackbar("Välj en klass först");
     }
 }
 
