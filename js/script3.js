@@ -11,8 +11,6 @@ const navigationButtonsLength = navigationButtons.length;
 const contentIframe = document.getElementById("contentIframe");
 const pageTitle = document.getElementById("titleName");
 const date = new Date();
-let scheduleHeight = window.innerHeight;
-let scheduleWidth = window.innerWidth;
 let scheduleInit = false;
 let firstScheduleLoad = true;
 
@@ -47,8 +45,6 @@ for (let i = 0; i < navigationButtonsLength; i++) {
 }
 
 function resizeSchedule() {
-    scheduleHeight = window.innerHeight;
-    scheduleWidth = window.innerWidth;
     if ((window.innerHeight/window.innerWidth) < 1) {
         slideout.close();
     }
@@ -202,7 +198,7 @@ function viewSchedule(clickInit = false) {
     if (currentWeek === "") currentWeek = date.getWeek();
     if (clickInit) className = classInputField.value;
 
-    schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${scheduleWidth}&height=${scheduleHeight}`;
+    schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
     schedule.onload = () => {
         contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 5) + "vh";
         //iframeDocument.getElementById("iframePanel").createElement
