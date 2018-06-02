@@ -88,6 +88,7 @@ function loadPage(page = 0) {
             break;
         default:
             loadSchedulePage();
+            page = 0;
             break;
     }
     for (let i = 0; i < navigationButtonsLength; i++) {
