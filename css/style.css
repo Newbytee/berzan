@@ -2,6 +2,7 @@ nav {
     height: 8vh;
     background-color: #490A3D; /* "Berzan-färgen": #A1274C, den jag valde: #490A3D */
     position: fixed;
+    box-shadow: 0 0 5px 2px #888888;
 }
 
 input {
