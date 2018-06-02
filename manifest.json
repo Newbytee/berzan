@@ -1,8 +1,8 @@
 {
-  "name": "Berzan.js",
   "short_name": "Berzan.js",
+  "name": "Berzan.js",
   "display": "standalone",
-  "background_color": "#490A3D",
+  "start_url": "/",
   "theme_color": "#490A3D",
-  "start_url": "/"
+  "background_color": "#490A3D"
 }
