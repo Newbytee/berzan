@@ -282,8 +282,8 @@ body {
 
     .contentDiv {
         width: 30%;
-        margin-right: 0.5vh;
-        margin-bottom: 0.5vh;
+        margin: 0.7vh;
+        flex-grow: 10;
     }
 
     #contentContainer {
