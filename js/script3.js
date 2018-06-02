@@ -40,6 +40,14 @@ for (let i = 0; i < navigationButtonsLength; i++) {
     });
 }
 
+function resetPreferences() {
+    if (confirm("Är du säker?")) {
+        sessionStorage.clear();
+        localStorage.clear();
+        location.reload();
+    }
+}
+
 function resizeSchedule() {
     if ((window.innerHeight/window.innerWidth) < 1) {
         slideout.close();
@@ -82,6 +90,15 @@ function loadPage(page = 0) {
             loadSchedulePage();
             break;
     }
+    for (let i = 0; i < navigationButtonsLength; i++) {
+        if (i !== page) {
+            mobileNavButtons[i].removeAttribute("style");
+            navigationButtons[i].removeAttribute("style");
+        }
+    }
+    mobileNavButtons[page].style.backgroundColor = "#00000066";
+    navigationButtons[page].style.textShadow = "0 0 8px #FFF";
+    sessionStorage.setItem("currentPage", page.toString());
 }
 
 function loadSchedulePage() {
@@ -268,26 +285,34 @@ function loadSettings() {
         iframeDocument.getElementById("saveButtonThingy").addEventListener("click", () => {
             saveDefaultClass();
         });
+
+        iframeDocument.getElementById("resetButton").addEventListener("click", () => {
+            resetPreferences();
+        });
     };
 }
 
-switch(localStorage.getItem("startPage")) {
-    case "schedule":
-        loadPage(0);
-        break;
-    case "lunch":
-        loadPage(1);
-        break;
-    case "etc":
-        loadPage(2);
-        break;
-    case "settings":
-        loadPage(3);
-        break;
-    default:
-        loadPage();
+if (sessionStorage.getItem("currentPage")) {
+    loadPage(parseInt(sessionStorage.getItem("currentPage")));
+} else {
+    switch(localStorage.getItem("startPage")) {
+        case "schedule":
+            loadPage(0);
+            break;
+        case "lunch":
+            loadPage(1);
+            break;
+        case "etc":
+            loadPage(2);
+            break;
+        case "settings":
+            loadPage(3);
+            break;
+        default:
+            loadPage();
+    }
 }
 
 document.getElementById("splashScreen").style.display = "none";
 
-if (location.protocol !== "https:") console.log("Jag skulle uppskatta om ni uppgraderade till HTTPS. Kan inte registrera service-workers annars. https://letsencrypt.org/getting-started/ :^)");
+if (location.protocol !== "https:") console.log("[Berzan.js] Jag skulle uppskatta om ni uppgraderade till HTTPS. Kan inte registrera service-workers annars. https://letsencrypt.org/getting-started/ :^)");

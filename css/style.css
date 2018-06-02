@@ -51,7 +51,7 @@ nav, #schedule, #contentIframe {
     font-weight: normal;
 }
 
-.contentDiv {
+#contentContainer div {
     text-align: center;
     background-color: #7F3571;
     box-shadow: 0 0 5px 2px #888888;
@@ -60,15 +60,15 @@ nav, #schedule, #contentIframe {
     padding: 10px;
 }
 
-.contentDiv button:hover {
+#contentContainer div button:hover {
     background-color: #FFFFFF77;
 }
 
-.contentDiv a:link, .contentDiv a:visited {
+#contentContainer div a:link, #contentContainer div a:visited {
     color: #00bfa5;
 }
 
-.contentDiv input {
+#contentContainer div input {
     width: 100px;
 }
 
@@ -264,6 +264,7 @@ body {
         cursor: pointer;
         padding: 0 20px;
         color: #FFFFFF;
+
     }
 
     .navButton:hover {
@@ -280,7 +281,7 @@ body {
         right: 1%;
     }
 
-    .contentDiv {
+    #contentContainer div {
         width: 30%;
         margin: 0.7vh;
         flex-grow: 10;
@@ -329,14 +330,14 @@ body {
         text-align: center;
     }
 
-    .contentDiv {
+    #contentContainer div {
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 3vw;
         width: 97%;
     }
 
-    .contentDiv:first-of-type {
+    #contentContainer div:first-of-type {
         margin-top: 3vw;
     }
 

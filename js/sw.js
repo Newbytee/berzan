@@ -1,12 +1,12 @@
 if ("serviceWorker" in navigator) {
-    console.log("Installing service worker ...");
+    console.log("[Service Worker] Installing service worker ...");
     navigator.serviceWorker.register('js/worker.js').then(function(registration) {
-        console.log("... done  (" + registration + ")");
+        console.log("[Service Worker]  ... done  (" + registration + ")");
     }).catch(function(error) {
-        console.log("... failed (" + error + ")");
+        console.log("[Service Worker] ... failed (" + error + ")");
     });
 } else {
-    console.log("Service workers are not supported");
+    console.log("[Service Worker] Service workers are not supported");
 }
 
 self.addEventListener("fetch", function(e){
