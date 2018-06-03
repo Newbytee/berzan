@@ -87,9 +87,8 @@ function loadPage(page = 0) {
             pageTitle.innerHTML = "Om - Berzan.js";
             break;
         default:
-            loadSchedulePage();
-            page = 0;
-            break;
+            loadPage(0);
+            return;
     }
     for (let i = 0; i < navigationButtonsLength; i++) {
         if (i !== page) {
