@@ -142,9 +142,7 @@ function loadSchedulePage() {
 
         for (let i = 0; i < inputFields.length; i++) {
             inputFields[i].addEventListener("keydown", (event) => {
-                const keyName = event.key;
-
-                if (keyName === "Enter") {
+                if (event.key === "Enter") {
                     scheduleInit = true;
                     viewSchedule(true);
                 }
@@ -275,9 +273,7 @@ function loadSettings() {
         }
 
         classSaveField.addEventListener("keydown", (event) => {
-            const keyName = event.key;
-
-            if (keyName === "Enter") {
+            if (event.key === "Enter") {
                 saveDefaultClass();
             }
         });
