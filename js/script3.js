@@ -180,11 +180,9 @@ function viewSchedule(clickInit = false, prompt = true) {
     const classInputField = iframeDocument.getElementById("classNameField");
     const dayDropdown = iframeDocument.getElementById("dayDropdown");
     const schedule = iframeDocument.getElementById("schedule");
-    let currentWeek;
+    let currentWeek = weekInputField.value;
     let weekDay;
     let className;
-
-    currentWeek = weekInputField.value;
 
     switch(dayDropdown.selectedIndex) {
         case 0:
@@ -310,5 +308,4 @@ if (sessionStorage.getItem("currentPage")) {
 }
 
 document.getElementById("splashScreen").style.display = "none";
-
 if (location.protocol !== "https:") console.log("[Berzan.js] Jag skulle uppskatta om ni uppgraderade till HTTPS. Kan inte registrera service-workers annars. https://letsencrypt.org/getting-started/ :^)");
