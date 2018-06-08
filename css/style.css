@@ -45,7 +45,7 @@ nav, #schedule, #contentIframe {
 }
 
 .identity {
-    padding-top: 9px;
+    padding-top: 8px;
     font-size: 30px;
     color: #FFFFFF;
     font-weight: normal;
@@ -125,7 +125,7 @@ nav, #schedule, #contentIframe {
 }
 
 #contentIframe {
-    margin-top: 85px;
+    margin-top: 65px;
     height: 90vh;
     overflow: hidden;
     border: none;
@@ -296,6 +296,10 @@ body {
         justify-content: flex-start;
     }
 
+    #contentIframe {
+        margin-top: 85px;
+    }
+
     #desktopNav {
         height: 8vh;
         display: flex;
@@ -352,7 +356,7 @@ body {
 
     #hamburgerSvg {
         position: absolute;
-        margin-top: 20px;
+        margin-top: 12px;
         height: 39px;
         margin-left: 5%;
     }
