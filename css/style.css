@@ -45,7 +45,7 @@ nav, #schedule, #contentIframe {
 }
 
 .identity {
-    padding-top: 15px;
+    padding-top: 10px;
     font-size: 30px;
     color: #FFFFFF;
     font-weight: normal;
@@ -281,6 +281,7 @@ body {
     }
 
     .identity {
+        padding-top: 15px;
         position: absolute;
         right: 1%;
     }
