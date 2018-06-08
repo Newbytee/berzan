@@ -49,7 +49,7 @@ function resetPreferences() {
 }
 
 function resizeSchedule() {
-    if ((window.innerHeight/window.innerWidth) < 1) {
+    if (window.innerWidth > 768) {
         slideout.close();
     }
 }
