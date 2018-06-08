@@ -45,7 +45,7 @@ nav, #schedule, #contentIframe {
 }
 
 .identity {
-    padding-top: 1.5vh;
+    padding-top: 15px;
     font-size: 30px;
     color: #FFFFFF;
     font-weight: normal;
@@ -125,7 +125,7 @@ nav, #schedule, #contentIframe {
 }
 
 #contentIframe {
-    margin-top: 8.5vh;
+    margin-top: 85px;
     height: 90vh;
     overflow: hidden;
     border: none;
@@ -275,7 +275,7 @@ body {
     .mobileNavButton:after {
         content: " (You shouldn't be seeing this)";
     }
-    
+
     .identity {
         position: absolute;
         right: 1%;
@@ -347,7 +347,7 @@ body {
 
     #hamburgerSvg {
         position: absolute;
-        margin-top: 2vh;
+        margin-top: 20px;
         height: 39px;
         margin-left: 5%;
     }
@@ -364,7 +364,7 @@ body {
     #contentContainer {
         justify-content: space-between;
     }
-    
+
     #mobileDiv {
         display: block;
     }
