@@ -18,7 +18,8 @@ const slideout = new Slideout({
     "panel": document.getElementById("panel"),
     "menu": document.getElementById("hiddenMenu"),
     "padding": 256,
-    "tolerance": 0
+    "tolerance": 0,
+    "easing": "cubic-bezier(.32,2,.55,.27)"
 });
 
 document.getElementById("hamburgerSvg").addEventListener("click", () => {
