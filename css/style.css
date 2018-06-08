@@ -46,7 +46,7 @@ nav, #schedule, #contentIframe {
 
 .identity {
     padding-top: 1.5vh;
-    font-size: 3vh;
+    font-size: 30px;
     color: #FFFFFF;
     font-weight: normal;
 }
@@ -348,7 +348,7 @@ body {
     #hamburgerSvg {
         position: absolute;
         margin-top: 2vh;
-        height: 4vh;
+        height: 39px;
         margin-left: 5%;
     }
 
