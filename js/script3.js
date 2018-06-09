@@ -220,6 +220,11 @@ function viewSchedule(clickInit = false, prompt = true) {
         }
     } else if (prompt === true) {
         showSnackbar("Välj en klass först");
+        return;
+    }
+
+    if (!(localStorage.getItem("defaultClass"))) {
+        localStorage.setItem("defaultClass", classInputField.value);
     }
 }
 
