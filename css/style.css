@@ -160,7 +160,7 @@ nav, #schedule, #contentIframe {
 }
 
 #weekNumberField:out-of-range {
-    background-color: #AA0000;
+    color: #AA0000;
 }
 
 #aboutInformationDiv {
