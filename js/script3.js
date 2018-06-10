@@ -1,21 +1,21 @@
 "use strict";
 
 Date.prototype.getWeek = function() {
-    const onejan = new Date(this.getFullYear(), 0, 1);
-    return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+    const ONEJAN = new Date(this.getFullYear(), 0, 1);
+    return Math.ceil((((this - ONEJAN) / 86400000) + ONEJAN.getDay() + 1) / 7);
 };
 
-const navigationButtons = document.getElementsByClassName("navButton");
-const mobileNavButtons = document.getElementsByClassName("mobileNavButton");
-const navigationButtonsLength = navigationButtons.length;
-const contentIframe = document.getElementById("contentIframe");
-const pageTitle = document.getElementById("titleName");
-const date = new Date();
+const NAVIGATION_BUTTONS = document.getElementsByClassName("navButton");
+const MOBILE_NAV_BUTTONS = document.getElementsByClassName("mobileNavButton");
+const NAVIGATION_BUTTONS_LENGTH = NAVIGATION_BUTTONS.length;
+const CONTENT_IFRAME = document.getElementById("contentIframe");
+const PAGE_TITLE = document.getElementById("titleName");
+const DATE = new Date();
 let scheduleInit = false;
 let firstScheduleLoad = true;
 let orientationPortrait;
 
-const slideout = new Slideout({
+const SLIDEOUT = new Slideout({
     "panel": document.getElementById("panel"),
     "menu": document.getElementById("hiddenMenu"),
     "padding": 256,
@@ -23,7 +23,7 @@ const slideout = new Slideout({
 });
 
 document.getElementById("hamburgerSvg").addEventListener("click", () => {
-    slideout.toggle();
+    SLIDEOUT.toggle();
 });
 
 window.onresize = () => {
@@ -31,13 +31,13 @@ window.onresize = () => {
     viewSchedule(true, false);
 };
 
-for (let i = 0; i < navigationButtonsLength; i++) {
-    navigationButtons[i].addEventListener("click", () => {
+for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
+    NAVIGATION_BUTTONS[i].addEventListener("click", () => {
         loadPage(i);
     });
-    mobileNavButtons[i].addEventListener("click", () => {
+    MOBILE_NAV_BUTTONS[i].addEventListener("click", () => {
         loadPage(i);
-        slideout.close();
+        SLIDEOUT.close();
     });
 }
 
@@ -51,7 +51,7 @@ function resetPreferences() {
 
 function checkOrientation() {
     if (window.innerWidth > 768) {
-        slideout.close();
+        SLIDEOUT.close();
         orientationPortrait = false;
     } else {
         orientationPortrait = true;
@@ -59,15 +59,15 @@ function checkOrientation() {
 }
 
 function showSnackbar(text) {
-    const snackbar = document.getElementById("snackbar");
-    if (snackbar.className.includes("show")) {
-        snackbar.innerHTML = text;
+    const SNACKBAR = document.getElementById("snackbar");
+    if (SNACKBAR.className.includes("show")) {
+        SNACKBAR.innerHTML = text;
         return;
     }
-    snackbar.innerHTML = text;
-    snackbar.className = "show";
+    SNACKBAR.innerHTML = text;
+    SNACKBAR.className = "show";
     setTimeout(() => {
-        snackbar.className = snackbar.className.replace("show", "");
+        SNACKBAR.className = SNACKBAR.className.replace("show", "");
     }, 3000);
 }
 
@@ -80,98 +80,98 @@ function loadPage(page = 0) {
             loadLunchPage();
             break;
         case 2:
-            contentIframe.src = "html/etc.html";
-            pageTitle.innerHTML = "Övrigt - Berzan.js";
+            CONTENT_IFRAME.src = "html/etc.html";
+            PAGE_TITLE.innerHTML = "Övrigt - Berzan.js";
             break;
         case 3:
             loadSettings();
             break;
         case 4:
-            contentIframe.src = "html/about.html";
-            pageTitle.innerHTML = "Om - Berzan.js";
+            CONTENT_IFRAME.src = "html/about.html";
+            PAGE_TITLE.innerHTML = "Om - Berzan.js";
             break;
         default:
             loadPage(0);
             return;
     }
-    for (let i = 0; i < navigationButtonsLength; i++) {
+    for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
         if (i !== page) {
-            mobileNavButtons[i].removeAttribute("style");
-            navigationButtons[i].removeAttribute("style");
+            MOBILE_NAV_BUTTONS[i].removeAttribute("style");
+            NAVIGATION_BUTTONS[i].removeAttribute("style");
         }
     }
-    mobileNavButtons[page].style.backgroundColor = "#00000066";
-    navigationButtons[page].style.textShadow = "0 0 8px #FFF";
+    MOBILE_NAV_BUTTONS[page].style.backgroundColor = "#00000066";
+    NAVIGATION_BUTTONS[page].style.textShadow = "0 0 8px #FFF";
     sessionStorage.setItem("currentPage", page.toString());
 }
 
 function loadSchedulePage() {
-    contentIframe.src = "html/schedule.html";
-    pageTitle.innerHTML = "Schema - Berzan.js";
-    sessionStorage.setItem("inputField0", date.getWeek());
-    contentIframe.onload = () => {
-        const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
-        const inputFields = iframeDocument.getElementsByClassName("inputField");
-        const searchButton = iframeDocument.getElementById("searchClass");
-        const dayDropdown = iframeDocument.getElementById("dayDropdown");
+    CONTENT_IFRAME.src = "html/schedule.html";
+    PAGE_TITLE.innerHTML = "Schema - Berzan.js";
+    sessionStorage.setItem("inputField0", DATE.getWeek());
+    CONTENT_IFRAME.onload = () => {
+        const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
+        const INPUT_FIELDS = IFRAME_DOCUMENT.getElementsByClassName("inputField");
+        const SEARCH_BUTTON = IFRAME_DOCUMENT.getElementById("searchClass");
+        const DAY_DROPDOWN = IFRAME_DOCUMENT.getElementById("dayDropdown");
 
-        for (let i = 0; i < inputFields.length; i++) {
-            if (sessionStorage.getItem("inputField" + i)) inputFields[i].value = sessionStorage.getItem("inputField" + i);
+        for (let i = 0; i < INPUT_FIELDS.length; i++) {
+            if (sessionStorage.getItem("inputField" + i)) INPUT_FIELDS[i].value = sessionStorage.getItem("inputField" + i);
         }
         
         if (firstScheduleLoad && localStorage.getItem("defaultClass")) {
-            inputFields[1].value = localStorage.getItem("defaultClass");
+            INPUT_FIELDS[1].value = localStorage.getItem("defaultClass");
             firstScheduleLoad = false;
         }
         
         if (orientationPortrait) {
-            searchButton.innerHTML = "Visa";
+            SEARCH_BUTTON.innerHTML = "Visa";
         } else {
-            searchButton.innerHTML = "Visa schema";
+            SEARCH_BUTTON.innerHTML = "Visa schema";
         }
 
-        inputFields[0].onchange = function() {
+        INPUT_FIELDS[0].onchange = function() {
             viewSchedule(true);
         };
 
-        dayDropdown.onchange = function() {
+        DAY_DROPDOWN.onchange = function() {
             scheduleInit = true;
             viewSchedule(true);
         };
         
-        searchButton.addEventListener("click", function() {
+        SEARCH_BUTTON.addEventListener("click", function() {
             scheduleInit = true;
             viewSchedule(true);
         });
 
-        for (let i = 0; i < inputFields.length; i++) {
-            inputFields[i].addEventListener("keydown", (event) => {
+        for (let i = 0; i < INPUT_FIELDS.length; i++) {
+            INPUT_FIELDS[i].addEventListener("keydown", (event) => {
                 if (event.key === "Enter") {
                     scheduleInit = true;
                     viewSchedule(true);
                 }
             });
 
-            inputFields[i].addEventListener("blur", () => {
-                sessionStorage.setItem("inputField" + i, inputFields[i].value);
+            INPUT_FIELDS[i].addEventListener("blur", () => {
+                sessionStorage.setItem("inputField" + i, INPUT_FIELDS[i].value);
             });
         }
 
         if (orientationPortrait) {
-            if (date.getDay() < 6) {
-                dayDropdown.selectedIndex = date.getDay() === 0 ? 1 : date.getDay();
+            if (DATE.getDay() < 6) {
+                DAY_DROPDOWN.selectedIndex = DATE.getDay() === 0 ? 1 : DATE.getDay();
             } else {
-                dayDropdown.selectedIndex = 1;
+                DAY_DROPDOWN.selectedIndex = 1;
             }
         } else {
-            dayDropdown.selectedIndex = 0;
+            DAY_DROPDOWN.selectedIndex = 0;
         }
         
         setTimeout(() => {
-            if (inputFields[1].value.length !== 0) {
+            if (INPUT_FIELDS[1].value.length !== 0) {
                 scheduleInit = true;
                 viewSchedule(true);
-                sessionStorage.setItem("inputField1", inputFields[1].value);
+                sessionStorage.setItem("inputField1", INPUT_FIELDS[1].value);
             }
         }, 0);
     };
@@ -179,16 +179,16 @@ function loadSchedulePage() {
 
 function viewSchedule(clickInit = false, prompt = true) {
     if (scheduleInit === false) return;
-    const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
-    const weekInputField = iframeDocument.getElementById("weekNumberField");
-    const classInputField = iframeDocument.getElementById("classNameField");
-    const dayDropdown = iframeDocument.getElementById("dayDropdown");
-    const schedule = iframeDocument.getElementById("schedule");
-    let currentWeek = weekInputField.value;
+    const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
+    const WEEK_INPUT_FIELD = IFRAME_DOCUMENT.getElementById("weekNumberField");
+    const CLASS_INPUT_FIELD = IFRAME_DOCUMENT.getElementById("classNameField");
+    const DAY_DROPDOWN = IFRAME_DOCUMENT.getElementById("dayDropdown");
+    const SCHEDULE = IFRAME_DOCUMENT.getElementById("schedule");
+    let currentWeek = WEEK_INPUT_FIELD.value;
     let weekDay;
     let className;
 
-    switch(dayDropdown.selectedIndex) {
+    switch(DAY_DROPDOWN.selectedIndex) {
         case 0:
             weekDay = 0;
             break;
@@ -212,15 +212,15 @@ function viewSchedule(clickInit = false, prompt = true) {
             break;
     }
 
-    if (currentWeek === "") currentWeek = date.getWeek();
-    if (clickInit) className = classInputField.value;
+    if (currentWeek === "") currentWeek = DATE.getWeek();
+    if (clickInit) className = CLASS_INPUT_FIELD.value;
 
     if (className.length > 0) {
-        schedule.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
-        schedule.onload = () => {
-            contentIframe.height = (contentIframe.contentWindow.document.body.scrollHeight + 5) + "vh";
+        SCHEDULE.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
+        SCHEDULE.onload = () => {
+            CONTENT_IFRAME.height = (CONTENT_IFRAME.contentWindow.document.body.scrollHeight + 5) + "vh";
             //iframeDocument.getElementById("iframePanel").createElement
-            iframeDocument.getElementById("schedule").style.display = "block";
+            IFRAME_DOCUMENT.getElementById("schedule").style.display = "block";
         }
     } else if (prompt === true) {
         showSnackbar("Välj en klass först");
@@ -228,26 +228,26 @@ function viewSchedule(clickInit = false, prompt = true) {
     }
 
     if (!(localStorage.getItem("defaultClass"))) {
-        localStorage.setItem("defaultClass", classInputField.value);
+        localStorage.setItem("defaultClass", CLASS_INPUT_FIELD.value);
     }
 }
 
 function loadLunchPage() {
-    contentIframe.src = "https://skolmaten.se/berzeliusskolan";
-    pageTitle.innerHTML = "Lunch - Berzan.js";
+    CONTENT_IFRAME.src = "https://skolmaten.se/berzeliusskolan";
+    PAGE_TITLE.innerHTML = "Lunch - Berzan.js";
     //fetch("https://skolmaten.se/berzeliusskolan/?fmt=json").then(response => response.json().then(obj => console.log(obj)));
 }
 
 function loadSettings() {
-    contentIframe.src = "html/settings.html";
-    pageTitle.innerHTML = "Inställningar - Berzan.js";
-    contentIframe.onload = () => {
-        const iframeDocument = contentIframe.contentDocument || contentIframe.contentWindow.document;
-        const changeStartpageButtons = iframeDocument.getElementsByClassName("startPagePicker");
-        const classSaveField = iframeDocument.getElementById("defaultClass");
-        
-        for (let i = 0; i < changeStartpageButtons.length; i++) {
-            changeStartpageButtons[i].addEventListener("click", () => {
+    CONTENT_IFRAME.src = "html/settings.html";
+    PAGE_TITLE.innerHTML = "Inställningar - Berzan.js";
+    CONTENT_IFRAME.onload = () => {
+        const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
+        const CHANGE_STARTPAGE_BUTTONS = IFRAME_DOCUMENT.getElementsByClassName("startPagePicker");
+        const CLASS_SAVE_FIELD = IFRAME_DOCUMENT.getElementById("defaultClass");
+
+        for (let i = 0; i < CHANGE_STARTPAGE_BUTTONS.length; i++) {
+            CHANGE_STARTPAGE_BUTTONS[i].addEventListener("click", () => {
                 switch (i) {
                     case 0:
                         localStorage.setItem("startPage", "schedule");
@@ -270,26 +270,26 @@ function loadSettings() {
         }
 
         function saveDefaultClass() {
-            if (classSaveField.value !== "") {
-                localStorage.setItem("defaultClass", classSaveField.value);
-                showSnackbar(classSaveField.value + " sparad som standardklass");
+            if (CLASS_SAVE_FIELD.value !== "") {
+                localStorage.setItem("defaultClass", CLASS_SAVE_FIELD.value);
+                showSnackbar(CLASS_SAVE_FIELD.value + " sparad som standardklass");
             } else {
                 localStorage.removeItem("defaultClass");
                 showSnackbar("Standardklass borttagen");
             }
         }
 
-        classSaveField.addEventListener("keydown", (event) => {
+        CLASS_SAVE_FIELD.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
                 saveDefaultClass();
             }
         });
 
-        iframeDocument.getElementById("saveButtonThingy").addEventListener("click", () => {
+        IFRAME_DOCUMENT.getElementById("saveButtonThingy").addEventListener("click", () => {
             saveDefaultClass();
         });
 
-        iframeDocument.getElementById("resetButton").addEventListener("click", () => {
+        IFRAME_DOCUMENT.getElementById("resetButton").addEventListener("click", () => {
             resetPreferences();
         });
     };
