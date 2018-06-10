@@ -4,5 +4,9 @@
   "display": "standalone",
   "start_url": "/",
   "theme_color": "#490A3D",
-  "background_color": "#490A3D"
+  "background_color": "#490A3D",
+  "icons": [{
+    "src": "img/logo.svg",
+    "sizes": "1024x1024"
+  }]
 }
