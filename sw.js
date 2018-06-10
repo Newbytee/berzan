@@ -1,3 +1,5 @@
+"use strict";
+
 if ("serviceWorker" in navigator) {
     console.log("[Service Worker] Installing service worker ...");
     navigator.serviceWorker.register("sw.js").then(function(registration) {
