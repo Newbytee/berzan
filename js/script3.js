@@ -13,6 +13,7 @@ const pageTitle = document.getElementById("titleName");
 const date = new Date();
 let scheduleInit = false;
 let firstScheduleLoad = true;
+let orientationPortrait;
 
 const slideout = new Slideout({
     "panel": document.getElementById("panel"),
@@ -26,7 +27,7 @@ document.getElementById("hamburgerSvg").addEventListener("click", () => {
 });
 
 window.onresize = () => {
-    resizeSchedule();
+    checkOrientation();
     viewSchedule(true, false);
 };
 
@@ -48,9 +49,12 @@ function resetPreferences() {
     }
 }
 
-function resizeSchedule() {
+function checkOrientation() {
     if (window.innerWidth > 768) {
         slideout.close();
+        orientationPortrait = false;
+    } else {
+        orientationPortrait = true;
     }
 }
 
@@ -120,10 +124,10 @@ function loadSchedulePage() {
             firstScheduleLoad = false;
         }
         
-        if ((window.innerHeight/window.innerWidth) < 1) {
-            searchButton.innerHTML = "Visa schema";
-        } else {
+        if (orientationPortrait) {
             searchButton.innerHTML = "Visa";
+        } else {
+            searchButton.innerHTML = "Visa schema";
         }
 
         inputFields[0].onchange = function() {
@@ -153,9 +157,9 @@ function loadSchedulePage() {
             });
         }
 
-        if (window.innerWidth < 768) {
+        if (orientationPortrait) {
             if (date.getDay() < 6) {
-                dayDropdown.selectedIndex = date.getDay();
+                dayDropdown.selectedIndex = date.getDay() === 0 ? 1 : date.getDay();
             } else {
                 dayDropdown.selectedIndex = 1;
             }
@@ -165,9 +169,9 @@ function loadSchedulePage() {
         
         setTimeout(() => {
             if (inputFields[1].value.length !== 0) {
-            scheduleInit = true;
-            viewSchedule(true);
-            sessionStorage.setItem("inputField1", inputFields[1].value);
+                scheduleInit = true;
+                viewSchedule(true);
+                sessionStorage.setItem("inputField1", inputFields[1].value);
             }
         }, 0);
     };
@@ -312,5 +316,6 @@ if (sessionStorage.getItem("currentPage")) {
     }
 }
 
+checkOrientation();
 document.getElementById("splashScreen").style.display = "none";
 if (location.protocol !== "https:") console.log("[Berzan.js] Jag skulle uppskatta om ni uppgraderade till HTTPS. Kan inte registrera service-workers annars. https://letsencrypt.org/getting-started/ :^)");
