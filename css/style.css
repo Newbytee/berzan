@@ -134,7 +134,7 @@ nav, #schedule, #contentIframe {
 #schedule {
     margin-top: 0.5vh;
     display: none;
-    height: 95vh;
+    height: 90vh;
 }
 
 #searchClass {
@@ -299,6 +299,10 @@ body {
 
     #contentIframe {
         margin-top: 85px;
+    }
+
+    #schedule {
+        height: 95vh;
     }
 
     #desktopNav {
