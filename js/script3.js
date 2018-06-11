@@ -215,7 +215,7 @@ function viewSchedule(clickInit = false, prompt = true) {
     if (currentWeek === "") currentWeek = DATE.getWeek();
     if (clickInit) className = CLASS_INPUT_FIELD.value;
     
-    if (className === "memer") {
+    if (className === "åsna") {
         CONTENT_IFRAME.src = "https://www.youtube.com/embed/L_jWHffIx5E";
         return;
     }
