@@ -51,6 +51,14 @@ nav, #schedule, #contentIframe {
     font-weight: normal;
 }
 
+.startPagePicker {
+    margin-bottom: 5px;
+}
+
+.dropdown {
+    display: inline-block;
+}
+
 #contentContainer div {
     text-align: center;
     background-color: #7F3571;
@@ -72,14 +80,6 @@ nav, #schedule, #contentIframe {
     width: 100px;
 }
 
-.startPagePicker {
-    margin-bottom: 5px;
-}
-
-.dropdown {
-    display: inline-block;
-}
-
 #contentContainer {
     display: flex;
     flex-wrap: wrap;
@@ -92,6 +92,10 @@ nav, #schedule, #contentIframe {
     width: 100vw;
     background-color: #490A3D;
     z-index: 15;
+}
+
+#mainBody {
+    overflow: hidden;
 }
 
 #splashScreen h1 {
