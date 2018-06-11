@@ -216,7 +216,7 @@ function viewSchedule(clickInit = false, prompt = true) {
     if (clickInit) className = CLASS_INPUT_FIELD.value;
     
     if (className === "memer") {
-        location.href = "https://www.youtube.com/embed/L_jWHffIx5E";
+        CONTENT_IFRAME.src = "https://www.youtube.com/embed/L_jWHffIx5E";
         return;
     }
 
