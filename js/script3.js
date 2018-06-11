@@ -214,6 +214,11 @@ function viewSchedule(clickInit = false, prompt = true) {
 
     if (currentWeek === "") currentWeek = DATE.getWeek();
     if (clickInit) className = CLASS_INPUT_FIELD.value;
+    
+    if (className === "memer") {
+        location.href = "https://www.youtube.com/embed/L_jWHffIx5E";
+        return;
+    }
 
     if (className.length > 0) {
         SCHEDULE.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
