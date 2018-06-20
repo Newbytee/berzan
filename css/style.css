@@ -381,11 +381,7 @@ nav, #schedule, #contentIframe {
     font-weight: normal;
 }
 
-.browserListItem {
-    margin-bottom: 5px;
-}
-
-.startPagePicker {
+.startPagePicker, .browserListItem {
     margin-bottom: 5px;
 }
 
