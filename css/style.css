@@ -379,6 +379,7 @@ nav, #schedule, #contentIframe {
     font-size: 30px;
     color: #FFFFFF;
     font-weight: normal;
+    text-align: center;
 }
 
 .startPagePicker, .browserListItem {
@@ -663,10 +664,6 @@ body {
     .mobileNavButton:hover {
         transition: 0.5s;
         background-color: #00000066; /* #123456 */
-    }
-
-    .identity {
-        text-align: center;
     }
 
     #contentContainer div {
