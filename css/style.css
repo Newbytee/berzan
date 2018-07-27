@@ -415,15 +415,6 @@ nav, #schedule, #contentIframe {
     flex-wrap: wrap;
 }
 
-#splashScreen {
-    position: absolute;
-    text-align: center;
-    height: 100vh;
-    width: 100vw;
-    background-color: #490A3D;
-    z-index: 15;
-}
-
 #mainBody {
     overflow: hidden;
 }
