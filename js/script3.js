@@ -91,7 +91,11 @@ function loadPage(page = 0) {
             PAGE_TITLE.innerHTML = "Om - Berzan.js";
             break;
         default:
-            loadPage(0);
+            if (typeof page === "string") {
+                CONTENT_IFRAME.src = page;
+            } else {
+                loadPage(0);
+            }
             return;
     }
     for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
