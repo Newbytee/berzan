@@ -284,9 +284,11 @@ function loadSettings() {
                 switch (i) {
                     case 0:
                         localStorage.setItem("scheduleFiletype", "png");
+                        showSnackbar("Schemat laddas nu som PNG");
                         break;
                     case 1:
                         localStorage.setItem("scheduleFiletype", "gif");
+                        showSnackbar("Schemat laddas nu som GIF");
                         break;
                 }
             });
