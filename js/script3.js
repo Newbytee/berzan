@@ -220,12 +220,12 @@ function viewSchedule(clickInit = false, prompt = true) {
     if (clickInit) className = CLASS_INPUT_FIELD.value;
     
     if (className === "åsna") {
-        CONTENT_IFRAME.src = "https://www.youtube.com/embed/L_jWHffIx5E";
+        loadPage("https://www.youtube.com/embed/L_jWHffIx5E");
         return;
     }
 
     if (className.length > 0) {
-        SCHEDULE.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=png&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
+        SCHEDULE.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=${localStorage.getItem("scheduleFiletype")}&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
         SCHEDULE.onload = () => {
             CONTENT_IFRAME.height = (CONTENT_IFRAME.contentWindow.document.body.scrollHeight + 5) + "vh";
             //iframeDocument.getElementById("iframePanel").createElement
@@ -254,9 +254,10 @@ function loadSettings() {
         const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
         const CHANGE_STARTPAGE_BUTTONS = IFRAME_DOCUMENT.getElementsByClassName("startPagePicker");
         const CLASS_SAVE_FIELD = IFRAME_DOCUMENT.getElementById("defaultClass");
+        const CHANGE_FILETYPE_BUTTONS = IFRAME_DOCUMENT.getElementsByClassName("filetypePicker");
 
         for (let i = 0; i < CHANGE_STARTPAGE_BUTTONS.length; i++) {
-            CHANGE_STARTPAGE_BUTTONS[i].addEventListener("click", () => {
+            CHANGE_STARTPAGE_BUTTONS[i].addEventListener("click", function() {
                 switch (i) {
                     case 0:
                         localStorage.setItem("startPage", "schedule");
@@ -273,6 +274,19 @@ function loadSettings() {
                     default:
                         localStorage.setItem("startPage", "schedule");
                         showSnackbar("Startsida bytt till schema");
+                        break;
+                }
+            });
+        }
+
+        for (let i = 0; i < CHANGE_FILETYPE_BUTTONS.length; i++) {
+            CHANGE_FILETYPE_BUTTONS[i].addEventListener("click", function() {
+                switch (i) {
+                    case 0:
+                        localStorage.setItem("scheduleFiletype", "png");
+                        break;
+                    case 1:
+                        localStorage.setItem("scheduleFiletype", "gif");
                         break;
                 }
             });
