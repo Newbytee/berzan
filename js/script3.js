@@ -315,23 +315,15 @@ function loadSettings() {
                 switch (i) {
                     case 0:
                         localStorage.setItem("slideoutSide", "left");
-                        /*if (orientationPortrait) {
-                            location.reload();
-                        } else {
-                            showSnackbar("Mobilmenyn flyttad till vänster");
-                        }*/
                         slideout.destroy();
                         createSlideout();
+                        showSnackbar("Mobilmenyn flyttad till vänster");
                         break;
                     case 1:
                         localStorage.setItem("slideoutSide", "right");
-                        /*if (orientationPortrait) {
-                            location.reload();
-                        } else {
-                            showSnackbar("Mobilmenyn flyttad till höger");
-                        }*/
                         slideout.destroy();
                         createSlideout();
+                        showSnackbar("Mobilmenyn flyttad till höger");
                         break;
                 }
             });
