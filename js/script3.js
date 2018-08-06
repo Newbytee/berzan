@@ -330,7 +330,7 @@ function loadSettings() {
         }
 
         function saveDefaultClass() {
-            if (CLASS_SAVE_FIELD.value !== "") {
+            if (CLASS_SAVE_FIELD.value.length > 0) {
                 localStorage.setItem("defaultClass", CLASS_SAVE_FIELD.value);
                 showSnackbar(CLASS_SAVE_FIELD.value + " sparad som standardklass");
             } else {
