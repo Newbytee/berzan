@@ -15,12 +15,23 @@ let scheduleInit = false;
 let firstScheduleLoad = true;
 let orientationPortrait;
 
-const SLIDEOUT = new Slideout({
-    "panel": document.getElementById("panel"),
-    "menu": document.getElementById("hiddenMenu"),
-    "padding": 256,
-    "tolerance": 0
-});
+if (localStorage.getItem("slideoutSide") === null || localStorage.getItem("slideoutSide") === "left") {
+    var SLIDEOUT = new Slideout({
+        "panel": document.getElementById("panel"),
+        "menu": document.getElementById("hiddenMenu"),
+        "padding": 256,
+        "tolerance": 0
+    });
+} else {
+    var SLIDEOUT = new Slideout({
+        "panel": document.getElementById("panel"),
+        "menu": document.getElementById("hiddenMenu"),
+        "padding": 256,
+        "tolerance": 0,
+        "side": "right"
+    });
+    document.getElementById("hamburgerSvg").style.marginLeft = "90%";
+}
 
 document.getElementById("hamburgerSvg").addEventListener("click", () => {
     SLIDEOUT.toggle();
@@ -255,6 +266,7 @@ function loadSettings() {
         const CHANGE_STARTPAGE_BUTTONS = IFRAME_DOCUMENT.getElementsByClassName("startPagePicker");
         const CLASS_SAVE_FIELD = IFRAME_DOCUMENT.getElementById("defaultClass");
         const CHANGE_FILETYPE_BUTTONS = IFRAME_DOCUMENT.getElementsByClassName("filetypePicker");
+        const CHANGE_SLIDEOUT_SIDE_BUTTONS = IFRAME_DOCUMENT.getElementsByClassName("slideoutSidePicker");
 
         for (let i = 0; i < CHANGE_STARTPAGE_BUTTONS.length; i++) {
             CHANGE_STARTPAGE_BUTTONS[i].addEventListener("click", function() {
@@ -289,6 +301,29 @@ function loadSettings() {
                     case 1:
                         localStorage.setItem("scheduleFiletype", "gif");
                         showSnackbar("Schemat laddas nu som GIF");
+                        break;
+                }
+            });
+        }
+
+        for (let i = 0; i < CHANGE_SLIDEOUT_SIDE_BUTTONS.length; i++) {
+            CHANGE_SLIDEOUT_SIDE_BUTTONS[i].addEventListener("click", function() {
+                switch (i) {
+                    case 0:
+                        localStorage.setItem("slideoutSide", "left");
+                        if (orientationPortrait) {
+                            location.reload();
+                        } else {
+                            showSnackbar("Mobilmenyn flyttad till vänster");
+                        }
+                        break;
+                    case 1:
+                        localStorage.setItem("slideoutSide", "right");
+                        if (orientationPortrait) {
+                            location.reload();
+                        } else {
+                            showSnackbar("Mobilmenyn flyttad till höger");
+                        }
                         break;
                 }
             });
