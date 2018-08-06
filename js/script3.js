@@ -14,16 +14,17 @@ const DATE = new Date();
 let scheduleInit = false;
 let firstScheduleLoad = true;
 let orientationPortrait;
+let slideout;
 
 if (localStorage.getItem("slideoutSide") === null || localStorage.getItem("slideoutSide") === "left") {
-    var SLIDEOUT = new Slideout({
+    slideout = new Slideout({
         "panel": document.getElementById("panel"),
         "menu": document.getElementById("hiddenMenu"),
         "padding": 256,
         "tolerance": 0
     });
 } else {
-    var SLIDEOUT = new Slideout({
+    slideout = new Slideout({
         "panel": document.getElementById("panel"),
         "menu": document.getElementById("hiddenMenu"),
         "padding": 256,
@@ -34,7 +35,7 @@ if (localStorage.getItem("slideoutSide") === null || localStorage.getItem("slide
 }
 
 document.getElementById("hamburgerSvg").addEventListener("click", () => {
-    SLIDEOUT.toggle();
+    slideout.toggle();
 });
 
 window.onresize = () => {
@@ -48,7 +49,7 @@ for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
     });
     MOBILE_NAV_BUTTONS[i].addEventListener("click", () => {
         loadPage(i);
-        SLIDEOUT.close();
+        slideout.close();
     });
 }
 
@@ -62,7 +63,7 @@ function resetPreferences() {
 
 function checkOrientation() {
     if (window.innerWidth > 768) {
-        SLIDEOUT.close();
+        slideout.close();
         orientationPortrait = false;
     } else {
         orientationPortrait = true;
@@ -319,11 +320,12 @@ function loadSettings() {
                         break;
                     case 1:
                         localStorage.setItem("slideoutSide", "right");
-                        if (orientationPortrait) {
+                        /*if (orientationPortrait) {
                             location.reload();
                         } else {
                             showSnackbar("Mobilmenyn flyttad till höger");
-                        }
+                        }*/
+                        slideout.destroy();
                         break;
                 }
             });
