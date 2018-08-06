@@ -16,24 +16,6 @@ let firstScheduleLoad = true;
 let orientationPortrait;
 let slideout;
 
-if (localStorage.getItem("slideoutSide") === null || localStorage.getItem("slideoutSide") === "left") {
-    slideout = new Slideout({
-        "panel": document.getElementById("panel"),
-        "menu": document.getElementById("hiddenMenu"),
-        "padding": 256,
-        "tolerance": 0
-    });
-} else {
-    slideout = new Slideout({
-        "panel": document.getElementById("panel"),
-        "menu": document.getElementById("hiddenMenu"),
-        "padding": 256,
-        "tolerance": 0,
-        "side": "right"
-    });
-    document.getElementById("hamburgerSvg").style.marginLeft = "90%";
-}
-
 document.getElementById("hamburgerSvg").addEventListener("click", () => {
     slideout.toggle();
 });
@@ -51,6 +33,27 @@ for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
         loadPage(i);
         slideout.close();
     });
+}
+
+function createSlideout() {
+    if (localStorage.getItem("slideoutSide") === null || localStorage.getItem("slideoutSide") === "left") {
+        slideout = new Slideout({
+            "panel": document.getElementById("panel"),
+            "menu": document.getElementById("hiddenMenu"),
+            "padding": 256,
+            "tolerance": 0
+        });
+        document.getElementById("hamburgerSvg").removeAttribute("style");
+    } else {
+        slideout = new Slideout({
+            "panel": document.getElementById("panel"),
+            "menu": document.getElementById("hiddenMenu"),
+            "padding": 256,
+            "tolerance": 0,
+            "side": "right"
+        });
+        document.getElementById("hamburgerSvg").style.marginLeft = "90%";
+    }
 }
 
 function resetPreferences() {
@@ -312,11 +315,13 @@ function loadSettings() {
                 switch (i) {
                     case 0:
                         localStorage.setItem("slideoutSide", "left");
-                        if (orientationPortrait) {
+                        /*if (orientationPortrait) {
                             location.reload();
                         } else {
                             showSnackbar("Mobilmenyn flyttad till vänster");
-                        }
+                        }*/
+                        slideout.destroy();
+                        createSlideout();
                         break;
                     case 1:
                         localStorage.setItem("slideoutSide", "right");
@@ -326,6 +331,7 @@ function loadSettings() {
                             showSnackbar("Mobilmenyn flyttad till höger");
                         }*/
                         slideout.destroy();
+                        createSlideout();
                         break;
                 }
             });
@@ -383,5 +389,6 @@ if (localStorage.getItem("scheduleFiletype") !== "png" || localStorage.getItem("
 }
 
 checkOrientation();
+createSlideout();
 document.getElementById("splashScreen").style.display = "none";
 if (location.protocol !== "https:") console.log("[Berzan.js] Jag skulle uppskatta om ni uppgraderade till HTTPS. Kan inte registrera service-workers annars. https://letsencrypt.org/getting-started/ :^)");
