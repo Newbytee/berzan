@@ -38,8 +38,9 @@ for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
     });
 }
 
-function createSlideout() {
+async function createSlideout() {
     const slideoutMenu = document.getElementById("hiddenMenu");
+    const hamburgerMenu = document.getElementById("hamburgerSvg");
     slideoutMenu.classList.remove("slideout-menu-right");
     slideoutMenu.classList.remove("slideout-menu-left");
     if (localStorage.getItem("slideoutSide") === null || localStorage.getItem("slideoutSide") === "left") {
@@ -49,7 +50,7 @@ function createSlideout() {
             "padding": 256,
             "tolerance": 0
         });
-        document.getElementById("hamburgerSvg").removeAttribute("style");
+        hamburgerMenu.style.marginLeft = "5%";
     } else {
         slideout = new Slideout({
             "panel": document.getElementById("panel"),
@@ -58,8 +59,14 @@ function createSlideout() {
             "tolerance": 0,
             "side": "right"
         });
-        document.getElementById("hamburgerSvg").style.marginLeft = "90%";
+        hamburgerMenu.style.marginLeft = "90%";
     }
+    await sleep(500);
+    hamburgerMenu.style.transition = "0.5s";
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function resetPreferences() {
