@@ -686,6 +686,7 @@ body {
         margin-top: 10px;
         height: 39px;
         margin-left: 5%;
+        transition: 0.5s;
     }
 
     #panel {
