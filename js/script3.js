@@ -59,7 +59,7 @@ async function createSlideout() {
             "tolerance": 0,
             "side": "right"
         });
-        hamburgerMenu.style.marginLeft = "90%";
+        hamburgerMenu.style.marginLeft = "85%";
     }
     await sleep(500);
     hamburgerMenu.style.transition = "0.5s";
