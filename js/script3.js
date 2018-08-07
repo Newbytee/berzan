@@ -39,6 +39,9 @@ for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
 }
 
 function createSlideout() {
+    const slideoutMenu = document.getElementById("hiddenMenu");
+    slideoutMenu.classList.remove("slideout-menu-right");
+    slideoutMenu.classList.remove("slideout-menu-left");
     if (localStorage.getItem("slideoutSide") === null || localStorage.getItem("slideoutSide") === "left") {
         slideout = new Slideout({
             "panel": document.getElementById("panel"),
