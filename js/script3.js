@@ -394,4 +394,4 @@ if (localStorage.getItem("scheduleFiletype") !== "png" || localStorage.getItem("
 }
 
 document.getElementById("splashScreen").style.display = "none";
-if (location.protocol !== "https:") console.log("[Berzan.js] Jag skulle uppskatta om ni uppgraderade till HTTPS. Kan inte registrera service-workers annars. https://letsencrypt.org/getting-started/ :^)");
+if (location.protocol !== "https:") console.log("[Berzan.js] Jag skulle uppskatta om ni uppgraderade till HTTPS -- kan inte registrera service-workers annars! https://letsencrypt.org/getting-started/ :^)");
