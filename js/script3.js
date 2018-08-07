@@ -16,8 +16,8 @@ let firstScheduleLoad = true;
 let orientationPortrait;
 let slideout;
 
-checkOrientation();
 createSlideout();
+checkOrientation();
 
 document.getElementById("hamburgerSvg").addEventListener("click", () => {
     slideout.toggle();
