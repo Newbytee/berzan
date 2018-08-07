@@ -16,6 +16,9 @@ let firstScheduleLoad = true;
 let orientationPortrait;
 let slideout;
 
+checkOrientation();
+createSlideout();
+
 document.getElementById("hamburgerSvg").addEventListener("click", () => {
     slideout.toggle();
 });
@@ -381,6 +384,5 @@ if (localStorage.getItem("scheduleFiletype") !== "png" || localStorage.getItem("
 }
 
 checkOrientation();
-createSlideout();
 document.getElementById("splashScreen").style.display = "none";
 if (location.protocol !== "https:") console.log("[Berzan.js] Jag skulle uppskatta om ni uppgraderade till HTTPS. Kan inte registrera service-workers annars. https://letsencrypt.org/getting-started/ :^)");
