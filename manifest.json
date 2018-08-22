@@ -5,8 +5,11 @@
   "start_url": "/",
   "theme_color": "#490A3D",
   "background_color": "#490A3D",
+  "lang": "Swedish",
+  "orientation": "any",
+  "description": "Schema och lunch för Berzeliusskolan",
   "icons": [{
-    "src": "img/logo.png",
+    "src": "img/logo/logo-1024.png",
     "sizes": "1024x1024",
     "type": "image/png"
   }]
