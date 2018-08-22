@@ -389,7 +389,7 @@ if (localStorage.getItem("scheduleFiletype") !== "png" || localStorage.getItem("
     localStorage.setItem("scheduleFiletype", "png");
 }
 
-if (navigator.serviceWorker.controller) {
+/*if (navigator.serviceWorker.controller) {
     console.log('[PWA Builder] active service worker found, no need to register')
 } else {
     //Register the ServiceWorker
@@ -398,7 +398,7 @@ if (navigator.serviceWorker.controller) {
     }).then(function(reg) {
         console.log('Service worker has been registered for scope:'+ reg.scope);
     });
-}
+}*/
 
 document.getElementById("splashScreen").style.display = "none";
 if (location.protocol !== "https:") console.log("[Berzan.js] Jag skulle uppskatta om ni uppgraderade till HTTPS -- kan inte registrera service-workers annars! https://letsencrypt.org/getting-started/ :^)");
