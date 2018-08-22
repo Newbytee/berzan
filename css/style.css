@@ -390,7 +390,7 @@ nav, #schedule, #contentIframe {
     display: inline-block;
 }
 
-#contentContainer div {
+.contentItem {
     text-align: center;
     background-color: #7F3571;
     box-shadow: 0 0 5px 2px #888888;
@@ -399,16 +399,34 @@ nav, #schedule, #contentIframe {
     padding: 10px;
 }
 
-#contentContainer div button:hover {
+.contentItem button:hover {
     background-color: #FFFFFF77;
 }
 
-#contentContainer div a:link, #contentContainer div a:visited {
+.contentItem a:link, #contentContainer div a:visited {
     color: #00bfa5;
 }
 
-#contentContainer div input {
+.contentItem input {
     width: 100px;
+}
+
+.divider {
+    width: 95%;
+    background-color: #DDDDDD;
+    height: 3px;
+    border-radius: 3px;
+    margin: 20px auto;
+}
+
+.divider p {
+    margin-right: auto;
+    margin-left: auto;
+    width: 15%;
+    display: block;
+    background-color: white;
+    margin-top: -10px;
+    text-align: center;
 }
 
 #contentContainer {
@@ -613,7 +631,7 @@ body {
         right: 1%;
     }
 
-    #contentContainer div {
+    .contentItem {
         width: 30%;
         margin: 0.7vh;
         flex-grow: 10;
@@ -666,14 +684,23 @@ body {
         background-color: #00000066; /* #123456 */
     }
 
-    #contentContainer div {
+    .divider {
+        margin-top: 15px;
+        margin-bottom: 25px;
+    }
+
+    .divider p {
+        width: 30%;
+    }
+
+    .contentItem {
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 3vw;
         width: 97%;
     }
 
-    #contentContainer div:first-of-type {
+    .contentItem:first-of-type {
         margin-top: 3vw;
     }
 
