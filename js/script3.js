@@ -69,6 +69,13 @@ function resetPreferences() {
     if (confirm("Är du säker?")) {
         sessionStorage.clear();
         localStorage.clear();
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                    registration.unregister();
+                }
+            });
+        }
         location.reload();
     }
 }
