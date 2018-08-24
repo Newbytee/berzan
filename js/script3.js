@@ -408,4 +408,11 @@ if (localStorage.getItem("scheduleFiletype") !== "png" || localStorage.getItem("
 }*/
 
 document.getElementById("splashScreen").style.display = "none";
+if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                    registration.unregister();
+                }
+            });
+        }
 if (location.protocol !== "https:") console.log("[Berzan.js] Jag skulle uppskatta om ni uppgraderade till HTTPS -- kan inte registrera service-workers annars! https://letsencrypt.org/getting-started/ :^)");
