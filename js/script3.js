@@ -39,7 +39,8 @@ for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
 }
 
 document.addEventListener("keydown", function(event) {
-    changeTab(event.key);
+    const tabIndex = parseInt(event.key);
+    if (!(isNaN(tabIndex))) changeTab(tabIndex);
 });
 
 function changeTab(tabIndex) {
