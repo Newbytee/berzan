@@ -609,7 +609,7 @@ body {
         color: #FFFFFF;
     }
 
-    .navButton:hover {
+    .navButton:hover, .navButtonFakeHover {
         transition: 0.5s;
         background-color: #FFFFFF66; /* #123456 */
     }

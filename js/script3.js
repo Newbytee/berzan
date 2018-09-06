@@ -38,6 +38,19 @@ for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
     });
 }
 
+document.addEventListener("keydown", function(event) {
+    changeTab(event.code[5]);
+});
+
+function changeTab(tabIndex) {
+    tabIndex--;
+    loadPage(tabIndex);
+    NAVIGATION_BUTTONS[tabIndex].classList.add("navButtonFakeHover");
+    setTimeout(function() {
+        NAVIGATION_BUTTONS[tabIndex].classList.remove("navButtonFakeHover");
+    }, 250);
+}
+
 function createSlideout() {
     const slideoutMenu = document.getElementById("hiddenMenu");
     const hamburgerMenu = document.getElementById("hamburgerSvg");
