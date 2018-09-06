@@ -39,7 +39,7 @@ for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
 }
 
 document.addEventListener("keydown", function(event) {
-    changeTab(event.code[5]);
+    changeTab(event.key);
 });
 
 function changeTab(tabIndex) {
