@@ -321,6 +321,12 @@ template {
     display: none !important;
 }
 
+h1 {
+    padding-top: 30vh;
+    font-size: 10vh;
+    z-index: 15;
+}
+
 nav {
     height: 60px;
     background-color: #490A3D; /* "Berzan-färgen": #A1274C, den jag valde: #490A3D */
@@ -431,11 +437,6 @@ nav, #schedule, #contentIframe {
     overflow: hidden;
 }
 
-#splashScreen h1 {
-    padding-top: 30vh;
-    font-size: 10vh;
-    z-index: 15;
-}
 
 #splashScreen h2 {
     margin-bottom: 40vh;
