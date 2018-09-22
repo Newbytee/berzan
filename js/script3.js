@@ -430,4 +430,3 @@ if ("serviceWorker" in navigator) {
         }
     });
 }
-if (location.protocol !== "https:") console.log("[Berzan.js] Jag skulle uppskatta om ni uppgraderade till HTTPS -- kan inte registrera service-workers annars! https://letsencrypt.org/getting-started/ :^)");
