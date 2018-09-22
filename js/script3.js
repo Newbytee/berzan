@@ -117,6 +117,7 @@ function showSnackbar(text) {
 }
 
 function loadPage(page = 0) {
+    CONTENT_IFRAME.onload = null;
     switch(page) {
         case 0:
             loadSchedulePage();
@@ -158,7 +159,7 @@ function loadSchedulePage() {
     CONTENT_IFRAME.src = "html/schedule.html";
     PAGE_TITLE.innerHTML = "Schema - Berzan.js";
     sessionStorage.setItem("inputField0", DATE.getWeek());
-    CONTENT_IFRAME.onload = () => {
+    CONTENT_IFRAME.onload = function() {
         const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
         const INPUT_FIELDS = IFRAME_DOCUMENT.getElementsByClassName("inputField");
         const SEARCH_BUTTON = IFRAME_DOCUMENT.getElementById("searchClass");
