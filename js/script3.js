@@ -271,7 +271,7 @@ function viewSchedule(clickInit = false, prompt = true) {
     }
 
     if (className.length > 0) {
-        SCHEDULE.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=${localStorage.getItem("scheduleFiletype")}&schoolid=89920/sv-se&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
+        SCHEDULE.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=${localStorage.getItem("scheduleFiletype")}&schoolid=89920/${localStorage.getItem("appLanguage")}&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
         SCHEDULE.onload = () => {
             CONTENT_IFRAME.height = (CONTENT_IFRAME.contentWindow.document.body.scrollHeight + 5) + "vh";
             //iframeDocument.getElementById("iframePanel").createElement
@@ -409,6 +409,10 @@ if (sessionStorage.getItem("currentPage")) {
 
 if (localStorage.getItem("scheduleFiletype") !== "png" || localStorage.getItem("scheduleFiletype") !== "gif") {
     localStorage.setItem("scheduleFiletype", "png");
+}
+
+if (localStorage.getItem("appLanguage") === null) {
+    localStorage.setItem("appLanguage", "sv-se");
 }
 
 /*if (navigator.serviceWorker.controller) {
