@@ -153,20 +153,13 @@ function loadPage(page = 0) {
     MOBILE_NAV_BUTTONS[page].style.backgroundColor = "#00000066";
     NAVIGATION_BUTTONS[page].style.textShadow = "0 0 8px #FFF";
     sessionStorage.setItem("currentPage", page.toString());
-    CONTENT_IFRAME.addEventListener("load", function() {
-        const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
-        IFRAME_DOCUMENT.addEventListener("keydown", function(event) {
-            const tabIndex = parseInt(event.key);
-            if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0) changeTab(tabIndex);
-        });
-    });
 }
 
 function loadSchedulePage() {
     CONTENT_IFRAME.src = "html/schedule.html";
     PAGE_TITLE.innerHTML = "Schema - Berzan.js";
     sessionStorage.setItem("inputField0", DATE.getWeek());
-    CONTENT_IFRAME.addEventListener("load", function() {
+    CONTENT_IFRAME.onload = function() {
         const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
         const INPUT_FIELDS = IFRAME_DOCUMENT.getElementsByClassName("inputField");
         const SEARCH_BUTTON = IFRAME_DOCUMENT.getElementById("searchClass");
@@ -231,7 +224,7 @@ function loadSchedulePage() {
                 sessionStorage.setItem("inputField1", INPUT_FIELDS[1].value);
             }
         }, 0);
-    });
+    };
 }
 
 function viewSchedule(clickInit = false, prompt = true) {
@@ -421,6 +414,15 @@ if (localStorage.getItem("scheduleFiletype") !== "png" || localStorage.getItem("
 if (localStorage.getItem("appLanguage") === null) {
     localStorage.setItem("appLanguage", "sv-se");
 }
+
+
+CONTENT_IFRAME.addEventListener("load", function() {
+    const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
+    IFRAME_DOCUMENT.addEventListener("keydown", function(event) {
+        const tabIndex = parseInt(event.key);
+        if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0) changeTab(tabIndex);
+    });
+});
 
 /*if (navigator.serviceWorker.controller) {
     console.log('[PWA Builder] active service worker found, no need to register')
