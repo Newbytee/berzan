@@ -416,13 +416,14 @@ if (localStorage.getItem("appLanguage") === null) {
 }
 
 
-CONTENT_IFRAME.addEventListener("load", function() {
+/*CONTENT_IFRAME.addEventListener("load", function() {
     const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
-    IFRAME_DOCUMENT.addEventListener("keydown", function(event) {
+    IFRAME_DOCUMENT.addEventListener("keypress", function(event) {
         const tabIndex = parseInt(event.key);
+        //console.log(CONTENT_IFRAME.activeElement);
         if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0) changeTab(tabIndex);
     });
-});
+});*/
 
 /*if (navigator.serviceWorker.controller) {
     console.log('[PWA Builder] active service worker found, no need to register')
