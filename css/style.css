@@ -653,10 +653,6 @@ body {
     to {bottom: 0; opacity: 0;}
 }
 
-#contentContainer {
-    justify-content: space-between;
-}
-
 @media screen and (min-width: 768px) {
     nav {
         height: 78px;
