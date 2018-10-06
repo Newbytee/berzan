@@ -427,6 +427,74 @@ nav, #schedule, #contentIframe {
     text-align: center;
 }
 
+.mobileNavButton {
+    transition: 0.5s;
+    height: 10vh;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 5%;
+    font-size: 4vh;
+    font-weight: lighter;
+    display: flex;
+    align-items: center;
+    background-color: #CCCCCC;
+    color: #000000;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.mobileNavButton:hover {
+    transition: 0.5s;
+    background-color: #00000066; /* #123456 */
+}
+
+.divider {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.divider p {
+    width: 30%;
+}
+
+.contentItem {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3vw;
+    width: 97%;
+}
+
+.contentItem:first-of-type {
+    margin-top: 3vw;
+}
+
+.mobileNavButton, #wrapper {
+    width: 100%;
+}
+
+#hamburgerSvg {
+    position: absolute;
+    margin-top: 10px;
+    height: 39px;
+}
+
+#panel {
+    box-shadow: -5px 0 30px 10px #888888;
+}
+
+#contentIframe {
+    width: 95%;
+    margin-left: 2.5%;
+}
+
+#contentContainer {
+    justify-content: space-between;
+}
+
+#mobileDiv {
+    display: block;
+}
+
 #contentContainer {
     display: flex;
     flex-wrap: wrap;
@@ -633,6 +701,10 @@ body {
         flex-grow: 10;
     }
 
+    .contentItem:first-of-type {
+        margin-top: 0.7vh;
+    }
+
     #contentContainer {
         justify-content: flex-start;
     }
@@ -655,75 +727,5 @@ body {
 
     #wrapper {
         width: 80%;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .mobileNavButton {
-        transition: 0.5s;
-        height: 10vh;
-        padding-top: 2vh;
-        padding-bottom: 2vh;
-        padding-left: 5%;
-        font-size: 4vh;
-        font-weight: lighter;
-        display: flex;
-        align-items: center;
-        background-color: #CCCCCC;
-        color: #000000;
-        text-transform: uppercase;
-        cursor: pointer;
-    }
-
-    .mobileNavButton:hover {
-        transition: 0.5s;
-        background-color: #00000066; /* #123456 */
-    }
-
-    .divider {
-        margin-top: 15px;
-        margin-bottom: 25px;
-    }
-
-    .divider p {
-        width: 30%;
-    }
-
-    .contentItem {
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 3vw;
-        width: 97%;
-    }
-
-    .contentItem:first-of-type {
-        margin-top: 3vw;
-    }
-
-    .mobileNavButton, #wrapper {
-        width: 100%;
-    }
-
-    #hamburgerSvg {
-        position: absolute;
-        margin-top: 10px;
-        height: 39px;
-    }
-
-    #panel {
-        box-shadow: -5px 0 30px 10px #888888;
-    }
-
-    #contentIframe {
-        width: 95%;
-        margin-left: 2.5%;
-    }
-
-    #contentContainer {
-        justify-content: space-between;
-    }
-
-    #mobileDiv {
-        display: block;
     }
 }
