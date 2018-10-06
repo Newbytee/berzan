@@ -312,6 +312,7 @@ function loadSettings() {
 
         CHANGE_LANGUAGE_SELECTION.addEventListener("change", function() {
             localStorage.setItem("appLanguage", LANGUAGES[CHANGE_LANGUAGE_SELECTION.selectedIndex]);
+            if (LANGUAGES[CHANGE_LANGUAGE_SELECTION.selectedIndex] === "de-de") alert("Due to what seems to be a bug with Novasoftware (the provider of the schedule), when German is selected as language the schedule will frequently fail to load.");
         });
 
         for (let i = 0; i < CHANGE_STARTPAGE_BUTTONS.length; i++) {
