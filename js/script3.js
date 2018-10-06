@@ -11,6 +11,7 @@ const NAVIGATION_BUTTONS_LENGTH = NAVIGATION_BUTTONS.length;
 const CONTENT_IFRAME = document.getElementById("contentIframe");
 const PAGE_TITLE = document.getElementById("titleName");
 const DATE = new Date();
+const LANGUAGES = ["sv-se", "en-gb", "de-de", "fr-fr"];
 let allowKeyNav = true;
 let scheduleInit = false;
 let firstScheduleLoad = true;
@@ -305,7 +306,13 @@ function loadSettings() {
         const CHANGE_SLIDEOUT_SIDE_BUTTONS = IFRAME_DOCUMENT.getElementsByClassName("slideoutSidePicker");
         const CHANGE_LANGUAGE_SELECTION = IFRAME_DOCUMENT.getElementById("languageSelection");
 
-        console.log(CHANGE_LANGUAGE_SELECTION);
+        for (let i = 0; i < LANGUAGES.length; i++) {
+            if (LANGUAGES[i] === localStorage.getItem("appLanguage")) CHANGE_LANGUAGE_SELECTION.selectedIndex = i;
+        }
+
+        CHANGE_LANGUAGE_SELECTION.addEventListener("change", function() {
+            localStorage.setItem("appLanguage", LANGUAGES[CHANGE_LANGUAGE_SELECTION.selectedIndex]);
+        });
 
         for (let i = 0; i < CHANGE_STARTPAGE_BUTTONS.length; i++) {
             CHANGE_STARTPAGE_BUTTONS[i].addEventListener("click", function() {
