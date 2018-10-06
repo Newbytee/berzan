@@ -441,7 +441,7 @@ nav, #schedule, #contentIframe {
     margin-bottom: 40vh;
 }
 
-#splashScreen noscript div {
+#splashScreen noscript {
     color: #FFFFFF;
     padding-top:20vh;
     z-index: 20;
