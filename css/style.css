@@ -344,7 +344,6 @@ strong {
 }
 
 select {
-    float: right;
     height: 30px;
     min-width: 55px;
 }
@@ -484,6 +483,10 @@ nav, #schedule, #contentIframe {
     overflow: hidden;
 }
 
+#dayDropdown {
+    float: right;
+}
+
 #desktopNav, #mobileDiv {
     display: none;
 }
@@ -498,7 +501,7 @@ nav, #schedule, #contentIframe {
 
 #weekNumberField:out-of-range {
     color: #FF0000;
-    border: 2px solid red;
+    border: 2px solid #FF0000;
     box-shadow: none;
 }
 

@@ -303,6 +303,9 @@ function loadSettings() {
         const CLASS_SAVE_FIELD = IFRAME_DOCUMENT.getElementById("defaultClass");
         const CHANGE_FILETYPE_BUTTONS = IFRAME_DOCUMENT.getElementsByClassName("filetypePicker");
         const CHANGE_SLIDEOUT_SIDE_BUTTONS = IFRAME_DOCUMENT.getElementsByClassName("slideoutSidePicker");
+        const CHANGE_LANGUAGE_SELECTION = IFRAME_DOCUMENT.getElementById("languageSelection");
+
+        console.log(CHANGE_LANGUAGE_SELECTION);
 
         for (let i = 0; i < CHANGE_STARTPAGE_BUTTONS.length; i++) {
             CHANGE_STARTPAGE_BUTTONS[i].addEventListener("click", function() {
