@@ -414,13 +414,13 @@ nav, #schedule, #contentIframe {
     background-color: #DDDDDD;
     height: 3px;
     border-radius: 3px;
-    margin: 20px auto;
+    margin: 15px auto 25px;
 }
 
 .divider p {
     margin-right: auto;
     margin-left: auto;
-    width: 15%;
+    width: 30%;
     display: block;
     background-color: white;
     margin-top: -10px;
@@ -443,16 +443,29 @@ nav, #schedule, #contentIframe {
     cursor: pointer;
 }
 
+.mobileNavButton:hover {
+    transition: 0.5s;
+    background-color: #00000066; /* #123456 */
+}
 
-#mainBody {
-    overflow: hidden;
+.contentItem {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3vw;
+    width: 97%;
+}
+
+.contentItem:first-of-type {
+    margin-top: 3vw;
+}
+
+.mobileNavButton, #wrapper {
+    width: 100%;
 }
 
 #splashScreen h2 {
     margin-bottom: 40vh;
 }
-
-
 
 #splashScreen noscript {
     color: #FFFFFF;
@@ -467,6 +480,34 @@ nav, #schedule, #contentIframe {
 
 #splashScreen h2, #splashScreen h1, #splashScreen p {
     color: #FFFFFF;
+}
+
+#contentIframe {
+    width: 95%;
+    margin-left: 2.5%;
+}
+
+#mobileDiv {
+    display: block;
+}
+
+#panel {
+    box-shadow: -5px 0 30px 10px #888888;
+}
+
+#hamburgerSvg {
+    position: absolute;
+    margin-top: 10px;
+    height: 39px;
+}
+
+#mainBody {
+    overflow: hidden;
+}
+
+#contentContainer {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #wrapper {
@@ -501,7 +542,7 @@ nav, #schedule, #contentIframe {
     float: right;
 }
 
-#desktopNav, #mobileDiv {
+#desktopNav {
     display: none;
 }
 
@@ -612,62 +653,8 @@ body {
     to {bottom: 0; opacity: 0;}
 }
 
-
-.mobileNavButton:hover {
-    transition: 0.5s;
-    background-color: #00000066; /* #123456 */
-}
-
-.divider {
-    margin-top: 15px;
-    margin-bottom: 25px;
-}
-
-.divider p {
-    width: 30%;
-}
-
-.contentItem {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 3vw;
-    width: 97%;
-}
-
-.contentItem:first-of-type {
-    margin-top: 3vw;
-}
-
-.mobileNavButton, #wrapper {
-    width: 100%;
-}
-
-#hamburgerSvg {
-    position: absolute;
-    margin-top: 10px;
-    height: 39px;
-}
-
-#panel {
-    box-shadow: -5px 0 30px 10px #888888;
-}
-
-#contentIframe {
-    width: 95%;
-    margin-left: 2.5%;
-}
-
 #contentContainer {
     justify-content: space-between;
-}
-
-#mobileDiv {
-    display: block;
-}
-
-#contentContainer {
-    display: flex;
-    flex-wrap: wrap;
 }
 
 @media screen and (min-width: 768px) {
@@ -707,6 +694,10 @@ body {
 
     .contentItem:first-of-type {
         margin-top: 0.7vh;
+    }
+
+    .divider p {
+        width: 15%;
     }
 
     #contentContainer {
