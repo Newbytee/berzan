@@ -560,6 +560,10 @@ nav, #schedule, #contentIframe {
     margin-top: 3vh;
 }
 
+#iframeBody {
+    margin-top: 10px;
+}
+
 #snackbar {
     visibility: hidden;
     min-width: 250px;
@@ -697,7 +701,7 @@ body {
     }
 
     #contentIframe {
-        margin-top: 80px;
+        margin-top: 75px;
     }
 
     #schedule {
