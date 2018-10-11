@@ -118,6 +118,67 @@ function showSnackbar(text) {
     }, 3000);
 }
 
+function updateServiceWorker() {
+    if (localStorage.getItem("serviceWorkerEnabled") === "on") {
+        const DOCUMENT_HEAD = document.getElementsByTagName("HEAD")
+        const SW2 = document.createElement("SCRIPT");
+        SW2.setAttribute("src", "sw2.js");
+        DOCUMENT_HEAD[0].appendChild(SW2);
+    }
+    
+    /*if (navigator.serviceWorker.controller) {
+        console.log("[Berzan.js] Active service worker found, no need to register")
+    } else {
+        //Register the ServiceWorker
+        navigator.serviceWorker.register("../sw.js", {
+            scope: './'
+        }).then(function(reg) {
+            console.log("[Berzan.js] Service worker has been registered for scope: "+ reg.scope);
+        });
+    }
+} else {
+    if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister();
+            }
+        });
+    }
+    */
+}
+
+function updateStyle() {
+    if (localStorage.getItem("newDesign") === "on") {
+        const LINK_ELEMENTS = document.getElementsByTagName("LINK");
+        for (let i = 0; i < LINK_ELEMENTS.length; i++) {
+            if (LINK_ELEMENTS[i].getAttribute("rel") === "stylesheet" && LINK_ELEMENTS[i].getAttribute("href").search("restyle") === -1) {
+                const HREF_STRING = LINK_ELEMENTS[i].getAttribute("href");
+                const PATTERN_INDEX = HREF_STRING.search("style");
+                let stringParts = [];
+                stringParts.push(HREF_STRING.substring(0, PATTERN_INDEX));
+                stringParts.push(HREF_STRING.substring(PATTERN_INDEX, HREF_STRING.length));
+                LINK_ELEMENTS[i].setAttribute("href", stringParts[0] + "re" + stringParts[1]);
+            }
+        }
+    }
+}
+
+function addToggle(element, storageKey, func) {
+    element.selectedIndex = localStorage.getItem(storageKey) ? 1 : 0;
+    
+    element.addEventListener("change", function() {
+        switch (element.selectedIndex) {
+            case 0:
+                localStorage.removeItem(storageKey);
+                break;
+            case 1:
+                localStorage.setItem(storageKey, "on");
+                break;
+        }
+        func;
+    });
+}
+
 function loadPage(page = 0) {
     CONTENT_IFRAME.onload = null;
     switch(page) {
@@ -298,13 +359,18 @@ function loadLunchPage() {
 function loadSettings() {
     CONTENT_IFRAME.src = "html/settings.html";
     PAGE_TITLE.innerHTML = "Inställningar - Berzan.js";
-    CONTENT_IFRAME.onload = () => {
+    CONTENT_IFRAME.onload = function() {
         const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
         const CHANGE_STARTPAGE_BUTTONS = IFRAME_DOCUMENT.getElementsByClassName("startPagePicker");
         const CLASS_SAVE_FIELD = IFRAME_DOCUMENT.getElementById("defaultClass");
         const CHANGE_FILETYPE_BUTTONS = IFRAME_DOCUMENT.getElementsByClassName("filetypePicker");
         const CHANGE_SLIDEOUT_SIDE_BUTTONS = IFRAME_DOCUMENT.getElementsByClassName("slideoutSidePicker");
         const CHANGE_LANGUAGE_SELECTION = IFRAME_DOCUMENT.getElementById("languageSelection");
+        const SERVICE_WORKER_SELECTION = IFRAME_DOCUMENT.getElementById("serviceWorkerSelection");
+        const STYLE_SELECTION = IFRAME_DOCUMENT.getElementById("styleSelection");
+        
+        addToggle(STYLE_SELECTION, "newDesign", updateStyle());
+        addToggle(SERVICE_WORKER_SELECTION, "serviceWorkerEnabled", updateServiceWorker());
 
         for (let i = 0; i < LANGUAGES.length; i++) {
             if (LANGUAGES[i] === localStorage.getItem("appLanguage")) CHANGE_LANGUAGE_SELECTION.selectedIndex = i;
@@ -444,22 +510,5 @@ CONTENT_IFRAME.addEventListener("load", function() {
     });
 });
 
-/*if (navigator.serviceWorker.controller) {
-    console.log('[PWA Builder] active service worker found, no need to register')
-} else {
-    //Register the ServiceWorker
-    navigator.serviceWorker.register('pwabuilder-sw.js', {
-        scope: './'
-    }).then(function(reg) {
-        console.log('Service worker has been registered for scope:'+ reg.scope);
-    });
-}*/
-
 document.getElementById("splashScreen").style.display = "none";
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.getRegistrations().then(function(registrations) {
-        for(let registration of registrations) {
-            registration.unregister();
-        }
-    });
-}
+updateServiceWorker();
