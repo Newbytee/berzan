@@ -654,9 +654,6 @@ body {
 }
 
 @media screen and (min-width: 768px) {
-    nav {
-        height: 78px;
-    }
 
     .navButton {
         transition: 0.5s;
@@ -677,7 +674,7 @@ body {
     }
 
     .identity {
-        padding-top: 15px;
+        padding-top: 50%;
         position: absolute;
         right: 1%;
     }
@@ -701,7 +698,7 @@ body {
     }
 
     #contentIframe {
-        margin-top: 75px;
+        margin-top: 55px;
     }
 
     #schedule {
