@@ -690,6 +690,10 @@ body {
     .divider p {
         width: 15%;
     }
+    
+    #hamburgerSvg {
+        display: none;
+    }
 
     #contentContainer {
         justify-content: flex-start;
