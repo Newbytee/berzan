@@ -192,22 +192,19 @@ function loadPage(page = 0) {
     sessionStorage.setItem("currentPage", page.toString());
     switch(page) {
         case 0:
-            loadSchedulePage();
+            putPage("html/schedule.html", "Schema", loadSchedulePage());
             break;
         case 1:
-            loadLunchPage();
+            putPage("https://skolmaten.se/berzeliusskolan", "Lunch");
             break;
         case 2:
-            CONTENT_IFRAME.src = "html/etc.html";
-            PAGE_TITLE.innerHTML = "Övrigt - Berzan.js";
+            putPage("html/etc.html", "Övrigt");
             break;
         case 3:
-            putPage("Settings", loadSettings(), "html/settings.html");
-            //loadSettings();
+            putPage("html/settings.html", "Settings", loadSettings());
             break;
         case 4:
-            CONTENT_IFRAME.src = "html/about.html";
-            PAGE_TITLE.innerHTML = "Om - Berzan.js";
+            putPage("html/about.html", "Om");
             break;
         default:
             if (typeof page === "string") {
@@ -219,17 +216,21 @@ function loadPage(page = 0) {
     }
 }
 
-function putPage(name, func, source) {
+function putPage(source, name, func) {
     CONTENT_IFRAME.src = source;
-    PAGE_TITLE.innerHTML = name + " - Berzan.js";
-    CONTENT_IFRAME.addEventListener("load", function() {
-        func();
-    });
+    if (name) {
+        PAGE_TITLE.innerHTML = name + " - Berzan.js";
+    } else {
+        PAGE_TITLE.innerHTML = "Berzan.js";
+    }
+    if (typeof func === "function") {
+        CONTENT_IFRAME.addEventListener("load", function() {
+            func();
+        });
+    }
 }
 
 function loadSchedulePage() {
-    CONTENT_IFRAME.src = "html/schedule.html";
-    PAGE_TITLE.innerHTML = "Schema - Berzan.js";
     sessionStorage.setItem("inputField0", DATE.getWeek());
     CONTENT_IFRAME.onload = function() {
         const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
