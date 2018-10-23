@@ -181,6 +181,15 @@ function addToggle(element, storageKey, func) {
 
 function loadPage(page = 0) {
     CONTENT_IFRAME.onload = null;
+    for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
+        if (i !== page) {
+            MOBILE_NAV_BUTTONS[i].removeAttribute("style");
+            NAVIGATION_BUTTONS[i].removeAttribute("style");
+        }
+    }
+    MOBILE_NAV_BUTTONS[page].style.backgroundColor = "#00000066";
+    NAVIGATION_BUTTONS[page].style.textShadow = "0 0 8px #FFF";
+    sessionStorage.setItem("currentPage", page.toString());
     switch(page) {
         case 0:
             loadSchedulePage();
@@ -193,7 +202,8 @@ function loadPage(page = 0) {
             PAGE_TITLE.innerHTML = "Övrigt - Berzan.js";
             break;
         case 3:
-            loadSettings();
+            putPage("Settings", loadSettings(), "html/settings.html");
+            //loadSettings();
             break;
         case 4:
             CONTENT_IFRAME.src = "html/about.html";
@@ -207,15 +217,14 @@ function loadPage(page = 0) {
             }
             return;
     }
-    for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
-        if (i !== page) {
-            MOBILE_NAV_BUTTONS[i].removeAttribute("style");
-            NAVIGATION_BUTTONS[i].removeAttribute("style");
-        }
-    }
-    MOBILE_NAV_BUTTONS[page].style.backgroundColor = "#00000066";
-    NAVIGATION_BUTTONS[page].style.textShadow = "0 0 8px #FFF";
-    sessionStorage.setItem("currentPage", page.toString());
+}
+
+function putPage(name, func, source) {
+    CONTENT_IFRAME.src = source;
+    PAGE_TITLE.innerHTML = name + " - Berzan.js";
+    CONTENT_IFRAME.addEventListener("load", function() {
+        func();
+    });
 }
 
 function loadSchedulePage() {
@@ -353,12 +362,12 @@ function viewSchedule(clickInit = false, prompt = true) {
 function loadLunchPage() {
     CONTENT_IFRAME.src = "https://skolmaten.se/berzeliusskolan";
     PAGE_TITLE.innerHTML = "Lunch - Berzan.js";
+    /*CONTENT_IFRAME.style.marginTop = "-20px";
+    CONTENT_IFRAME.style.height = "120vh";*/
     //fetch("https://skolmaten.se/berzeliusskolan/?fmt=json").then(response => response.json().then(obj => console.log(obj)));
 }
 
 function loadSettings() {
-    CONTENT_IFRAME.src = "html/settings.html";
-    PAGE_TITLE.innerHTML = "Inställningar - Berzan.js";
     CONTENT_IFRAME.onload = function() {
         const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
         const CHANGE_STARTPAGE_BUTTONS = IFRAME_DOCUMENT.getElementsByClassName("startPagePicker");
