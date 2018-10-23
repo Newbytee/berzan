@@ -360,14 +360,6 @@ function viewSchedule(clickInit = false, prompt = true) {
     }
 }
 
-function loadLunchPage() {
-    CONTENT_IFRAME.src = "https://skolmaten.se/berzeliusskolan";
-    PAGE_TITLE.innerHTML = "Lunch - Berzan.js";
-    /*CONTENT_IFRAME.style.marginTop = "-20px";
-    CONTENT_IFRAME.style.height = "120vh";*/
-    //fetch("https://skolmaten.se/berzeliusskolan/?fmt=json").then(response => response.json().then(obj => console.log(obj)));
-}
-
 function loadSettings() {
     CONTENT_IFRAME.onload = function() {
         const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
