@@ -181,15 +181,7 @@ function addToggle(element, storageKey, func) {
 
 function loadPage(page = 0) {
     CONTENT_IFRAME.onload = null;
-    for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
-        if (i !== page) {
-            MOBILE_NAV_BUTTONS[i].removeAttribute("style");
-            NAVIGATION_BUTTONS[i].removeAttribute("style");
-        }
-    }
-    MOBILE_NAV_BUTTONS[page].style.backgroundColor = "#00000066";
-    NAVIGATION_BUTTONS[page].style.textShadow = "0 0 8px #FFF";
-    sessionStorage.setItem("currentPage", page.toString());
+    
     switch(page) {
         case 0:
             putPage("html/schedule.html", "Schema", loadSchedulePage());
@@ -210,10 +202,20 @@ function loadPage(page = 0) {
             if (typeof page === "string") {
                 CONTENT_IFRAME.src = page;
             } else {
+                console.error("Invalid parameter passed to loadPage().");
                 loadPage(0);
             }
             return;
     }
+    for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
+        if (i !== page) {
+            MOBILE_NAV_BUTTONS[i].removeAttribute("style");
+            NAVIGATION_BUTTONS[i].removeAttribute("style");
+        }
+    }
+    MOBILE_NAV_BUTTONS[page].style.backgroundColor = "#00000066";
+    NAVIGATION_BUTTONS[page].style.textShadow = "0 0 8px #FFF";
+    sessionStorage.setItem("currentPage", page.toString());
 }
 
 function putPage(source, name, func) {
