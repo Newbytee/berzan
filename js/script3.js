@@ -499,9 +499,9 @@ if (localStorage.getItem("appLanguage") === null) {
 
 CONTENT_IFRAME.addEventListener("load", function() {
     let iframeDocument;
-    try {
+    if (CONTENT_IFRAME.src.split("/")[2] === document.location.hostname) {
         iframeDocument = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
-    } catch (error) {
+    } else {
         return;
     }
     const IFRAME_INPUT_FIELDS = iframeDocument.getElementsByTagName("INPUT");
