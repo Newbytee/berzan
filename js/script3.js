@@ -89,7 +89,7 @@ function resetPreferences() {
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
                 for(let registration of registrations) {
                     registration.unregister();
-                }
+                }   
             });
         }
         location.reload();
@@ -498,8 +498,13 @@ if (localStorage.getItem("appLanguage") === null) {
 }
 
 CONTENT_IFRAME.addEventListener("load", function() {
-    const IFRAME_DOCUMENT = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
-    const IFRAME_INPUT_FIELDS = IFRAME_DOCUMENT.getElementsByTagName("INPUT");
+    let iframeDocument;
+    try {
+        iframeDocument = CONTENT_IFRAME.contentDocument || CONTENT_IFRAME.contentWindow.document;
+    } catch (error) {
+        return;
+    }
+    const IFRAME_INPUT_FIELDS = iframeDocument.getElementsByTagName("INPUT");
     for (let i = 0; i < IFRAME_INPUT_FIELDS.length; i++) {
         IFRAME_INPUT_FIELDS[i].addEventListener("focus", function() {
             allowKeyNav = false;
@@ -508,7 +513,7 @@ CONTENT_IFRAME.addEventListener("load", function() {
             allowKeyNav = true;
         });
     }
-    IFRAME_DOCUMENT.addEventListener("keypress", function(event) {
+    iframeDocument.addEventListener("keypress", function(event) {
         const tabIndex = parseInt(event.key);
         if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
     });
