@@ -21,20 +21,20 @@ let slideout;
 createSlideout();
 checkOrientation();
 
-document.getElementById("hamburgerSvg").addEventListener("click", () => {
+document.getElementById("hamburgerSvg").addEventListener("click", function() {
     slideout.toggle();
 });
 
-window.onresize = () => {
+window.onresize = function() {
     checkOrientation();
     viewSchedule(true, false);
 };
 
 for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
-    NAVIGATION_BUTTONS[i].addEventListener("click", () => {
+    NAVIGATION_BUTTONS[i].addEventListener("click", function() {
         loadPage(i);
     });
-    MOBILE_NAV_BUTTONS[i].addEventListener("click", () => {
+    MOBILE_NAV_BUTTONS[i].addEventListener("click", function() {
         loadPage(i);
         slideout.close();
     });
@@ -113,14 +113,14 @@ function showSnackbar(text) {
     }
     SNACKBAR.innerHTML = text;
     SNACKBAR.className = "show";
-    setTimeout(() => {
+    setTimeout(function() {
         SNACKBAR.className = SNACKBAR.className.replace("show", "");
     }, 3000);
 }
 
 function updateServiceWorker() {
     if (localStorage.getItem("serviceWorkerEnabled") === "on") {
-        const DOCUMENT_HEAD = document.getElementsByTagName("HEAD")
+        const DOCUMENT_HEAD = document.getElementsByTagName("HEAD");
         const SW2 = document.createElement("SCRIPT");
         SW2.setAttribute("src", "sw2.js");
         DOCUMENT_HEAD[0].appendChild(SW2);
@@ -175,7 +175,7 @@ function addToggle(element, storageKey, func) {
                 localStorage.setItem(storageKey, "on");
                 break;
         }
-        func;
+        func();
     });
 }
 
@@ -277,7 +277,7 @@ function loadSchedulePage() {
                 }
             });
 
-            INPUT_FIELDS[i].addEventListener("blur", () => {
+            INPUT_FIELDS[i].addEventListener("blur", function() {
                 sessionStorage.setItem("inputField" + i, INPUT_FIELDS[i].value);
             });
         }
@@ -292,7 +292,7 @@ function loadSchedulePage() {
             DAY_DROPDOWN.selectedIndex = 0;
         }
         
-        setTimeout(() => {
+        setTimeout(function() {
             if (INPUT_FIELDS[1].value.length !== 0) {
                 scheduleInit = true;
                 viewSchedule(true);
@@ -347,7 +347,7 @@ function viewSchedule(clickInit = false, prompt = true) {
 
     if (className.length > 0) {
         SCHEDULE.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=${localStorage.getItem("scheduleFiletype")}&schoolid=89920/${localStorage.getItem("appLanguage")}&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
-        SCHEDULE.onload = () => {
+        SCHEDULE.onload = function() {
             CONTENT_IFRAME.height = (CONTENT_IFRAME.contentWindow.document.body.scrollHeight + 5) + "vh";
             //iframeDocument.getElementById("iframePanel").createElement
             IFRAME_DOCUMENT.getElementById("schedule").style.display = "block";
@@ -458,11 +458,11 @@ function loadSettings() {
             }
         });
 
-        IFRAME_DOCUMENT.getElementById("saveButtonThingy").addEventListener("click", () => {
+        IFRAME_DOCUMENT.getElementById("saveButtonThingy").addEventListener("click", function() {
             saveDefaultClass();
         });
 
-        IFRAME_DOCUMENT.getElementById("resetButton").addEventListener("click", () => {
+        IFRAME_DOCUMENT.getElementById("resetButton").addEventListener("click", function() {
             resetPreferences();
         });
     };
