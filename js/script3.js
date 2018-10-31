@@ -111,7 +111,7 @@ function showSnackbar(text) {
         SNACKBAR.innerHTML = text;
         return;
     }
-    SNACKBAR.innerHTML = text;
+    SNACKBAR.innerText = text;
     SNACKBAR.className = "show";
     setTimeout(function() {
         SNACKBAR.className = SNACKBAR.className.replace("show", "");
