@@ -87,9 +87,9 @@ function resetPreferences() {
         localStorage.clear();
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                for(let registration of registrations) {
-                    registration.unregister();
-                }   
+                for (let i = 0; i < registrations.length; i++) {
+                    registrations[i].unregister();
+                }
             });
         }
         location.reload();
