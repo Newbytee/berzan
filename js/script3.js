@@ -45,6 +45,27 @@ document.addEventListener("keydown", function(event) {
     if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0) changeTab(tabIndex);
 });
 
+function getData(URL) {
+    if (!URL) {
+        console.error("Invalid parameter passed to getData()");
+        return;
+    }
+    const request = new XMLHttpRequest();
+    
+    request.onreadystatechange = function() {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                console.log(request.responseText);
+            } else {
+                console.error("Request returned " + request.status);
+            }
+        }
+    };
+    
+    request.open("GET", URL, true);
+    request.send();
+}
+
 function changeTab(tabIndex) {
     tabIndex--;
     loadPage(tabIndex);
