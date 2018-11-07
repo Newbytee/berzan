@@ -46,7 +46,7 @@ document.addEventListener("keydown", function(event) {
 });
 
 function getData(URL) {
-    if (!URL) {
+    if (typeof URL !== "string") {
         console.error("Invalid parameter passed to getData()");
         return;
     }
