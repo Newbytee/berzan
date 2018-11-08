@@ -217,7 +217,7 @@ function loadPage(page = 0) {
             if (typeof page === "string") {
                 CONTENT_IFRAME.src = page;
             } else {
-                console.error("Invalid parameter passed to loadPage().");
+                console.error("Invalid parameter passed to loadPage()");
                 loadPage(0);
             }
             return;
@@ -248,9 +248,13 @@ function putPage(source, name, func) {
 }
 
 function loadHTML(URL) {
-    AJAXRequest(URL).then(function(requestedHTML) {
-        CONTENT_DIV.innerHTML = requestedHTML;
-    });
+    if (typeof URL === "string") {
+        AJAXRequest(URL).then(function(requestedHTML) {
+            CONTENT_DIV.innerHTML = requestedHTML;
+        });
+    } else {
+        console.error("Invalid parameter passed to loadHTML()");
+    }
 }
 
 function loadSchedulePage() {
