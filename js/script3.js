@@ -9,9 +9,10 @@ const NAVIGATION_BUTTONS = document.getElementsByClassName("navButton");
 const MOBILE_NAV_BUTTONS = document.getElementsByClassName("mobileNavButton");
 const NAVIGATION_BUTTONS_LENGTH = NAVIGATION_BUTTONS.length;
 const CONTENT_IFRAME = document.getElementById("contentIframe");
+const CONTENT_DIV = document.getElementById("wrapper");
 const PAGE_TITLE = document.getElementById("titleName");
 const DATE = new Date();
-const LANGUAGES = ["sv-se", "en-gb", "de-de", "fr-fr"];
+const LANGUAGES = [ "sv-se", "en-gb", "de-de", "fr-fr" ];
 let allowKeyNav = true;
 let scheduleInit = false;
 let firstScheduleLoad = true;
@@ -244,6 +245,12 @@ function putPage(source, name, func) {
             func();
         });
     }
+}
+
+function loadHTML(URL) {
+    AJAXRequest(URL).then(function(requestedHTML) {
+        CONTENT_DIV.innerHTML = requestedHTML;
+    });
 }
 
 function loadSchedulePage() {
