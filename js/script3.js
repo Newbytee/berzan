@@ -214,13 +214,13 @@ function loadPage(page = 0) {
             putPage("html-fragments/lunch.html", "Lunch");
             break;
         case 2:
-            putPage("html/etc.html", "Övrigt");
+            putPage("html-fragments/etc.html", "Övrigt");
             break;
         case 3:
             putPage("html-fragments/settings.html", "Settings", loadSettings);
             break;
         case 4:
-            putPage("html/about.html", "Om");
+            putPage("html-fragments/about.html", "Om");
             break;
         default:
             if (typeof page === "string") {
