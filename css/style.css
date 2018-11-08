@@ -509,6 +509,7 @@ nav, #schedule, #contentIframe {
 #wrapper {
     margin-left: auto;
     margin-right: auto;
+    padding-top: 65px;
 }
 
 #contentIframe {
