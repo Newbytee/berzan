@@ -59,11 +59,7 @@ function AJAXRequest() {
         REQUEST.onreadystatechange = function() {
             if (REQUEST.readyState === XMLHttpRequest.DONE) {
                 if (REQUEST.status === 200) {
-                    //console.log(request.responseText);
                     result = REQUEST.responseText;
-                    setTimeout(function() {
-                        return REQUEST.responseText;
-                    }, 1);
                 } else {
                     console.error("Request returned " + REQUEST.status);
                 }
