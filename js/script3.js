@@ -11,6 +11,7 @@ const NAVIGATION_BUTTONS_LENGTH = NAVIGATION_BUTTONS.length;
 const CONTENT_IFRAME = document.getElementById("contentIframe");
 const PAGE_TITLE = document.getElementById("titleName");
 const DATE = new Date();
+const AJAX = new AJAXRequest();
 const LANGUAGES = ["sv-se", "en-gb", "de-de", "fr-fr"];
 let allowKeyNav = true;
 let scheduleInit = false;
@@ -45,25 +46,37 @@ document.addEventListener("keydown", function(event) {
     if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0) changeTab(tabIndex);
 });
 
-function getData(URL) {
-    if (typeof URL !== "string") {
-        console.error("Invalid parameter passed to getData()");
-        return;
-    }
-    const request = new XMLHttpRequest();
+function AJAXRequest() {
+    const REQUEST = new XMLHttpRequest();
+    let result = null;
     
-    request.onreadystatechange = function() {
-        if (request.readyState === XMLHttpRequest.DONE) {
-            if (request.status === 200) {
-                console.log(request.responseText);
-            } else {
-                console.error("Request returned " + request.status);
-            }
+    this.sendRequest = function(URL) {
+        if (typeof URL !== "string") {
+            console.error("Invalid parameter passed to getData()");
+            return;
         }
+        
+        REQUEST.onreadystatechange = function() {
+            if (REQUEST.readyState === XMLHttpRequest.DONE) {
+                if (REQUEST.status === 200) {
+                    //console.log(request.responseText);
+                    result = REQUEST.responseText;
+                    setTimeout(function() {
+                        return REQUEST.responseText;
+                    }, 1);
+                } else {
+                    console.error("Request returned " + REQUEST.status);
+                }
+            }
+        };
+        
+        REQUEST.open("GET", URL, true);
+        REQUEST.send();
     };
     
-    request.open("GET", URL, true);
-    request.send();
+    this.getData = function() {
+        return result;
+    };
 }
 
 function changeTab(tabIndex) {
