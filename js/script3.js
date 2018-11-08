@@ -11,7 +11,6 @@ const NAVIGATION_BUTTONS_LENGTH = NAVIGATION_BUTTONS.length;
 const CONTENT_IFRAME = document.getElementById("contentIframe");
 const PAGE_TITLE = document.getElementById("titleName");
 const DATE = new Date();
-const AJAX = new AJAXRequest();
 const LANGUAGES = ["sv-se", "en-gb", "de-de", "fr-fr"];
 let allowKeyNav = true;
 let scheduleInit = false;
@@ -46,33 +45,18 @@ document.addEventListener("keydown", function(event) {
     if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0) changeTab(tabIndex);
 });
 
-function AJAXRequest() {
-    const REQUEST = new XMLHttpRequest();
-    let result = null;
-    
-    this.sendRequest = function(URL) {
-        if (typeof URL !== "string") {
-            console.error("Invalid parameter passed to getData()");
-            return;
-        }
-        
-        REQUEST.onreadystatechange = function() {
-            if (REQUEST.readyState === XMLHttpRequest.DONE) {
-                if (REQUEST.status === 200) {
-                    result = REQUEST.responseText;
-                } else {
-                    console.error("Request returned " + REQUEST.status);
-                }
-            }
-        };
-        
+function AJAXRequest(URL) {
+    return new Promise(function(resolve, reject) {
+        const REQUEST = new XMLHttpRequest();
         REQUEST.open("GET", URL, true);
+        REQUEST.onload = function() {
+            resolve(REQUEST.responseText);
+        };
+        REQUEST.onerror = function() {
+            reject(REQUEST.statusText);
+        };
         REQUEST.send();
-    };
-    
-    this.getData = function() {
-        return result;
-    };
+    });
 }
 
 function changeTab(tabIndex) {
