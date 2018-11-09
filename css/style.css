@@ -330,7 +330,8 @@ h1 {
 nav {
     height: 60px;
     background-color: #490A3D; /* "Berzan-färgen": #A1274C, den jag valde: #490A3D */
-    position: fixed;
+    position: sticky;
+    top: 0;
     box-shadow: 0 0 5px 2px #888888;
 }
 
@@ -494,10 +495,6 @@ nav, #schedule {
     height: 39px;
 }
 
-#mainBody {
-    overflow: hidden;
-}
-
 #contentContainer {
     display: flex;
     flex-wrap: wrap;
@@ -506,7 +503,7 @@ nav, #schedule {
 #wrapper {
     margin-left: auto;
     margin-right: auto;
-    padding-top: 65px;
+    padding-top: 5px;
 }
 
 #contentIframe {
@@ -697,10 +694,6 @@ body {
 
     #contentContainer {
         justify-content: flex-start;
-    }
-
-    #schedule {
-        height: 93vh;
     }
 
     #desktopNav {
