@@ -41,6 +41,11 @@ for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
     });
 }
 
+document.addEventListener("keypress", function(event) {
+    const tabIndex = parseInt(event.key);
+    if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
+});
+
 function AJAXRequest(URL) {
     return new Promise(function(resolve, reject) {
         const REQUEST = new XMLHttpRequest();
@@ -189,7 +194,7 @@ function addToggle(element, storageKey, func) {
     });
 }
 
-function configureKeyboardNav() {
+function updateNavBlocking() {
     const CONTENT_INPUT_FIELDS = document.getElementsByTagName("INPUT");
     for (let i = 0; i < CONTENT_INPUT_FIELDS.length; i++) {
         CONTENT_INPUT_FIELDS[i].addEventListener("focus", function() {
@@ -199,10 +204,6 @@ function configureKeyboardNav() {
             allowKeyNav = true;
         });
     }
-    document.addEventListener("keypress", function(event) {
-        const tabIndex = parseInt(event.key);
-        if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
-    });
 }
 
 function loadPage(page = 0) {
@@ -252,7 +253,7 @@ function putPage(source, name, func) {
         if (typeof func === "function") {
             func();
         }
-        configureKeyboardNav();
+        updateNavBlocking();
     });
 }
 
