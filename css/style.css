@@ -369,7 +369,7 @@ button:active {
     transition: 0.5s;
 }
 
-nav, #schedule, #contentIframe {
+nav, #schedule {
     width: 100%;
 }
 
@@ -483,11 +483,6 @@ nav, #schedule, #contentIframe {
     text-align: center;
 }
 
-#contentIframe {
-    width: 95%;
-    margin-left: 2.5%;
-}
-
 #panel {
     box-shadow: -5px 0 30px 10px #888888;
 }
@@ -515,6 +510,8 @@ nav, #schedule, #contentIframe {
 
 #contentIframe {
     height: 90vh;
+    width: 95%;
+    margin-left: 2.5%;
     overflow: hidden;
     border: none;
 }
@@ -711,6 +708,11 @@ body {
         flex-direction: row;
         justify-content: flex-start;
         align-items: stretch;
+    }
+    
+    #contentIframe {
+        width: 100%;
+        margin-left: 0;
     }
 
     #wrapper {
