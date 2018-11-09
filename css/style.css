@@ -347,6 +347,7 @@ select {
     height: 30px;
     min-width: 55px;
     background-color: #FFFFFF;
+    border: 1px solid #000000;
 }
 
 button {
