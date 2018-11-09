@@ -8,7 +8,6 @@ Date.prototype.getWeek = function() {
 const NAVIGATION_BUTTONS = document.getElementsByClassName("navButton");
 const MOBILE_NAV_BUTTONS = document.getElementsByClassName("mobileNavButton");
 const NAVIGATION_BUTTONS_LENGTH = NAVIGATION_BUTTONS.length;
-const CONTENT_IFRAME = document.getElementById("contentIframe");
 const CONTENT_DIV = document.getElementById("wrapper");
 const PAGE_TITLE = document.getElementById("titleName");
 const DATE = new Date();
