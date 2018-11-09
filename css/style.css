@@ -330,6 +330,7 @@ h1 {
 nav {
     height: 60px;
     background-color: #490A3D; /* "Berzan-färgen": #A1274C, den jag valde: #490A3D */
+    position: absolute;
     position: -webkit-sticky;
     position: sticky;
     top: 0;
