@@ -346,6 +346,7 @@ strong {
 select {
     height: 30px;
     min-width: 55px;
+    background-color: #FFFFFF;
 }
 
 button {
