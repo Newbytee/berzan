@@ -225,7 +225,7 @@ function loadPage(page = 0) {
             break;
         default:
             if (typeof page === "string") {
-                CONTENT_IFRAME.src = page;
+                createExternalPageViewer(page);
             } else {
                 console.error("Invalid parameter passed to loadPage()");
                 loadPage(0);
@@ -269,6 +269,14 @@ function loadHTML(URL) {
             reject();
         }
     })
+}
+
+function createExternalPageViewer(URL) {
+    const EXT_PAGE_IFRAME = document.createElement("IFRAME");
+    EXT_PAGE_IFRAME.src = URL;
+    EXT_PAGE_IFRAME.id = "contentIframe";
+    CONTENT_DIV.innerHTML = "";
+    CONTENT_DIV.appendChild(EXT_PAGE_IFRAME);
 }
 
 function loadSchedulePage() {

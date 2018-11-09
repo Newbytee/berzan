@@ -513,7 +513,6 @@ nav, #schedule, #contentIframe {
 }
 
 #contentIframe {
-    margin-top: 65px;
     height: 90vh;
     overflow: hidden;
     border: none;
@@ -699,10 +698,6 @@ body {
 
     #contentContainer {
         justify-content: flex-start;
-    }
-
-    #contentIframe {
-        margin-top: 55px;
     }
 
     #schedule {
