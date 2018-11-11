@@ -217,7 +217,7 @@ function loadPage(page = 0) {
             putPage("html-fragments/etc.html", "Övrigt");
             break;
         case 3:
-            putPage("html-fragments/settings.html", "Settings", loadSettings);
+            putPage("html-fragments/settings.html", "Inställningar", loadSettings);
             break;
         case 4:
             putPage("html-fragments/about.html", "Om");
