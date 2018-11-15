@@ -666,10 +666,6 @@ body {
         background-color: #FFFFFF66; /* #123456 */
     }
 
-    .mobileNavButton:after {
-        content: " (You shouldn't be seeing this)";
-    }
-
     .contentItem {
         width: 30%;
         margin: 0.7vh;
