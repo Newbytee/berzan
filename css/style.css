@@ -512,7 +512,7 @@ nav, #schedule {
     height: 90vh;
     width: 95%;
     margin-left: 2.5%;
-    overflow: hidden;
+    margin-top: -5px;
     border: none;
 }
 
