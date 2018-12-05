@@ -139,26 +139,6 @@ function updateServiceWorker() {
         SW2.setAttribute("src", "sw2.js");
         DOCUMENT_HEAD[0].appendChild(SW2);
     }
-    
-    /*if (navigator.serviceWorker.controller) {
-        console.log("[Berzan.js] Active service worker found, no need to register")
-    } else {
-        //Register the ServiceWorker
-        navigator.serviceWorker.register("../sw.js", {
-            scope: './'
-        }).then(function(reg) {
-            console.log("[Berzan.js] Service worker has been registered for scope: "+ reg.scope);
-        });
-    }
-} else {
-    if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.getRegistrations().then(function(registrations) {
-            for(let registration of registrations) {
-                registration.unregister();
-            }
-        });
-    }
-    */
 }
 
 function updateStyle() {
