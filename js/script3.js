@@ -379,7 +379,7 @@ function viewSchedule(clickInit = false, prompt = true) {
             break;
     }
 
-    if (currentWeek === "") currentWeek = DATE.getWeek();
+    if (currentWeek.length === 0) currentWeek = DATE.getWeek();
     if (clickInit) className = CLASS_INPUT_FIELD.value;
     
     if (className === "åsna") {
@@ -411,8 +411,8 @@ function loadSettings() {
     const SERVICE_WORKER_SELECTION = document.getElementById("serviceWorkerSelection");
     const STYLE_SELECTION = document.getElementById("styleSelection");
     
-    addToggle(STYLE_SELECTION, "newDesign", updateStyle());
-    addToggle(SERVICE_WORKER_SELECTION, "serviceWorkerEnabled", updateServiceWorker());
+    addToggle(STYLE_SELECTION, "newDesign", updateStyle);
+    addToggle(SERVICE_WORKER_SELECTION, "serviceWorkerEnabled", updateServiceWorker);
 
     for (let i = 0; i < LANGUAGES.length; i++) {
         if (LANGUAGES[i] === localStorage.getItem("appLanguage")) CHANGE_LANGUAGE_SELECTION.selectedIndex = i;
