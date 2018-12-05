@@ -373,7 +373,7 @@ button:active {
     transition: 0.5s;
 }
 
-nav, #schedule {
+nav, .mobileNavButton, #schedule, #wrapper {
     width: 100%;
 }
 
@@ -454,10 +454,6 @@ nav, #schedule {
 
 .contentItem:first-of-type {
     margin-top: 3vw;
-}
-
-.mobileNavButton, #wrapper {
-    width: 100%;
 }
 
 #splashScreen h2 {
