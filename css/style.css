@@ -365,6 +365,7 @@ button:hover {
     background-color: #7F357177;
     border-color: #7F357177;
     transition: 0.5s;
+    cursor: pointer;
 }
 
 button:active {
@@ -516,11 +517,6 @@ nav, .mobileNavButton, #schedule, #wrapper {
     margin-top: 0.5vh;
     display: none;
     height: 90vh;
-}
-
-#searchClass {
-    border-color: #F0F0F0;
-    cursor: pointer;
 }
 
 #hiddenMenu {
