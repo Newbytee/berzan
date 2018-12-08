@@ -646,16 +646,18 @@ body {
 @media screen and (min-width: 768px) {
     .navButton {
         transition: 0.5s;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
         padding: 0 20px;
         color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        background: inherit;
+        border: none;
     }
 
-    .navButton:hover, .navButtonFakeHover {
+    .navButton:hover, .navButtonFakeHover, .navButton:focus {
         transition: 0.5s;
         background-color: #FFFFFF66; /* #123456 */
+        outline: 0;
     }
 
     .contentItem {

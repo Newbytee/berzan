@@ -33,6 +33,7 @@ window.onresize = function() {
 for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
     NAVIGATION_BUTTONS[i].addEventListener("click", function() {
         loadPage(i);
+        NAVIGATION_BUTTONS[i].blur();
     });
     MOBILE_NAV_BUTTONS[i].addEventListener("click", function() {
         loadPage(i);
