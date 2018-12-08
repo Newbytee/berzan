@@ -264,7 +264,6 @@ function loadSchedulePage() {
     const INPUT_FIELDS = document.getElementsByClassName("inputField");
     const SEARCH_BUTTON = document.getElementById("searchClass");
     const DAY_DROPDOWN = document.getElementById("dayDropdown");
-    const SCHEDULE = document.getElementById("schedule");
 
     for (let i = 0; i < INPUT_FIELDS.length; i++) {
         if (sessionStorage.getItem("inputField" + i)) INPUT_FIELDS[i].value = sessionStorage.getItem("inputField" + i);
@@ -288,10 +287,6 @@ function loadSchedulePage() {
     DAY_DROPDOWN.onchange = function() {
         scheduleInit = true;
         viewSchedule(true);
-    };
-
-    SCHEDULE.onload = function() {
-        SCHEDULE.style.display = "block";
     };
     
     SEARCH_BUTTON.addEventListener("click", function() {
@@ -375,6 +370,9 @@ function viewSchedule(clickInit = false, prompt = true) {
 
     if (className.length > 0) {
         SCHEDULE.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=${localStorage.getItem("scheduleFiletype")}&schoolid=89920/${localStorage.getItem("appLanguage")}&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
+        SCHEDULE.onload = function() {
+            SCHEDULE.style.display = "block";
+        };
     } else if (prompt === true) {
         showSnackbar("Välj en klass först");
         return;
