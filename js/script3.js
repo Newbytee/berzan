@@ -224,7 +224,7 @@ function loadPage(page = 0) {
 }
 
 function putPage(source, name, func) {
-    fetcher(source).then(function() {
+    loadHTML(source).then(function() {
         if (name) {
             PAGE_TITLE.innerHTML = name + " - Berzan.js";
         } else {
@@ -237,7 +237,7 @@ function putPage(source, name, func) {
     });
 }
 
-function fetcher(URL) {
+function loadHTML(URL) {
     return new Promise(function(resolve, reject) {
         if (typeof URL === "string") {
             AJAXRequest(URL).then(function(requestedHTML) {
@@ -245,7 +245,7 @@ function fetcher(URL) {
                 resolve();
             });
         } else {
-            console.error("Invalid parameter passed to fetcher()");
+            console.error("Invalid parameter passed to loadHTML()");
             reject();
         }
     })
