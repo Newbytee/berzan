@@ -362,11 +362,6 @@ function viewSchedule(clickInit = false, prompt = true) {
 
     if (currentWeek.length === 0) currentWeek = DATE.getWeek();
     if (clickInit) className = CLASS_INPUT_FIELD.value;
-    
-    if (className === "åsna") {
-        loadPage("https://www.youtube.com/embed/L_jWHffIx5E");
-        return;
-    }
 
     if (className.length > 0) {
         SCHEDULE.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=${localStorage.getItem("scheduleFiletype")}&schoolid=89920/${localStorage.getItem("appLanguage")}&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
@@ -375,6 +370,16 @@ function viewSchedule(clickInit = false, prompt = true) {
         };
     } else if (prompt === true) {
         showSnackbar("Välj en klass först");
+        return;
+    }
+
+    if (className === "åsna") {
+        loadPage("https://www.youtube.com/embed/L_jWHffIx5E");
+        return;
+    }
+
+    if (className === "debug") {
+        putPage("html-fragments/debug.html", "Debug", loadDebugMenu);
         return;
     }
 
@@ -483,6 +488,27 @@ function loadSettings() {
 
     document.getElementById("resetButton").addEventListener("click", function() {
         resetPreferences();
+    });
+}
+
+function loadDebugMenu() {
+    const SET_ITEM_INPUT = document.getElementsByClassName("setItemInput");
+    const SET_ITEM_BUTTON = document.getElementById("setItemButton");
+    const GET_ITEM_INPUT = document.getElementById("getItemInput");
+    const GET_ITEM_BUTTON = document.getElementById("getItemButton");
+    const LOAD_URL_INPUT = document.getElementById("loadURLInput");
+    const LOAD_URL_BUTTON = document.getElementById("loadURLButton");
+
+    SET_ITEM_BUTTON.addEventListener("click", function() {
+        localStorage.setItem(SET_ITEM_INPUT[0].value, SET_ITEM_INPUT[1].value);
+    });
+
+    GET_ITEM_BUTTON.addEventListener("click", function() {
+        showSnackbar(localStorage.getItem(GET_ITEM_INPUT.value));
+    });
+
+    LOAD_URL_BUTTON.addEventListener("click", function() {
+        loadPage(LOAD_URL_INPUT.value);
     });
 }
 
