@@ -123,10 +123,10 @@ function checkOrientation() {
 function showSnackbar(text) {
     const SNACKBAR = document.getElementById("snackbar");
     if (SNACKBAR.className.includes("show")) {
-        SNACKBAR.innerHTML = text;
+        SNACKBAR.textContent = text;
         return;
     }
-    SNACKBAR.innerText = text;
+    SNACKBAR.textContent = text;
     SNACKBAR.className = "show";
     setTimeout(function() {
         SNACKBAR.className = SNACKBAR.className.replace("show", "");
