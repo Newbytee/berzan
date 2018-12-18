@@ -248,7 +248,7 @@ function loadHTML(URL) {
             console.error("Invalid parameter passed to loadHTML()");
             reject();
         }
-    })
+    });
 }
 
 function createExternalPageViewer(URL) {
