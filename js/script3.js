@@ -264,6 +264,7 @@ function loadSchedulePage() {
     const INPUT_FIELDS = document.getElementsByClassName("inputField");
     const SEARCH_BUTTON = document.getElementById("searchClass");
     const DAY_DROPDOWN = document.getElementById("dayDropdown");
+    const SCHEDULE = document.getElementById("schedule");
 
     for (let i = 0; i < INPUT_FIELDS.length; i++) {
         if (sessionStorage.getItem("inputField" + i)) INPUT_FIELDS[i].value = sessionStorage.getItem("inputField" + i);
@@ -280,14 +281,20 @@ function loadSchedulePage() {
         SEARCH_BUTTON.innerHTML = "Visa schema";
     }
 
-    INPUT_FIELDS[0].onchange = function() {
+    INPUT_FIELDS[0].addEventListener("change", function() {
         viewSchedule(true);
-    };
+    });
 
     DAY_DROPDOWN.onchange = function() {
         scheduleInit = true;
         viewSchedule(true);
     };
+    
+    SCHEDULE.addEventListener("error", function() {
+        if (scheduleInit) {
+            showSnackbar("Kunde inte ladda schemat :(");
+        }
+    });
     
     SEARCH_BUTTON.addEventListener("click", function() {
         scheduleInit = true;
@@ -336,7 +343,7 @@ function viewSchedule(clickInit = false, prompt = true) {
     let weekDay;
     let className;
 
-    switch(DAY_DROPDOWN.selectedIndex) {
+    switch (DAY_DROPDOWN.selectedIndex) {
         case 0:
             weekDay = 0;
             break;
