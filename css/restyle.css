@@ -344,6 +344,17 @@ nav {
     display: none;
 }
 
+#snackbar {
+    position: fixed;
+    height: 30px;
+    width: 200px;
+    background-color: #BBBBBB;
+    z-index: 100;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+}
+
 @media screen and (min-width: 768px) {
     .navButton, .identity {
         height: 50px;
