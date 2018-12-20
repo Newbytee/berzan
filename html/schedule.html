@@ -4,16 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../css/reset.css" type="text/css">
     <link rel="stylesheet" href="../css/style.css" type="text/css">
     <title>Schema</title>
 </head>
-<body>
+<body id="iframeBody">
     <main id="iframePanel">
-        <input class="inputField" max="54" id="weekNumberField" placeholder="Vecka">
+        <input class="inputField" type="number" min="1" max="80" id="weekNumberField" placeholder="Vecka">
         <input class="inputField" id="classNameField" placeholder="Klass">
-        <button id="searchClass">Visa schema</button>
-        <img id="schedule" alt="Schemat för den valda tidsperioden" src="../img/placeholder.gif">
+        <button id="searchClass" title="Klicka för att visa det valda schemat">Visa schema</button>
+        <select id="dayDropdown" title="Val av veckodag">
+            <option value="week">Hela veckan</option>
+            <option value="monday">Måndag</option>
+            <option value="tuesday">Tisdag</option>
+            <option value="wednesday">Onsdag</option>
+            <option value="thursday">Torsdag</option>
+            <option value="friday">Fredag</option>
+        </select>
+        <img id="schedule" alt="Schemat för den valda tidsperioden" src="../img/logo/logo-48.png">
     </main>
 </body>
 </html>

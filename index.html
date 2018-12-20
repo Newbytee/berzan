@@ -5,36 +5,48 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="theme-color" content="#490A3D">
-	<link rel="stylesheet" href="css/reset.css" type="text/css">
+    <meta name="description" content="Schema och lunch för Berzeliusskolan">
+ 	<meta name="keywords" content="Berzan,Berzeliusskolan,Schema,Lunch,App,Linköping,Berzan.js,Web,Webb,Projekt,Project">
 	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="icon" href="img/logo/logo-512.png">
 	<link rel="manifest" href="manifest.json">
+	<script async src="sw.js"></script>
 	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.js"></script>
 	<script defer src="js/script3.js"></script>
-	<title id="titleName">Berzan</title>
+	<style>
+		#splashScreen {
+			position: absolute;
+			text-align: center;
+			height: 100vh;
+			width: 100vw;
+			background-color: #490A3D;
+			z-index: 15;
+		}
+	</style>
+	<title id="titleName">Berzan.js</title>
 </head>
-<body>
+<body id="mainBody">
     <div id="splashScreen">
-        <h1>Berzan</h1>
+        <h1>Berzan.js</h1>
         <h2>Laddar ...</h2>
         <noscript><div><strong>Please enable JavaScript to use this web-app.</strong></div></noscript>
         <a href="http://t.me/Newbyte">Feedback?</a><p> - </p><a href="html/browsers.html">Webbläsare som stöds</a>
     </div>
     <div id="hiddenMenu">
-        <div class="mobileNavButton">Schema</div>
-        <div class="mobileNavButton">Lunch</div>
-        <div class="mobileNavButton">Övrigt</div>
-        <div class="mobileNavButton">Inställningar</div>
-        <div class="mobileNavButton">Om</div>
+        <div role="button" class="mobileNavButton">Schema</div>
+        <div role="button" class="mobileNavButton">Lunch</div>
+        <div role="button" class="mobileNavButton">Övrigt</div>
+        <div role="button" class="mobileNavButton">Inställningar</div>
+        <div role="button" class="mobileNavButton">Om</div>
     </div>
 	<div id="panel">
 		<nav>
 			<div id="desktopNav">
-				<div class="navButton">Schema</div>
-				<div class="navButton">Lunch</div>
-				<div class="navButton">Övrigt</div>
-				<div class="navButton">Inställningar</div>
-				<div class="navButton">Om</div>
-				<h2 class="identity">Berzan</h2>
+				<button class="navButton">Schema</button>
+				<button class="navButton">Lunch</button>
+				<button class="navButton">Övrigt</button>
+				<button class="navButton">Inställningar</button>
+				<button class="navButton">Om</button>
 			</div>
 			<div id="mobileDiv">
 				<div id="iconCenterDiv">
@@ -49,12 +61,13 @@
 						</g>
 					</svg>
 				</div>
-				<h2 class="identity">Berzan</h2>
 			</div>
+			<h2 id="identity">Berzan.js</h2>
 		</nav>
 		<main id="wrapper">
-			<iframe id="contentIframe"></iframe>
 		</main>
+		<div id="snackbar"></div>
 	</div>
+	<script> </script>
 </body>
 </html>

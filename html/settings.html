@@ -4,25 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../css/reset.css" type="text/css">
     <link rel="stylesheet" href="../css/style.css" type="text/css">
     <title>Inställningar</title>
 </head>
-<body>
-    <main id="iframePanel">
-        <section class="settingsDiv">
-            <h2>Val av förstasida</h2>
+<body id="iframeBody">
+    <div id="contentContainer">
+        <div class="divider">
+            <p>Schema</p>
+        </div>
+        <div class="contentItem">
+            <p>Val av förstasida</p>
             <button class="startPagePicker">Schema</button>
             <button class="startPagePicker">Lunch</button>
             <button class="startPagePicker">Övrigt</button>
-            <button class="startPagePicker">Inställningar</button>
-        </section>
-        <section class="settingsDiv">
-            <h2>Val av standardklass</h2>
+        </div>
+        <div class="contentItem">
+            <p>Val av standardklass</p>
             <input id="defaultClass" placeholder="Klass">
-            <button id="saveButtonThingy">Spara</button>
-            <p id="hasSaved"></p>
-        </section>
-    </main>
+            <button id="saveButtonThingy" title="Spara vald klass som standardklass">Spara</button>
+        </div>
+        <div class="contentItem">
+            <p>Språk</p>
+            <select id="languageSelection">
+                <option>Svenska (Swedish)</option>
+                <option>English</option>
+                <option>Deutsch (German)</option>
+                <option>Français (French)</option>
+            </select>
+        </div>
+        <div class="divider">
+            <p>Anpassning</p>
+        </div>
+        <div class="contentItem">
+            <p>Bildformat för schemat</p>
+            <button class="filetypePicker">PNG</button>
+            <button class="filetypePicker">GIF</button>
+        </div>
+        <div class="contentItem">
+            <p>Sida för mobilmenyn</p>
+            <button class="slideoutSidePicker">Vänster</button>
+            <button class="slideoutSidePicker">Höger</button>
+        </div>
+        <div class="divider">
+            <p>Övrigt</p>
+        </div>
+        <div class="contentItem">
+            <p>Återställ inställningar</p>
+            <button id="resetButton" title="Återställ alla inställningar till deras standardvärde">Återställ</button>
+        </div>
+        <div class="divider">
+            <p>Experiment</p>
+        </div>
+        <div class="contentItem">
+            <p>Val av design för Berzan.js</p>
+            <select id="styleSelection">
+                <option>Standard</option>
+                <option>Experimentell</option>
+            </select>
+        </div>
+        <div class="contentItem">
+            <p>Utökat service worker-stöd</p>
+            <select id="serviceWorkerSelection">
+                <option>Av</option>
+                <option>På (under utveckling)</option>
+            </select>
+        </div>
+    </div>
 </body>
 </html>

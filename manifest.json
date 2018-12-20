@@ -1,8 +1,16 @@
 {
-  "name": "Berzan-app",
-  "short_name": "Berzan",
+  "short_name": "Berzan.js",
+  "name": "Berzan.js",
   "display": "standalone",
-  "background_color": "#490A3D",
+  "start_url": "/",
   "theme_color": "#490A3D",
-  "start_url": "/stefan/"
+  "background_color": "#490A3D",
+  "lang": "Swedish",
+  "orientation": "any",
+  "description": "Schema och lunch för Berzeliusskolan",
+  "icons": [{
+    "src": "img/logo/logo-512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
 }

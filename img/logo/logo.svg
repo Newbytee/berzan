@@ -1,0 +1,17 @@
+<svg width="1000" height="1000" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>Layer 1</title>
+ </g>
+ <g>
+  <title>background</title>
+  <rect fill="#fff" id="canvas_background" height="1002" width="1002" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+  <rect rx="50" stroke="#000" id="svg_3" height="900" width="900" y="50" x="50" stroke-width="1.5" fill="#490a3d"/>
+  <text stroke="#000" transform="matrix(25.655736923217773,0,0,14.599533081054688,-9677.376742362976,-6150.813821315765) " xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_4" y="474" x="392.5" stroke-opacity="null" stroke-width="0" fill="#000000"/>
+  <text stroke="#000" transform="matrix(39.25030034158067,0,0,33.274917023066216,-10725.782575899882,-14747.279075137343) " xml:space="preserve" text-anchor="start" font-family="'Trebuchet MS', Gadget, sans-serif" font-size="24" id="svg_5" y="466.695756" x="279.342261" stroke-opacity="null" stroke-width="0" fill="#ffffff">B</text>
+ </g>
+</svg>
