@@ -509,6 +509,10 @@ nav, .mobileNavButton, #schedule, #wrapper {
     border: none;
 }
 
+#contentIframe:after {
+    content: "URL " attr(src) " kunde inte laddas.";
+}
+
 #schedule {
     margin-top: 0.5vh;
     display: none;
