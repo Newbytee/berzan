@@ -10,6 +10,7 @@ const MOBILE_NAV_BUTTONS = document.getElementsByClassName("mobileNavButton");
 const NAVIGATION_BUTTONS_LENGTH = NAVIGATION_BUTTONS.length;
 const CONTENT_DIV = document.getElementById("wrapper");
 const PAGE_TITLE = document.getElementById("titleName");
+const SPLASH_SCREEN = document.getElementById("splashScreen");
 const DATE = new Date();
 const LANGUAGES = [ "sv-se", "en-gb", "de-de", "fr-fr" ];
 let allowKeyNav = true;
@@ -292,7 +293,7 @@ function loadSchedulePage() {
     
     SCHEDULE.addEventListener("error", function() {
         if (scheduleInit) {
-            showSnackbar("Kunde inte ladda schemat :(");
+            showSnackbar("Kunde inte ladda schema :(");
         }
     });
     
@@ -548,5 +549,8 @@ if (localStorage.getItem("appLanguage") === null) {
     localStorage.setItem("appLanguage", "sv-se");
 }
 
-document.getElementById("splashScreen").style.display = "none";
+SPLASH_SCREEN.style.opacity = "0";
+setTimeout(function() {
+    SPLASH_SCREEN.style.display = "none";
+}, 200);
 updateServiceWorker();

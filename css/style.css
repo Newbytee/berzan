@@ -321,12 +321,6 @@ template {
     display: none !important;
 }
 
-h1 {
-    padding-top: 30vh;
-    font-size: 10vh;
-    z-index: 15;
-}
-
 nav {
     height: 60px;
     background-color: #490A3D; /* "Berzan-färgen": #A1274C, den jag valde: #490A3D */
@@ -457,13 +451,8 @@ nav, .mobileNavButton, #schedule, #wrapper {
     margin-top: 3vw;
 }
 
-#splashScreen h2 {
-    margin-bottom: 40vh;
-}
-
 #splashScreen noscript {
     color: #FFFFFF;
-    padding-top:20vh;
     z-index: 20;
     display: inline;
 }
@@ -472,7 +461,14 @@ nav, .mobileNavButton, #schedule, #wrapper {
     display: inline;
 }
 
-#splashScreen h2, #splashScreen h1, #splashScreen p {
+#splashScreen h1 {
+    padding-top: 34vh;
+    margin-bottom: 30vh;
+    font-size: 10vh;
+    z-index: 15;
+}
+
+#splashScreen h1, #splashScreen p {
     color: #FFFFFF;
 }
 
@@ -517,6 +513,13 @@ nav, .mobileNavButton, #schedule, #wrapper {
     margin-top: 0.5vh;
     display: none;
     height: 90vh;
+    text-align: center;
+}
+
+#schedule:after {
+    content: "Schemat kunde inte laddas. Försäkra dig att du är inloggad på nätverket, att din adblocker / contentblocker inte blockerar novasoftware.se, samt att din klass/vecka inte innehåller < eller >. (URL: " attr(src) ")";
+    display: block;
+    margin-top: 10px;
 }
 
 #hiddenMenu {
