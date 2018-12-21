@@ -513,13 +513,15 @@ nav, .mobileNavButton, #schedule, #wrapper {
     margin-top: 0.5vh;
     display: none;
     height: 90vh;
-    text-align: center;
+    color: #00000000;
 }
 
 #schedule:after {
-    content: "Schemat kunde inte laddas. Försäkra dig att du är inloggad på nätverket, att din adblocker / contentblocker inte blockerar novasoftware.se, samt att din klass/vecka inte innehåller < eller >. (URL: " attr(src) ")";
+    content: "Schemat kunde inte laddas.\A Försäkra dig att du är inloggad på nätverket, att din adblocker / contentblocker inte blockerar novasoftware.se, samt att din klass/vecka inte innehåller < eller >.\A\A(URL: " attr(src) ")";
+    white-space: pre-wrap;
+    text-align: center;
     display: block;
-    margin-top: 10px;
+    color: #000000;
 }
 
 #hiddenMenu {
