@@ -208,8 +208,7 @@ function loadPage(page = 0) {
             if (typeof page === "string") {
                 createExternalPageViewer(page);
             } else {
-                console.error("Invalid parameter \"" + page + "\" passed to loadPage()");
-                loadPage(0);
+                throw new Error("Invalid parameter \"" + page + "\" passed to loadPage()");
             }
             return;
     }
@@ -239,15 +238,14 @@ function putPage(source, name, func) {
 }
 
 function loadHTML(URL) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function(resolve) {
         if (typeof URL === "string") {
             AJAXRequest(URL).then(function(requestedHTML) {
                 CONTENT_DIV.innerHTML = requestedHTML;
                 resolve();
             });
         } else {
-            console.error("Invalid parameter passed to loadHTML()");
-            reject();
+            throw new TypeError("Invalid parameter passed to loadHTML()");
         }
     });
 }
