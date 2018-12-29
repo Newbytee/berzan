@@ -193,7 +193,28 @@ function addToggle(element, storageKey, func) {
                 localStorage.setItem(storageKey, "on");
                 break;
         }
-        func();
+        if (typeof func === "function") {
+            func();
+        }
+    });
+}
+
+function addSelection(element, storageKey, items, func) {
+    for (let i = 0; i < items.length; i++) {
+        if (items[i] === localStorage.getItem(storageKey)) {
+            element.selectedIndex = i;
+        }
+    }
+    
+    element.addEventListener("change", function() {
+        for (let i = 0; i < items.length; i++) {
+            if (i === element.selectedIndex) {
+                localStorage.setItem(storageKey, items[i]);
+            }
+        }
+        if (typeof func === "function") {
+            func();
+        }
     });
 }
 
@@ -412,7 +433,7 @@ function viewSchedule(clickInit = false, prompt = true) {
     }
 
     if (className === "debug") {
-        putPage("html-fragments/debug.html", "Debug", loadDebugMenu);
+        putPage("html-fragments/debug.html", "Debug", setupDebugMenu);
         return;
     }
 
@@ -422,16 +443,18 @@ function viewSchedule(clickInit = false, prompt = true) {
 }
 
 function setupSettings() {
-    const CHANGE_STARTPAGE_BUTTONS = document.getElementsByClassName("startPagePicker");
     const CLASS_SAVE_FIELD = document.getElementById("defaultClass");
-    const CHANGE_FILETYPE_BUTTONS = document.getElementsByClassName("filetypePicker");
     const CHANGE_SLIDEOUT_SIDE_BUTTONS = document.getElementsByClassName("slideoutSidePicker");
     const CHANGE_LANGUAGE_SELECTION = document.getElementById("languageSelection");
     const SERVICE_WORKER_SELECTION = document.getElementById("serviceWorkerSelection");
     const STYLE_SELECTION = document.getElementById("styleSelection");
+    const FILETYPE_SELECTION = document.getElementById("filetypeSelection");
+    const START_PAGE_SELECTION = document.getElementById("startPageSelection");
     
     addToggle(STYLE_SELECTION, "newDesign", updateStyle);
     addToggle(SERVICE_WORKER_SELECTION, "serviceWorkerEnabled", updateServiceWorker);
+    addSelection(FILETYPE_SELECTION, "scheduleFiletype", [ "PNG", "GIF" ], function() { showSnackbar("Schemat laddas nu som " + localStorage.getItem("scheduleFiletype").toUpperCase()) });
+    addSelection(START_PAGE_SELECTION, "startPage", [ "schedule", "lunch", "etc" ]);
 
     for (let i = 0; i < LANGUAGES.length; i++) {
         if (LANGUAGES[i] === localStorage.getItem("appLanguage")) CHANGE_LANGUAGE_SELECTION.selectedIndex = i;
@@ -441,44 +464,6 @@ function setupSettings() {
         localStorage.setItem("appLanguage", LANGUAGES[CHANGE_LANGUAGE_SELECTION.selectedIndex]);
         if (LANGUAGES[CHANGE_LANGUAGE_SELECTION.selectedIndex] === "de-de") alert("Due to what seems to be a bug with Novasoftware (the provider of the schedule), when German is selected as language the schedule will frequently fail to load.");
     });
-
-    for (let i = 0; i < CHANGE_STARTPAGE_BUTTONS.length; i++) {
-        CHANGE_STARTPAGE_BUTTONS[i].addEventListener("click", function() {
-            switch (i) {
-                case 0:
-                    localStorage.setItem("startPage", "schedule");
-                    showSnackbar("Startsida bytt till schema");
-                    break;
-                case 1:
-                    localStorage.setItem("startPage", "lunch");
-                    showSnackbar("Startsida bytt till lunch");
-                    break;
-                case 2:
-                    localStorage.setItem("startPage", "etc");
-                    showSnackbar("Startsida bytt till övrigt");
-                    break;
-                default:
-                    localStorage.setItem("startPage", "schedule");
-                    showSnackbar("Startsida bytt till schema");
-                    break;
-            }
-        });
-    }
-
-    for (let i = 0; i < CHANGE_FILETYPE_BUTTONS.length; i++) {
-        CHANGE_FILETYPE_BUTTONS[i].addEventListener("click", function() {
-            switch (i) {
-                case 0:
-                    localStorage.setItem("scheduleFiletype", "png");
-                    showSnackbar("Schemat laddas nu som PNG");
-                    break;
-                case 1:
-                    localStorage.setItem("scheduleFiletype", "gif");
-                    showSnackbar("Schemat laddas nu som GIF");
-                    break;
-            }
-        });
-    }
 
     for (let i = 0; i < CHANGE_SLIDEOUT_SIDE_BUTTONS.length; i++) {
         CHANGE_SLIDEOUT_SIDE_BUTTONS[i].addEventListener("click", function() {
@@ -524,7 +509,7 @@ function setupSettings() {
     });
 }
 
-function loadDebugMenu() {
+function setupDebugMenu() {
     const SET_ITEM_INPUT = document.getElementsByClassName("setItemInput");
     const SET_ITEM_BUTTON = document.getElementById("setItemButton");
     const GET_ITEM_INPUT = document.getElementById("getItemInput");
