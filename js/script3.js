@@ -230,7 +230,9 @@ function loadPage(page = 0) {
             if (typeof page === "string") {
                 createExternalPageViewer(page);
             } else {
-                throw new Error("Invalid parameter \"" + page + "\" passed to loadPage()");
+                const MSG = "Invalid parameter \"" + page + "\" passed to loadPage()";
+                LOG.error(MSG);
+                throw new Error(MSG);
             }
             return;
     }
@@ -267,7 +269,9 @@ function loadHTML(URL) {
                 resolve();
             });
         } else {
-            throw new TypeError("Invalid parameter passed to loadHTML()");
+            const MSG = "Invalid parameter passed to loadHTML()";
+            LOG.error(MSG);
+            throw new TypeError(MSG);
         }
     });
 }
@@ -385,7 +389,7 @@ function viewSchedule(clickInit = false, prompt = true) {
             break;
         default:
             weekDay = 0;
-            LOG.error("DAY_DROPDOWN had an invalid index.");
+            LOG.error("DAY_DROPDOWN had an invalid index (" + DAY_DROPDOWN.selectedIndex.toString() + ").");
             break;
     }
 
