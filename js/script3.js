@@ -12,6 +12,7 @@ const CONTENT_DIV = document.getElementById("wrapper");
 const PAGE_TITLE = document.getElementById("titleName");
 const SPLASH_SCREEN = document.getElementById("splashScreen");
 const DATE = new Date();
+const LOG = new Log();
 const LANGUAGES = [ "sv-se", "en-gb", "de-de", "fr-fr" ];
 let allowKeyNav = true;
 let scheduleInit = false;
@@ -46,6 +47,27 @@ document.addEventListener("keypress", function(event) {
     const tabIndex = parseInt(event.key);
     if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
 });
+
+function Log() {
+    this.data = [];
+    
+    this.generateLog = function(type, message) {
+        const TMP_DATE = new Date();
+        this.data.push("(" + TMP_DATE.getHours() + ":" + TMP_DATE.getMinutes() + ":" + TMP_DATE.getSeconds() + ") " + type + ": " + message);
+    };
+    
+    this.error = function(err) {
+        this.generateLog("ERROR", err);
+    };
+    
+    this.info = function(message) {
+        this.generateLog("INFO", message);
+    };
+    
+    this.get = function() {
+        return this.data;
+    };
+}
 
 function AJAXRequest(URL) {
     return new Promise(function(resolve, reject) {
@@ -190,7 +212,7 @@ function updateNavBlocking() {
 function loadPage(page = 0) {
     switch(page) {
         case 0:
-            putPage("html-fragments/schedule.html", "Schema", loadSchedulePage);
+            putPage("html-fragments/schedule.html", "Schema", setupSchedulePage);
             break;
         case 1:
             putPage("html-fragments/lunch.html", "Lunch");
@@ -199,7 +221,7 @@ function loadPage(page = 0) {
             putPage("html-fragments/etc.html", "Övrigt");
             break;
         case 3:
-            putPage("html-fragments/settings.html", "Inställningar", loadSettings);
+            putPage("html-fragments/settings.html", "Inställningar", setupSettings);
             break;
         case 4:
             putPage("html-fragments/about.html", "Om");
@@ -258,7 +280,7 @@ function createExternalPageViewer(URL) {
     CONTENT_DIV.appendChild(EXT_PAGE_IFRAME);
 }
 
-function loadSchedulePage() {
+function setupSchedulePage() {
     sessionStorage.setItem("inputField0", DATE.getWeek());
     const INPUT_FIELDS = document.getElementsByClassName("inputField");
     const SEARCH_BUTTON = document.getElementById("searchClass");
@@ -363,6 +385,7 @@ function viewSchedule(clickInit = false, prompt = true) {
             break;
         default:
             weekDay = 0;
+            LOG.error("DAY_DROPDOWN had an invalid index.");
             break;
     }
 
@@ -394,7 +417,7 @@ function viewSchedule(clickInit = false, prompt = true) {
     }
 }
 
-function loadSettings() {
+function setupSettings() {
     const CHANGE_STARTPAGE_BUTTONS = document.getElementsByClassName("startPagePicker");
     const CLASS_SAVE_FIELD = document.getElementById("defaultClass");
     const CHANGE_FILETYPE_BUTTONS = document.getElementsByClassName("filetypePicker");
