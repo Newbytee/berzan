@@ -96,16 +96,19 @@ function createSlideout() {
     const slideoutMenu = document.getElementById("hiddenMenu");
     const hamburgerMenu = document.getElementById("hamburgerSvg");
     if (localStorage.getItem("slideoutSide") === null || localStorage.getItem("slideoutSide") === "left") {
+        slideoutMenu.classList.remove("slideout-menu-right");
+        hamburgerMenu.style.removeProperty("right");
+        hamburgerMenu.style.left = "5%";
         slideout = new Slideout({
             "panel": document.getElementById("panel"),
             "menu": document.getElementById("hiddenMenu"),
             "padding": 256,
             "tolerance": 0
         });
-        slideoutMenu.classList.remove("slideout-menu-right");
-        hamburgerMenu.style.removeProperty("right");
-        hamburgerMenu.style.left = "5%";
     } else {
+        slideoutMenu.classList.remove("slideout-menu-left");
+        hamburgerMenu.style.removeProperty("left");
+        hamburgerMenu.style.right = "5%";
         slideout = new Slideout({
             "panel": document.getElementById("panel"),
             "menu": document.getElementById("hiddenMenu"),
@@ -113,9 +116,6 @@ function createSlideout() {
             "tolerance": 0,
             "side": "right"
         });
-        slideoutMenu.classList.remove("slideout-menu-left");
-        hamburgerMenu.style.removeProperty("left");
-        hamburgerMenu.style.right = "5%";
     }
 }
 
@@ -200,6 +200,14 @@ function addToggle(element, storageKey, func) {
 }
 
 function addSelection(element, storageKey, items, func) {
+    /*if (items === null) {
+        for (let i = 0; i < element.children.length; i++) {
+            items.push(element.children.textContent);
+        }
+    }
+    
+    console.log(items);
+    */
     for (let i = 0; i < items.length; i++) {
         if (items[i] === localStorage.getItem(storageKey)) {
             element.selectedIndex = i;
@@ -445,24 +453,25 @@ function viewSchedule(clickInit = false, prompt = true) {
 function setupSettings() {
     const CLASS_SAVE_FIELD = document.getElementById("defaultClass");
     const CHANGE_SLIDEOUT_SIDE_BUTTONS = document.getElementsByClassName("slideoutSidePicker");
-    const CHANGE_LANGUAGE_SELECTION = document.getElementById("languageSelection");
     const SERVICE_WORKER_SELECTION = document.getElementById("serviceWorkerSelection");
+    const LANGUAGE_SELECTION = document.getElementById("languageSelection");
     const STYLE_SELECTION = document.getElementById("styleSelection");
     const FILETYPE_SELECTION = document.getElementById("filetypeSelection");
     const START_PAGE_SELECTION = document.getElementById("startPageSelection");
     
     addToggle(STYLE_SELECTION, "newDesign", updateStyle);
     addToggle(SERVICE_WORKER_SELECTION, "serviceWorkerEnabled", updateServiceWorker);
-    addSelection(FILETYPE_SELECTION, "scheduleFiletype", [ "PNG", "GIF" ], function() { showSnackbar("Schemat laddas nu som " + localStorage.getItem("scheduleFiletype").toUpperCase()) });
+    addSelection(FILETYPE_SELECTION, "scheduleFiletype", null, function() { showSnackbar("Schemat laddas nu som " + localStorage.getItem("scheduleFiletype").toUpperCase()) });
     addSelection(START_PAGE_SELECTION, "startPage", [ "schedule", "lunch", "etc" ]);
+    addSelection(LANGUAGE_SELECTION, "appLanguage", LANGUAGES, function() { if (LANGUAGES[LANGUAGE_SELECTION.selectedIndex] === "de-de") alert("Due to what seems to be a bug with Novasoftware (the schedule provider), when German is selected as language the schedule will frequently fail to load."); })
 
     for (let i = 0; i < LANGUAGES.length; i++) {
-        if (LANGUAGES[i] === localStorage.getItem("appLanguage")) CHANGE_LANGUAGE_SELECTION.selectedIndex = i;
+        if (LANGUAGES[i] === localStorage.getItem("appLanguage")) LANGUAGE_SELECTION.selectedIndex = i;
     }
 
-    CHANGE_LANGUAGE_SELECTION.addEventListener("change", function() {
-        localStorage.setItem("appLanguage", LANGUAGES[CHANGE_LANGUAGE_SELECTION.selectedIndex]);
-        if (LANGUAGES[CHANGE_LANGUAGE_SELECTION.selectedIndex] === "de-de") alert("Due to what seems to be a bug with Novasoftware (the provider of the schedule), when German is selected as language the schedule will frequently fail to load.");
+    LANGUAGE_SELECTION.addEventListener("change", function() {
+        localStorage.setItem("appLanguage", LANGUAGES[LANGUAGE_SELECTION.selectedIndex]);
+        if (LANGUAGES[LANGUAGE_SELECTION.selectedIndex] === "de-de") alert("Due to what seems to be a bug with Novasoftware (the provider of the schedule), when German is selected as language the schedule will frequently fail to load.");
     });
 
     for (let i = 0; i < CHANGE_SLIDEOUT_SIDE_BUTTONS.length; i++) {
