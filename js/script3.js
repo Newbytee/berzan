@@ -451,28 +451,63 @@ function viewSchedule(clickInit = false, prompt = true) {
 }
 
 function setupSettings() {
+    const CHANGE_STARTPAGE_BUTTONS = document.getElementsByClassName("startPagePicker");
     const CLASS_SAVE_FIELD = document.getElementById("defaultClass");
+    const CHANGE_FILETYPE_BUTTONS = document.getElementsByClassName("filetypePicker");
     const CHANGE_SLIDEOUT_SIDE_BUTTONS = document.getElementsByClassName("slideoutSidePicker");
+    const CHANGE_LANGUAGE_SELECTION = document.getElementById("languageSelection");
     const SERVICE_WORKER_SELECTION = document.getElementById("serviceWorkerSelection");
-    const LANGUAGE_SELECTION = document.getElementById("languageSelection");
     const STYLE_SELECTION = document.getElementById("styleSelection");
-    const FILETYPE_SELECTION = document.getElementById("filetypeSelection");
-    const START_PAGE_SELECTION = document.getElementById("startPageSelection");
     
     addToggle(STYLE_SELECTION, "newDesign", updateStyle);
     addToggle(SERVICE_WORKER_SELECTION, "serviceWorkerEnabled", updateServiceWorker);
-    addSelection(FILETYPE_SELECTION, "scheduleFiletype", null, function() { showSnackbar("Schemat laddas nu som " + localStorage.getItem("scheduleFiletype").toUpperCase()) });
-    addSelection(START_PAGE_SELECTION, "startPage", [ "schedule", "lunch", "etc" ]);
-    addSelection(LANGUAGE_SELECTION, "appLanguage", LANGUAGES, function() { if (LANGUAGES[LANGUAGE_SELECTION.selectedIndex] === "de-de") alert("Due to what seems to be a bug with Novasoftware (the schedule provider), when German is selected as language the schedule will frequently fail to load."); })
 
     for (let i = 0; i < LANGUAGES.length; i++) {
-        if (LANGUAGES[i] === localStorage.getItem("appLanguage")) LANGUAGE_SELECTION.selectedIndex = i;
+        if (LANGUAGES[i] === localStorage.getItem("appLanguage")) CHANGE_LANGUAGE_SELECTION.selectedIndex = i;
     }
 
-    LANGUAGE_SELECTION.addEventListener("change", function() {
-        localStorage.setItem("appLanguage", LANGUAGES[LANGUAGE_SELECTION.selectedIndex]);
-        if (LANGUAGES[LANGUAGE_SELECTION.selectedIndex] === "de-de") alert("Due to what seems to be a bug with Novasoftware (the provider of the schedule), when German is selected as language the schedule will frequently fail to load.");
+    CHANGE_LANGUAGE_SELECTION.addEventListener("change", function() {
+        localStorage.setItem("appLanguage", LANGUAGES[CHANGE_LANGUAGE_SELECTION.selectedIndex]);
+        if (LANGUAGES[CHANGE_LANGUAGE_SELECTION.selectedIndex] === "de-de") alert("Due to what seems to be a bug with Novasoftware (the provider of the schedule), when German is selected as language the schedule will frequently fail to load.");
     });
+
+    for (let i = 0; i < CHANGE_STARTPAGE_BUTTONS.length; i++) {
+        CHANGE_STARTPAGE_BUTTONS[i].addEventListener("click", function() {
+            switch (i) {
+                case 0:
+                    localStorage.setItem("startPage", "schedule");
+                    showSnackbar("Startsida bytt till schema");
+                    break;
+                case 1:
+                    localStorage.setItem("startPage", "lunch");
+                    showSnackbar("Startsida bytt till lunch");
+                    break;
+                case 2:
+                    localStorage.setItem("startPage", "etc");
+                    showSnackbar("Startsida bytt till övrigt");
+                    break;
+                default:
+                    localStorage.setItem("startPage", "schedule");
+                    showSnackbar("Startsida bytt till schema");
+                    break;
+            }
+        });
+    }
+
+    for (let i = 0; i < CHANGE_FILETYPE_BUTTONS.length; i++) {
+        CHANGE_FILETYPE_BUTTONS[i].addEventListener("click", function() {
+            switch (i) {
+                case 0:
+                    localStorage.setItem("scheduleFiletype", "png");
+                    showSnackbar("Schemat laddas nu som PNG");
+                    break;
+                case 1:
+                    localStorage.setItem("scheduleFiletype", "gif");
+                    showSnackbar("Schemat laddas nu som GIF");
+                    break;
+            }
+        });
+    }
 
     for (let i = 0; i < CHANGE_SLIDEOUT_SIDE_BUTTONS.length; i++) {
         CHANGE_SLIDEOUT_SIDE_BUTTONS[i].addEventListener("click", function() {
@@ -515,6 +550,27 @@ function setupSettings() {
 
     document.getElementById("resetButton").addEventListener("click", function() {
         resetPreferences();
+    });
+}
+
+function loadDebugMenu() {
+    const SET_ITEM_INPUT = document.getElementsByClassName("setItemInput");
+    const SET_ITEM_BUTTON = document.getElementById("setItemButton");
+    const GET_ITEM_INPUT = document.getElementById("getItemInput");
+    const GET_ITEM_BUTTON = document.getElementById("getItemButton");
+    const LOAD_URL_INPUT = document.getElementById("loadURLInput");
+    const LOAD_URL_BUTTON = document.getElementById("loadURLButton");
+
+    SET_ITEM_BUTTON.addEventListener("click", function() {
+        localStorage.setItem(SET_ITEM_INPUT[0].value, SET_ITEM_INPUT[1].value);
+    });
+
+    GET_ITEM_BUTTON.addEventListener("click", function() {
+        showSnackbar(localStorage.getItem(GET_ITEM_INPUT.value));
+    });
+
+    LOAD_URL_BUTTON.addEventListener("click", function() {
+        loadPage(LOAD_URL_INPUT.value);
     });
 }
 
