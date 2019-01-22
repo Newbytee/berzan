@@ -441,7 +441,7 @@ function getScheduleURL(className, week, weekDay, language, filetype) {
     }
     
     if (typeof className !== "string") {
-        throw LOG.error("className was undefined");
+        throw LOG.error("className was " + typeof className + ", expected string.");
     }
     
     return "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=" + filetype + "&schoolid=89920/" + language + "&type=-1&id=" + className + "&period=&week=" + week + "&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=" + weekDay + "&width=" + window.innerWidth + "&height=" + window.innerHeight;
