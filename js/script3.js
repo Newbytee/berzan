@@ -199,33 +199,6 @@ function addToggle(element, storageKey, func) {
     });
 }
 
-function addSelection(element, storageKey, items, func) {
-    /*if (items === null) {
-        for (let i = 0; i < element.children.length; i++) {
-            items.push(element.children.textContent);
-        }
-    }
-    
-    console.log(items);
-    */
-    for (let i = 0; i < items.length; i++) {
-        if (items[i] === localStorage.getItem(storageKey)) {
-            element.selectedIndex = i;
-        }
-    }
-    
-    element.addEventListener("change", function() {
-        for (let i = 0; i < items.length; i++) {
-            if (i === element.selectedIndex) {
-                localStorage.setItem(storageKey, items[i]);
-            }
-        }
-        if (typeof func === "function") {
-            func();
-        }
-    });
-}
-
 function updateNavBlocking() {
     const CONTENT_INPUT_FIELDS = document.getElementsByTagName("INPUT");
     for (let i = 0; i < CONTENT_INPUT_FIELDS.length; i++) {
