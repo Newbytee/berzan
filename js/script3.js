@@ -58,6 +58,7 @@ function Log() {
     
     this.error = function(err) {
         this.generateLog("ERROR", err);
+        return err; // Return the message for easy throwing of error 
     };
     
     this.info = function(message) {
@@ -395,11 +396,10 @@ function viewSchedule(clickInit = false, prompt = true) {
             break;
     }
 
-    if (currentWeek.length === 0) currentWeek = DATE.getWeek();
     if (clickInit) className = CLASS_INPUT_FIELD.value;
 
     if (className.length > 0) {
-        SCHEDULE.src = `http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=${localStorage.getItem("scheduleFiletype")}&schoolid=89920/${localStorage.getItem("appLanguage")}&type=-1&id=${className}&period=&week=${currentWeek}&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=${weekDay}&width=${window.innerWidth}&height=${window.innerHeight}`;
+        SCHEDULE.src = getScheduleURL(className, currentWeek, weekDay, localStorage.getItem("appLanguage"), localStorage.getItem("scheduleFiletype"));
         SCHEDULE.onload = function() {
             SCHEDULE.style.display = "block";
         };
@@ -421,6 +421,30 @@ function viewSchedule(clickInit = false, prompt = true) {
     if (!(localStorage.getItem("defaultClass"))) {
         localStorage.setItem("defaultClass", CLASS_INPUT_FIELD.value);
     }
+}
+
+function getScheduleURL(className, week, weekDay, language, filetype) {
+    if (typeof filetype !== "string") {
+        filetype = "png";
+    }
+    
+    if (typeof language !== "string") {
+        language = "sv-se";
+    }
+    
+    if (typeof weekDay !== "number") {
+        weekDay = 0;
+    }
+    
+    if (typeof week !== "number") {
+        week = DATE.getWeek();
+    }
+    
+    if (typeof className !== "string") {
+        throw LOG.error("className was undefined");
+    }
+    
+    return "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=" + filetype + "&schoolid=89920/" + language + "&type=-1&id=" + className + "&period=&week=" + week + "&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=" + weekDay + "&width=" + window.innerWidth + "&height=" + window.innerHeight;
 }
 
 function setupSettings() {
