@@ -58,7 +58,7 @@ function Log() {
     
     this.error = function(err) {
         this.generateLog("ERROR", err);
-        return err; // Return the message for easy throwing of error 
+        return err; // Return the message for easy throwing of error
     };
     
     this.info = function(message) {
@@ -535,7 +535,7 @@ function setupSettings() {
         }
     }
 
-    CLASS_SAVE_FIELD.addEventListener("keydown", (event) => {
+    CLASS_SAVE_FIELD.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
             saveDefaultClass();
         }
