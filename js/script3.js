@@ -437,7 +437,7 @@ function getScheduleURL(className, week, weekDay, language, filetype) {
     }
     
     if (typeof week !== "string") {
-        throw LOG.error("week was " + typeof week + ", expected number.");
+        throw LOG.error("week was " + typeof week + ", expected string.");
     }
     
     if (typeof className !== "string") {
