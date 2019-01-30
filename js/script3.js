@@ -425,11 +425,11 @@ function viewSchedule(clickInit = false, prompt = true) {
 
 function getScheduleURL(className, week, weekDay, language, filetype) {
     if (typeof filetype !== "string") {
-        filetype = "png";
+        throw LOG.error("filetype was " + typeof filetype + ", expected string");
     }
     
     if (typeof language !== "string") {
-        language = "sv-se";
+        throw LOG.error("language was " + typeof filetype + ", expected string");
     }
     
     if (typeof weekDay !== "number") {
