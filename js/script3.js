@@ -272,9 +272,7 @@ function loadHTML(URL) {
                 resolve();
             });
         } else {
-            const MSG = "Invalid parameter passed to loadHTML()";
-            LOG.error(MSG);
-            throw new TypeError(MSG);
+            throw LOG.error("Invalid parameter passed to loadHTML()");
         }
     });
 }
