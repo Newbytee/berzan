@@ -29,7 +29,9 @@ document.getElementById("hamburgerSvg").addEventListener("click", function() {
 
 window.onresize = function() {
     checkOrientation();
-    viewSchedule(true, false);
+    if (sessionStorage.getItem("currentPage") === "0") {
+        viewSchedule(true, false);
+    }
 };
 
 for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
