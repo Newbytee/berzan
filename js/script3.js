@@ -235,9 +235,7 @@ function loadPage(page = 0) {
             if (typeof page === "string") {
                 createExternalPageViewer(page);
             } else {
-                const MSG = "Invalid parameter \"" + page + "\" passed to loadPage()";
-                LOG.error(MSG);
-                throw new Error(MSG);
+                throw LOG.error("Invalid parameter \"" + page + "\" passed to loadPage()");
             }
             return;
     }
