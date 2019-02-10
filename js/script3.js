@@ -62,7 +62,7 @@ function init() {
     
     window.onresize = function() {
         checkOrientation();
-        if (sessionStorage.getItem("currentPage") === "0") {
+        if (sessionStorage.getItem("currentView") === "schedule") {
             viewSchedule(true, false);
         }
     };
@@ -258,19 +258,19 @@ function updateNavBlocking() {
 function loadPage(page = 0) {
     switch(page) {
         case 0:
-            putPage("html-fragments/schedule.html", "Schema", setupSchedulePage);
+            putPage("schedule", "Schema", setupSchedulePage);
             break;
         case 1:
-            putPage("html-fragments/lunch.html", "Lunch");
+            putPage("lunch", "Lunch");
             break;
         case 2:
-            putPage("html-fragments/etc.html", "Övrigt");
+            putPage("etc", "Övrigt");
             break;
         case 3:
-            putPage("html-fragments/settings.html", "Inställningar", setupSettings);
+            putPage("settings", "Inställningar", setupSettings);
             break;
         case 4:
-            putPage("html-fragments/about.html", "Om");
+            putPage("about", "Om");
             break;
         default:
             if (typeof page === "string") {
@@ -292,7 +292,7 @@ function loadPage(page = 0) {
 }
 
 function putPage(source, name, func) {
-    loadHTML(source).then(function() {
+    loadHTML("html-fragments/" + source + ".html").then(function() {
         if (name) {
             PAGE_TITLE.innerHTML = name + " - Berzan.js";
         } else {
@@ -302,6 +302,7 @@ function putPage(source, name, func) {
             func();
         updateNavBlocking();
     });
+    sessionStorage.setItem("currentView", source);
 }
 
 function loadHTML(URL) {
@@ -451,7 +452,7 @@ function viewSchedule(clickInit = false, prompt = true) {
     }
 
     if (className === "debug") {
-        putPage("html-fragments/debug.html", "Debug", setupDebugMenu);
+        putPage("debug", "Debug", setupDebugMenu);
         return;
     }
 
