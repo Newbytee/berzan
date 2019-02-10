@@ -368,7 +368,7 @@ nav, .mobileNavButton, #schedule, #wrapper {
 }
 
 #schedule:after {
-    content: "Schemat kunde inte laddas.\A Försäkra dig att du är inloggad på nätverket, att din adblocker / contentblocker inte blockerar novasoftware.se, samt att din klass/vecka inte innehåller < eller >.\A\A(URL: " attr(src) ")";
+    content: "Schemat kunde inte laddas :(\A Försäkra dig att du är inloggad på nätverket, att din adblocker / contentblocker inte blockerar novasoftware.se, samt att din klass/vecka inte innehåller < eller >.\A\A(URL: " attr(src) ")";
     white-space: pre-wrap;
     text-align: center;
     display: block;
