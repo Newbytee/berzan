@@ -63,7 +63,7 @@ function init() {
     window.onresize = function() {
         checkOrientation();
         if (sessionStorage.getItem("currentView") === "schedule") {
-            viewSchedule(true, false);
+            viewSchedule(false);
         }
     };
     
@@ -350,12 +350,12 @@ function setupSchedulePage() {
     }
 
     INPUT_FIELDS[0].addEventListener("change", function() {
-        viewSchedule(true);
+        viewSchedule();
     });
 
     DAY_DROPDOWN.onchange = function() {
         scheduleInit = true;
-        viewSchedule(true);
+        viewSchedule();
     };
     
     SCHEDULE.addEventListener("error", function() {
@@ -365,14 +365,14 @@ function setupSchedulePage() {
     
     SEARCH_BUTTON.addEventListener("click", function() {
         scheduleInit = true;
-        viewSchedule(true);
+        viewSchedule();
     });
 
     for (let i = 0; i < INPUT_FIELDS.length; i++) {
         INPUT_FIELDS[i].addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
                 scheduleInit = true;
-                viewSchedule(true);
+                viewSchedule();
             }
         });
 
@@ -393,20 +393,20 @@ function setupSchedulePage() {
     
     if (INPUT_FIELDS[1].value.length !== 0) {
         scheduleInit = true;
-        viewSchedule(true);
+        viewSchedule();
         sessionStorage.setItem("inputField1", INPUT_FIELDS[1].value);
     }
 }
 
-function viewSchedule(clickInit = false, prompt = true) {
+function viewSchedule(prompt = true) {
     if (scheduleInit === false) return;
     const WEEK_INPUT_FIELD = document.getElementById("weekNumberField");
     const CLASS_INPUT_FIELD = document.getElementById("classNameField");
     const DAY_DROPDOWN = document.getElementById("dayDropdown");
     const SCHEDULE = document.getElementById("schedule");
     let currentWeek = WEEK_INPUT_FIELD.value;
+    let className = CLASS_INPUT_FIELD.value;
     let weekDay;
-    let className;
 
     switch (DAY_DROPDOWN.selectedIndex) {
         case 0:
@@ -432,8 +432,6 @@ function viewSchedule(clickInit = false, prompt = true) {
             LOG.error("DAY_DROPDOWN had an invalid index (" + DAY_DROPDOWN.selectedIndex.toString() + ").");
             break;
     }
-
-    if (clickInit) className = CLASS_INPUT_FIELD.value;
 
     if (className.length > 0) {
         SCHEDULE.onload = function() {
