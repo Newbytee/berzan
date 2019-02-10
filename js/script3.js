@@ -391,13 +391,11 @@ function setupSchedulePage() {
         DAY_DROPDOWN.selectedIndex = 0;
     }
     
-    setTimeout(function() {
-        if (INPUT_FIELDS[1].value.length !== 0) {
-            scheduleInit = true;
-            viewSchedule(true);
-            sessionStorage.setItem("inputField1", INPUT_FIELDS[1].value);
-        }
-    }, 0);
+    if (INPUT_FIELDS[1].value.length !== 0) {
+        scheduleInit = true;
+        viewSchedule(true);
+        sessionStorage.setItem("inputField1", INPUT_FIELDS[1].value);
+    }
 }
 
 function viewSchedule(clickInit = false, prompt = true) {
