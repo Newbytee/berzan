@@ -50,6 +50,7 @@ function Log() {
 function init() {
     checkOrientation();
     createSlideout();
+    updateServiceWorker();
     
     document.getElementById("hamburgerSvg").addEventListener("click", function() {
         slideout.toggle();
@@ -91,6 +92,7 @@ function init() {
                 break;
             default:
                 loadPage();
+                break;
         }
     }
     
@@ -101,8 +103,6 @@ function init() {
     if (localStorage.getItem("appLanguage") === null) {
         localStorage.setItem("appLanguage", "sv-se");
     }
-    
-    updateServiceWorker();
     
     SPLASH_SCREEN.style.opacity = "0";
     setTimeout(function() {
