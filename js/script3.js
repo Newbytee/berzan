@@ -48,8 +48,8 @@ function Log() {
 }
 
 function init() {
-    createSlideout();
     checkOrientation();
+    createSlideout();
     
     document.getElementById("hamburgerSvg").addEventListener("click", function() {
         slideout.toggle();
