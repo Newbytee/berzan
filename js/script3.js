@@ -436,10 +436,10 @@ function viewSchedule(clickInit = false, prompt = true) {
     if (clickInit) className = CLASS_INPUT_FIELD.value;
 
     if (className.length > 0) {
-        SCHEDULE.src = getScheduleURL(className, currentWeek, weekDay.toString(), localStorage.getItem("appLanguage"), localStorage.getItem("scheduleFiletype"));
         SCHEDULE.onload = function() {
             SCHEDULE.style.display = "block";
         };
+        SCHEDULE.src = getScheduleURL(className, currentWeek, weekDay.toString(), localStorage.getItem("appLanguage"), localStorage.getItem("scheduleFiletype"));
     } else if (prompt === true) {
         showSnackbar("Välj en klass först");
         return;
