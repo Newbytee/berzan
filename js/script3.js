@@ -20,31 +20,6 @@ let firstScheduleLoad = true;
 let orientationPortrait;
 let slideout;
 
-createSlideout();
-checkOrientation();
-
-document.getElementById("hamburgerSvg").addEventListener("click", function() {
-    slideout.toggle();
-});
-
-window.onresize = function() {
-    checkOrientation();
-    if (sessionStorage.getItem("currentPage") === "0") {
-        viewSchedule(true, false);
-    }
-};
-
-for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
-    NAVIGATION_BUTTONS[i].addEventListener("click", function() {
-        loadPage(i);
-        NAVIGATION_BUTTONS[i].blur();
-    });
-    MOBILE_NAV_BUTTONS[i].addEventListener("click", function() {
-        loadPage(i);
-        slideout.close();
-    });
-}
-
 document.addEventListener("keypress", function(event) {
     const tabIndex = parseInt(event.key);
     if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
@@ -70,6 +45,69 @@ function Log() {
     this.get = function() {
         return this.data;
     };
+}
+
+function init() {
+    createSlideout();
+    checkOrientation();
+    
+    document.getElementById("hamburgerSvg").addEventListener("click", function() {
+        slideout.toggle();
+    });
+    
+    window.onresize = function() {
+        checkOrientation();
+        if (sessionStorage.getItem("currentPage") === "0") {
+            viewSchedule(true, false);
+        }
+    };
+    
+    for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
+        NAVIGATION_BUTTONS[i].addEventListener("click", function() {
+            loadPage(i);
+            NAVIGATION_BUTTONS[i].blur();
+        });
+        MOBILE_NAV_BUTTONS[i].addEventListener("click", function() {
+            loadPage(i);
+            slideout.close();
+        });
+    }
+
+    if (sessionStorage.getItem("currentPage")) {
+        loadPage(parseInt(sessionStorage.getItem("currentPage")));
+    } else {
+        switch(localStorage.getItem("startPage")) {
+            case "schedule":
+                loadPage(0);
+                break;
+            case "lunch":
+                loadPage(1);
+                break;
+            case "etc":
+                loadPage(2);
+                break;
+            case "settings":
+                loadPage(3);
+                break;
+            default:
+                loadPage();
+        }
+    }
+    
+    if (localStorage.getItem("scheduleFiletype") === null) {
+        localStorage.setItem("scheduleFiletype", "png");
+    }
+    
+    if (localStorage.getItem("appLanguage") === null) {
+        localStorage.setItem("appLanguage", "sv-se");
+    }
+    
+    updateServiceWorker();
+    
+    SPLASH_SCREEN.style.opacity = "0";
+    setTimeout(function() {
+        SPLASH_SCREEN.style.display = "none";
+    }, 200);
 }
 
 function AJAXRequest(URL) {
@@ -569,37 +607,4 @@ function setupDebugMenu() {
     });
 }
 
-if (sessionStorage.getItem("currentPage")) {
-    loadPage(parseInt(sessionStorage.getItem("currentPage")));
-} else {
-    switch(localStorage.getItem("startPage")) {
-        case "schedule":
-            loadPage(0);
-            break;
-        case "lunch":
-            loadPage(1);
-            break;
-        case "etc":
-            loadPage(2);
-            break;
-        case "settings":
-            loadPage(3);
-            break;
-        default:
-            loadPage();
-    }
-}
-
-if (localStorage.getItem("scheduleFiletype") === null) {
-    localStorage.setItem("scheduleFiletype", "png");
-}
-
-if (localStorage.getItem("appLanguage") === null) {
-    localStorage.setItem("appLanguage", "sv-se");
-}
-
-SPLASH_SCREEN.style.opacity = "0";
-setTimeout(function() {
-    SPLASH_SCREEN.style.display = "none";
-}, 200);
-updateServiceWorker();
+init();
