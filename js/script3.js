@@ -38,6 +38,10 @@ function Log() {
         return err; // Return the message for easy throwing of error
     };
     
+    this.typeError = function(varname, type, expectedType) {
+        return this.error(varname + " was " + type + ", expected " + expectedType);
+    };
+    
     this.info = function(message) {
         this.generateLog("INFO", message);
     };
@@ -435,7 +439,7 @@ function viewSchedule(clickInit = false, prompt = true) {
     if (clickInit) className = CLASS_INPUT_FIELD.value;
 
     if (className.length > 0) {
-        SCHEDULE.src = getScheduleURL(className, currentWeek, weekDay, localStorage.getItem("appLanguage"), localStorage.getItem("scheduleFiletype"));
+        SCHEDULE.src = getScheduleURL(className, currentWeek, weekDay.toString(), localStorage.getItem("appLanguage"), localStorage.getItem("scheduleFiletype"));
         SCHEDULE.onload = function() {
             SCHEDULE.style.display = "block";
         };
@@ -461,23 +465,23 @@ function viewSchedule(clickInit = false, prompt = true) {
 
 function getScheduleURL(className, week, weekDay, language, filetype) {
     if (typeof filetype !== "string") {
-        throw LOG.error("filetype was " + typeof filetype + ", expected string");
+        throw LOG.typeError("filetype", typeof filetype, "string");
     }
     
     if (typeof language !== "string") {
-        throw LOG.error("language was " + typeof filetype + ", expected string");
+        throw LOG.typeError("language", typeof language, "string");
     }
     
-    if (typeof weekDay !== "number") {
-        weekDay = 0;
+    if (typeof weekDay !== "string") {
+        throw LOG.typeError("weekDay", typeof weekDay, "string");
     }
     
     if (typeof week !== "string") {
-        throw LOG.error("week was " + typeof week + ", expected string.");
+        throw LOG.typeError("week", typeof week, "string.");
     }
     
     if (typeof className !== "string") {
-        throw LOG.error("className was " + typeof className + ", expected string.");
+        throw LOG.typeError("className", typeof className,"expected string.");
     }
     
     return "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=" + filetype + "&schoolid=89920/" + language + "&type=-1&id=" + className + "&period=&week=" + week + "&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=" + weekDay + "&width=" + window.innerWidth + "&height=" + window.innerHeight;
