@@ -78,8 +78,8 @@ function init() {
         });
     }
 
-    if (sessionStorage.getItem("currentPage")) {
-        loadPage(parseInt(sessionStorage.getItem("currentPage")));
+    if (sessionStorage.getItem("currentTab")) {
+        loadPage(parseInt(sessionStorage.getItem("currentTab")));
     } else {
         switch(localStorage.getItem("startPage")) {
             case "schedule":
@@ -288,7 +288,7 @@ function loadPage(page = 0) {
     }
     MOBILE_NAV_BUTTONS[page].style.backgroundColor = "#00000066";
     NAVIGATION_BUTTONS[page].style.textShadow = "0 0 8px #FFF";
-    sessionStorage.setItem("currentPage", page.toString());
+    sessionStorage.setItem("currentTab", page.toString());
 }
 
 function putPage(source, name, func) {
@@ -324,6 +324,7 @@ function createExternalPageViewer(URL) {
     EXT_PAGE_IFRAME.id = "contentIframe";
     CONTENT_DIV.innerHTML = "";
     CONTENT_DIV.appendChild(EXT_PAGE_IFRAME);
+    sessionStorage.setItem("currentView", "~external")
 }
 
 function setupSchedulePage() {
