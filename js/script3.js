@@ -20,11 +20,6 @@ let firstScheduleLoad = true;
 let orientationPortrait;
 let slideout;
 
-document.addEventListener("keypress", function(event) {
-    const tabIndex = parseInt(event.key);
-    if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
-});
-
 function Log() {
     this.data = [];
     
@@ -58,6 +53,11 @@ function init() {
     
     document.getElementById("hamburgerSvg").addEventListener("click", function() {
         slideout.toggle();
+    });
+
+    document.addEventListener("keypress", function(event) {
+        const tabIndex = parseInt(event.key);
+        if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
     });
     
     window.onresize = function() {
