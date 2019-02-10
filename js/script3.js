@@ -165,7 +165,7 @@ function createSlideout() {
 }
 
 function resetPreferences() {
-    if (confirm("Är du säker?")) {
+    if (confirm("Är du säker att du vill återställa dina inställningar?")) {
         sessionStorage.clear();
         localStorage.clear();
         if ("serviceWorker" in navigator) {
@@ -238,9 +238,8 @@ function addToggle(element, storageKey, func) {
                 localStorage.setItem(storageKey, "on");
                 break;
         }
-        if (typeof func === "function") {
+        if (typeof func === "function")
             func();
-        }
     });
 }
 
@@ -299,9 +298,8 @@ function putPage(source, name, func) {
         } else {
             PAGE_TITLE.innerHTML = "Berzan.js";
         }
-        if (typeof func === "function") {
+        if (typeof func === "function")
             func();
-        }
         updateNavBlocking();
     });
 }
@@ -359,9 +357,8 @@ function setupSchedulePage() {
     };
     
     SCHEDULE.addEventListener("error", function() {
-        if (scheduleInit) {
+        if (scheduleInit)
             showSnackbar("Kunde inte ladda schema :(");
-        }
     });
     
     SEARCH_BUTTON.addEventListener("click", function() {
@@ -458,31 +455,25 @@ function viewSchedule(clickInit = false, prompt = true) {
         return;
     }
 
-    if (!(localStorage.getItem("defaultClass"))) {
+    if (!(localStorage.getItem("defaultClass")))
         localStorage.setItem("defaultClass", CLASS_INPUT_FIELD.value);
-    }
 }
 
 function getScheduleURL(className, week, weekDay, language, filetype) {
-    if (typeof filetype !== "string") {
+    if (typeof filetype !== "string")
         throw LOG.typeError("filetype", typeof filetype, "string");
-    }
     
-    if (typeof language !== "string") {
+    if (typeof language !== "string")
         throw LOG.typeError("language", typeof language, "string");
-    }
     
-    if (typeof weekDay !== "string") {
+    if (typeof weekDay !== "string")
         throw LOG.typeError("weekDay", typeof weekDay, "string");
-    }
     
-    if (typeof week !== "string") {
+    if (typeof week !== "string")
         throw LOG.typeError("week", typeof week, "string.");
-    }
     
-    if (typeof className !== "string") {
+    if (typeof className !== "string")
         throw LOG.typeError("className", typeof className,"expected string.");
-    }
     
     return "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=" + filetype + "&schoolid=89920/" + language + "&type=-1&id=" + className + "&period=&week=" + week + "&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=" + weekDay + "&width=" + window.innerWidth + "&height=" + window.innerHeight;
 }
