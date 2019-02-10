@@ -48,8 +48,8 @@ function Log() {
 }
 
 function init() {
-    checkOrientation();
     createSlideout();
+    checkOrientation();
     updateServiceWorker();
     
     document.getElementById("hamburgerSvg").addEventListener("click", function() {
