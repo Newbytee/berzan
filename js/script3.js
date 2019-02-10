@@ -49,7 +49,7 @@ function Log() {
 
 function init() {
     createSlideout();
-    checkOrientation();
+    checkOrientation(); // Check orientation fails if slideout hasn't been created, please keep them this order
     updateServiceWorker();
     
     document.getElementById("hamburgerSvg").addEventListener("click", function() {
