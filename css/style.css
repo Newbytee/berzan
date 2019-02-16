@@ -363,7 +363,7 @@ nav, .mobileNavButton, #schedule, #wrapper {
 #schedule {
     margin-top: 0.5vh;
     display: none;
-    height: 90vh;
+    height: calc(100vh - 110px);
     color: #00000000;
 }
 
