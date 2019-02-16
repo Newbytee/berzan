@@ -364,7 +364,7 @@ nav, .mobileNavButton, #schedule, #wrapper {
     margin-top: 0.5vh;
     display: none;
     height: calc(100vh - 110px);
-    color: #00000000;
+    font-size: 0;
 }
 
 #schedule:after {
@@ -373,6 +373,7 @@ nav, .mobileNavButton, #schedule, #wrapper {
     text-align: center;
     display: block;
     color: #000000;
+    font-size: medium;
 }
 
 #hiddenMenu {
