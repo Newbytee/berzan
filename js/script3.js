@@ -292,7 +292,7 @@ function loadPage(page = 0) {
 }
 
 function putPage(source, name, func) {
-    loadHTML("html-fragments/" + source + ".html").then(function() {
+    loadHTML("views/" + source + ".html").then(function() {
         if (name) {
             PAGE_TITLE.innerHTML = name + " - Berzan.js";
         } else {
