@@ -100,13 +100,11 @@ function init() {
         }
     }
     
-    if (localStorage.getItem("scheduleFiletype") === null) {
+    if (localStorage.getItem("scheduleFiletype") === null)
         localStorage.setItem("scheduleFiletype", "png");
-    }
     
-    if (localStorage.getItem("appLanguage") === null) {
+    if (localStorage.getItem("appLanguage") === null)
         localStorage.setItem("appLanguage", "sv-se");
-    }
     
     if (location.hostname === "berzan.netlify.com")
         document.getElementById("identity").textContent += " (Canary)";
