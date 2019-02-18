@@ -9,12 +9,9 @@ const NAVIGATION_BUTTONS = document.getElementsByClassName("navButton");
 const MOBILE_NAV_BUTTONS = document.getElementsByClassName("mobileNavButton");
 const NAVIGATION_BUTTONS_LENGTH = NAVIGATION_BUTTONS.length;
 const CONTENT_DIV = document.getElementById("wrapper");
-const PAGE_TITLE = document.getElementById("titleName");
-const SPLASH_SCREEN = document.getElementById("splashScreen");
 const DATE = new Date();
 const LOG = new Log();
 const MODULES = new ModuleManager();
-const LANGUAGES = [ "sv-se", "en-gb", "de-de", "fr-fr" ];
 let allowKeyNav = true;
 let scheduleInit = false;
 let firstScheduleLoad = true;
@@ -68,6 +65,8 @@ function ModuleManager() {
 }
 
 function init() {
+    const SPLASH_SCREEN = document.getElementById("splashScreen");
+    
     createSlideout();
     checkOrientation(); // Check orientation fails if slideout hasn't been created, please keep them this order
     updateServiceWorker();
@@ -266,6 +265,8 @@ function loadPage(page = 0) {
 }
 
 function putPage(source, name, func) {
+    const PAGE_TITLE = document.getElementById("titleName");
+
     loadHTML("views/" + source + ".html").then(function() {
         if (name) {
             PAGE_TITLE.innerHTML = name + " - Berzan.js";

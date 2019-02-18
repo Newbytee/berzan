@@ -6,6 +6,7 @@ function setupSettings() {
     const CHANGE_LANGUAGE_SELECTION = document.getElementById("languageSelection");
     const SERVICE_WORKER_SELECTION = document.getElementById("serviceWorkerSelection");
     const STYLE_SELECTION = document.getElementById("styleSelection");
+    const LANGUAGES = [ "sv-se", "en-gb", "de-de", "fr-fr" ];
     
     addToggle(STYLE_SELECTION, "newDesign", updateStyle);
     addToggle(SERVICE_WORKER_SELECTION, "serviceWorkerEnabled", updateServiceWorker);
