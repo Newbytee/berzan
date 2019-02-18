@@ -100,3 +100,51 @@ function setupSettings() {
         resetPreferences();
     });
 }
+
+function updateStyle() {
+    if (localStorage.getItem("newDesign") === "on") {
+        const LINK_ELEMENTS = document.getElementsByTagName("LINK");
+        for (let i = 0; i < LINK_ELEMENTS.length; i++) {
+            if (LINK_ELEMENTS[i].getAttribute("rel") === "stylesheet" && LINK_ELEMENTS[i].getAttribute("href").search("restyle") === -1) {
+                const HREF_STRING = LINK_ELEMENTS[i].getAttribute("href");
+                const PATTERN_INDEX = HREF_STRING.search("style");
+                let stringParts = [];
+                stringParts.push(HREF_STRING.substring(0, PATTERN_INDEX));
+                stringParts.push(HREF_STRING.substring(PATTERN_INDEX, HREF_STRING.length));
+                LINK_ELEMENTS[i].setAttribute("href", stringParts[0] + "re" + stringParts[1]);
+            }
+        }
+    }
+}
+
+function addToggle(element, storageKey, func) {
+    element.selectedIndex = localStorage.getItem(storageKey) ? 1 : 0;
+    
+    element.addEventListener("change", function() {
+        switch (element.selectedIndex) {
+            case 0:
+                localStorage.removeItem(storageKey);
+                break;
+            case 1:
+                localStorage.setItem(storageKey, "on");
+                break;
+        }
+        if (typeof func === "function")
+            func();
+    });
+}
+
+function resetPreferences() {
+    if (confirm("Är du säker att du vill återställa dina inställningar?")) {
+        sessionStorage.clear();
+        localStorage.clear();
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for (let i = 0; i < registrations.length; i++) {
+                    registrations[i].unregister();
+                }
+            });
+        }
+        location.reload();
+    }
+}
