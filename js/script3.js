@@ -108,6 +108,9 @@ function init() {
         localStorage.setItem("appLanguage", "sv-se");
     }
     
+    if (location.hostname === "berzan.netlify.com")
+        document.getElementById("identity").textContent += " (Canary)";
+    
     SPLASH_SCREEN.style.opacity = "0";
     setTimeout(function() {
         SPLASH_SCREEN.style.display = "none";
