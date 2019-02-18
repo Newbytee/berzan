@@ -51,7 +51,6 @@ function ModuleManager() {
         const PATH = "js/" + name + ".js";
         
         for (let i = 0; i < this.modules.children.length; i++) {
-            console.log(i);
             if (this.modules.children[i].src.endsWith(PATH))
                 return; // Module is already loaded, so return
         }
