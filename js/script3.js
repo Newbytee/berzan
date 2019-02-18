@@ -9,11 +9,13 @@ const NAVIGATION_BUTTONS = document.getElementsByClassName("navButton");
 const MOBILE_NAV_BUTTONS = document.getElementsByClassName("mobileNavButton");
 const NAVIGATION_BUTTONS_LENGTH = NAVIGATION_BUTTONS.length;
 const CONTENT_DIV = document.getElementById("wrapper");
-const PAGE_TITLE = document.getElementById("titleName");
-const SPLASH_SCREEN = document.getElementById("splashScreen");
 const DATE = new Date();
 const LOG = new Log();
+<<<<<<< HEAD
 const LANGUAGES = [ "sv-se", "en-gb", "de-de", "fr-fr" ];
+=======
+const MODULES = new ModuleManager();
+>>>>>>> master
 let allowKeyNav = true;
 let scheduleInit = false;
 let firstScheduleLoad = true;
@@ -47,6 +49,8 @@ function Log() {
 }
 
 function init() {
+    const SPLASH_SCREEN = document.getElementById("splashScreen");
+    
     createSlideout();
     checkOrientation(); // Check orientation fails if slideout hasn't been created, please keep them this order
     updateServiceWorker();
@@ -165,21 +169,6 @@ function createSlideout() {
     }
 }
 
-function resetPreferences() {
-    if (confirm("Är du säker att du vill återställa dina inställningar?")) {
-        sessionStorage.clear();
-        localStorage.clear();
-        if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                for (let i = 0; i < registrations.length; i++) {
-                    registrations[i].unregister();
-                }
-            });
-        }
-        location.reload();
-    }
-}
-
 function checkOrientation() {
     if (window.innerWidth > 768) {
         slideout.close();
@@ -190,16 +179,9 @@ function checkOrientation() {
 }
 
 function showSnackbar(text) {
-    const SNACKBAR = document.getElementById("snackbar");
-    if (SNACKBAR.className.includes("show")) {
-        SNACKBAR.textContent = text;
-        return;
-    }
-    SNACKBAR.textContent = text;
-    SNACKBAR.className = "show";
-    setTimeout(function() {
-        SNACKBAR.className = SNACKBAR.className.replace("show", "");
-    }, 3000);
+    MODULES.load("utils", function() {
+        showSnackbar(text);
+    });
 }
 
 function updateServiceWorker() {
@@ -209,39 +191,6 @@ function updateServiceWorker() {
         SW2.setAttribute("src", "sw2.js");
         DOCUMENT_HEAD[0].appendChild(SW2);
     }
-}
-
-function updateStyle() {
-    if (localStorage.getItem("newDesign") === "on") {
-        const LINK_ELEMENTS = document.getElementsByTagName("LINK");
-        for (let i = 0; i < LINK_ELEMENTS.length; i++) {
-            if (LINK_ELEMENTS[i].getAttribute("rel") === "stylesheet" && LINK_ELEMENTS[i].getAttribute("href").search("restyle") === -1) {
-                const HREF_STRING = LINK_ELEMENTS[i].getAttribute("href");
-                const PATTERN_INDEX = HREF_STRING.search("style");
-                let stringParts = [];
-                stringParts.push(HREF_STRING.substring(0, PATTERN_INDEX));
-                stringParts.push(HREF_STRING.substring(PATTERN_INDEX, HREF_STRING.length));
-                LINK_ELEMENTS[i].setAttribute("href", stringParts[0] + "re" + stringParts[1]);
-            }
-        }
-    }
-}
-
-function addToggle(element, storageKey, func) {
-    element.selectedIndex = localStorage.getItem(storageKey) ? 1 : 0;
-    
-    element.addEventListener("change", function() {
-        switch (element.selectedIndex) {
-            case 0:
-                localStorage.removeItem(storageKey);
-                break;
-            case 1:
-                localStorage.setItem(storageKey, "on");
-                break;
-        }
-        if (typeof func === "function")
-            func();
-    });
 }
 
 function updateNavBlocking() {
@@ -293,6 +242,8 @@ function loadPage(page = 0) {
 }
 
 function putPage(source, name, func) {
+    const PAGE_TITLE = document.getElementById("titleName");
+
     loadHTML("views/" + source + ".html").then(function() {
         if (name) {
             PAGE_TITLE.innerHTML = name + " - Berzan.js";
@@ -320,12 +271,9 @@ function loadHTML(URL) {
 }
 
 function createExternalPageViewer(URL) {
-    const EXT_PAGE_IFRAME = document.createElement("IFRAME");
-    EXT_PAGE_IFRAME.src = URL;
-    EXT_PAGE_IFRAME.id = "contentIframe";
-    CONTENT_DIV.innerHTML = "";
-    CONTENT_DIV.appendChild(EXT_PAGE_IFRAME);
-    sessionStorage.setItem("currentView", "~external")
+    MODULES.load("utils", function() {
+        createExternalPageViewer(URL);
+    });
 }
 
 function setupSchedulePage() {
