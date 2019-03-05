@@ -364,6 +364,7 @@ function setupSchedulePage() {
 
 function viewSchedule(prompt) {
     if (scheduleInit === false) return;
+    if (typeof prompt === "undefined") prompt = true;
     const WEEK_INPUT_FIELD = document.getElementById("weekNumberField");
     const CLASS_INPUT_FIELD = document.getElementById("classNameField");
     const DAY_DROPDOWN = document.getElementById("dayDropdown");
