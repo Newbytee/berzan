@@ -114,7 +114,7 @@ function init() {
                 loadPage(3);
                 break;
             default:
-                loadPage();
+                loadPage(0);
                 break;
         }
     }
@@ -220,7 +220,7 @@ function updateNavBlocking() {
     }
 }
 
-function loadPage(page = 0) {
+function loadPage(page) {
     switch(page) {
         case 0:
             putPage("schedule", "Schema", setupSchedulePage);
@@ -362,7 +362,7 @@ function setupSchedulePage() {
     }
 }
 
-function viewSchedule(prompt = true) {
+function viewSchedule(prompt) {
     if (scheduleInit === false) return;
     const WEEK_INPUT_FIELD = document.getElementById("weekNumberField");
     const CLASS_INPUT_FIELD = document.getElementById("classNameField");
