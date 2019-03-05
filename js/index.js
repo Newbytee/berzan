@@ -333,7 +333,7 @@ function setupSchedulePage() {
     });
 
     for (let i = 0; i < INPUT_FIELDS.length; i++) {
-        INPUT_FIELDS[i].addEventListener("keydown", (event) => {
+        INPUT_FIELDS[i].addEventListener("keydown", function(event) {
             if (event.key === "Enter") {
                 scheduleInit = true;
                 viewSchedule();
