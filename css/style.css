@@ -258,6 +258,15 @@ nav, .mobileNavButton, #schedule, #wrapper {
     color: #FFFFFF;
     border-radius: 10px;
     padding: 10px;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    width: 97%;
+}
+
+.contentItem:first-of-type {
+    margin-top: 3vw;
 }
 
 .contentItem button:hover {
@@ -309,17 +318,6 @@ nav, .mobileNavButton, #schedule, #wrapper {
 .mobileNavButton:hover {
     transition: 0.5s;
     background-color: #00000066; /* #123456 */
-}
-
-.contentItem {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 3vw;
-    width: 97%;
-}
-
-.contentItem:first-of-type {
-    margin-top: 3vw;
 }
 
 #identity {
