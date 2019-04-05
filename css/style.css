@@ -317,6 +317,16 @@ nav, .mobileNavButton, #schedule, #wrapper {
     background-color: #00000066; /* #123456 */
 }
 
+.field {
+    height: 30px;
+    color: #000;
+    background-color: transparent;
+    padding: 4px;
+    margin: 0;
+    border: 1px solid #000;
+    line-height: normal;
+}
+
 #identity {
     padding-top: 8px;
     font-size: 30px;
