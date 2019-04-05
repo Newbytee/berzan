@@ -107,6 +107,7 @@ svg:not(:root) {
 
 button {
     border-radius: 0;
+    cursor: pointer;
 }
 
 button:focus {
@@ -216,16 +217,6 @@ select {
     min-width: 55px;
     background-color: #FFFFFF;
     border: 1px solid #7A7A7A;
-}
-
-button {
-    cursor: pointer;
-}
-
-button:active {
-    background-color: #888888;
-    border-color: #7F357177;
-    transition: 0.5s;
 }
 
 button.field:hover {
