@@ -243,10 +243,6 @@ nav, .mobileNavButton, #schedule, #wrapper {
     width: 100%;
 }
 
-.startPagePicker, .browserListItem {
-    margin-bottom: 5px;
-}
-
 .dropdown {
     display: inline-block;
 }
@@ -267,15 +263,11 @@ nav, .mobileNavButton, #schedule, #wrapper {
 }
 
 .contentItem button:hover {
-    background-color: #FFFFFF77;
+    background-color: #DDDDDD;
 }
 
 .contentItem a:link, #contentContainer div a:visited {
     color: #00bfa5;
-}
-
-.contentItem input {
-    width: 100px;
 }
 
 .divider {
@@ -320,8 +312,8 @@ nav, .mobileNavButton, #schedule, #wrapper {
 .field {
     height: 30px;
     color: #000;
-    background-color: transparent;
-    padding: 4px;
+    background-color: #FFF;
+    padding: 4px 6px;
     margin: 0;
     border: 1px solid #000;
     line-height: normal;
