@@ -219,22 +219,17 @@ select {
 }
 
 button {
-    border: 1px solid #7A7A7A;
-    border-radius: 0;
-    padding: 2px 10px;
-    background-color: #FFFFFF;
-    transition: 0.5s;
-}
-
-button:hover {
-    background-color: #7F357177;
-    border-color: #7F357177;
-    transition: 0.5s;
     cursor: pointer;
 }
 
 button:active {
     background-color: #888888;
+    border-color: #7F357177;
+    transition: 0.5s;
+}
+
+button.field:hover {
+    background-color: #DDDDDD;
     border-color: #7F357177;
     transition: 0.5s;
 }
@@ -260,10 +255,6 @@ nav, .mobileNavButton, #schedule, #wrapper {
 
 .contentItem:first-of-type {
     margin-top: 3vw;
-}
-
-.contentItem button:hover {
-    background-color: #DDDDDD;
 }
 
 .contentItem a:link, #contentContainer div a:visited {
@@ -310,12 +301,13 @@ nav, .mobileNavButton, #schedule, #wrapper {
 }
 
 .field {
+    transition: 0.5s;
     height: 30px;
     color: #000;
     background-color: #FFF;
     padding: 4px 6px;
     margin: 0;
-    border: 1px solid #000;
+    border: 1px solid #7A7A7A;
     line-height: normal;
 }
 
