@@ -347,7 +347,7 @@ nav, .mobileNavButton, #schedule, #wrapper {
 #schedule {
     margin-top: 0.5vh;
     display: none;
-    height: calc(100vh - 110px);
+    height: calc(100vh - 100px);
     font-size: 0;
 }
 
@@ -539,5 +539,9 @@ nav, .mobileNavButton, #schedule, #wrapper {
 
     #wrapper {
         width: 80%;
+    }
+
+    #schedule {
+        height: calc(100vh - 110px);
     }
 }
