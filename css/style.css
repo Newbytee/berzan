@@ -170,21 +170,6 @@ input[type="month"] {
     height: auto;
 }
 
-[type="search"] {
-    outline-offset: -2px;
-    -webkit-appearance: none;
-}
-
-[type="search"]::-webkit-search-cancel-button,
-[type="search"]::-webkit-search-decoration {
-    -webkit-appearance: none;
-}
-
-::-webkit-file-upload-button {
-    font: inherit;
-    -webkit-appearance: button;
-}
-
 nav {
     height: 60px;
     background-color: #490A3D; /* "Berzan-färgen": #A1274C, den jag valde: #490A3D */
