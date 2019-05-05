@@ -17,7 +17,7 @@ html {
     width: device-width;
 }
 
-article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
+article, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
     display: block;
 }
 
