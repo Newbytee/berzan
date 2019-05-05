@@ -6,10 +6,12 @@ function setupSettings() {
     const CHANGE_LANGUAGE_SELECTION = document.getElementById("languageSelection");
     const SERVICE_WORKER_SELECTION = document.getElementById("serviceWorkerSelection");
     const STYLE_SELECTION = document.getElementById("styleSelection");
+    const SLIDEOUT_FAIL_SELECTION = document.getElementById("slideoutFailWarn");
     const LANGUAGES = [ "sv-se", "en-gb", "de-de", "fr-fr" ];
     
     addToggle(STYLE_SELECTION, "newDesign", updateStyle);
     addToggle(SERVICE_WORKER_SELECTION, "serviceWorkerEnabled", updateServiceWorker);
+    addToggle(SLIDEOUT_FAIL_SELECTION, "slideoutWarnDisable");
 
     for (let i = 0; i < LANGUAGES.length; i++) {
         if (LANGUAGES[i] === localStorage.getItem("appLanguage")) CHANGE_LANGUAGE_SELECTION.selectedIndex = i;

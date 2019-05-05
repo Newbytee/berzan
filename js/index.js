@@ -184,7 +184,8 @@ function createSlideout() {
             });
         }
     } else {
-        alert("Din webbläsare tycks blockera Slideout.js, ett bibliotek Berzan.js använder. Berzan.js bör fungera ändå, men vissa saker lär vara trasiga. Testa att stäng av din adblocker (eller liknande) och se om problemet kvarstår.");
+        if (localStorage.getItem("slideoutWarnDisable") !== "on")
+            alert("Din webbläsare tycks blockera Slideout.js, ett bibliotek Berzan.js använder. Berzan.js bör fungera ändå, men vissa saker lär vara trasiga. Testa att stäng av din adblocker (eller liknande) och se om problemet kvarstår.");
         document.getElementById("hiddenMenu").style.display = "none";
         slideout = { close() {} }
     }
