@@ -66,68 +66,73 @@ function ModuleManager() {
 function init() {
     const SPLASH_SCREEN = document.getElementById("splashScreen");
     
-    createSlideout();
-    checkOrientation(); // Check orientation fails if slideout hasn't been created, please keep them this order
-    updateServiceWorker();
-    
-    document.getElementById("hamburgerSvg").addEventListener("click", function() {
-        slideout.toggle();
-    });
+    if (createSlideout()) {
+        checkOrientation(); // Check orientation fails if slideout hasn't been created, please keep them this order
+        updateServiceWorker();
 
-    document.addEventListener("keypress", function(event) {
-        const tabIndex = parseInt(event.key);
-        if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
-    });
-    
-    window.onresize = function() {
-        checkOrientation();
-        if (sessionStorage.getItem("currentView") === "schedule") {
-            viewSchedule(false);
+        document.getElementById("hamburgerSvg").addEventListener("click", function () {
+            slideout.toggle();
+        });
+
+        document.addEventListener("keypress", function (event) {
+            const tabIndex = parseInt(event.key);
+            if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
+        });
+
+        window.onresize = function () {
+            checkOrientation();
+            if (sessionStorage.getItem("currentView") === "schedule") {
+                viewSchedule(false);
+            }
+        };
+
+        for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
+            NAVIGATION_BUTTONS[i].addEventListener("click", function () {
+                loadPage(i);
+                NAVIGATION_BUTTONS[i].blur();
+            });
+            MOBILE_NAV_BUTTONS[i].addEventListener("click", function () {
+                loadPage(i);
+                slideout.close();
+            });
         }
-    };
-    
-    for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
-        NAVIGATION_BUTTONS[i].addEventListener("click", function() {
-            loadPage(i);
-            NAVIGATION_BUTTONS[i].blur();
-        });
-        MOBILE_NAV_BUTTONS[i].addEventListener("click", function() {
-            loadPage(i);
-            slideout.close();
-        });
-    }
 
-    if (sessionStorage.getItem("currentTab")) {
-        loadPage(parseInt(sessionStorage.getItem("currentTab")));
+        if (sessionStorage.getItem("currentTab")) {
+            loadPage(parseInt(sessionStorage.getItem("currentTab")));
+        } else {
+            switch (localStorage.getItem("startPage")) {
+                case "schedule":
+                    loadPage(0);
+                    break;
+                case "lunch":
+                    loadPage(1);
+                    break;
+                case "etc":
+                    loadPage(2);
+                    break;
+                case "settings":
+                    loadPage(3);
+                    break;
+                default:
+                    loadPage(0);
+                    break;
+            }
+        }
     } else {
-        switch(localStorage.getItem("startPage")) {
-            case "schedule":
-                loadPage(0);
-                break;
-            case "lunch":
-                loadPage(1);
-                break;
-            case "etc":
-                loadPage(2);
-                break;
-            case "settings":
-                loadPage(3);
-                break;
-            default:
-                loadPage(0);
-                break;
-        }
+        loadHTML("views/emergency.html");
+        console.error("Failed to create instance of Slideout! Is the resource blocked?");
+        document.getElementById("hiddenMenu").style.display = "none";
     }
-    
+
     if (localStorage.getItem("scheduleFiletype") === null)
         localStorage.setItem("scheduleFiletype", "png");
-    
+
     if (localStorage.getItem("appLanguage") === null)
         localStorage.setItem("appLanguage", "sv-se");
-    
+
     if (location.hostname === "berzan.netlify.com")
         document.getElementById("identity").textContent += " (Canary)";
-    
+
     SPLASH_SCREEN.style.opacity = "0";
     setTimeout(function() {
         SPLASH_SCREEN.style.display = "none";
@@ -158,29 +163,35 @@ function changeTab(tabIndex) {
 }
 
 function createSlideout() {
-    const slideoutMenu = document.getElementById("hiddenMenu");
-    const hamburgerMenu = document.getElementById("hamburgerSvg");
-    if (localStorage.getItem("slideoutSide") === null || localStorage.getItem("slideoutSide") === "left") {
-        slideoutMenu.classList.remove("slideout-menu-right");
-        hamburgerMenu.style.removeProperty("right");
-        hamburgerMenu.style.left = "5%";
-        slideout = new Slideout({
-            "panel": document.getElementById("panel"),
-            "menu": document.getElementById("hiddenMenu"),
-            "padding": 256,
-            "tolerance": 0
-        });
+    if (window["Slideout"]) {
+        const slideoutMenu = document.getElementById("hiddenMenu");
+        const hamburgerMenu = document.getElementById("hamburgerSvg");
+        if (localStorage.getItem("slideoutSide") === null || localStorage.getItem("slideoutSide") === "left") {
+            slideoutMenu.classList.remove("slideout-menu-right");
+            hamburgerMenu.style.removeProperty("right");
+            hamburgerMenu.style.left = "5%";
+            slideout = new Slideout({
+                "panel": document.getElementById("panel"),
+                "menu": document.getElementById("hiddenMenu"),
+                "padding": 256,
+                "tolerance": 0
+            });
+        } else {
+            slideoutMenu.classList.remove("slideout-menu-left");
+            hamburgerMenu.style.removeProperty("left");
+            hamburgerMenu.style.right = "5%";
+            slideout = new Slideout({
+                "panel": document.getElementById("panel"),
+                "menu": document.getElementById("hiddenMenu"),
+                "padding": 256,
+                "tolerance": 0,
+                "side": "right"
+            });
+        }
+
+        return true;
     } else {
-        slideoutMenu.classList.remove("slideout-menu-left");
-        hamburgerMenu.style.removeProperty("left");
-        hamburgerMenu.style.right = "5%";
-        slideout = new Slideout({
-            "panel": document.getElementById("panel"),
-            "menu": document.getElementById("hiddenMenu"),
-            "padding": 256,
-            "tolerance": 0,
-            "side": "right"
-        });
+        return false;
     }
 }
 
