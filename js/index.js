@@ -66,62 +66,57 @@ function ModuleManager() {
 function init() {
     const SPLASH_SCREEN = document.getElementById("splashScreen");
     
-    if (createSlideout()) {
-        checkOrientation(); // Check orientation fails if slideout hasn't been created, please keep them this order
-        updateServiceWorker();
+    createSlideout();
+    checkOrientation(); // Check orientation fails if slideout hasn't been created, please keep them this order
+    updateServiceWorker();
 
-        document.getElementById("hamburgerSvg").addEventListener("click", function () {
-            slideout.toggle();
-        });
+    document.getElementById("hamburgerSvg").addEventListener("click", function () {
+        slideout.toggle();
+    });
 
-        document.addEventListener("keypress", function (event) {
-            const tabIndex = parseInt(event.key);
-            if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
-        });
+    document.addEventListener("keypress", function (event) {
+        const tabIndex = parseInt(event.key);
+        if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
+    });
 
-        window.onresize = function () {
-            checkOrientation();
-            if (sessionStorage.getItem("currentView") === "schedule") {
-                viewSchedule(false);
-            }
-        };
-
-        for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
-            NAVIGATION_BUTTONS[i].addEventListener("click", function () {
-                loadPage(i);
-                NAVIGATION_BUTTONS[i].blur();
-            });
-            MOBILE_NAV_BUTTONS[i].addEventListener("click", function () {
-                loadPage(i);
-                slideout.close();
-            });
+    window.onresize = function () {
+        checkOrientation();
+        if (sessionStorage.getItem("currentView") === "schedule") {
+            viewSchedule(false);
         }
+    };
 
-        if (sessionStorage.getItem("currentTab")) {
-            loadPage(parseInt(sessionStorage.getItem("currentTab")));
-        } else {
-            switch (localStorage.getItem("startPage")) {
-                case "schedule":
-                    loadPage(0);
-                    break;
-                case "lunch":
-                    loadPage(1);
-                    break;
-                case "etc":
-                    loadPage(2);
-                    break;
-                case "settings":
-                    loadPage(3);
-                    break;
-                default:
-                    loadPage(0);
-                    break;
-            }
-        }
+    for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
+        NAVIGATION_BUTTONS[i].addEventListener("click", function () {
+            loadPage(i);
+            NAVIGATION_BUTTONS[i].blur();
+        });
+        MOBILE_NAV_BUTTONS[i].addEventListener("click", function () {
+            loadPage(i);
+            slideout.close();
+        });
+    }
+
+    if (sessionStorage.getItem("currentTab")) {
+        loadPage(parseInt(sessionStorage.getItem("currentTab")));
     } else {
-        loadHTML("views/emergency.html");
-        console.error("Failed to create instance of Slideout! Is the resource blocked?");
-        document.getElementById("hiddenMenu").style.display = "none";
+        switch (localStorage.getItem("startPage")) {
+            case "schedule":
+                loadPage(0);
+                break;
+            case "lunch":
+                loadPage(1);
+                break;
+            case "etc":
+                loadPage(2);
+                break;
+            case "settings":
+                loadPage(3);
+                break;
+            default:
+                loadPage(0);
+                break;
+        }
     }
 
     if (localStorage.getItem("scheduleFiletype") === null)
@@ -188,10 +183,10 @@ function createSlideout() {
                 "side": "right"
             });
         }
-
-        return true;
     } else {
-        return false;
+        alert("Din webbläsare tycks blockera Slideout.js, ett bibliotek Berzan.js använder. Berzan.js bör fungera ändå, men vissa saker lär vara trasiga. Testa att stäng av din adblocker (eller liknande) och se om problemet kvarstår.");
+        document.getElementById("hiddenMenu").style.display = "none";
+        slideout = { close() {} }
     }
 }
 
