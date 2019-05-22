@@ -74,7 +74,7 @@ function init() {
         slideout.toggle();
     });
 
-    document.addEventListener("keypress", function (event) {
+    document.addEventListener("keypress", function(event) {
         const tabIndex = parseInt(event.key);
         if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
     });
@@ -87,11 +87,11 @@ function init() {
     };
 
     for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
-        NAVIGATION_BUTTONS[i].addEventListener("click", function () {
+        NAVIGATION_BUTTONS[i].addEventListener("click", function() {
             loadPage(i);
             NAVIGATION_BUTTONS[i].blur();
         });
-        MOBILE_NAV_BUTTONS[i].addEventListener("click", function () {
+        MOBILE_NAV_BUTTONS[i].addEventListener("click", function() {
             loadPage(i);
             slideout.close();
         });
