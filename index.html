@@ -21,9 +21,21 @@
 			width: 100vw;
 			background-color: #490A3D;
 			color: #FFFFFF;
-			z-index: 15;
-			transition: 200ms;
-			opacity: 1;
+			animation: initialFade;
+			animation-duration: 200ms;
+			animation-fill-mode: forwards;
+		}
+
+		@keyframes initialFade {
+			from {
+				z-index: 15;
+				opacity: 1;
+			}
+
+			to {
+				z-index: -10;
+				opacity: 0;
+			}
 		}
 	</style>
 	<title id="titleName">Berzan.js</title>
