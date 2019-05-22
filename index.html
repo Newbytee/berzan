@@ -21,14 +21,16 @@
 			width: 100vw;
 			background-color: #490A3D;
 			color: #FFFFFF;
-			animation: initialFade;
 			animation-duration: 200ms;
 			animation-fill-mode: forwards;
 		}
 
+		#navigation {
+			z-index: -1;
+		}
+
 		@keyframes initialFade {
 			from {
-				z-index: 15;
 				opacity: 1;
 			}
 
@@ -54,7 +56,7 @@
         <div role="button" class="mobileNavButton">Om</div>
     </div>
 	<div id="panel">
-		<nav>
+		<nav id="navigation">
 			<div id="desktopNav">
 				<button class="navButton">Schema</button>
 				<button class="navButton">Lunch</button>
