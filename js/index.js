@@ -79,7 +79,7 @@ function init() {
         if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
     });
 
-    window.onresize = function() {
+    window.onresize = function () {
         checkOrientation();
         if (sessionStorage.getItem("currentView") === "schedule") {
             viewSchedule(false);
