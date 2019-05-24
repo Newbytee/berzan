@@ -64,8 +64,6 @@ function ModuleManager() {
 }
 
 function init() {
-    const SPLASH_SCREEN = document.getElementById("splashScreen");
-
     createSlideout();
     checkOrientation(); // Check orientation fails if slideout hasn't been created, please keep them this order
     updateServiceWorker();
@@ -127,8 +125,6 @@ function init() {
 
     if (location.hostname === "berzan.netlify.com")
         document.getElementById("identity").textContent += " (Canary)";
-
-    SPLASH_SCREEN.style.animation = "initialFade";
 }
 
 function AJAXRequest(URL) {
