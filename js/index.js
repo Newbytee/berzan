@@ -10,39 +10,12 @@ const MOBILE_NAV_BUTTONS = document.getElementsByClassName("mobileNavButton");
 const NAVIGATION_BUTTONS_LENGTH = NAVIGATION_BUTTONS.length;
 const CONTENT_DIV = document.getElementById("wrapper");
 const DATE = new Date();
-const LOG = new Log();
 const MODULES = new ModuleManager();
 let allowKeyNav = true;
 let scheduleInit = false;
 let firstScheduleLoad = true;
 let orientationPortrait;
 let slideout;
-
-function Log() {
-    this.data = [];
-    
-    this.generateLog = function(type, message) {
-        const TMP_DATE = new Date();
-        this.data.push("(" + TMP_DATE.getHours() + ":" + TMP_DATE.getMinutes() + ":" + TMP_DATE.getSeconds() + ") " + type + ": " + message);
-    };
-    
-    this.error = function(err) {
-        this.generateLog("ERROR", err);
-        return err; // Return the message for easy throwing of error
-    };
-    
-    this.typeError = function(varname, type, expectedType) {
-        return this.error(varname + " was " + type + ", expected " + expectedType);
-    };
-    
-    this.info = function(message) {
-        this.generateLog("INFO", message);
-    };
-    
-    this.get = function() {
-        return this.data;
-    };
-}
 
 function ModuleManager() {
     this.modules = document.getElementById("modules");
