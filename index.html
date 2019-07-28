@@ -1,77 +1,77 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="theme-color" content="#490A3D">
     <meta name="description" content="Schema och lunch för Berzeliusskolan">
- 	<meta name="keywords" content="Berzan,Berzeliusskolan,Schema,Lunch,App,Linköping,Berzan.js,Web,Webb,Projekt,Project">
-	<link rel="stylesheet" href="css/style.css" type="text/css">
-	<link rel="icon" href="img/logo/logo-512.png">
-	<link rel="manifest" href="manifest.json">
-	<script async src="sw.js"></script>
-	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.js"></script>
-	<script defer src="js/index.js"></script>
-	<style>
-		#splashScreen {
-			position: absolute;
-			text-align: center;
-			height: 100vh;
-			width: 100vw;
-			background-color: #490A3D;
-			color: #FFFFFF;
-			z-index: 15;
-			transition: 200ms;
-			opacity: 1;
-		}
-	</style>
-	<title id="titleName">Berzan.js</title>
+    <meta name="keywords" content="Berzan,Berzeliusskolan,Schema,Lunch,App,Linköping,Berzan.js,Web,Webb,Projekt,Project">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="icon" href="img/logo/logo-512.png">
+    <link rel="manifest" href="manifest.json">
+    <script async src="sw.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.js"></script>
+    <script defer src="js/index.js"></script>
+    <style>
+        #splashScreen {
+            position: absolute;
+            text-align: center;
+            height: 100vh;
+            width: 100vw;
+            background-color: #490A3D;
+            color: #FFFFFF;
+            z-index: 15;
+            transition: 200ms;
+            opacity: 1;
+        }
+    </style>
+    <title id="titleName">Berzan.js</title>
 </head>
 <body id="mainBody">
-    <div id="splashScreen">
-        <h1>Berzan.js</h1>
-        <noscript><div><strong>Your browser does not provide the resources required to use this webpage :( (JavaScript unavailable)</strong></div></noscript>
-        <a href="http://t.me/Newbyte">Feedback</a> - <a href="html/browsers.html">Webbläsare som stöds</a>
-    </div>
-    <div id="hiddenMenu">
-        <div role="button" class="mobileNavButton">Schema</div>
-        <div role="button" class="mobileNavButton">Lunch</div>
-        <div role="button" class="mobileNavButton">Övrigt</div>
-        <div role="button" class="mobileNavButton">Inställningar</div>
-        <div role="button" class="mobileNavButton">Om</div>
-    </div>
-	<div id="panel">
-		<nav>
-			<div id="desktopNav">
-				<button class="navButton">Schema</button>
-				<button class="navButton">Lunch</button>
-				<button class="navButton">Övrigt</button>
-				<button class="navButton">Inställningar</button>
-				<button class="navButton">Om</button>
-			</div>
-			<div id="mobileDiv">
-				<div id="iconCenterDiv">
-					<svg id="hamburgerSvg" viewBox="0 0 30 30" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-						<g>
-							<title>background</title>
-							<rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"></rect>
-						</g>
-						<g>
-							<title>Layer 1</title>
-							<path fill="#FFFFFF" id="svg_1" d="m4,10l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2zm24,4l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2zm0,8l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2z"></path>
-						</g>
-					</svg>
-				</div>
-			</div>
-			<h2 id="identity">Berzan.js</h2>
-		</nav>
-		<main id="wrapper">
-		</main>
-	</div>
-	<div id="snackbar"></div>
-	<div id="modules">
-	</div>
-	<script> </script>
+<div id="splashScreen">
+    <h1>Berzan.js</h1>
+    <noscript><div><strong>Your browser does not provide the resources required to use this webpage :( (JavaScript unavailable)</strong></div></noscript>
+    <a href="http://t.me/Newbyte">Feedback</a> - <a href="html/browsers.html">Webbläsare som stöds</a>
+</div>
+<div id="hiddenMenu">
+    <div role="button" class="mobileNavButton">Schema</div>
+    <div role="button" class="mobileNavButton">Lunch</div>
+    <div role="button" class="mobileNavButton">Övrigt</div>
+    <div role="button" class="mobileNavButton">Inställningar</div>
+    <div role="button" class="mobileNavButton">Om</div>
+</div>
+<div id="panel">
+    <nav>
+        <div id="desktopNav">
+            <button class="navButton">Schema</button>
+            <button class="navButton">Lunch</button>
+            <button class="navButton">Övrigt</button>
+            <button class="navButton">Inställningar</button>
+            <button class="navButton">Om</button>
+        </div>
+        <div id="mobileDiv">
+            <div id="iconCenterDiv">
+                <svg id="hamburgerSvg" viewBox="0 0 30 30" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                        <title>background</title>
+                        <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"></rect>
+                    </g>
+                    <g>
+                        <title>Layer 1</title>
+                        <path fill="#FFFFFF" id="svg_1" d="m4,10l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2zm24,4l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2zm0,8l-24,0c-1.104,0 -2,0.896 -2,2s0.896,2 2,2l24,0c1.104,0 2,-0.896 2,-2s-0.896,-2 -2,-2z"></path>
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <h2 id="identity">Berzan.js</h2>
+    </nav>
+    <main id="wrapper">
+    </main>
+</div>
+<div id="snackbar"></div>
+<div id="modules">
+</div>
+<script> </script>
 </body>
 </html>
