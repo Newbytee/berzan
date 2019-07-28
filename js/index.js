@@ -277,6 +277,7 @@ function setupSchedulePage() {
     const SEARCH_BUTTON = document.getElementById("searchClass");
     const DAY_DROPDOWN = document.getElementById("dayDropdown");
     const SCHEDULE = document.getElementById("schedule");
+    const FORM = document.getElementById("inputForm");
 
     for (let i = 0; i < INPUT_FIELDS.length; i++) {
         if (sessionStorage.getItem("inputField" + i)) INPUT_FIELDS[i].value = sessionStorage.getItem("inputField" + i);
@@ -306,20 +307,14 @@ function setupSchedulePage() {
         if (scheduleInit)
             showSnackbar("Kunde inte ladda schema :(");
     });
-    
-    SEARCH_BUTTON.addEventListener("click", function() {
+
+    FORM.addEventListener("submit", function(evnt) {
+        evnt.preventDefault();
         scheduleInit = true;
         viewSchedule();
     });
 
     for (let i = 0; i < INPUT_FIELDS.length; i++) {
-        INPUT_FIELDS[i].addEventListener("keydown", function(event) {
-            if (event.key === "Enter") {
-                scheduleInit = true;
-                viewSchedule();
-            }
-        });
-
         INPUT_FIELDS[i].addEventListener("blur", function() {
             sessionStorage.setItem("inputField" + i, INPUT_FIELDS[i].value);
         });
