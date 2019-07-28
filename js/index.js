@@ -272,7 +272,7 @@ function createExternalPageViewer(URL) {
 }
 
 function setupSchedulePage() {
-    sessionStorage.setItem("inputField0", DATE.getWeek());
+    sessionStorage.setItem("inputField0", DATE.getWeek().toString());
     const INPUT_FIELDS = document.getElementsByClassName("inputField");
     const SEARCH_BUTTON = document.getElementById("searchClass");
     const DAY_DROPDOWN = document.getElementById("dayDropdown");
