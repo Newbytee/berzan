@@ -7,7 +7,6 @@ Date.prototype.getWeek = function() {
 
 const NAVIGATION_BUTTONS = document.getElementsByClassName("navButton");
 const MOBILE_NAV_BUTTONS = document.getElementsByClassName("mobileNavButton");
-const NAVIGATION_BUTTONS_LENGTH = NAVIGATION_BUTTONS.length;
 const CONTENT_DIV = document.getElementById("wrapper");
 const DATE = new Date();
 const MODULES = new ModuleManager();
@@ -31,7 +30,7 @@ function ModuleManager() {
         const SCRIPT = document.createElement("SCRIPT");
         SCRIPT.onload = callback;
         SCRIPT.src = PATH;
-    
+
         this.modules.appendChild(SCRIPT);
     };
 }
@@ -49,7 +48,7 @@ function init() {
 
     document.addEventListener("keypress", function (event) {
         const tabIndex = parseInt(event.key);
-        if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS_LENGTH + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
+        if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS.length + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
     });
 
     window.onresize = function () {
@@ -59,7 +58,7 @@ function init() {
         }
     };
 
-    for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
+    for (let i = 0; i < NAVIGATION_BUTTONS.length; i++) {
         NAVIGATION_BUTTONS[i].addEventListener("click", function () {
             loadPage(i);
             NAVIGATION_BUTTONS[i].blur();
@@ -221,11 +220,11 @@ function loadPage(page) {
             if (typeof page === "string") {
                 createExternalPageViewer(page);
             } else {
-                throw LOG.error("Invalid parameter \"" + page + "\" passed to loadPage()");
+                throw "Invalid argument \"" + page + "\" passed to loadPage()";
             }
             return;
     }
-    for (let i = 0; i < NAVIGATION_BUTTONS_LENGTH; i++) {
+    for (let i = 0; i < NAVIGATION_BUTTONS.length; i++) {
         if (i !== page) {
             MOBILE_NAV_BUTTONS[i].removeAttribute("style");
             NAVIGATION_BUTTONS[i].removeAttribute("style");
@@ -260,7 +259,7 @@ function loadHTML(URL) {
                 resolve();
             });
         } else {
-            throw LOG.error("Invalid parameter passed to loadHTML()");
+            throw "Invalid argument passed to loadHTML()";
         }
     });
 }
@@ -369,8 +368,7 @@ function viewSchedule(prompt) {
             break;
         default:
             weekDay = 0;
-            LOG.error("DAY_DROPDOWN had an invalid index (" + DAY_DROPDOWN.selectedIndex.toString() + ").");
-            break;
+            throw "DAY_DROPDOWN had an invalid index (" + DAY_DROPDOWN.selectedIndex.toString() + ").";
     }
 
     if (className.length > 0) {
