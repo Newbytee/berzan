@@ -415,9 +415,9 @@ function getScheduleJSON(className, week, weekDay) {
 }
 
 function getClassGUIDByName(className, retried) {
-    className = className.toLowerCase();
-
     return new Promise((resolve, reject) => {
+        className = className.toLowerCase();
+
         getAllClassGUIDs()
             .then(classGUIDs => {
                 if (classGUIDs.hasOwnProperty(className)) {
