@@ -421,7 +421,7 @@ function getClassGUIDByName(className, retried) {
         getAllClassGUIDs()
             .then(classGUIDs => {
                 if (classGUIDs.hasOwnProperty(className)) {
-                    resolve(classGUIDs.className);
+                    resolve(classGUIDs[className]);
                 } else {
                     if (retried !== true) {
                         rebuildClassGUIDCache()
