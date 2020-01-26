@@ -47,8 +47,8 @@ function init() {
     });
 
     document.addEventListener("keypress", function (event) {
-        const tabIndex = parseInt(event.key);
-        if (!(isNaN(tabIndex)) && tabIndex < NAVIGATION_BUTTONS.length + 1 && tabIndex > 0 && allowKeyNav) changeTab(tabIndex);
+        const TAB_INDEX = parseInt(event.key);
+        if (!(isNaN(TAB_INDEX)) && TAB_INDEX < NAVIGATION_BUTTONS.length + 1 && TAB_INDEX > 0 && allowKeyNav) changeTab(TAB_INDEX);
     });
 
     window.onresize = function () {
