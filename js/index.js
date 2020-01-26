@@ -411,7 +411,24 @@ function getScheduleURL(className, week, weekDay, language, filetype) {
 }
 
 function getScheduleJSON(className, week, weekDay) {
-
+    return new Promise((resolve, reject) => {
+        getClassGUIDByName(className)
+            .then(classGUID => {
+                APIFetch(
+                    "schema?week=" + week +
+                    "&week-day=" + weekDay +
+                    "&class-name=" + className +
+                    "&class-guid=" + classGUID +
+                    "&width=" + window.innerWidth +
+                    "&height=" + window.innerHeight
+                ).then(schedulePromise => {
+                    schedulePromise
+                        .json()
+                        .then(scheduleJSON => resolve(scheduleJSON))
+                        .catch(error => console.error(error));
+                })
+            });
+    });
 }
 
 function getClassGUIDByName(className, retried) {
