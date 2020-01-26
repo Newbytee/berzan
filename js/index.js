@@ -5,6 +5,7 @@ Date.prototype.getWeek = function() {
     return Math.ceil((((this - ONEJAN) / 86400000) + ONEJAN.getDay() + 1) / 7);
 };
 
+const DEFAULT_API_URL = "https://berzanjs-api.herokuapp.com/";
 const NAVIGATION_BUTTONS = document.getElementsByClassName("navButton");
 const MOBILE_NAV_BUTTONS = document.getElementsByClassName("mobileNavButton");
 const CONTENT_DIV = document.getElementById("wrapper");
@@ -15,6 +16,7 @@ let scheduleInit = false;
 let firstScheduleLoad = true;
 let orientationPortrait;
 let slideout;
+let APIURL;
 
 function ModuleManager() {
     this.modules = document.getElementById("modules");
@@ -97,6 +99,11 @@ function init() {
     if (localStorage.getItem("appLanguage") === null)
         localStorage.setItem("appLanguage", "sv-se");
 
+    if (localStorage.getItem("APIURLOverride") === null)
+        localStorage.setItem("APIURLOverride", DEFAULT_API_URL);
+
+    APIURL = localStorage.getItem("APIURLOverride");
+
     if (location.hostname === "berzan.netlify.com")
         document.getElementById("identity").textContent += " (Canary)";
 
@@ -118,6 +125,10 @@ function AJAXRequest(URL) {
         };
         REQUEST.send();
     });
+}
+
+function APIFetch(query) {
+    return fetch(APIURL + query);
 }
 
 function changeTab(tabIndex) {
@@ -397,6 +408,89 @@ function viewSchedule(prompt) {
 
 function getScheduleURL(className, week, weekDay, language, filetype) {
     return "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=" + filetype + "&schoolid=89920/" + language + "&type=-1&id=" + className + "&period=&week=" + week + "&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=" + weekDay + "&width=" + window.innerWidth + "&height=" + window.innerHeight;
+}
+
+function getScheduleJSON(className, week, weekDay) {
+
+}
+
+function getClassGUIDByName(className, retried) {
+    className = className.toLowerCase();
+
+    return new Promise((resolve, reject) => {
+        getAllClassGUIDs()
+            .then(classGUIDs => {
+                if (classGUIDs.hasOwnProperty(className)) {
+                    resolve(classGUIDs.className);
+                } else {
+                    if (retried !== true) {
+                        rebuildClassGUIDCache()
+                            .then(() => {
+                                getClassGUIDByName(className, true)
+                                    .then(newClassGUID => resolve(newClassGUID))
+                                    .catch(error => reject(error))
+                            });
+                    } else {
+                        reject(new Error("No such class name found"));
+                    }
+                }
+            })
+    });
+}
+
+async function getAllClassGUIDs() {
+    const CLASSES = localStorage.getItem("classGUIDs");
+
+    if (typeof CLASSES === "string") {
+        let classGUIDObj;
+
+        try {
+            classGUIDObj = JSON.parse(CLASSES);
+        } catch (error) {
+            console.log("Class GUID cache invalid, rebuilding …");
+            await rebuildClassGUIDCache();
+            return await getAllClassGUIDs();
+        }
+
+        if (typeof classGUIDObj === "object") {
+            return new Promise(resolve => resolve(classGUIDObj));
+        } else {
+            await rebuildClassGUIDCache();
+            return await getAllClassGUIDs();
+        }
+    } else {
+        await rebuildClassGUIDCache();
+        return await getAllClassGUIDs();
+    }
+}
+
+function fetchClassGUIDsFromAPI() {
+    return APIFetch("klasser")
+        .then(response => {
+            return response.json();
+        });
+}
+
+function rebuildClassGUIDCache() {
+    return new Promise(resolve => {
+        fetchClassGUIDsFromAPI()
+            .then(class_GUIDs => {
+                const NEAT_CLASS_GUIDS = getNeatClassGUIDsObject(class_GUIDs);
+                localStorage.setItem("classGUIDs", JSON.stringify(NEAT_CLASS_GUIDS));
+                resolve();
+            });
+    });
+}
+
+function getNeatClassGUIDsObject(untidyObject) {
+    const untidyGroups = untidyObject.data.groups;
+    const neatObject = {};
+
+    for (let i = 0; i < untidyGroups.length; i++) {
+        neatObject[untidyGroups[i].id.toLowerCase()] = untidyGroups[i].guid;
+    }
+
+    return neatObject;
 }
 
 function setupSettings() {
