@@ -14,6 +14,8 @@ const MODULES = new ModuleManager();
 let allowKeyNav = true;
 let scheduleInit = false;
 let firstScheduleLoad = true;
+let scheduleWidth;
+let scheduleHeight;
 let isMobile;
 let slideout;
 let APIURL;
@@ -189,6 +191,17 @@ function showSnackbar(text) {
     });
 }
 
+function updateNeoscheduleVars() {
+    if (sessionStorage.getItem("currentView") === "neoschedule") {
+        const NAV_HEIGHT = document.getElementsByTagName("nav")[0].offsetHeight;
+        const INPUT_FORM = document.getElementById("scheduleInputForm");
+        const INPUT_FORM_HEIGHT = INPUT_FORM.offsetHeight;
+
+        scheduleWidth = INPUT_FORM.offsetWidth;
+        scheduleHeight = window.innerHeight - NAV_HEIGHT - INPUT_FORM_HEIGHT;
+    }
+}
+
 function updateServiceWorker() {
     if (localStorage.getItem("serviceWorkerEnabled") === "on") {
         const DOCUMENT_HEAD = document.getElementsByTagName("HEAD");
@@ -213,7 +226,7 @@ function updateNavBlocking() {
 function loadPage(page) {
     switch(page) {
         case 0:
-            putPage("schedule", "Schema", setupSchedulePage);
+            putPage("neoschedule", "Schema", setupNeoschedule);
             break;
         case 1:
             putPage("lunch", "Lunch");
@@ -278,6 +291,29 @@ function loadHTML(URL) {
 function createExternalPageViewer(URL) {
     MODULES.load("utils", function() {
         createExternalPageViewer(URL);
+    });
+}
+
+function setupNeoschedule() {
+    const SCHEDULE_MOUNT = document.getElementById("scheduleMount");
+    const SCHEDULE_INPUT_FORM = document.getElementById("scheduleInputForm");
+
+    updateNeoscheduleVars();
+
+    if (isMobile) {
+
+    } else {
+
+    }
+
+    SCHEDULE_INPUT_FORM.addEventListener("submit", function(evnt) {
+        evnt.preventDefault();
+
+        getScheduleJSON(evnt.target[1].value, evnt.target[0].value, 0)
+            .then(scheduleJSON => {
+                console.log(evnt, scheduleJSON);
+
+            });
     });
 }
 
@@ -425,7 +461,7 @@ function getScheduleJSON(className, week, weekDay) {
                     schedulePromise
                         .json()
                         .then(scheduleJSON => resolve(scheduleJSON))
-                        .catch(error => console.error(error));
+                        .catch(error => reject(error));
                 })
             });
     });
@@ -448,7 +484,7 @@ function getClassGUIDByName(className, retried) {
                                     .catch(error => reject(error))
                             });
                     } else {
-                        reject(new Error("No such class name found"));
+                        reject("No such class name found");
                     }
                 }
             })
