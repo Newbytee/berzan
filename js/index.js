@@ -14,7 +14,7 @@ const MODULES = new ModuleManager();
 let allowKeyNav = true;
 let scheduleInit = false;
 let firstScheduleLoad = true;
-let orientationPortrait;
+let isMobile;
 let slideout;
 let APIURL;
 
@@ -41,7 +41,7 @@ function init() {
     const SPLASH_SCREEN = document.getElementById("splashScreen");
     
     createSlideout();
-    checkOrientation(); // Check orientation fails if slideout hasn't been created, please keep them this order
+    checkDeviceType(); // Check orientation fails if slideout hasn't been created, please keep them this order
     updateServiceWorker();
 
     document.getElementById("hamburgerSvg").addEventListener("click", function () {
@@ -54,7 +54,7 @@ function init() {
     });
 
     window.onresize = function () {
-        checkOrientation();
+        checkDeviceType();
         if (sessionStorage.getItem("currentView") === "schedule") {
             viewSchedule(false);
         }
@@ -174,12 +174,12 @@ function createSlideout() {
     }
 }
 
-function checkOrientation() {
+function checkDeviceType() {
     if (window.innerWidth > 768) {
         slideout.close();
-        orientationPortrait = false;
+        isMobile = false;
     } else {
-        orientationPortrait = true;
+        isMobile = true;
     }
 }
 
@@ -298,7 +298,7 @@ function setupSchedulePage() {
         firstScheduleLoad = false;
     }
     
-    if (orientationPortrait) {
+    if (isMobile) {
         SEARCH_BUTTON.innerHTML = "Visa";
     } else {
         SEARCH_BUTTON.innerHTML = "Visa schema";
@@ -330,7 +330,7 @@ function setupSchedulePage() {
         });
     }
 
-    if (orientationPortrait) {
+    if (isMobile) {
         if (DATE.getDay() < 6) {
             DAY_DROPDOWN.selectedIndex = DATE.getDay() === 0 ? 1 : DATE.getDay();
         } else {
