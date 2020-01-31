@@ -342,19 +342,24 @@ function setupNeoschedule() {
 }
 
 function renderSchedule(scheduleJSON) {
+    const START_TIME = performance.now();
     const SCHEDULE_MOUNT = document.getElementById("scheduleMount");
+    const SCHEDULE_CONTAINER = document.createElement("DIV");
     const BOXES = scheduleJSON.data.boxList;
     const TEXTS = scheduleJSON.data.textList;
 
     for (let i = 0; i < BOXES.length; i++) {
         const BOX = intoBox(BOXES[i]);
-        SCHEDULE_MOUNT.appendChild(BOX);
+        SCHEDULE_CONTAINER.appendChild(BOX);
     }
 
     for (let i = 0; i < TEXTS.length; i++) {
         const TEXT = intoText(TEXTS[i]);
-        SCHEDULE_MOUNT.appendChild(TEXT);
+        SCHEDULE_CONTAINER.appendChild(TEXT);
     }
+
+    SCHEDULE_MOUNT.appendChild(SCHEDULE_CONTAINER);
+    console.log("Time: " + (performance.now() - START_TIME).toString());
 }
 
 function intoBox(obj) {
