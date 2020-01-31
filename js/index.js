@@ -519,11 +519,10 @@ function getScheduleJSON(className, week, weekDay) {
                     "&width=" + scheduleWidth +
                     "&height=" + scheduleHeight
                 ).then(schedulePromise => {
-                    schedulePromise
-                        .json()
-                        .then(scheduleJSON => resolve(scheduleJSON))
-                        .catch(error => reject(error));
+                    return schedulePromise.json();
                 })
+                .then(scheduleJSON => resolve(scheduleJSON))
+                .catch(error => reject(error));
             });
     });
 }
