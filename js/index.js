@@ -301,6 +301,7 @@ function createExternalPageViewer(URL) {
 function setupNeoschedule() {
     const SCHEDULE_INPUT_FORM = document.getElementById("scheduleInputForm");
     const INPUT_FIELDS = document.getElementsByClassName("inputField");
+    const SUBMIT_BUTTON = SCHEDULE_INPUT_FORM[2];
     sessionStorage.setItem("inputField0", DATE.getWeek().toString());
 
     for (let i = 0; i < INPUT_FIELDS.length; i++) {
@@ -313,9 +314,9 @@ function setupNeoschedule() {
     }
 
     if (isMobile) {
-        SCHEDULE_INPUT_FORM[2].textContent = "Visa";
+        SUBMIT_BUTTON.textContent = "Visa";
     } else {
-        SCHEDULE_INPUT_FORM[2].textContent = "Visa schema";
+        SUBMIT_BUTTON.textContent = "Visa schema";
     }
 
 
