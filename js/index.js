@@ -347,6 +347,11 @@ function renderSchedule(scheduleJSON) {
         const BOX = intoBox(BOXES[i]);
         SCHEDULE_MOUNT.appendChild(BOX);
     }
+
+    for (let i = 0; i < TEXTS.length; i++) {
+        const TEXT = intoText(TEXTS[i]);
+        SCHEDULE_MOUNT.appendChild(TEXT);
+    }
 }
 
 function intoBox(obj) {
@@ -363,7 +368,14 @@ function intoBox(obj) {
 }
 
 function intoText(obj) {
-
+    const TEXT = document.createElement("SPAN");
+    TEXT.style.position = "absolute";
+    TEXT.style.color = obj.fcolor;
+    TEXT.style.fontSize = obj.fontsize.toString() + "px";
+    TEXT.style.left = (obj.x - scheduleMarginLeft).toString() + "px";
+    TEXT.style.top = (obj.y + scheduleMarginTop).toString() + "px";
+    TEXT.textContent = obj.text;
+    return TEXT;
 }
 
 function setupSchedulePage() {
