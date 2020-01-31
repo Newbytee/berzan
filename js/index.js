@@ -302,6 +302,7 @@ function setupNeoschedule() {
     const SCHEDULE_INPUT_FORM = document.getElementById("scheduleInputForm");
     const INPUT_FIELDS = document.getElementsByClassName("inputField");
     const SUBMIT_BUTTON = SCHEDULE_INPUT_FORM[2];
+    const DAY_DROPDOWN = SCHEDULE_INPUT_FORM[3];
     sessionStorage.setItem("inputField0", DATE.getWeek().toString());
 
     for (let i = 0; i < INPUT_FIELDS.length; i++) {
@@ -330,16 +331,24 @@ function setupNeoschedule() {
 
     SCHEDULE_INPUT_FORM.addEventListener("submit", function(evnt) {
         evnt.preventDefault();
-
-        getScheduleJSON(evnt.target[1].value, evnt.target[0].value, 0)
-            .then(scheduleJSON => {
-                console.log(evnt, scheduleJSON);
-                renderSchedule(scheduleJSON);
-            })
-            .catch(error => {
-                showSnackbar(error);
-            });
+        handleRenderRequest(SCHEDULE_INPUT_FORM);
     });
+    DAY_DROPDOWN.addEventListener("change", function() {
+        handleRenderRequest(SCHEDULE_INPUT_FORM);
+    });
+    INPUT_FIELDS[0].addEventListener("change", function() {
+        handleRenderRequest(SCHEDULE_INPUT_FORM);
+    });
+}
+
+function handleRenderRequest(form) {
+    getScheduleJSON(form[1].value, form[0].value, 0)
+        .then(scheduleJSON => {
+            renderSchedule(scheduleJSON);
+        })
+        .catch(error => {
+            showSnackbar(error);
+        });
 }
 
 function renderSchedule(scheduleJSON) {
@@ -518,6 +527,7 @@ function getScheduleJSON(className, week, weekDay) {
     return new Promise((resolve, reject) => {
         getClassGUIDByName(className)
             .then(classGUID => {
+
                 APIFetch(
                     "schema?week=" + week +
                     "&week-day=" + weekDay +
