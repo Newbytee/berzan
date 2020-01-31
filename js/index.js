@@ -342,7 +342,6 @@ function setupNeoschedule() {
 }
 
 function renderSchedule(scheduleJSON) {
-    const START_TIME = performance.now();
     const SCHEDULE_MOUNT = document.getElementById("scheduleMount");
     const SCHEDULE_CONTAINER = document.createElement("DIV");
     const BOXES = scheduleJSON.data.boxList;
@@ -359,7 +358,6 @@ function renderSchedule(scheduleJSON) {
     }
 
     SCHEDULE_MOUNT.appendChild(SCHEDULE_CONTAINER);
-    console.log("Time: " + (performance.now() - START_TIME).toString());
 }
 
 function intoBox(obj) {
