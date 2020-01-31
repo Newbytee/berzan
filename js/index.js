@@ -16,6 +16,8 @@ let scheduleInit = false;
 let firstScheduleLoad = true;
 let scheduleWidth;
 let scheduleHeight;
+let scheduleMarginLeft;
+let scheduleMarginTop;
 let isMobile;
 let slideout;
 let APIURL;
@@ -199,6 +201,8 @@ function updateNeoscheduleVars() {
 
         scheduleWidth = INPUT_FORM.offsetWidth;
         scheduleHeight = window.innerHeight - NAV_HEIGHT - INPUT_FORM_HEIGHT;
+        scheduleMarginLeft = (INPUT_FORM.offsetWidth - window.innerWidth) / 2;
+        scheduleMarginTop = NAV_HEIGHT + INPUT_FORM_HEIGHT + 10;
     }
 }
 
@@ -295,8 +299,25 @@ function createExternalPageViewer(URL) {
 }
 
 function setupNeoschedule() {
-    const SCHEDULE_MOUNT = document.getElementById("scheduleMount");
     const SCHEDULE_INPUT_FORM = document.getElementById("scheduleInputForm");
+    const INPUT_FIELDS = document.getElementsByClassName("inputField");
+    sessionStorage.setItem("inputField0", DATE.getWeek().toString());
+
+    for (let i = 0; i < INPUT_FIELDS.length; i++) {
+        if (sessionStorage.getItem("inputField" + i)) INPUT_FIELDS[i].value = sessionStorage.getItem("inputField" + i);
+    }
+
+    if (firstScheduleLoad && localStorage.getItem("defaultClass")) {
+        INPUT_FIELDS[1].value = localStorage.getItem("defaultClass");
+        firstScheduleLoad = false;
+    }
+
+    if (isMobile) {
+        SCHEDULE_INPUT_FORM[3].innerHTML = "Visa";
+    } else {
+        SCHEDULE_INPUT_FORM[3].innerHTML = "Visa schema";
+    }
+
 
     updateNeoscheduleVars();
 
@@ -312,9 +333,37 @@ function setupNeoschedule() {
         getScheduleJSON(evnt.target[1].value, evnt.target[0].value, 0)
             .then(scheduleJSON => {
                 console.log(evnt, scheduleJSON);
-
+                renderSchedule(scheduleJSON);
             });
     });
+}
+
+function renderSchedule(scheduleJSON) {
+    const SCHEDULE_MOUNT = document.getElementById("scheduleMount");
+    const BOXES = scheduleJSON.data.boxList;
+    const TEXTS = scheduleJSON.data.textList;
+
+    for (let i = 0; i < BOXES.length; i++) {
+        const BOX = intoBox(BOXES[i]);
+        SCHEDULE_MOUNT.appendChild(BOX);
+    }
+}
+
+function intoBox(obj) {
+    const BOX = document.createElement("DIV");
+    BOX.style.position = "absolute";
+    BOX.style.boxSizing = "content-box";
+    BOX.style.backgroundColor = obj.bcolor;
+    BOX.style.color = obj.fcolor;
+    BOX.style.height = obj.height.toString() + "px";
+    BOX.style.width = obj.width.toString() + "px";
+    BOX.style.left = (obj.x - scheduleMarginLeft).toString() + "px";
+    BOX.style.top = (obj.y + scheduleMarginTop).toString() + "px";
+    return BOX;
+}
+
+function intoText(obj) {
+
 }
 
 function setupSchedulePage() {
@@ -455,8 +504,8 @@ function getScheduleJSON(className, week, weekDay) {
                     "&week-day=" + weekDay +
                     "&class-name=" + className +
                     "&class-guid=" + classGUID +
-                    "&width=" + window.innerWidth +
-                    "&height=" + window.innerHeight
+                    "&width=" + scheduleWidth +
+                    "&height=" + scheduleHeight
                 ).then(schedulePromise => {
                     schedulePromise
                         .json()
