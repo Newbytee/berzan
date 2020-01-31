@@ -334,6 +334,9 @@ function setupNeoschedule() {
             .then(scheduleJSON => {
                 console.log(evnt, scheduleJSON);
                 renderSchedule(scheduleJSON);
+            })
+            .catch(error => {
+                showSnackbar(error);
             });
     });
 }
@@ -523,7 +526,8 @@ function getScheduleJSON(className, week, weekDay) {
                 })
                 .then(scheduleJSON => resolve(scheduleJSON))
                 .catch(error => reject(error));
-            });
+            })
+            .catch(error => reject(error));
     });
 }
 
@@ -541,10 +545,10 @@ function getClassGUIDByName(className, retried) {
                             .then(() => {
                                 getClassGUIDByName(className, true)
                                     .then(newClassGUID => resolve(newClassGUID))
-                                    .catch(error => reject(error))
+                                    .catch(error => reject(error));
                             });
                     } else {
-                        reject("No such class name found");
+                        reject("Klassen hittades inte :(");
                     }
                 }
             })
