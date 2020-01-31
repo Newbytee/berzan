@@ -313,9 +313,9 @@ function setupNeoschedule() {
     }
 
     if (isMobile) {
-        SCHEDULE_INPUT_FORM[3].innerHTML = "Visa";
+        SCHEDULE_INPUT_FORM[2].innerHTML = "Visa";
     } else {
-        SCHEDULE_INPUT_FORM[3].innerHTML = "Visa schema";
+        SCHEDULE_INPUT_FORM[2].innerHTML = "Visa schema";
     }
 
 
