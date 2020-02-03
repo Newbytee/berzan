@@ -342,7 +342,7 @@ function setupNeoschedule() {
 }
 
 function handleRenderRequest(form) {
-    getScheduleJSON(form[1].value, form[0].value, 0)
+    getScheduleJSON(form[1].value, form[0].value, form[3].selectedIndex)
         .then(scheduleJSON => {
             renderSchedule(scheduleJSON);
         })
