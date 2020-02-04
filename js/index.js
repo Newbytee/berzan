@@ -354,6 +354,9 @@ function handleRenderRequest(form) {
     getScheduleJSON(form[1].value, form[0].value, form[3].selectedIndex)
         .then(scheduleJSON => {
             renderSchedule(scheduleJSON);
+            if (!localStorage.getItem("defaultClass")) {
+                localStorage.setItem("defaultClass", form[1].value);
+            }
         })
         .catch(error => {
             showSnackbar(error);
