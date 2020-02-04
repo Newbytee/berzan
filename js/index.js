@@ -555,41 +555,42 @@ function getScheduleJSON(className, week, weekDay) {
     });
 }
 
-function getScheduleByQuery(query) {
-    return new Promise((resolve, reject) => {
-        const schedules = localStorage.getItem("schedules");
+async function getScheduleByQuery(query) {
+    const schedules = localStorage.getItem("schedules");
 
-        if (typeof schedules === "string") {
-            let scheduleListObj;
+    if (typeof schedules === "string") {
+        let scheduleListObj;
 
-            try {
-                scheduleListObj = JSON.parse(schedules);
-            } catch (error) {
-                console.log("Cache miss when serving query " + query);
-            }
+        try {
+            scheduleListObj = JSON.parse(schedules);
+        } catch (error) {
+            console.log("Cache miss when serving query " + query);
+        }
 
-            if (typeof scheduleListObj === "object") {
-                if (scheduleListObj.hasOwnProperty(query)) {
-                    const scheduleEntry = scheduleListObj[query];
+        if (typeof scheduleListObj === "object") {
+            if (scheduleListObj.hasOwnProperty(query)) {
+                const scheduleEntry = scheduleListObj[query];
 
-                    scheduleEntry.lastQueried = Date.now();
-                    localStorage.setItem("schedules", JSON.stringify(scheduleListObj));
+                scheduleEntry.lastQueried = Date.now();
+                localStorage.setItem("schedules", JSON.stringify(scheduleListObj));
 
-                    resolve(scheduleEntry.schedule);
-                } else {
+                return new Promise(resolve => resolve(scheduleEntry.schedule));
+            } else {
+                return new Promise((resolve, reject) => {
                     downloadSchedule(query, scheduleListObj)
                         .then(schedule => resolve(schedule))
                         .catch(error => reject(error));
-                }
-            } else {
-                localStorage.removeItem("schedules");
-                return getScheduleByQuery(query);
+                });
             }
         } else {
-            localStorage.setItem("schedules", "{}");
-            return getScheduleByQuery(query);
+            localStorage.removeItem("schedules");
+            return await getScheduleByQuery(query);
         }
-    });
+
+    } else {
+        localStorage.setItem("schedules", "{}");
+        return await getScheduleByQuery(query);
+    }
 }
 
 function downloadSchedule(query, scheduleListObj) {
