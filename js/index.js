@@ -555,30 +555,26 @@ function getScheduleByQuery(query) {
         const schedules = localStorage.getItem("schedules");
 
         if (typeof schedules === "string") {
-            let scheduleObj;
+            let scheduleListObj;
 
             try {
-                scheduleObj = JSON.parse(schedules);
+                scheduleListObj = JSON.parse(schedules);
             } catch (error) {
                 console.log("Cache miss when serving query " + query);
             }
 
-            if (typeof scheduleObj === "object") {
-                if (scheduleObj.hasOwnProperty(query)) {
-                    resolve(scheduleObj[query]);
+            if (typeof scheduleListObj === "object") {
+                if (scheduleListObj.hasOwnProperty(query)) {
+                    const scheduleEntry = scheduleListObj[query];
+
+                    scheduleEntry.lastQueried = Date.now();
+                    localStorage.setItem("schedules", JSON.stringify(scheduleListObj));
+
+                    resolve(scheduleEntry.schedule);
                 } else {
-                    APIFetch(query)
-                        .then(schedulePromise => {
-                            return schedulePromise.json();
-                        })
-                        .then(scheduleJSON => {
-                            scheduleObj[query] = scheduleJSON;
-                            localStorage.setItem("schedules", JSON.stringify(scheduleObj));
-                            resolve(scheduleJSON);
-                        })
-                        .catch(error =>
-                            reject(error)
-                        );
+                    downloadSchedule(query, scheduleListObj)
+                        .then(schedule => resolve(schedule))
+                        .catch(error => reject(error));
                 }
             } else {
                 localStorage.removeItem("schedules");
@@ -589,6 +585,30 @@ function getScheduleByQuery(query) {
             return getScheduleByQuery(query);
         }
     });
+}
+
+function downloadSchedule(query, scheduleListObj) {
+    return new Promise((resolve, reject) => {
+        APIFetch(query)
+            .then(schedulePromise => {
+                return schedulePromise.json();
+            })
+            .then(scheduleObj => {
+                scheduleListObj[query] = makeScheduleEntry(scheduleObj);
+                localStorage.setItem("schedules", JSON.stringify(scheduleListObj));
+                resolve(scheduleObj);
+            })
+            .catch(error =>
+                reject(error)
+            );
+    });
+}
+
+function makeScheduleEntry(scheduleObj) {
+    return {
+        schedule: scheduleObj,
+        lastQueried: Date.now()
+    }
 }
 
 function getClassGUIDByName(className, retried) {
