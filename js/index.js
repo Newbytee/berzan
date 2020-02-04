@@ -543,19 +543,6 @@ function getScheduleJSON(className, week, weekDay) {
                     .catch(error => {
                         reject(error)
                     });
-                /*
-                APIFetch(query)
-                    .then(schedulePromise => {
-                        return schedulePromise.json();
-                    })
-                    .then(scheduleJSON =>
-                        resolve(scheduleJSON)
-                    )
-                    .catch(error =>
-                        reject(error)
-                    );
-
-                 */
             })
             .catch(error => reject(error));
     });
