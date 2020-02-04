@@ -326,6 +326,12 @@ function setupNeoschedule() {
         handleRenderRequest(SCHEDULE_INPUT_FORM);
     }
 
+    for (let i = 0; i < INPUT_FIELDS.length; i++) {
+        INPUT_FIELDS[i].addEventListener("blur", function() {
+            sessionStorage.setItem("inputField" + i, INPUT_FIELDS[i].value);
+        });
+    }
+
     SCHEDULE_INPUT_FORM.addEventListener("submit", function(evnt) {
         evnt.preventDefault();
         handleRenderRequest(SCHEDULE_INPUT_FORM);
