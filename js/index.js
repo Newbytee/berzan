@@ -320,14 +320,7 @@ function setupNeoschedule() {
         SUBMIT_BUTTON.textContent = "Visa schema";
     }
 
-
     updateNeoscheduleVars();
-
-    if (isMobile) {
-
-    } else {
-
-    }
 
     if (INPUT_FIELDS[1].value.length !== 0) {
         handleRenderRequest(SCHEDULE_INPUT_FORM);
