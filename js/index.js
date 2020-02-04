@@ -316,8 +316,14 @@ function setupNeoschedule() {
 
     if (isMobile) {
         SUBMIT_BUTTON.textContent = "Visa";
+        if (DATE.getDay() < 6) {
+            DAY_DROPDOWN.selectedIndex = DATE.getDay() === 0 ? 1 : DATE.getDay();
+        } else {
+            DAY_DROPDOWN.selectedIndex = 1;
+        }
     } else {
         SUBMIT_BUTTON.textContent = "Visa schema";
+        DAY_DROPDOWN.selectedIndex = 0;
     }
 
     updateNeoscheduleVars();
