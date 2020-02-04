@@ -1,16 +1,37 @@
 "use strict";
 
-if ("serviceWorker" in navigator) {
-    console.log("[Service Worker] Installing service worker ...");
-    navigator.serviceWorker.register("sw.js").then(function(registration) {
-        console.log("[Service Worker] ... done  (" + registration + ")");
-    }).catch(function(error) {
-        console.log("[Service Worker] ... failed (" + error + ")");
-    });
-} else {
-    console.log("[Service Worker] Service workers are not supported (don't listen to me, I'm usually wrong on this one)");
-}
+const CACHE_NAME = "berzanjs-cache-v1";
+const URLS_TO_CACHE = [
+    "/",
+    "/css/style.css",
+    "/js/index.js",
+    "/js/settings.js",
+    "/js/utils.js",
+    "/views/neoschedule.html",
+    "/views/etc.html",
+    "/views/settings.html",
+    "/manifest.json",
+    "/img/logo/logo-512.png",
+];
 
-self.addEventListener("fetch", function(e){
+self.addEventListener("install", function(evnt) {
+    evnt.waitUntil(
+        caches.open(CACHE_NAME)
+            .then(function(cache) {
+                console.log("Opened cache");
+                return cache.addAll(URLS_TO_CACHE);
+            })
+    );
+});
 
+self.addEventListener("fetch", function(evnt){
+    evnt.respondWith(
+        caches.match(evnt.request)
+            .then(function(response) {
+                if (response) {
+                    return response;
+                }
+                return fetch(evnt.request);
+            })
+    );
 });
