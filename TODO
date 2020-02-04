@@ -1,6 +1,5 @@
+TODO:
 (in order of importance)
- - Update schedule viewer to use Skola24 instead of Novasoftware
- - Add offline viewing to schedule viewer
  - Update lunch viewer to not use an iframe (might make using iframe an option)
  - Add offline viewing for lunch viewer (depends on backend updates)
  - Add custom events to schedule
@@ -11,3 +10,7 @@
  - Notification about today's lunch (opt-in)
  - Searchable selection fields (in settings and schedule viewer) for classes as we now can enumerate them
  - Add support for other schools
+
+DONE:
+ - Update schedule viewer to use Skola24 instead of Novasoftware
+ - Add offline viewing to schedule viewer
