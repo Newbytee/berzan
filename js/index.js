@@ -329,6 +329,8 @@ function setupNeoschedule() {
 
     }
 
+    handleRenderRequest(SCHEDULE_INPUT_FORM);
+
     SCHEDULE_INPUT_FORM.addEventListener("submit", function(evnt) {
         evnt.preventDefault();
         handleRenderRequest(SCHEDULE_INPUT_FORM);
