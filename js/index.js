@@ -529,21 +529,76 @@ function getScheduleJSON(className, week, weekDay) {
     return new Promise((resolve, reject) => {
         getClassGUIDByName(className)
             .then(classGUID => {
-
-                APIFetch(
-                    "schema?week=" + week +
+                const query = "schema?week=" + week +
                     "&week-day=" + weekDay +
                     "&class-name=" + className +
                     "&class-guid=" + classGUID +
                     "&width=" + scheduleWidth +
-                    "&height=" + scheduleHeight
-                ).then(schedulePromise => {
-                    return schedulePromise.json();
-                })
-                .then(scheduleJSON => resolve(scheduleJSON))
-                .catch(error => reject(error));
+                    "&height=" + scheduleHeight;
+
+                getScheduleByQuery(query)
+                    .then(schedule =>
+                        resolve(schedule)
+                    )
+                    .catch(error => {
+                        reject(error)
+                    });
+                /*
+                APIFetch(query)
+                    .then(schedulePromise => {
+                        return schedulePromise.json();
+                    })
+                    .then(scheduleJSON =>
+                        resolve(scheduleJSON)
+                    )
+                    .catch(error =>
+                        reject(error)
+                    );
+
+                 */
             })
             .catch(error => reject(error));
+    });
+}
+
+function getScheduleByQuery(query) {
+    return new Promise((resolve, reject) => {
+        const schedules = localStorage.getItem("schedules");
+
+        if (typeof schedules === "string") {
+            let scheduleObj;
+
+            try {
+                scheduleObj = JSON.parse(schedules);
+            } catch (error) {
+                console.log("Cache miss when serving query " + query);
+            }
+
+            if (typeof scheduleObj === "object") {
+                if (scheduleObj.hasOwnProperty(query)) {
+                    resolve(scheduleObj[query]);
+                } else {
+                    APIFetch(query)
+                        .then(schedulePromise => {
+                            return schedulePromise.json();
+                        })
+                        .then(scheduleJSON => {
+                            scheduleObj[query] = scheduleJSON;
+                            localStorage.setItem("schedules", JSON.stringify(scheduleObj));
+                            resolve(scheduleJSON);
+                        })
+                        .catch(error =>
+                            reject(error)
+                        );
+                }
+            } else {
+                localStorage.removeItem("schedules");
+                return getScheduleByQuery(query);
+            }
+        } else {
+            localStorage.setItem("schedules", "{}");
+            return getScheduleByQuery(query);
+        }
     });
 }
 
