@@ -403,6 +403,7 @@ function intoBox(obj) {
     BOX.style.width = obj.width.toString() + "px";
     BOX.style.left = (obj.x - scheduleMarginLeft).toString() + "px";
     BOX.style.top = (obj.y + scheduleMarginTop).toString() + "px";
+    BOX.style.border = "1px solid rgb(0, 0, 0)";
     return BOX;
 }
 
@@ -414,6 +415,9 @@ function intoText(obj) {
     TEXT.style.left = (obj.x - scheduleMarginLeft).toString() + "px";
     TEXT.style.top = (obj.y + scheduleMarginTop).toString() + "px";
     TEXT.textContent = obj.text;
+    if (/\d+:\d+/.test(obj.text)) {
+        TEXT.style.lineHeight = "1.3";
+    }
     return TEXT;
 }
 
