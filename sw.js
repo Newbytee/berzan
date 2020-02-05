@@ -12,6 +12,7 @@ const URLS_TO_CACHE = [
     "/views/settings.html",
     "/manifest.json",
     "/img/logo/logo-512.png",
+    "https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.js"
 ];
 
 self.addEventListener("install", function(evnt) {
