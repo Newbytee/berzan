@@ -417,6 +417,7 @@ function intoText(obj) {
     TEXT.textContent = obj.text;
     if (/\d+:\d+/.test(obj.text)) {
         TEXT.style.lineHeight = "1.3";
+        TEXT.style.marginLeft = "0.15em";
     }
     return TEXT;
 }
