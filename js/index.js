@@ -117,6 +117,21 @@ function init() {
     }, 200);
 
     if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.addEventListener("message", evnt => {
+            console.log("Message received: " + evnt);
+            const URI = evnt.data.URL.split("?")[0];
+
+            console.log(URI);
+
+            switch (evnt.data.URL) {
+                case APIURL + "/schema":
+                    break;
+                case APIURL + "/klasser":
+                    break;
+                default:
+                    break;
+            }
+        });
         console.log("[Service Worker] Installing service worker ...");
         navigator.serviceWorker.register("/sw.js").then(function(registration) {
             console.log("[Service Worker] ... done  (" + registration + ")");
@@ -562,78 +577,19 @@ function getScheduleJSON(className, week, weekDay) {
                     "&width=" + scheduleWidth +
                     "&height=" + scheduleHeight;
 
-                getScheduleByQuery(query)
-                    .then(schedule =>
-                        resolve(schedule)
-                    )
+                APIFetch(query)
+                    .then(scheduleResp => {
+                        return scheduleResp.json();
+                    })
+                    .then(scheduleJSON => {
+                        resolve(scheduleJSON);
+                    })
                     .catch(error => {
-                        reject(error)
+                        reject(error);
                     });
             })
             .catch(error => reject(error));
     });
-}
-
-async function getScheduleByQuery(query) {
-    const schedules = localStorage.getItem("schedules");
-
-    if (typeof schedules === "string") {
-        let scheduleListObj;
-
-        try {
-            scheduleListObj = JSON.parse(schedules);
-        } catch (error) {
-            console.log("Cache miss when serving query " + query);
-        }
-
-        if (typeof scheduleListObj === "object") {
-            if (scheduleListObj.hasOwnProperty(query)) {
-                const scheduleEntry = scheduleListObj[query];
-
-                scheduleEntry.lastQueried = Date.now();
-                localStorage.setItem("schedules", JSON.stringify(scheduleListObj));
-
-                return new Promise(resolve => resolve(scheduleEntry.schedule));
-            } else {
-                return new Promise((resolve, reject) => {
-                    downloadSchedule(query, scheduleListObj)
-                        .then(schedule => resolve(schedule))
-                        .catch(error => reject(error));
-                });
-            }
-        } else {
-            localStorage.removeItem("schedules");
-            return await getScheduleByQuery(query);
-        }
-
-    } else {
-        localStorage.setItem("schedules", "{}");
-        return await getScheduleByQuery(query);
-    }
-}
-
-function downloadSchedule(query, scheduleListObj) {
-    return new Promise((resolve, reject) => {
-        APIFetch(query)
-            .then(schedulePromise => {
-                return schedulePromise.json();
-            })
-            .then(scheduleObj => {
-                scheduleListObj[query] = makeScheduleEntry(scheduleObj);
-                localStorage.setItem("schedules", JSON.stringify(scheduleListObj));
-                resolve(scheduleObj);
-            })
-            .catch(error =>
-                reject(error)
-            );
-    });
-}
-
-function makeScheduleEntry(scheduleObj) {
-    return {
-        schedule: scheduleObj,
-        lastQueried: Date.now()
-    }
 }
 
 function getClassGUIDByName(className, retried) {
