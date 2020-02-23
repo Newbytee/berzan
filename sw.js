@@ -30,22 +30,22 @@ self.addEventListener("fetch", function(evnt){
         caches.match(evnt.request)
             .then(function(response) {
                 if (response) {
+                    // TODO: refresh caches
+                    /*
                     if (response.type === "cors" && evnt.clientId) {
                         refreshCacheEntry(evnt.request, evnt.clientId);
                     }
+
+                     */
                     return response;
                 }
                 return fetch(evnt.request).then(
                     function(response) {
-                        console.log("Response type: " + response.type);
-
-                        console.log(response);
-
                         if (
                             !response ||
                             response.status !== 200 ||
-                            response.type !== "basic" ||
-                            response.type !== "cors"
+                            (response.type !== "basic" &&
+                            response.type !== "cors")
                         ) {
                             return response;
                         }
