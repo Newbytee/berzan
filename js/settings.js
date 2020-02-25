@@ -1,48 +1,13 @@
 function setupSettings() {
-    const CHANGE_STARTPAGE_BUTTONS = document.getElementsByClassName("startPagePicker");
     const CLASS_SAVE_FIELD = document.getElementById("defaultClass");
     const CHANGE_SLIDEOUT_SIDE_BUTTONS = document.getElementsByClassName("slideoutSidePicker");
-    const CHANGE_LANGUAGE_SELECTION = document.getElementById("languageSelection");
     const SERVICE_WORKER_SELECTION = document.getElementById("serviceWorkerSelection");
     const STYLE_SELECTION = document.getElementById("styleSelection");
     const SLIDEOUT_FAIL_SELECTION = document.getElementById("slideoutFailWarn");
-    const LANGUAGES = [ "sv-se", "en-gb", "de-de", "fr-fr" ];
-    
+
     addToggle(STYLE_SELECTION, "newDesign", updateStyle);
     addToggle(SERVICE_WORKER_SELECTION, "serviceWorkerEnabled", updateServiceWorker);
     addToggle(SLIDEOUT_FAIL_SELECTION, "slideoutWarnDisable");
-
-    for (let i = 0; i < LANGUAGES.length; i++) {
-        if (LANGUAGES[i] === localStorage.getItem("appLanguage")) CHANGE_LANGUAGE_SELECTION.selectedIndex = i;
-    }
-
-    CHANGE_LANGUAGE_SELECTION.addEventListener("change", function() {
-        localStorage.setItem("appLanguage", LANGUAGES[CHANGE_LANGUAGE_SELECTION.selectedIndex]);
-        if (LANGUAGES[CHANGE_LANGUAGE_SELECTION.selectedIndex] === "de-de") alert("Due to what seems to be a bug with Novasoftware (the provider of the schedule), when German is selected as language the schedule will frequently fail to load.");
-    });
-
-    for (let i = 0; i < CHANGE_STARTPAGE_BUTTONS.length; i++) {
-        CHANGE_STARTPAGE_BUTTONS[i].addEventListener("click", function() {
-            switch (i) {
-                case 0:
-                    localStorage.setItem("startPage", "schedule");
-                    showSnackbar("Startsida bytt till schema");
-                    break;
-                case 1:
-                    localStorage.setItem("startPage", "lunch");
-                    showSnackbar("Startsida bytt till lunch");
-                    break;
-                case 2:
-                    localStorage.setItem("startPage", "etc");
-                    showSnackbar("Startsida bytt till övrigt");
-                    break;
-                default:
-                    localStorage.setItem("startPage", "schedule");
-                    showSnackbar("Startsida bytt till schema");
-                    break;
-            }
-        });
-    }
 
     for (let i = 0; i < CHANGE_SLIDEOUT_SIDE_BUTTONS.length; i++) {
         CHANGE_SLIDEOUT_SIDE_BUTTONS[i].addEventListener("click", function() {
