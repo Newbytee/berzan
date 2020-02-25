@@ -1,7 +1,6 @@
 function setupSettings() {
     const CHANGE_STARTPAGE_BUTTONS = document.getElementsByClassName("startPagePicker");
     const CLASS_SAVE_FIELD = document.getElementById("defaultClass");
-    const CHANGE_FILETYPE_BUTTONS = document.getElementsByClassName("filetypePicker");
     const CHANGE_SLIDEOUT_SIDE_BUTTONS = document.getElementsByClassName("slideoutSidePicker");
     const CHANGE_LANGUAGE_SELECTION = document.getElementById("languageSelection");
     const SERVICE_WORKER_SELECTION = document.getElementById("serviceWorkerSelection");
@@ -40,21 +39,6 @@ function setupSettings() {
                 default:
                     localStorage.setItem("startPage", "schedule");
                     showSnackbar("Startsida bytt till schema");
-                    break;
-            }
-        });
-    }
-
-    for (let i = 0; i < CHANGE_FILETYPE_BUTTONS.length; i++) {
-        CHANGE_FILETYPE_BUTTONS[i].addEventListener("click", function() {
-            switch (i) {
-                case 0:
-                    localStorage.setItem("scheduleFiletype", "png");
-                    showSnackbar("Schemat laddas nu som PNG");
-                    break;
-                case 1:
-                    localStorage.setItem("scheduleFiletype", "gif");
-                    showSnackbar("Schemat laddas nu som GIF");
                     break;
             }
         });
