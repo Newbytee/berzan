@@ -355,6 +355,7 @@ function setupNeoschedule() {
     updateNeoscheduleVars();
 
     if (INPUT_FIELDS[1].value.length !== 0) {
+        sessionStorage.setItem("inputField1", INPUT_FIELDS[1].value);
         handleRenderRequest(SCHEDULE_INPUT_FORM);
     }
 
