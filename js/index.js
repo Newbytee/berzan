@@ -59,9 +59,7 @@ function init() {
 
     window.onresize = function () {
         checkDeviceType();
-        if (sessionStorage.getItem("currentView") === "schedule") {
-            viewSchedule(false);
-        }
+        // TODO: make schedule re-render when window is resized
     };
 
     for (let i = 0; i < NAVIGATION_BUTTONS.length; i++) {
@@ -436,135 +434,6 @@ function intoText(obj) {
         TEXT.style.marginLeft = "0.15em";
     }
     return TEXT;
-}
-
-function setupSchedulePage() {
-    sessionStorage.setItem("inputField0", DATE.getWeek().toString());
-    const INPUT_FIELDS = document.getElementsByClassName("inputField");
-    const SEARCH_BUTTON = document.getElementById("searchClass");
-    const DAY_DROPDOWN = document.getElementById("dayDropdown");
-    const SCHEDULE = document.getElementById("schedule");
-    const FORM = document.getElementById("inputForm");
-
-    for (let i = 0; i < INPUT_FIELDS.length; i++) {
-        if (sessionStorage.getItem("inputField" + i)) INPUT_FIELDS[i].value = sessionStorage.getItem("inputField" + i);
-    }
-    
-    if (firstScheduleLoad && localStorage.getItem("defaultClass")) {
-        INPUT_FIELDS[1].value = localStorage.getItem("defaultClass");
-        firstScheduleLoad = false;
-    }
-    
-    if (isMobile) {
-        SEARCH_BUTTON.innerHTML = "Visa";
-    } else {
-        SEARCH_BUTTON.innerHTML = "Visa schema";
-    }
-
-    INPUT_FIELDS[0].addEventListener("change", function() {
-        viewSchedule();
-    });
-
-    DAY_DROPDOWN.onchange = function() {
-        scheduleInit = true;
-        viewSchedule();
-    };
-    
-    SCHEDULE.addEventListener("error", function() {
-        if (scheduleInit)
-            showSnackbar("Kunde inte ladda schema :(");
-    });
-
-    FORM.addEventListener("submit", function(evnt) {
-        evnt.preventDefault();
-        scheduleInit = true;
-        viewSchedule();
-    });
-
-    for (let i = 0; i < INPUT_FIELDS.length; i++) {
-        INPUT_FIELDS[i].addEventListener("blur", function() {
-            sessionStorage.setItem("inputField" + i, INPUT_FIELDS[i].value);
-        });
-    }
-
-    if (isMobile) {
-        if (DATE.getDay() < 6) {
-            DAY_DROPDOWN.selectedIndex = DATE.getDay() === 0 ? 1 : DATE.getDay();
-        } else {
-            DAY_DROPDOWN.selectedIndex = 1;
-        }
-    } else {
-        DAY_DROPDOWN.selectedIndex = 0;
-    }
-    
-    if (INPUT_FIELDS[1].value.length !== 0) {
-        scheduleInit = true;
-        viewSchedule();
-        sessionStorage.setItem("inputField1", INPUT_FIELDS[1].value);
-    }
-}
-
-function viewSchedule(prompt) {
-    if (scheduleInit === false) return;
-    if (typeof prompt === "undefined") prompt = true;
-    const WEEK_INPUT_FIELD = document.getElementById("weekNumberField");
-    const CLASS_INPUT_FIELD = document.getElementById("classNameField");
-    const DAY_DROPDOWN = document.getElementById("dayDropdown");
-    const SCHEDULE = document.getElementById("schedule");
-    let currentWeek = WEEK_INPUT_FIELD.value;
-    let className = CLASS_INPUT_FIELD.value;
-    let weekDay;
-
-    switch (DAY_DROPDOWN.selectedIndex) {
-        case 0:
-            weekDay = 0;
-            break;
-        case 1:
-            weekDay = 1;
-            break;
-        case 2:
-            weekDay = 2;
-            break;
-        case 3:
-            weekDay = 4;
-            break;
-        case 4:
-            weekDay = 8;
-            break;
-        case 5:
-            weekDay = 16;
-            break;
-        default:
-            weekDay = 0;
-            throw "DAY_DROPDOWN had an invalid index (" + DAY_DROPDOWN.selectedIndex.toString() + ").";
-    }
-
-    if (className.length > 0) {
-        SCHEDULE.onload = function() {
-            SCHEDULE.style.display = "block";
-        };
-        SCHEDULE.src = getScheduleURL(className, currentWeek, weekDay.toString(), localStorage.getItem("appLanguage"), localStorage.getItem("scheduleFiletype"));
-    } else if (prompt === true) {
-        showSnackbar("Välj en klass först");
-        return;
-    }
-
-    if (className === "åsna") {
-        loadPage("https://www.youtube.com/embed/L_jWHffIx5E");
-        return;
-    }
-
-    if (className === "debug") {
-        putPage("debug", "Debug", setupDebugMenu);
-        return;
-    }
-
-    if (!(localStorage.getItem("defaultClass")))
-        localStorage.setItem("defaultClass", CLASS_INPUT_FIELD.value);
-}
-
-function getScheduleURL(className, week, weekDay, language, filetype) {
-    return "http://www.novasoftware.se/ImgGen/schedulegenerator.aspx?format=" + filetype + "&schoolid=89920/" + language + "&type=-1&id=" + className + "&period=&week=" + week + "&mode=0&printer=0&colors=32&head=0&clock=0&foot=0&day=" + weekDay + "&width=" + window.innerWidth + "&height=" + window.innerHeight;
 }
 
 function getScheduleJSON(className, week, weekDay) {
