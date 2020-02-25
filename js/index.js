@@ -139,7 +139,7 @@ function init() {
             console.log("[Service Worker] ... failed (" + error + ")");
         });
     } else {
-        console.log("[Service Worker] Service workers are not supported (don't listen to me, I'm usually wrong on this one)");
+        console.log("[Service Worker] Service workers are not supported");
     }
 }
 
