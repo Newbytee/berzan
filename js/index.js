@@ -12,7 +12,6 @@ const CONTENT_DIV = document.getElementById("wrapper");
 const DATE = new Date();
 const MODULES = new ModuleManager();
 let allowKeyNav = true;
-let scheduleInit = false;
 let firstScheduleLoad = true;
 let scheduleWidth;
 let scheduleHeight;
