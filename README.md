@@ -12,6 +12,10 @@ It is currently perpetually developed, with features being added and bugs fixed 
 * Ability to set default class for schedule viewer
 * User interface adapts to whatever device you're using
 
+## Related sources
+
+Code used for proxying API calls: https://gitlab.com/Newbyte/berzanjs-api
+
 ## Third party code used
 * Slideout.js
 * Bootstrap's Reboot was used as base for the stylesheet.
