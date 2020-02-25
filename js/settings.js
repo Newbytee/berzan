@@ -1,12 +1,10 @@
 function setupSettings() {
     const CLASS_SAVE_FIELD = document.getElementById("defaultClass");
     const CHANGE_SLIDEOUT_SIDE_BUTTONS = document.getElementsByClassName("slideoutSidePicker");
-    const SERVICE_WORKER_SELECTION = document.getElementById("serviceWorkerSelection");
     const STYLE_SELECTION = document.getElementById("styleSelection");
     const SLIDEOUT_FAIL_SELECTION = document.getElementById("slideoutFailWarn");
 
     addToggle(STYLE_SELECTION, "newDesign", updateStyle);
-    addToggle(SERVICE_WORKER_SELECTION, "serviceWorkerEnabled", updateServiceWorker);
     addToggle(SLIDEOUT_FAIL_SELECTION, "slideoutWarnDisable");
 
     for (let i = 0; i < CHANGE_SLIDEOUT_SIDE_BUTTONS.length; i++) {

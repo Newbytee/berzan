@@ -45,7 +45,6 @@ function init() {
     
     createSlideout();
     checkDeviceType(); // Check orientation fails if slideout hasn't been created, please keep them this order
-    updateServiceWorker();
 
     document.getElementById("hamburgerSvg").addEventListener("click", function () {
         slideout.toggle();
@@ -226,15 +225,6 @@ function updateNeoscheduleVars() {
         scheduleHeight = window.innerHeight - NAV_HEIGHT - INPUT_FORM_HEIGHT;
         scheduleMarginLeft = (INPUT_FORM.offsetWidth - window.innerWidth) / 2;
         scheduleMarginTop = NAV_HEIGHT + INPUT_FORM_HEIGHT + 10;
-    }
-}
-
-function updateServiceWorker() {
-    if (localStorage.getItem("serviceWorkerEnabled") === "on") {
-        const DOCUMENT_HEAD = document.getElementsByTagName("HEAD");
-        const SW2 = document.createElement("SCRIPT");
-        SW2.setAttribute("src", "sw2.js");
-        DOCUMENT_HEAD[0].appendChild(SW2);
     }
 }
 
