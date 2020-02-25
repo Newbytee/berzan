@@ -34,3 +34,7 @@ Code used for proxying API calls: https://gitlab.com/Newbyte/berzanjs-api
 ## Third party code used
 * Slideout.js
 * Bootstrap's Reboot was used as base for the stylesheet.
+
+## License 
+
+Berzan.js is licensed under the Mozilla Public License Version 2. This license both imposes certain restrictions and gives you certain freedoms in regards to how you are allowed to use the code. See the file LICENSE or [this](https://www.mozilla.org/en-US/MPL/2.0/) for more information. 
