@@ -350,6 +350,12 @@ nav, .mobileNavButton, #schedule, #wrapper {
     font-size: medium;
 }
 
+#scheduleMount {
+    text-align: center;
+    font-size: 4em;
+    color: #222222;
+}
+
 #hiddenMenu {
     background-color: #EEEEEE;
     overflow: hidden;

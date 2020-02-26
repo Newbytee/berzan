@@ -382,16 +382,28 @@ function handleRenderRequest(form) {
         SCHEDULE_MOUNT.firstChild.remove();
     }
 
+    SCHEDULE_MOUNT.style.height = scheduleHeight + "px";
+    SCHEDULE_MOUNT.style.lineHeight = scheduleHeight * 0.8 + "px";
+    SCHEDULE_MOUNT.style.fontWeight = "lighter";
+    SCHEDULE_MOUNT.textContent = "Laddar…";
+
     getScheduleJSON(form[1].value, form[0].value, form[3].selectedIndex)
         .then(scheduleJSON => {
+            removeLoading(SCHEDULE_MOUNT);
             renderSchedule(scheduleJSON, SCHEDULE_MOUNT);
             if (!localStorage.getItem("defaultClass")) {
                 localStorage.setItem("defaultClass", form[1].value);
             }
         })
         .catch(error => {
+            removeLoading(SCHEDULE_MOUNT);
             showSnackbar(error);
         });
+}
+
+function removeLoading(scheduleMount) {
+    scheduleMount.textContent = "";
+    scheduleMount.removeAttribute("style");
 }
 
 function renderSchedule(scheduleJSON, schedule_mount) {
