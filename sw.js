@@ -10,6 +10,7 @@ const URLS_TO_CACHE = [
     "/views/neoschedule.html",
     "/views/etc.html",
     "/views/settings.html",
+    "/views/about.html",
     "/manifest.json",
     "/img/logo/logo-512.png",
     "https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.js"
