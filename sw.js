@@ -1,6 +1,7 @@
 "use strict";
 
-const CACHE_NAME = "berzanjs-cache-v1";
+const APP_CACHE = "berzanjs-app-cache-v1";
+const CONTENT_CACHE = "berzanjs-schedule-cache-v1";
 const URLS_TO_CACHE = [
     "/",
     "/css/style.css",
@@ -18,7 +19,7 @@ const URLS_TO_CACHE = [
 
 self.addEventListener("install", function(evnt) {
     evnt.waitUntil(
-        caches.open(CACHE_NAME)
+        caches.open(APP_CACHE)
             .then(function(cache) {
                 console.log("Opened cache");
                 return cache.addAll(URLS_TO_CACHE);
@@ -28,7 +29,8 @@ self.addEventListener("install", function(evnt) {
 
 self.addEventListener("activate", function(evnt) {
     const CACHE_WHITELIST = [
-        CACHE_NAME
+        APP_CACHE,
+        CONTENT_CACHE
     ];
 
     evnt.waitUntil(
@@ -71,11 +73,18 @@ self.addEventListener("fetch", function(evnt){
 
                         const RESPONSE_TO_CACHE = response.clone();
 
-                        caches.open(CACHE_NAME)
+                        let cacheType;
+                        if (response.type === "cors") {
+                            cacheType = CONTENT_CACHE;
+                        } else {
+                            cacheType = APP_CACHE;
+                        }
+
+                        caches.open(cacheType)
                             .then(function(cache) {
                                 cache.put(evnt.request, RESPONSE_TO_CACHE);
                             });
-                        
+
                         return response;
                     }
                 );
