@@ -13,6 +13,7 @@ const DATE = new Date();
 const MODULES = new ModuleManager();
 let allowKeyNav = true;
 let firstScheduleLoad = true;
+let scheduleResizeTimer = null;
 let scheduleWidth;
 let scheduleHeight;
 let scheduleMarginLeft;
@@ -62,7 +63,17 @@ function init() {
 
     window.onresize = function() {
         checkDeviceType();
-        // TODO: make schedule re-render when window is resized
+
+        if (sessionStorage.getItem("currentView") === "neoschedule") {
+            const INPUT_FORM = document.getElementById("scheduleInputForm");
+            if (scheduleResizeTimer !== null) {
+                window.clearTimeout(scheduleResizeTimer);
+            }
+            scheduleResizeTimer = window.setTimeout(function() {
+                updateNeoscheduleVars();
+                handleRenderRequest(INPUT_FORM);
+            }, 150);
+        }
     };
 
     for (let i = 0; i < NAVIGATION_BUTTONS.length; i++) {
