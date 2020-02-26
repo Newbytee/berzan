@@ -26,6 +26,24 @@ self.addEventListener("install", function(evnt) {
     );
 });
 
+self.addEventListener("activate", function(evnt) {
+    const CACHE_WHITELIST = [
+        CACHE_NAME
+    ];
+
+    evnt.waitUntil(
+        caches.keys().then(cacheNames => {
+            return Promise.all(
+                cacheNames.map(cacheName => {
+                    if (CACHE_WHITELIST.indexOf(cacheName) === -1) {
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
+        })
+    );
+});
+
 self.addEventListener("fetch", function(evnt){
     evnt.respondWith(
         caches.match(evnt.request)
