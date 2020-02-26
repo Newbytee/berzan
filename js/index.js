@@ -93,12 +93,6 @@ function init() {
         }
     }
 
-    if (localStorage.getItem("scheduleFiletype") === null)
-        localStorage.setItem("scheduleFiletype", "png");
-
-    if (localStorage.getItem("appLanguage") === null)
-        localStorage.setItem("appLanguage", "sv-se");
-
     if (localStorage.getItem("APIURLOverride") === null)
         localStorage.setItem("APIURLOverride", DEFAULT_API_URL);
 
