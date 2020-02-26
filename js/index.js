@@ -46,11 +46,11 @@ function init() {
     createSlideout();
     checkDeviceType(); // Check orientation fails if slideout hasn't been created, please keep them this order
 
-    document.getElementById("hamburgerSvg").addEventListener("click", function () {
+    document.getElementById("hamburgerSvg").addEventListener("click", function() {
         slideout.toggle();
     });
 
-    document.addEventListener("keypress", function (event) {
+    document.addEventListener("keypress", function(event) {
         const TAB_INDEX = parseInt(event.key);
         if (
             !(isNaN(TAB_INDEX)) &&
@@ -60,17 +60,17 @@ function init() {
         ) changeTab(TAB_INDEX);
     });
 
-    window.onresize = function () {
+    window.onresize = function() {
         checkDeviceType();
         // TODO: make schedule re-render when window is resized
     };
 
     for (let i = 0; i < NAVIGATION_BUTTONS.length; i++) {
-        NAVIGATION_BUTTONS[i].addEventListener("click", function () {
+        NAVIGATION_BUTTONS[i].addEventListener("click", function() {
             loadPage(i);
             NAVIGATION_BUTTONS[i].blur();
         });
-        MOBILE_NAV_BUTTONS[i].addEventListener("click", function () {
+        MOBILE_NAV_BUTTONS[i].addEventListener("click", function() {
             loadPage(i);
             slideout.close();
         });
