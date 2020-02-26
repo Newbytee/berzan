@@ -359,9 +359,15 @@ function setupNeoschedule() {
 }
 
 function handleRenderRequest(form) {
+    const SCHEDULE_MOUNT = document.getElementById("scheduleMount");
+
+    while (SCHEDULE_MOUNT.firstChild) {
+        SCHEDULE_MOUNT.firstChild.remove();
+    }
+
     getScheduleJSON(form[1].value, form[0].value, form[3].selectedIndex)
         .then(scheduleJSON => {
-            renderSchedule(scheduleJSON);
+            renderSchedule(scheduleJSON, SCHEDULE_MOUNT);
             if (!localStorage.getItem("defaultClass")) {
                 localStorage.setItem("defaultClass", form[1].value);
             }
@@ -371,8 +377,7 @@ function handleRenderRequest(form) {
         });
 }
 
-function renderSchedule(scheduleJSON) {
-    const SCHEDULE_MOUNT = document.getElementById("scheduleMount");
+function renderSchedule(scheduleJSON, schedule_mount) {
     const SCHEDULE_CONTAINER = document.createElement("DIV");
     const BOXES = scheduleJSON.data.boxList;
     const TEXTS = scheduleJSON.data.textList;
@@ -387,7 +392,7 @@ function renderSchedule(scheduleJSON) {
         SCHEDULE_CONTAINER.appendChild(TEXT);
     }
 
-    SCHEDULE_MOUNT.appendChild(SCHEDULE_CONTAINER);
+    schedule_mount.appendChild(SCHEDULE_CONTAINER);
 }
 
 function intoBox(obj) {
