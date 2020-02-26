@@ -22,6 +22,7 @@ Code used for proxying API calls: https://gitlab.com/Newbyte/berzanjs-api
   * Improvements/bugfixes land here first, but are not guaranteed to be of quality.
   * If you are interested in contributing to Berzan.js, this is the branch you should base your code on.
   * Hosted on [berzan.netlify.com](https://berzan.netlify.com)
+    * Note that this is not recommended for daily usage, and due to Berzan.js' caching strategy you may end up only getting updates when a version bump is performed regardless. 
 * gh-pages (meaning GitHub pages)
   * Code from master is merged in here when I consider it good enough. Code here should always be reliable
   * Hosted on [berzan.js.org](https://berzan.js.org) (recommended for daily usage)
