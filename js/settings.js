@@ -1,4 +1,5 @@
 function setupSettings() {
+    const CHANGE_STARTPAGE_BUTTONS = document.getElementsByClassName("startPagePicker");
     const CLASS_SAVE_FIELD = document.getElementById("defaultClass");
     const CHANGE_SLIDEOUT_SIDE_BUTTONS = document.getElementsByClassName("slideoutSidePicker");
     const STYLE_SELECTION = document.getElementById("styleSelection");
@@ -6,6 +7,29 @@ function setupSettings() {
 
     addToggle(STYLE_SELECTION, "newDesign", updateStyle);
     addToggle(SLIDEOUT_FAIL_SELECTION, "slideoutWarnDisable");
+
+    for (let i = 0; i < CHANGE_STARTPAGE_BUTTONS.length; i++) {
+        CHANGE_STARTPAGE_BUTTONS[i].addEventListener("click", function() {
+            switch (i) {
+                case 0:
+                    localStorage.setItem("startPage", "schedule");
+                    showSnackbar("Startsida bytt till schema");
+                    break;
+                case 1:
+                    localStorage.setItem("startPage", "lunch");
+                    showSnackbar("Startsida bytt till lunch");
+                    break;
+                case 2:
+                    localStorage.setItem("startPage", "etc");
+                    showSnackbar("Startsida bytt till övrigt");
+                    break;
+                default:
+                    localStorage.setItem("startPage", "schedule");
+                    showSnackbar("Startsida bytt till schema");
+                    break;
+            }
+        });
+    }
 
     for (let i = 0; i < CHANGE_SLIDEOUT_SIDE_BUTTONS.length; i++) {
         CHANGE_SLIDEOUT_SIDE_BUTTONS[i].addEventListener("click", function() {
