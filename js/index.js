@@ -52,7 +52,12 @@ function init() {
 
     document.addEventListener("keypress", function (event) {
         const TAB_INDEX = parseInt(event.key);
-        if (!(isNaN(TAB_INDEX)) && TAB_INDEX < NAVIGATION_BUTTONS.length + 1 && TAB_INDEX > 0 && allowKeyNav) changeTab(TAB_INDEX);
+        if (
+            !(isNaN(TAB_INDEX)) &&
+            TAB_INDEX < NAVIGATION_BUTTONS.length + 1 &&
+            TAB_INDEX > 0 &&
+            allowKeyNav
+        ) changeTab(TAB_INDEX);
     });
 
     window.onresize = function () {
