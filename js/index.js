@@ -229,12 +229,13 @@ function updateNeoscheduleVars() {
     if (sessionStorage.getItem("currentView") === "neoschedule") {
         const NAV_HEIGHT = document.getElementsByTagName("nav")[0].offsetHeight;
         const INPUT_FORM = document.getElementById("scheduleInputForm");
-        const INPUT_FORM_HEIGHT = INPUT_FORM.offsetHeight;
+        const MAIN_WRAPPER_HEIGHT = document.getElementById("wrapper").offsetHeight;
+        const OFFSET = 5;
 
-        scheduleWidth = INPUT_FORM.offsetWidth;
-        scheduleHeight = window.innerHeight - NAV_HEIGHT - INPUT_FORM_HEIGHT;
+        scheduleWidth = INPUT_FORM.offsetWidth - 1;
+        scheduleHeight = window.innerHeight - MAIN_WRAPPER_HEIGHT - NAV_HEIGHT - OFFSET - 1;
         scheduleMarginLeft = (INPUT_FORM.offsetWidth - window.innerWidth) / 2;
-        scheduleMarginTop = NAV_HEIGHT + INPUT_FORM_HEIGHT + 10;
+        scheduleMarginTop = MAIN_WRAPPER_HEIGHT + NAV_HEIGHT + OFFSET;
     }
 }
 
