@@ -397,7 +397,7 @@ function renderSchedule(scheduleJSON, schedule_mount) {
 
 function intoBox(obj) {
     const BOX = document.createElement("DIV");
-    BOX.style.position = "absolute";
+    BOX.classList.add("scheduleElement");
     BOX.style.boxSizing = "content-box";
     BOX.style.backgroundColor = obj.bcolor;
     BOX.style.color = obj.fcolor;
@@ -411,7 +411,7 @@ function intoBox(obj) {
 
 function intoText(obj) {
     const TEXT = document.createElement("SPAN");
-    TEXT.style.position = "absolute";
+    TEXT.classList.add("scheduleElement");
     TEXT.style.color = obj.fcolor;
     TEXT.style.fontSize = obj.fontsize.toString() + "px";
     TEXT.style.left = (obj.x - scheduleMarginLeft).toString() + "px";

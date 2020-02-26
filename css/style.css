@@ -287,6 +287,11 @@ nav, .mobileNavButton, #schedule, #wrapper {
     line-height: normal;
 }
 
+.scheduleElement {
+    position: absolute;
+    z-index: -1;
+}
+
 #identity {
     padding-top: 8px;
     font-size: 30px;
