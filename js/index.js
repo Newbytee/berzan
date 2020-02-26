@@ -406,7 +406,7 @@ function removeLoading(scheduleMount) {
     scheduleMount.removeAttribute("style");
 }
 
-function renderSchedule(scheduleJSON, schedule_mount) {
+function renderSchedule(scheduleJSON, scheduleMount) {
     const SCHEDULE_CONTAINER = document.createElement("DIV");
     const BOXES = scheduleJSON.data.boxList;
     const TEXTS = scheduleJSON.data.textList;
@@ -421,7 +421,7 @@ function renderSchedule(scheduleJSON, schedule_mount) {
         SCHEDULE_CONTAINER.appendChild(TEXT);
     }
 
-    schedule_mount.appendChild(SCHEDULE_CONTAINER);
+    scheduleMount.appendChild(SCHEDULE_CONTAINER);
 }
 
 function intoBox(obj) {
