@@ -1,6 +1,7 @@
 {
   "short_name": "Berzan.js",
   "name": "Berzan.js",
+  "version": "1.2",
   "display": "standalone",
   "start_url": "/",
   "theme_color": "#490A3D",
