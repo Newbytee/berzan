@@ -1,5 +1,6 @@
 <div id="contentContainer">
     <h2 class="contentSeparatorHeader">Schema</h2>
+    <div class="separator"></div>
     <div class="contentItem">
         <h3 class="contentHeader">Förstasida</h3>
         <label>Schema
@@ -12,11 +13,12 @@
     <div class="contentItem">
         <h3 class="contentHeader">Standardklass</h3>
         <form id="defaultClassForm">
-            <input placeholder="Klass" title="Namn på klass att spara som standardklass">
-            <input title="Spara vald klass som standardklass" type="submit" value="Spara">
+            <input class="field" placeholder="Klass" title="Namn på klass att spara som standardklass">
+            <input class="field" title="Spara vald klass som standardklass" type="submit" value="Spara">
         </form>
     </div>
     <h2 class="contentSeparatorHeader">Anpassning</h2>
+    <div class="separator"></div>
     <div class="contentItem">
         <h3 class="contentHeader">Sida för mobilmenyn</h3>
         <label>Vänster
@@ -27,23 +29,33 @@
         </label>
     </div>
     <h2 class="contentSeparatorHeader">Övrigt</h2>
+    <div class="separator"></div>
     <div class="contentItem">
         <h3 class="contentHeader">Om Slideout.js inte kan laddas</h3>
-        <select class="field" id="slideoutFailWarn">
-            <option>Varna</option>
-            <option>Varna inte</option>
-        </select>
+        <label>Varna
+            <input class="slideoutBehaviourPicker" name="slideoutBehaviourPicker" type="radio">
+        </label>
+        <label>Varna inte
+            <input class="slideoutBehaviourPicker" name="slideoutBehaviourPicker" type="radio">
+        </label>
+    </div>
+    <div class="contentItem">
+        <h3 class="contentHeader">Rensa cache</h3>
+        <button class="field" id="deleteCaches" title="Ta bort all cachelagrad data Berzan.js skapat">Återställ</button>
     </div>
     <div class="contentItem">
         <h3 class="contentHeader">Återställ inställningar</h3>
         <button class="field" id="resetButton" title="Återställ alla inställningar till deras standardvärde">Återställ</button>
     </div>
     <h2 class="contentSeparatorHeader">Experiment</h2>
+    <div class="separator"></div>
     <div class="contentItem">
-        <h3 class="contentHeader">Val av design för Berzan.js</h3>
-        <select class="field" id="styleSelection">
-            <option>Standard</option>
-            <option>Experimentell</option>
-        </select>
+        <h3 class="contentHeader">Tema</h3>
+        <label>Ljus
+            <input class="stylePicker" name="stylePicker" type="radio">
+        </label>
+        <label>Mörk
+            <input class="stylePicker" name="stylePicker" type="radio">
+        </label>
     </div>
 </div>

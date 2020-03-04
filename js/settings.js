@@ -1,52 +1,66 @@
 function setupSettings() {
-    const CHANGE_STARTPAGE_BUTTONS = document.getElementsByClassName("startPagePicker");
+    const CHANGE_STARTPAGE_RADIO = document.getElementsByClassName("startPagePicker");
     const DEFAULT_CLASS_FORM = document.getElementById("defaultClassForm");
-    const CHANGE_SLIDEOUT_SIDE_BUTTONS = document.getElementsByClassName("slideoutSidePicker");
-    const STYLE_SELECTION = document.getElementById("styleSelection");
-    const SLIDEOUT_FAIL_SELECTION = document.getElementById("slideoutFailWarn");
+    const CHANGE_SLIDEOUT_SIDE_RADIO = document.getElementsByClassName("slideoutSidePicker");
+    const SLIDEOUT_FAIL_RADIO = document.getElementsByClassName("slideoutBehaviourPicker");
+    const STYLE_RADIO = document.getElementsByClassName("stylePicker");
+    const DELETE_CACHES_BUTTON = document.getElementById("deleteCaches");
 
-    addToggle(STYLE_SELECTION, "newDesign", updateStyle);
-    addToggle(SLIDEOUT_FAIL_SELECTION, "slideoutWarnDisable");
-
-    for (let i = 0; i < CHANGE_STARTPAGE_BUTTONS.length; i++) {
-        CHANGE_STARTPAGE_BUTTONS[i].addEventListener("change", function() {
-            switch (i) {
-                case 0:
-                    localStorage.setItem("startPage", "schedule");
+    setupRadio(
+        CHANGE_STARTPAGE_RADIO,
+        [
+            "schedule",
+            "lunch"
+        ],
+        "startPage",
+        function(value) {
+            switch (value) {
+                case "schedule":
                     showSnackbar("Startsida bytt till schema");
                     break;
-                case 1:
-                    localStorage.setItem("startPage", "lunch");
+                case "lunch":
                     showSnackbar("Startsida bytt till lunch");
                     break;
-                default:
-                    localStorage.setItem("startPage", "schedule");
-                    showSnackbar("Startsida bytt till schema");
-                    break;
             }
-        });
-    }
+        }
+    );
+    setupRadio(
+        CHANGE_SLIDEOUT_SIDE_RADIO,
+        [
+            "left",
+            "right"
+        ],
+        "slideoutSide",
+        function(value) {
+            slideout.destroy();
+            createSlideout();
 
-    for (let i = 0; i < CHANGE_SLIDEOUT_SIDE_BUTTONS.length; i++) {
-        CHANGE_SLIDEOUT_SIDE_BUTTONS[i].addEventListener("change", function() {
-            switch (i) {
-                case 0:
-                    localStorage.setItem("slideoutSide", "left");
-                    slideout.destroy();
-                    createSlideout();
+            switch (value) {
+                case "left":
                     showSnackbar("Mobilmenyn flyttad till vänster");
                     break;
-                case 1:
-                    localStorage.setItem("slideoutSide", "right");
-                    slideout.destroy();
-                    createSlideout();
+                case "right":
                     showSnackbar("Mobilmenyn flyttad till höger");
                     break;
-                default:
-                    break;
             }
-        });
-    }
+        }
+    );
+    setupRadio(
+        SLIDEOUT_FAIL_RADIO,
+        [
+            "on",
+            "off"
+        ],
+        "slideoutWarnDisable"
+    );
+    setupRadio(
+        STYLE_RADIO,
+        [
+            "light",
+            "dark"
+        ],
+        "theme"
+    );
 
     function saveDefaultClass(evnt) {
         const CLASS_TEXT = evnt.target[0].value;
@@ -64,42 +78,46 @@ function setupSettings() {
         saveDefaultClass(evnt);
     });
 
+    DELETE_CACHES_BUTTON.addEventListener("click", function() {
+        if (confirm("Detta kommer ta bort all cachelagrad data. Inga inställningar försvinner, men det kan ta längre tid att ladda saker eftersom allt behöver hämtas igen. Fortsätt?")) {
+            deleteCaches();
+        }
+    });
+
     document.getElementById("resetButton").addEventListener("click", function() {
         resetPreferences();
     });
 }
 
-function updateStyle() {
-    if (localStorage.getItem("newDesign") === "on") {
-        const LINK_ELEMENTS = document.getElementsByTagName("LINK");
-        for (let i = 0; i < LINK_ELEMENTS.length; i++) {
-            if (LINK_ELEMENTS[i].getAttribute("rel") === "stylesheet" && LINK_ELEMENTS[i].getAttribute("href").search("restyle") === -1) {
-                const HREF_STRING = LINK_ELEMENTS[i].getAttribute("href");
-                const PATTERN_INDEX = HREF_STRING.search("style");
-                let stringParts = [];
-                stringParts.push(HREF_STRING.substring(0, PATTERN_INDEX));
-                stringParts.push(HREF_STRING.substring(PATTERN_INDEX, HREF_STRING.length));
-                LINK_ELEMENTS[i].setAttribute("href", stringParts[0] + "re" + stringParts[1]);
-            }
+function setupRadio(elements, values, storageKey, onchangeCallback) {
+    for (let i = 0; i < elements.length; i++) {
+        const element = elements[i];
+
+        if (i === values.indexOf(
+            localStorage.getItem(storageKey))
+        ) {
+            element.checked = true;
         }
+
+        element.addEventListener("change", function() {
+            localStorage.setItem(storageKey, values[i]);
+
+            if (typeof onchangeCallback === "function") {
+                onchangeCallback(values[i]);
+            }
+        })
     }
 }
 
-function addToggle(element, storageKey, func) {
-    element.selectedIndex = localStorage.getItem(storageKey) ? 1 : 0;
-    
-    element.addEventListener("change", function() {
-        switch (element.selectedIndex) {
-            case 0:
-                localStorage.removeItem(storageKey);
-                break;
-            case 1:
-                localStorage.setItem(storageKey, "on");
-                break;
-        }
-        if (typeof func === "function")
-            func();
-    });
+async function deleteCaches() {
+    await caches.keys()
+        .then(keys => {
+            keys.map((key, index) => {
+                caches.delete(key);
+            })
+        });
+
+    reloadPage();
 }
 
 function resetPreferences() {
@@ -113,6 +131,10 @@ function resetPreferences() {
                 }
             });
         }
-        location.reload();
+        reloadPage();
     }
+}
+
+function reloadPage() {
+    location.reload();
 }
