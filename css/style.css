@@ -1,3 +1,16 @@
+:root {
+    /*--nav-bg-colour:*/
+    --nav-bg-colour-hover: #FFFFFF66;
+
+    --global-bg-colour: #FFF;
+    --slideout-bg-colour: #FFF;
+    --snackbar-bg-colour: #333;
+
+    --normal-text-colour: #212529;
+    --invert-text-colour: #FFF;
+    --nav-text-colour: #FFF;
+}
+
 *,
 *::before,
 *::after {
@@ -27,9 +40,9 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #212529;
+    color: var(--normal-text-colour);
     text-align: left;
-    background-color: #fff;
+    background-color: var(--global-bg-colour);
     width: 100%;
     height: 100%;
     user-select: none;
@@ -219,40 +232,22 @@ nav, .mobileNavButton, #schedule, #wrapper {
 }
 
 .contentItem {
-    text-align: center;
-    background-color: #7F3571;
-    box-shadow: 0 0 5px 2px #888888;
-    color: #FFFFFF;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 5px auto;
+    padding: 1em;
+    margin: auto;
     width: 97%;
-}
-
-.contentItem:first-of-type {
-    margin-top: 3vw;
 }
 
 .contentItem a:link, #contentContainer div a:visited {
     color: #00bfa5;
 }
 
-.divider {
-    width: 95%;
-    background-color: #DDDDDD;
-    height: 3px;
-    border-radius: 3px;
-    margin: 20px auto;
+.contentSeparatorHeader {
+    width: 100%;
+    padding: 1em;
+    margin: auto;
 }
 
-.divider p {
-    margin-right: auto;
-    margin-left: auto;
-    width: 30%;
-    display: block;
-    background-color: white;
-    margin-top: -10px;
-    text-align: center;
+.contentHeader {
 }
 
 .mobileNavButton {
@@ -266,7 +261,7 @@ nav, .mobileNavButton, #schedule, #wrapper {
     display: flex;
     align-items: center;
     background-color: #CCCCCC;
-    color: #000000;
+    color: var(--normal-text-colour);
     text-transform: uppercase;
     cursor: pointer;
 }
@@ -395,7 +390,7 @@ nav, .mobileNavButton, #schedule, #wrapper {
     visibility: hidden;
     min-width: 250px;
     margin-left: -125px;
-    background-color: #333;
+    background-color: var(--snackbar-bg-colour);
     color: #fff;
     text-align: center;
     border-radius: 2px;
@@ -439,7 +434,7 @@ nav, .mobileNavButton, #schedule, #wrapper {
   position: relative;
   z-index: 1;
   will-change: transform;
-  background-color: #FFF; /* A background-color is required */
+  background-color: var(--slideout-bg-colour); /* A background-color is required */
   min-height: 100vh;
 }
 
@@ -479,7 +474,7 @@ nav, .mobileNavButton, #schedule, #wrapper {
     .navButton {
         transition: 0.5s;
         padding: 0 20px;
-        color: #FFFFFF;
+        color: var(--nav-text-colour);
         display: flex;
         align-items: center;
         background: inherit;
@@ -488,14 +483,13 @@ nav, .mobileNavButton, #schedule, #wrapper {
 
     .navButton:hover, .navButtonFakeHover, .navButton:focus {
         transition: 0.5s;
-        background-color: #FFFFFF66; /* #123456 */
+        background-color: var(--nav-bg-colour-hover); /* #123456 */
         outline: 0;
     }
 
     .contentItem {
         width: 30%;
         margin: 0.7vh;
-        flex-grow: 10;
     }
 
     .contentItem:first-of-type {

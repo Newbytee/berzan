@@ -1,6 +1,6 @@
 function setupSettings() {
     const CHANGE_STARTPAGE_BUTTONS = document.getElementsByClassName("startPagePicker");
-    const CLASS_SAVE_FIELD = document.getElementById("defaultClass");
+    const DEFAULT_CLASS_FORM = document.getElementById("defaultClassForm");
     const CHANGE_SLIDEOUT_SIDE_BUTTONS = document.getElementsByClassName("slideoutSidePicker");
     const STYLE_SELECTION = document.getElementById("styleSelection");
     const SLIDEOUT_FAIL_SELECTION = document.getElementById("slideoutFailWarn");
@@ -9,7 +9,7 @@ function setupSettings() {
     addToggle(SLIDEOUT_FAIL_SELECTION, "slideoutWarnDisable");
 
     for (let i = 0; i < CHANGE_STARTPAGE_BUTTONS.length; i++) {
-        CHANGE_STARTPAGE_BUTTONS[i].addEventListener("click", function() {
+        CHANGE_STARTPAGE_BUTTONS[i].addEventListener("change", function() {
             switch (i) {
                 case 0:
                     localStorage.setItem("startPage", "schedule");
@@ -18,10 +18,6 @@ function setupSettings() {
                 case 1:
                     localStorage.setItem("startPage", "lunch");
                     showSnackbar("Startsida bytt till lunch");
-                    break;
-                case 2:
-                    localStorage.setItem("startPage", "etc");
-                    showSnackbar("Startsida bytt till övrigt");
                     break;
                 default:
                     localStorage.setItem("startPage", "schedule");
@@ -32,7 +28,7 @@ function setupSettings() {
     }
 
     for (let i = 0; i < CHANGE_SLIDEOUT_SIDE_BUTTONS.length; i++) {
-        CHANGE_SLIDEOUT_SIDE_BUTTONS[i].addEventListener("click", function() {
+        CHANGE_SLIDEOUT_SIDE_BUTTONS[i].addEventListener("change", function() {
             switch (i) {
                 case 0:
                     localStorage.setItem("slideoutSide", "left");
@@ -46,28 +42,26 @@ function setupSettings() {
                     createSlideout();
                     showSnackbar("Mobilmenyn flyttad till höger");
                     break;
+                default:
+                    break;
             }
         });
     }
 
-    function saveDefaultClass() {
-        if (CLASS_SAVE_FIELD.value.length > 0) {
-            localStorage.setItem("defaultClass", CLASS_SAVE_FIELD.value);
-            showSnackbar(CLASS_SAVE_FIELD.value + " sparad som standardklass");
+    function saveDefaultClass(evnt) {
+        const CLASS_TEXT = evnt.target[0].value;
+        if (CLASS_TEXT.length > 0) {
+            localStorage.setItem("defaultClass", CLASS_TEXT.value);
+            showSnackbar(CLASS_TEXT + " sparad som standardklass");
         } else {
             localStorage.removeItem("defaultClass");
             showSnackbar("Standardklass borttagen");
         }
     }
 
-    CLASS_SAVE_FIELD.addEventListener("keydown", function(event) {
-        if (event.key === "Enter") {
-            saveDefaultClass();
-        }
-    });
-
-    document.getElementById("saveButtonThingy").addEventListener("click", function() {
-        saveDefaultClass();
+    DEFAULT_CLASS_FORM.addEventListener("submit", function(evnt) {
+        evnt.preventDefault();
+        saveDefaultClass(evnt);
     });
 
     document.getElementById("resetButton").addEventListener("click", function() {

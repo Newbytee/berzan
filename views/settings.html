@@ -1,45 +1,46 @@
 <div id="contentContainer">
-    <div class="divider">
-        <p>Schema</p>
+    <h2 class="contentSeparatorHeader">Schema</h2>
+    <div class="contentItem">
+        <h3 class="contentHeader">Förstasida</h3>
+        <label>Schema
+            <input class="startPagePicker" name="startpagePicker" type="radio">
+        </label>
+        <label>Lunch
+            <input class="startPagePicker" name="startpagePicker" type="radio">
+        </label>
     </div>
     <div class="contentItem">
-        <p>Val av förstasida</p>
-        <button class="field startPagePicker">Schema</button>
-        <button class="field startPagePicker">Lunch</button>
-        <button class="field startPagePicker">Övrigt</button>
+        <h3 class="contentHeader">Standardklass</h3>
+        <form id="defaultClassForm">
+            <input placeholder="Klass" title="Namn på klass att spara som standardklass">
+            <input title="Spara vald klass som standardklass" type="submit" value="Spara">
+        </form>
     </div>
+    <h2 class="contentSeparatorHeader">Anpassning</h2>
     <div class="contentItem">
-        <p>Val av standardklass</p>
-        <input class="field" id="defaultClass" placeholder="Klass">
-        <button class="field" id="saveButtonThingy" title="Spara vald klass som standardklass">Spara</button>
+        <h3 class="contentHeader">Sida för mobilmenyn</h3>
+        <label>Vänster
+            <input class="slideoutSidePicker" name="slideoutSidePicker" type="radio">
+        </label>
+        <label>Höger
+            <input class="slideoutSidePicker" name="slideoutSidePicker" type="radio">
+        </label>
     </div>
-    <div class="divider">
-        <p>Anpassning</p>
-    </div>
+    <h2 class="contentSeparatorHeader">Övrigt</h2>
     <div class="contentItem">
-        <p>Sida för mobilmenyn</p>
-        <button class="field slideoutSidePicker">Vänster</button>
-        <button class="field slideoutSidePicker">Höger</button>
-    </div>
-    <div class="divider">
-        <p>Övrigt</p>
-    </div>
-    <div class="contentItem">
-        <p>Om Slideout.js inte kan laddas</p>
+        <h3 class="contentHeader">Om Slideout.js inte kan laddas</h3>
         <select class="field" id="slideoutFailWarn">
             <option>Varna</option>
             <option>Varna inte</option>
         </select>
     </div>
     <div class="contentItem">
-        <p>Återställ inställningar</p>
+        <h3 class="contentHeader">Återställ inställningar</h3>
         <button class="field" id="resetButton" title="Återställ alla inställningar till deras standardvärde">Återställ</button>
     </div>
-    <div class="divider">
-        <p>Experiment</p>
-    </div>
+    <h2 class="contentSeparatorHeader">Experiment</h2>
     <div class="contentItem">
-        <p>Val av design för Berzan.js</p>
+        <h3 class="contentHeader">Val av design för Berzan.js</h3>
         <select class="field" id="styleSelection">
             <option>Standard</option>
             <option>Experimentell</option>
