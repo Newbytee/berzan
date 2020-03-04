@@ -8,10 +8,6 @@ function setupSettings() {
 
     setupRadio(
         CHANGE_STARTPAGE_RADIO,
-        [
-            "schedule",
-            "lunch"
-        ],
         "startPage",
         function(value) {
             switch (value) {
@@ -26,10 +22,6 @@ function setupSettings() {
     );
     setupRadio(
         CHANGE_SLIDEOUT_SIDE_RADIO,
-        [
-            "left",
-            "right"
-        ],
         "slideoutSide",
         function(value) {
             slideout.destroy();
@@ -47,18 +39,10 @@ function setupSettings() {
     );
     setupRadio(
         SLIDEOUT_FAIL_RADIO,
-        [
-            "on",
-            "off"
-        ],
         "slideoutWarnDisable"
     );
     setupRadio(
         STYLE_RADIO,
-        [
-            "light",
-            "dark"
-        ],
         "theme"
     );
 
@@ -89,7 +73,13 @@ function setupSettings() {
     });
 }
 
-function setupRadio(elements, values, storageKey, onchangeCallback) {
+function setupRadio(elementsCollection, storageKey, onchangeCallback) {
+    const elements = Array.prototype.slice.call(elementsCollection);
+
+    const values = elements.map(element => {
+        return element.value;
+    });
+
     for (let i = 0; i < elements.length; i++) {
         const element = elements[i];
 
@@ -100,10 +90,10 @@ function setupRadio(elements, values, storageKey, onchangeCallback) {
         }
 
         element.addEventListener("change", function() {
-            localStorage.setItem(storageKey, values[i]);
+            localStorage.setItem(storageKey, element.value);
 
             if (typeof onchangeCallback === "function") {
-                onchangeCallback(values[i]);
+                onchangeCallback(element.value);
             }
         })
     }
