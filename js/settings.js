@@ -102,7 +102,7 @@ function setupRadio(elementsCollection, storageKey, onchangeCallback) {
 async function deleteCaches() {
     await caches.keys()
         .then(keys => {
-            keys.map((key, index) => {
+            keys.map(key => {
                 caches.delete(key);
             })
         });
