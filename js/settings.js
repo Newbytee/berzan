@@ -74,26 +74,26 @@ function setupSettings() {
 }
 
 function setupRadio(elementsCollection, storageKey, onchangeCallback) {
-    const elements = Array.prototype.slice.call(elementsCollection);
+    const ELEMENTS = Array.prototype.slice.call(elementsCollection);
 
-    const values = elements.map(element => {
+    const VALUES = ELEMENTS.map(element => {
         return element.value;
     });
 
-    for (let i = 0; i < elements.length; i++) {
-        const element = elements[i];
+    for (let i = 0; i < ELEMENTS.length; i++) {
+        const ELEMENT = ELEMENTS[i];
 
-        if (i === values.indexOf(
+        if (i === VALUES.indexOf(
             localStorage.getItem(storageKey))
         ) {
-            element.checked = true;
+            ELEMENT.checked = true;
         }
 
-        element.addEventListener("change", function() {
-            localStorage.setItem(storageKey, element.value);
+        ELEMENT.addEventListener("change", function() {
+            localStorage.setItem(storageKey, ELEMENT.value);
 
             if (typeof onchangeCallback === "function") {
-                onchangeCallback(element.value);
+                onchangeCallback(ELEMENT.value);
             }
         })
     }
