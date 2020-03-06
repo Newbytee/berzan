@@ -47,33 +47,29 @@ function setupSettings() {
         "theme"
     );
 
-    function saveDefaultClass(evnt) {
-        const CLASS_TEXT = evnt.target[0].value;
-        if (CLASS_TEXT.length > 0) {
-            localStorage.setItem("defaultClass", CLASS_TEXT.value);
-            showSnackbar(CLASS_TEXT + " sparad som standardklass");
-        } else {
-            localStorage.removeItem("defaultClass");
-            showSnackbar("Standardklass borttagen");
-        }
+    SWITCH_DAY_TIME_FORM
+        .addEventListener("submit", saveDayTimeSwitch);
+
+    DEFAULT_CLASS_FORM
+        .addEventListener("submit", saveDefaultClass);
+
+    DELETE_CACHES_BUTTON
+        .addEventListener("click", deleteCaches);
+
+    document.getElementById("resetButton")
+        .addEventListener("click", resetPreferences);
+}
+
+function saveDefaultClass(evnt) {
+    evnt.preventDefault();
+    const CLASS_TEXT = evnt.target[0].value;
+    if (CLASS_TEXT.length > 0) {
+        localStorage.setItem("defaultClass", CLASS_TEXT.value);
+        showSnackbar(CLASS_TEXT + " sparad som standardklass");
+    } else {
+        localStorage.removeItem("defaultClass");
+        showSnackbar("Standardklass borttagen");
     }
-
-    SWITCH_DAY_TIME_FORM.addEventListener("submit", saveDayTimeSwitch);
-
-    DEFAULT_CLASS_FORM.addEventListener("submit", function(evnt) {
-        evnt.preventDefault();
-        saveDefaultClass(evnt);
-    });
-
-    DELETE_CACHES_BUTTON.addEventListener("click", function() {
-        if (confirm("Detta kommer ta bort all cachelagrad data. Inga inställningar försvinner, men det kan ta längre tid att ladda saker eftersom allt behöver hämtas igen. Fortsätt?")) {
-            deleteCaches();
-        }
-    });
-
-    document.getElementById("resetButton").addEventListener("click", function() {
-        resetPreferences();
-    });
 }
 
 function saveDayTimeSwitch(evnt) {
@@ -113,14 +109,16 @@ function setupRadio(elementsCollection, storageKey, onchangeCallback) {
 }
 
 async function deleteCaches() {
-    await caches.keys()
-        .then(keys => {
-            keys.map(key => {
-                caches.delete(key);
-            })
-        });
+    if (confirm("Detta kommer ta bort all cachelagrad data. Inga inställningar försvinner, men det kan ta längre tid att ladda saker eftersom allt behöver hämtas igen. Fortsätt?")) {
+        await caches.keys()
+            .then(keys => {
+                keys.map(key => {
+                    caches.delete(key);
+                })
+            });
 
-    reloadPage();
+        reloadPage();
+    }
 }
 
 function saveSettingsObj(object) {
