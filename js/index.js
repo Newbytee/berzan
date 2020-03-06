@@ -6,6 +6,7 @@ Date.prototype.getWeek = function() {
 };
 
 const DEFAULT_API_URL = "https://berzanjs-api.herokuapp.com/";
+const SETTINGS_KEY = "berzan.jsSettings";
 const NAVIGATION_BUTTONS = document.getElementsByClassName("navButton");
 const MOBILE_NAV_BUTTONS = document.getElementsByClassName("mobileNavButton");
 const CONTENT_DIV = document.getElementById("wrapper");
@@ -111,6 +112,19 @@ function init() {
 
     if (localStorage.getItem("APIURLOverride") === null)
         localStorage.setItem("APIURLOverride", DEFAULT_API_URL);
+
+    if (localStorage.getItem(SETTINGS_KEY) === null)
+        localStorage.setItem(SETTINGS_KEY,
+            JSON.stringify({
+                theme: "light",
+                switchoverTime: {
+                    type: "global",
+                    values: {
+                        all: "00:00"
+                    }
+                }
+            })
+        );
 
     APIURL = localStorage.getItem("APIURLOverride");
 
@@ -556,6 +570,10 @@ function getNeatClassGUIDsObject(untidyObject) {
     }
 
     return neatObject;
+}
+
+function getSettingsObj() {
+    return JSON.parse(localStorage.getItem(SETTINGS_KEY));
 }
 
 function setupSettings() {

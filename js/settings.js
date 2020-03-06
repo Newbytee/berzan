@@ -5,6 +5,7 @@ function setupSettings() {
     const SLIDEOUT_FAIL_RADIO = document.getElementsByClassName("slideoutBehaviourPicker");
     const STYLE_RADIO = document.getElementsByClassName("stylePicker");
     const DELETE_CACHES_BUTTON = document.getElementById("deleteCaches");
+    const SWITCH_DAY_TIME_FORM = document.getElementById("switchDayTimeForm");
 
     setupRadio(
         CHANGE_STARTPAGE_RADIO,
@@ -57,6 +58,8 @@ function setupSettings() {
         }
     }
 
+    SWITCH_DAY_TIME_FORM.addEventListener("submit", saveDayTimeSwitch);
+
     DEFAULT_CLASS_FORM.addEventListener("submit", function(evnt) {
         evnt.preventDefault();
         saveDefaultClass(evnt);
@@ -71,6 +74,16 @@ function setupSettings() {
     document.getElementById("resetButton").addEventListener("click", function() {
         resetPreferences();
     });
+}
+
+function saveDayTimeSwitch(evnt) {
+    evnt.preventDefault();
+    const SETTINGS = getSettingsObj();
+
+    SETTINGS.switchoverTime.type = "global";
+    SETTINGS.switchoverTime.values.all = evnt.target[0].value;
+
+    saveSettingsObj(SETTINGS);
 }
 
 function setupRadio(elementsCollection, storageKey, onchangeCallback) {
@@ -108,6 +121,10 @@ async function deleteCaches() {
         });
 
     reloadPage();
+}
+
+function saveSettingsObj(object) {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(object));
 }
 
 function resetPreferences() {
