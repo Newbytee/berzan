@@ -64,7 +64,7 @@ function saveDefaultClass(evnt) {
     evnt.preventDefault();
     const CLASS_TEXT = evnt.target[0].value;
     if (CLASS_TEXT.length > 0) {
-        localStorage.setItem("defaultClass", CLASS_TEXT.value);
+        localStorage.setItem("defaultClass", CLASS_TEXT);
         showSnackbar(CLASS_TEXT + " sparad som standardklass");
     } else {
         localStorage.removeItem("defaultClass");
