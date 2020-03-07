@@ -493,7 +493,7 @@ nav, .mobileNavButton, #schedule, #wrapper {
     }
 
     .contentItem {
-        width: 30%;
+        width: 20em;
     }
 
     .contentItem:first-of-type {
