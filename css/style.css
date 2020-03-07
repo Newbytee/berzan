@@ -244,6 +244,10 @@ nav, .mobileNavButton, #schedule, #wrapper {
     width: 100%;
 }
 
+.contentItem .field {
+    width: 30%;
+}
+
 .contentItem a:link, #contentContainer div a:visited {
     color: #00bfa5;
 }
