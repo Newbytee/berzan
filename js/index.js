@@ -13,7 +13,6 @@ const CONTENT_DIV = document.getElementById("wrapper");
 const DATE = new Date();
 const MODULES = new ModuleManager();
 let allowKeyNav = true;
-let firstScheduleLoad = true;
 let scheduleResizeTimer = null;
 let scheduleWidth;
 let scheduleHeight;
@@ -349,7 +348,6 @@ function setupNeoschedule() {
     }
 
     if (
-        firstScheduleLoad &&
         localStorage.getItem("defaultClass") &&
         INPUT_FIELDS[1].value.length === 0
     ) {
@@ -412,7 +410,6 @@ function handleRenderRequest(form) {
             if (!localStorage.getItem("defaultClass")) {
                 localStorage.setItem("defaultClass", form[1].value);
             }
-            firstScheduleLoad = false;
         })
         .catch(error => {
             removeLoading(SCHEDULE_MOUNT);
