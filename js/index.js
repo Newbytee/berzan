@@ -60,6 +60,7 @@ function init() {
             })
         );
 
+    updateDateObject();
     createSlideout();
     checkDeviceType(); // Check orientation fails if slideout hasn't been created, please keep them this order
 
@@ -236,6 +237,19 @@ function showSnackbar(text) {
     MODULES.load("utils", function() {
         showSnackbar(text);
     });
+}
+
+function updateDateObject() {
+    const SETTINGS = getSettingsObj();
+
+    if (SETTINGS.hasOwnProperty("switchoverTime")) {
+        const NOW_DATE = new Date();
+        const DATE_AND_TIME_ARR = SETTINGS.switchoverTime.values.all.split(":");
+        console.log(DATE_AND_TIME_ARR);
+
+        DATE.setHours(NOW_DATE.getHours() + parseInt(DATE_AND_TIME_ARR[0]));
+        DATE.setMinutes(NOW_DATE.getMinutes() + parseInt(DATE_AND_TIME_ARR[1]));
+    }
 }
 
 function updateNeoscheduleVars() {

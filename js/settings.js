@@ -83,6 +83,7 @@ function saveDayTimeSwitch(evnt) {
     SETTINGS.switchoverTime.values.all = evnt.target[0].value;
 
     saveSettingsObj(SETTINGS);
+    updateDateObject();
 }
 
 function setupRadio(elementsCollection, storageKey, onchangeCallback) {
