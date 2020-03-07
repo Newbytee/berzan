@@ -43,7 +43,23 @@ function ModuleManager() {
 
 function init() {
     const SPLASH_SCREEN = document.getElementById("splashScreen");
-    
+
+    if (localStorage.getItem("APIURLOverride") === null)
+        localStorage.setItem("APIURLOverride", DEFAULT_API_URL);
+
+    if (localStorage.getItem(SETTINGS_KEY) === null)
+        localStorage.setItem(SETTINGS_KEY,
+            JSON.stringify({
+                theme: "light",
+                switchoverTime: {
+                    type: "global",
+                    values: {
+                        all: "00:00"
+                    }
+                }
+            })
+        );
+
     createSlideout();
     checkDeviceType(); // Check orientation fails if slideout hasn't been created, please keep them this order
 
