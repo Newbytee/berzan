@@ -348,9 +348,12 @@ function setupNeoschedule() {
             INPUT_FIELDS[i].value = sessionStorage.getItem("inputField" + i);
     }
 
-    if (firstScheduleLoad && localStorage.getItem("defaultClass")) {
+    if (
+        firstScheduleLoad &&
+        localStorage.getItem("defaultClass") &&
+        INPUT_FIELDS[1].value.length === 0
+    ) {
         INPUT_FIELDS[1].value = localStorage.getItem("defaultClass");
-        firstScheduleLoad = false;
     }
 
     if (isMobile) {
@@ -409,6 +412,7 @@ function handleRenderRequest(form) {
             if (!localStorage.getItem("defaultClass")) {
                 localStorage.setItem("defaultClass", form[1].value);
             }
+            firstScheduleLoad = false;
         })
         .catch(error => {
             removeLoading(SCHEDULE_MOUNT);
