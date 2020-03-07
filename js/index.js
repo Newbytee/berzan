@@ -245,6 +245,7 @@ function updateNeoscheduleVars() {
         const MAIN_WRAPPER_HEIGHT = document.getElementById("wrapper").offsetHeight;
         const OFFSET = 5;
 
+        // -1 is needed to not produce scollbars for some reason
         scheduleWidth = INPUT_FORM.offsetWidth - 1;
         scheduleHeight = window.innerHeight - MAIN_WRAPPER_HEIGHT - NAV_HEIGHT - OFFSET - 1;
         scheduleMarginLeft = (INPUT_FORM.offsetWidth - window.innerWidth) / 2;
