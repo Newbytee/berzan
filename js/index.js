@@ -344,7 +344,8 @@ function setupNeoschedule() {
     sessionStorage.setItem("inputField0", DATE.getWeek().toString());
 
     for (let i = 0; i < INPUT_FIELDS.length; i++) {
-        if (sessionStorage.getItem("inputField" + i)) INPUT_FIELDS[i].value = sessionStorage.getItem("inputField" + i);
+        if (sessionStorage.getItem("inputField" + i))
+            INPUT_FIELDS[i].value = sessionStorage.getItem("inputField" + i);
     }
 
     if (firstScheduleLoad && localStorage.getItem("defaultClass")) {
