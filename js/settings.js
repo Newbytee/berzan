@@ -95,12 +95,14 @@ function setupRadio(elementsCollection, storageKey, onchangeCallback) {
     const STORAGE_INDEX = VALUES.indexOf(
         localStorage.getItem(storageKey));
 
+    if (STORAGE_INDEX !== -1) {
+        ELEMENTS[STORAGE_INDEX].checked = true;
+    } else {
+        ELEMENTS[0].checked = true;
+    }
+
     for (let i = 0; i < ELEMENTS.length; i++) {
         const ELEMENT = ELEMENTS[i];
-
-        if (i === STORAGE_INDEX) {
-            ELEMENT.checked = true;
-        }
 
         ELEMENT.addEventListener("change", function() {
             localStorage.setItem(storageKey, ELEMENT.value);
@@ -109,10 +111,6 @@ function setupRadio(elementsCollection, storageKey, onchangeCallback) {
                 onchangeCallback(ELEMENT.value);
             }
         })
-    }
-
-    if (STORAGE_INDEX === -1) {
-        ELEMENTS[0].checked = true;
     }
 }
 
