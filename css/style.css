@@ -119,7 +119,7 @@ svg:not(:root) {
     overflow: hidden;
 }
 
-button {
+button, input[type=submit] {
     border-radius: 0;
     cursor: pointer;
 }
