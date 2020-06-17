@@ -1,8 +1,12 @@
 # Berzan.js
 ## Introduction
-Berzan.js is a specialised frontend for Novasoftware's schedule viewer and skolmaten.se's lunch viewer.
+Berzan.js is a specialised frontend for Novasoftware's schedule viewer and
+ skolmaten.se's lunch viewer.
 
-It is currently perpetually developed, with features being added and bugs fixed as I find the motivation and inspiration to. The goal is to make it work across as many devices as well as possible while maintaining its stability, speed, and features.
+It is currently perpetually developed, with features being added and bugs fixed
+ as I find the motivation and inspiration to. The goal is to make it work across
+ as many devices as well as possible while maintaining its stability, speed, and
+ features.
 
 ## Features 
 
@@ -38,4 +42,7 @@ Code used for proxying API calls: https://gitlab.com/Newbyte/berzanjs-api-rs
 
 ## License 
 
-Berzan.js is licensed under the Mozilla Public License Version 2. This license both imposes certain restrictions and gives you certain freedoms in regards to how you are allowed to use the code. See the file LICENSE or [this](https://www.mozilla.org/en-US/MPL/2.0/) for more information. 
+Berzan.js is licensed under the Mozilla Public License Version 2. This license
+ both imposes certain restrictions and gives you certain freedoms in regards to
+ how you are allowed to use the code. See the file LICENSE or
+ [this](https://www.mozilla.org/en-US/MPL/2.0/) for more information. 
