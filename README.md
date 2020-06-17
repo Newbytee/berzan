@@ -14,7 +14,7 @@ It is currently perpetually developed, with features being added and bugs fixed 
 
 ## Related sources
 
-Code used for proxying API calls: https://gitlab.com/Newbyte/berzanjs-api
+Code used for proxying API calls: https://gitlab.com/Newbyte/berzanjs-api-rs
 
 ## Guide to branches 
 
