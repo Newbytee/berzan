@@ -1,6 +1,6 @@
 # Berzan.js
 ## Introduction
-Berzan.js is a specialised frontend for Novasoftware's schedule viewer and
+Berzan.js is a specialised frontend for Skola24's schedule viewer and
  skolmaten.se's lunch viewer.
 
 It is currently perpetually developed, with features being added and bugs fixed
