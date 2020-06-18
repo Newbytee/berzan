@@ -177,8 +177,8 @@ function AJAXRequest(URL) {
     });
 }
 
-function APIFetch(query) {
-    return fetch(APIURL + query);
+function APIFetch(query, options = {}) {
+    return fetch(APIURL + query, options);
 }
 
 function changeTab(tabIndex) {
@@ -488,15 +488,17 @@ function getScheduleJSON(className, week, weekDay) {
     return new Promise((resolve, reject) => {
         getClassGUIDByName(className)
             .then(classGUID => {
-                const query = "schema?week=" + week +
-                    "&week-day=" + weekDay +
-                    "&class-name=" + className +
-                    "&class-guid=" + classGUID +
-                    "&width=" + scheduleWidth +
-                    "&height=" + scheduleHeight;
-
-                APIFetch(query)
-                    .then(scheduleResp => {
+                APIFetch("schema", {
+                	method: "POST",
+                	headers: {
+                		"Content-Type": "application/json"
+                	},
+                	body: "{\"unit_guid\":\"" + classGUID +
+                	"\",\"width\":" + parseInt(scheduleWidth) +
+                	",\"height\":" + parseInt(scheduleHeight) +
+                	",\"week\":" + parseInt(week) +
+                	",\"day\":" + parseInt(weekDay) + "}"
+                }).then(scheduleResp => {
                         return scheduleResp.json();
                     })
                     .then(scheduleJSON => {
@@ -579,11 +581,11 @@ function rebuildClassGUIDCache() {
 }
 
 function getNeatClassGUIDsObject(untidyObject) {
-    const untidyGroups = untidyObject.data.groups;
+    const untidyGroups = untidyObject.data.classes;
     const neatObject = {};
 
     for (let i = 0; i < untidyGroups.length; i++) {
-        neatObject[untidyGroups[i].id.toLowerCase()] = untidyGroups[i].guid;
+        neatObject[untidyGroups[i].groupName.toLowerCase()] = untidyGroups[i].groupGuid;
     }
 
     return neatObject;
