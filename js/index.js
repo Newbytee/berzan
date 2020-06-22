@@ -413,34 +413,45 @@ function handleRenderRequest(form) {
 		SCHEDULE_MOUNT.firstChild.remove();
 	}
 
-	SCHEDULE_MOUNT.style.height = scheduleHeight + "px";
-	SCHEDULE_MOUNT.style.lineHeight = scheduleHeight * 0.8 + "px";
-	SCHEDULE_MOUNT.style.fontWeight = "lighter";
-	SCHEDULE_MOUNT.textContent = "Laddar…";
+	setScheduleStatusText(SCHEDULE_MOUNT, "Laddar…");
 
 	getScheduleJSON(form[1].value, form[0].value, form[3].selectedIndex)
 		.then(scheduleJSON => {
-			removeLoading(SCHEDULE_MOUNT);
+			if (scheduleJSON.data.timetableJson === null) {
+				// FIXME: actually display error message
+				setScheduleStatusText(SCHEDULE_MOUNT, scheduleJSON);
+				return;
+			}
+			removeScheduleStatusText(SCHEDULE_MOUNT);
 			renderSchedule(scheduleJSON, SCHEDULE_MOUNT);
 			if (!localStorage.getItem("defaultClass")) {
 				localStorage.setItem("defaultClass", form[1].value);
 			}
 		})
 		.catch(error => {
-			removeLoading(SCHEDULE_MOUNT);
+			removeScheduleStatusText(SCHEDULE_MOUNT);
 			showSnackbar(error);
 		});
 }
 
-function removeLoading(scheduleMount) {
+function setScheduleStatusText(scheduleMount, text) {
+	scheduleMount.style.height = scheduleHeight + "px";
+	scheduleMount.style.lineHeight = scheduleHeight * 0.8 + "px";
+	scheduleMount.style.fontWeight = "lighter";
+	scheduleMount.textContent = text;
+}
+
+function removeScheduleStatusText(scheduleMount) {
 	scheduleMount.textContent = "";
 	scheduleMount.removeAttribute("style");
 }
 
-function renderSchedule(scheduleJSON, scheduleMount) {
+function renderSchedule(scheduleJSONString, scheduleMount) {
 	const SCHEDULE_CONTAINER = document.createElement("DIV");
-	const BOXES = scheduleJSON.data.boxList;
-	const TEXTS = scheduleJSON.data.textList;
+	console.log(scheduleJSONString);
+	const SCHEDULE_JSON = JSON.parse(scheduleJSONString.data.timetableJson);
+	const BOXES = SCHEDULE_JSON.boxList;
+	const TEXTS = SCHEDULE_JSON.textList;
 
 	for (let i = 0; i < BOXES.length; i++) {
 		const BOX = intoBox(BOXES[i]);
