@@ -1,132 +1,132 @@
 :root {
-    /*--nav-bg-colour:*/
-    --nav-bg-colour-hover: #FFFFFF66;
+	/*--nav-bg-colour:*/
+	--nav-bg-colour-hover: #FFFFFF66;
 
-    --global-bg-colour: #FFF;
-    --invert-bg-colour: #000;
-    --slideout-bg-colour: #FFF;
-    --snackbar-bg-colour: #333;
+	--global-bg-colour: #FFF;
+	--invert-bg-colour: #000;
+	--slideout-bg-colour: #FFF;
+	--snackbar-bg-colour: #333;
 
-    --normal-text-colour: #212529;
-    --invert-text-colour: #FFF;
-    --nav-text-colour: #FFF;
+	--normal-text-colour: #212529;
+	--invert-text-colour: #FFF;
+	--nav-text-colour: #FFF;
 }
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html {
-    font-family: sans-serif;
-    line-height: 1.15;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    -ms-overflow-style: scrollbar;
-    -webkit-tap-highlight-color: transparent;
+	font-family: sans-serif;
+	line-height: 1.15;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	-ms-overflow-style: scrollbar;
+	-webkit-tap-highlight-color: transparent;
 }
 
 @-ms-viewport {
-    width: device-width;
+	width: device-width;
 }
 
 article, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
-    display: block;
+	display: block;
 }
 
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: var(--normal-text-colour);
-    text-align: left;
-    background-color: var(--global-bg-colour);
-    width: 100%;
-    height: 100%;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: var(--normal-text-colour);
+	text-align: left;
+	background-color: var(--global-bg-colour);
+	width: 100%;
+	height: 100%;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
 }
 
 [tabindex="-1"]:focus {
-    outline: 0 !important;
+	outline: 0 !important;
 }
 
 h2, h3, h4, h5, h6 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
+	margin-top: 0;
+	margin-bottom: 0.5rem;
 }
 
 p {
-    margin-top: 0;
-    margin-bottom: 1rem;
+	margin-top: 0;
+	margin-bottom: 1rem;
 }
 
 ol,
 ul,
 dl {
-    margin-top: 0;
-    margin-bottom: 1rem;
+	margin-top: 0;
+	margin-bottom: 1rem;
 }
 
 ol ol,
 ul ul,
 ol ul,
 ul ol {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 b,
 strong {
-    font-weight: bolder;
+	font-weight: bolder;
 }
 
 a {
-    color: #007bff;
-    text-decoration: none;
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects;
+	color: #007bff;
+	text-decoration: none;
+	background-color: transparent;
+	-webkit-text-decoration-skip: objects;
 }
 
 a:hover {
-    color: #0056b3;
-    text-decoration: underline;
+	color: #0056b3;
+	text-decoration: underline;
 }
 
 a:not([href]):not([tabindex]) {
-    color: inherit;
-    text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 a:not([href]):not([tabindex]):hover, a:not([href]):not([tabindex]):focus {
-    color: inherit;
-    text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 a:not([href]):not([tabindex]):focus {
-    outline: 0;
+	outline: 0;
 }
 
 img {
-    vertical-align: middle;
-    border-style: none;
+	vertical-align: middle;
+	border-style: none;
 }
 
 svg:not(:root) {
-    overflow: hidden;
+	overflow: hidden;
 }
 
 button, input[type=submit] {
-    border-radius: 0;
-    cursor: pointer;
+	border-radius: 0;
+	cursor: pointer;
 }
 
 button:focus {
-    outline: 1px dotted;
-    outline: 5px auto -webkit-focus-ring-color;
+	outline: 1px dotted;
+	outline: 5px auto -webkit-focus-ring-color;
 }
 
 input,
@@ -134,287 +134,287 @@ button,
 select,
 optgroup,
 textarea {
-    margin: 0;
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
+	margin: 0;
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
 }
 
 button,
 input {
-    overflow: visible;
+	overflow: visible;
 }
 
 button,
 select {
-    text-transform: none;
+	text-transform: none;
 }
 
 button,
 html [type="button"],
 [type="reset"],
 [type="submit"] {
-    -webkit-appearance: button;
-    -moz-appearance: button;
+	-webkit-appearance: button;
+	-moz-appearance: button;
 }
 
 button::-moz-focus-inner,
 [type="button"]::-moz-focus-inner,
 [type="reset"]::-moz-focus-inner,
 [type="submit"]::-moz-focus-inner {
-    padding: 0;
-    border-style: none;
+	padding: 0;
+	border-style: none;
 }
 
 input[type="radio"],
 input[type="checkbox"] {
-    box-sizing: border-box;
-    padding: 0;
+	box-sizing: border-box;
+	padding: 0;
 }
 
 input[type="date"],
 input[type="time"],
 input[type="datetime-local"],
 input[type="month"] {
-    -webkit-appearance: listbox;
+	-webkit-appearance: listbox;
 }
 
 [type="number"]::-webkit-inner-spin-button,
 [type="number"]::-webkit-outer-spin-button {
-    height: auto;
+	height: auto;
 }
 
 nav {
-    height: 60px;
-    background-color: #490A3D; /* "Berzan-färgen": #A1274C, den jag valde: #490A3D */
-    position: absolute;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    box-shadow: 0 0 5px 2px #888888;
+	height: 60px;
+	background-color: #490A3D; /* "Berzan-färgen": #A1274C, den jag valde: #490A3D */
+	position: absolute;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	box-shadow: 0 0 5px 2px #888888;
 }
 
 h1 {
-    letter-spacing: 2px;
-    padding-top: 33vh;
-    margin-top: 0;
-    margin-bottom: 30vh;
-    font-size: 10vh;
+	letter-spacing: 2px;
+	padding-top: 33vh;
+	margin-top: 0;
+	margin-bottom: 30vh;
+	font-size: 10vh;
 }
 
 input {
-    width: 20%;
-    max-width: 100px;
+	width: 20%;
+	max-width: 100px;
 }
 
 strong {
-    font-size: 5vh;
+	font-size: 5vh;
 }
 
 select {
-    height: 30px;
-    min-width: 55px;
-    background-color: #FFFFFF;
-    border: 1px solid #7A7A7A;
+	height: 30px;
+	min-width: 55px;
+	background-color: #FFFFFF;
+	border: 1px solid #7A7A7A;
 }
 
 button.field:hover {
-    background-color: #DDDDDD;
-    border-color: #7F357177;
-    transition: 0.5s;
+	background-color: #DDDDDD;
+	border-color: #7F357177;
+	transition: 0.5s;
 }
 
 nav, .mobileNavButton, #schedule, #wrapper {
-    width: 100%;
+	width: 100%;
 }
 
 .dropdown {
-    display: inline-block;
+	display: inline-block;
 }
 
 .separator {
-    width: 100%;
-    height: 0.05em;
-    background-color: var(--invert-bg-colour);
-    margin-bottom: 1.5em;
+	width: 100%;
+	height: 0.05em;
+	background-color: var(--invert-bg-colour);
+	margin-bottom: 1.5em;
 }
 
 .contentItem {
-    margin-bottom: 1.5em;
-    width: 100%;
+	margin-bottom: 1.5em;
+	width: 100%;
 }
 
 .contentItem .field {
-    width: 30%;
+	width: 30%;
 }
 
 .contentItem a:link, #contentContainer div a:visited {
-    color: #00bfa5;
+	color: #00bfa5;
 }
 
 .contentSeparatorHeader {
-    width: 100%;
+	width: 100%;
 }
 
 .mobileNavButton {
-    transition: 0.5s;
-    height: 10vh;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    padding-left: 5%;
-    font-size: 4vh;
-    font-weight: lighter;
-    display: flex;
-    align-items: center;
-    background-color: #CCCCCC;
-    color: var(--normal-text-colour);
-    text-transform: uppercase;
-    cursor: pointer;
+	transition: 0.5s;
+	height: 10vh;
+	padding-top: 2vh;
+	padding-bottom: 2vh;
+	padding-left: 5%;
+	font-size: 4vh;
+	font-weight: lighter;
+	display: flex;
+	align-items: center;
+	background-color: #CCCCCC;
+	color: var(--normal-text-colour);
+	text-transform: uppercase;
+	cursor: pointer;
 }
 
 .mobileNavButton:hover {
-    transition: 0.5s;
-    background-color: #00000066; /* #123456 */
+	transition: 0.5s;
+	background-color: #00000066; /* #123456 */
 }
 
 .field {
-    transition: 0.5s;
-    height: 30px;
-    color: #000;
-    background-color: #FFF;
-    padding: 4px 6px;
-    margin: 0;
-    border: 1px solid #7A7A7A;
-    line-height: normal;
+	transition: 0.5s;
+	height: 30px;
+	color: #000;
+	background-color: #FFF;
+	padding: 4px 6px;
+	margin: 0;
+	border: 1px solid #7A7A7A;
+	line-height: normal;
 }
 
 .scheduleElement {
-    position: absolute;
-    z-index: -1;
+	position: absolute;
+	z-index: -1;
 }
 
 #identity {
-    padding-top: 8px;
-    font-size: 30px;
-    color: #FFFFFF;
-    font-weight: normal;
-    text-align: center;
+	padding-top: 8px;
+	font-size: 30px;
+	color: #FFFFFF;
+	font-weight: normal;
+	text-align: center;
 }
 
 #panel {
-    box-shadow: -5px 0 30px 10px #888888;
+	box-shadow: -5px 0 30px 10px #888888;
 }
 
 #hamburgerSvg {
-    position: absolute;
-    margin-top: 10px;
-    height: 39px;
+	position: absolute;
+	margin-top: 10px;
+	height: 39px;
 }
 
 #contentContainer {
-    display: flex;
-    flex-wrap: wrap;
-    margin: auto;
-    padding: 1em;
-    width: 97%;
+	display: flex;
+	flex-wrap: wrap;
+	margin: auto;
+	padding: 1em;
+	width: 97%;
 }
 
 #wrapper {
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 5px;
-    overscroll-behavior: none;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 5px;
+	overscroll-behavior: none;
 }
 
 #contentIframe {
-    height: 90vh;
-    width: 95%;
-    margin-left: 2.5%;
-    margin-top: -5px;
-    border: none;
+	height: 90vh;
+	width: 95%;
+	margin-left: 2.5%;
+	margin-top: -5px;
+	border: none;
 }
 
 #contentIframe:after {
-    content: "URL " attr(src) " kunde inte laddas.";
+	content: "URL " attr(src) " kunde inte laddas.";
 }
 
 #schedule {
-    margin-top: 0.5vh;
-    display: none;
-    height: calc(100vh - 100px);
-    font-size: 0;
+	margin-top: 0.5vh;
+	display: none;
+	height: calc(100vh - 100px);
+	font-size: 0;
 }
 
 #schedule:after {
-    content: "Schemat kunde inte laddas :(\A Försäkra dig att du är inloggad på nätverket, att din adblocker / contentblocker inte blockerar novasoftware.se, samt att din klass/vecka inte innehåller < eller >.\A\A(URL: " attr(src) ")";
-    white-space: pre-wrap;
-    text-align: center;
-    display: block;
-    color: #000000;
-    font-size: medium;
+	content: "Schemat kunde inte laddas :(\A Försäkra dig att du är inloggad på nätverket, att din adblocker / contentblocker inte blockerar novasoftware.se, samt att din klass/vecka inte innehåller < eller >.\A\A(URL: " attr(src) ")";
+	white-space: pre-wrap;
+	text-align: center;
+	display: block;
+	color: #000000;
+	font-size: medium;
 }
 
 #scheduleMount {
-    text-align: center;
-    font-size: 2.5em;
-    color: #222222;
+	text-align: center;
+	font-size: 2.5em;
+	color: #222222;
 }
 
 #hiddenMenu {
-    background-color: #EEEEEE;
-    overflow: hidden;
+	background-color: #EEEEEE;
+	overflow: hidden;
 }
 
 #dayDropdown {
-    float: right;
+	float: right;
 }
 
 #desktopNav {
-    display: none;
+	display: none;
 }
 
 #weekNumberField {
-    min-width: 20px;
+	min-width: 20px;
 }
 
 #classNameField {
-    min-width: 60px;
+	min-width: 60px;
 }
 
 #weekNumberField:out-of-range {
-    color: #FF0000;
-    border: 2px solid #FF0000;
-    box-shadow: none;
+	color: #FF0000;
+	border: 2px solid #FF0000;
+	box-shadow: none;
 }
 
 #aboutInformationDiv {
-    margin-top: 3vh;
+	margin-top: 3vh;
 }
 
 #iframeBody {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 
 #snackbar {
-    visibility: hidden;
-    min-width: 250px;
-    margin-left: -125px;
-    background-color: var(--snackbar-bg-colour);
-    color: #fff;
-    text-align: center;
-    border-radius: 2px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    bottom: 30px;
-    font-size: 17px;
+	visibility: hidden;
+	min-width: 250px;
+	margin-left: -125px;
+	background-color: var(--snackbar-bg-colour);
+	color: #fff;
+	text-align: center;
+	border-radius: 2px;
+	padding: 16px;
+	position: fixed;
+	z-index: 1;
+	left: 50%;
+	bottom: 30px;
+	font-size: 17px;
 }
 
 #snackbar.show {
-    visibility: visible;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	visibility: visible;
+	-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+	animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
 /* start of Slideout.js CSS */
@@ -460,82 +460,82 @@ nav, .mobileNavButton, #schedule, #wrapper {
 /* end of Slideout.js CSS */
 
 @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+	from {bottom: 0; opacity: 0;}
+	to {bottom: 30px; opacity: 1;}
 }
 
 @keyframes fadein {
-    from {bottom: 0; opacity: 0;}
-    to {bottom: 30px; opacity: 1;}
+	from {bottom: 0; opacity: 0;}
+	to {bottom: 30px; opacity: 1;}
 }
 
 @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
+	from {bottom: 30px; opacity: 1;}
+	to {bottom: 0; opacity: 0;}
 }
 
 @keyframes fadeout {
-    from {bottom: 30px; opacity: 1;}
-    to {bottom: 0; opacity: 0;}
+	from {bottom: 30px; opacity: 1;}
+	to {bottom: 0; opacity: 0;}
 }
 
 @media screen and (min-width: 768px) {
-    .navButton {
-        transition: 0.5s;
-        padding: 0 20px;
-        color: var(--nav-text-colour);
-        display: flex;
-        align-items: center;
-        background: inherit;
-        border: none;
-    }
+	.navButton {
+		transition: 0.5s;
+		padding: 0 20px;
+		color: var(--nav-text-colour);
+		display: flex;
+		align-items: center;
+		background: inherit;
+		border: none;
+	}
 
-    .navButton:hover, .navButtonFakeHover, .navButton:focus {
-        transition: 0.5s;
-        background-color: var(--nav-bg-colour-hover); /* #123456 */
-        outline: 0;
-    }
+	.navButton:hover, .navButtonFakeHover, .navButton:focus {
+		transition: 0.5s;
+		background-color: var(--nav-bg-colour-hover); /* #123456 */
+		outline: 0;
+	}
 
-    .contentItem {
-        width: 20em;
-    }
+	.contentItem {
+		width: 20em;
+	}
 
-    .contentItem:first-of-type {
-        margin-top: 0.7vh;
-    }
+	.contentItem:first-of-type {
+		margin-top: 0.7vh;
+	}
 
-    #identity {
-        margin-top: -63px;
-        position: absolute;
-        right: 1%;
-    }
-    
-    #hamburgerSvg {
-        display: none;
-    }
+	#identity {
+		margin-top: -63px;
+		position: absolute;
+		right: 1%;
+	}
+	
+	#hamburgerSvg {
+		display: none;
+	}
 
-    #contentContainer {
-        justify-content: flex-start;
-    }
+	#contentContainer {
+		justify-content: flex-start;
+	}
 
-    #desktopNav {
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: stretch;
-    }
-    
-    #contentIframe {
-        width: 100%;
-        margin-left: 0;
-    }
+	#desktopNav {
+		height: 100%;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: stretch;
+	}
+	
+	#contentIframe {
+		width: 100%;
+		margin-left: 0;
+	}
 
-    #wrapper {
-        width: 80%;
-    }
+	#wrapper {
+		width: 80%;
+	}
 
-    #schedule {
-        height: calc(100vh - 110px);
-    }
+	#schedule {
+		height: calc(100vh - 110px);
+	}
 }
