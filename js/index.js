@@ -504,7 +504,7 @@ function getScheduleJSON(className, week, weekDay) {
 					headers: {
 						"Content-Type": "application/json"
 					},
-					body: "{\"unit_guid\":\"" + classGUID +
+					body: "{\"class_guid\":\"" + classGUID +
 					"\",\"width\":" + parseInt(scheduleWidth) +
 					",\"height\":" + parseInt(scheduleHeight) +
 					",\"week\":" + parseInt(week) +
