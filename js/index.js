@@ -6,6 +6,7 @@ Date.prototype.getWeek = function() {
 };
 
 const DEFAULT_API_URL = "https://berzanjs-api.herokuapp.com/";
+const BERZAN_UNIT_GUID = "ODUzZGRmNmMtYzdiNy1mZTA3LThlMTctNzIyNDY2Mjk1Y2I2";
 const SETTINGS_KEY = "berzan.jsSettings";
 const NAVIGATION_BUTTONS = document.getElementsByClassName("navButton");
 const MOBILE_NAV_BUTTONS = document.getElementsByClassName("mobileNavButton");
@@ -504,9 +505,11 @@ function getScheduleJSON(className, week, weekDay) {
 					headers: {
 						"Content-Type": "application/json"
 					},
-					body: "{\"class_guid\":\"" + classGUID +
+					body: "{\"unit_guid\":\"" + BERZAN_UNIT_GUID +
+					"\",\"selection_guid\":\"" + classGUID +
 					"\",\"width\":" + parseInt(scheduleWidth) +
 					",\"height\":" + parseInt(scheduleHeight) +
+					",\"black_and_white\":" + true.toString() +
 					",\"week\":" + parseInt(week) +
 					",\"day\":" + parseInt(weekDay) + "}"
 				}).then(scheduleResp => {
