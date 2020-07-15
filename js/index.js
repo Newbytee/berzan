@@ -137,6 +137,8 @@ function init() {
 		SPLASH_SCREEN.style.display = "none";
 	}, 200);
 
+	console.info("%cNyfiken på källkoden? https://github.com/Newbytee/berzan", "font-size: 25px")
+
 	if ("serviceWorker" in navigator) {
 		navigator.serviceWorker.addEventListener("message", evnt => {
 			console.log("Message received: " + evnt);
