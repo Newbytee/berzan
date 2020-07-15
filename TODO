@@ -15,6 +15,7 @@ TODO:
  - Notification about today's lunch (opt-in)
  - Searchable selection fields (in settings and schedule viewer) for classes as we now can enumerate them
  - Add support for other schools
+ - Improve handing of invalid responses for schedule
 
 DONE:
  - Update schedule viewer to use Skola24 instead of Novasoftware
