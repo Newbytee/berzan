@@ -45,8 +45,6 @@ function ModuleManager() {
 function init() {
 	const SPLASH_SCREEN = document.getElementById("splashScreen");
 
-	if (localStorage.getItem("APIURLOverride") === null)
-		localStorage.setItem("APIURLOverride", DEFAULT_API_URL);
 
 	if (localStorage.getItem(SETTINGS_KEY) === null)
 		localStorage.setItem(SETTINGS_KEY,
@@ -127,7 +125,7 @@ function init() {
 		}
 	}
 
-	APIURL = localStorage.getItem("APIURLOverride");
+	APIURL = localStorage.getItem("APIURLOverride") || DEFAULT_API_URL;
 
 	if (location.hostname === "berzan.netlify.com")
 		document.getElementById("identity").textContent += " (Canary)";
