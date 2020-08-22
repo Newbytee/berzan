@@ -5,13 +5,15 @@ Date.prototype.getWeek = function() {
 	return Math.ceil((((this - ONEJAN) / 86400000) + ONEJAN.getDay() + 1) / 7);
 };
 
-const DEFAULT_API_URL = "http://198.143.181.71:8080/";
+const DEFAULT_API_URL = "http://198.143.181.71:8080/skola24/v0/";
 const BERZAN_UNIT_GUID = "ODUzZGRmNmMtYzdiNy1mZTA3LThlMTctNzIyNDY2Mjk1Y2I2";
-const SETTINGS_KEY = "berzan.jsSettings";
+const SETTINGS_KEY = "berzanjsConfig";
+const TIMESTAMP_PATTERN = /\d+:\d+/;
 const NAVIGATION_BUTTONS = document.getElementsByClassName("navButton");
 const MOBILE_NAV_BUTTONS = document.getElementsByClassName("mobileNavButton");
 const CONTENT_DIV = document.getElementById("wrapper");
 const DATE = new Date();
+const CONFIG = new ConfigManager();
 const MODULES = new ModuleManager();
 let allowKeyNav = true;
 let scheduleResizeTimer = null;
@@ -22,6 +24,75 @@ let scheduleMarginTop;
 let isMobile;
 let slideout;
 let APIURL;
+
+function ConfigManager() {
+	let config = localStorage.getItem(SETTINGS_KEY);
+
+	if (typeof config !== "string") {
+		config = "{}";
+	}
+
+	try {
+		this.config = JSON.parse(config);
+	} catch (_) {
+		this.config = {};
+	}
+
+	this.getVar = function(varName) {
+		return this.config[varName];
+	}
+
+	this.setVar = function(varName, value) {
+		this.config[varName] = value;
+		this.saveVars();
+	}
+
+	this.saveVars = function() {
+		const configString = JSON.stringify(this.config);
+		localStorage.setItem(SETTINGS_KEY, configString);
+	}
+
+	this.validateVar = function(varName, value) {
+		switch (varName) {
+			case "theme":
+				return value === "light" || value === "dark";
+			case "switchoverTime":
+				const switchoverTime = this.getVar("switchoverTime");
+				const switchoverTimeType = typeof switchoverTime;
+
+				switch (switchoverTimeType) {
+					case "object":
+						for (const timeItem in switchoverTime) {
+							if (TIMESTAMP_PATTERN.test(timeItem)) {
+								return true;
+							}
+						}
+
+						return false;
+					case "string":
+						return TIMESTAMP_PATTERN.test(switchoverTime);
+					default:
+						return false;
+				}
+		}
+	}
+
+	this.validateVars = function() {
+		const currentTheme = this.getVar("theme");
+
+		if (!this.validateVar("theme", currentTheme)) {
+			this.setVar("theme", "light");
+		}
+
+		const switchoverTime = this.getVar("switchoverTime");
+
+		if (!this.validateVar("switchoverTime", switchoverTime)) {
+			this.setVar("switchoverTime", {
+				time: "00:00"
+			});
+		}
+	}
+}
 
 function ModuleManager() {
 	this.modules = document.getElementById("modules");
@@ -45,17 +116,13 @@ function ModuleManager() {
 function init() {
 	const SPLASH_SCREEN = document.getElementById("splashScreen");
 
+	CONFIG.validateVars();
 
 	if (localStorage.getItem(SETTINGS_KEY) === null)
 		localStorage.setItem(SETTINGS_KEY,
 			JSON.stringify({
 				theme: "light",
-				switchoverTime: {
-					type: "global",
-					values: {
-						all: "00:00"
-					}
-				}
+				switchoverTime: "00:00"
 			})
 		);
 
@@ -241,16 +308,13 @@ function showSnackbar(text) {
 }
 
 function updateDateObject() {
-	const SETTINGS = getSettingsObj();
+	const switchoverTime = CONFIG.getVar("switchoverTime");
 
-	if (SETTINGS.hasOwnProperty("switchoverTime")) {
-		const NOW_DATE = new Date();
-		const DATE_AND_TIME_ARR = SETTINGS.switchoverTime.values.all.split(":");
-		console.log(DATE_AND_TIME_ARR);
+	const NOW_DATE = new Date();
+	const DATE_AND_TIME_ARR = switchoverTime.time.split(":");
 
-		DATE.setHours(NOW_DATE.getHours() + parseInt(DATE_AND_TIME_ARR[0]));
-		DATE.setMinutes(NOW_DATE.getMinutes() + parseInt(DATE_AND_TIME_ARR[1]));
-	}
+	DATE.setHours(NOW_DATE.getHours() + parseInt(DATE_AND_TIME_ARR[0]));
+	DATE.setMinutes(NOW_DATE.getMinutes() + parseInt(DATE_AND_TIME_ARR[1]));
 }
 
 function updateNeoscheduleVars() {
