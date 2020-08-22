@@ -94,7 +94,7 @@ function setupRadio(elementsCollection, storageKey, onchangeCallback) {
 	});
 
 	const STORAGE_INDEX = VALUES.indexOf(
-		localStorage.getItem(storageKey));
+		CONFIG.getVar(storageKey));
 
 	if (STORAGE_INDEX !== -1) {
 		ELEMENTS[STORAGE_INDEX].checked = true;
@@ -106,7 +106,9 @@ function setupRadio(elementsCollection, storageKey, onchangeCallback) {
 		const ELEMENT = ELEMENTS[i];
 
 		ELEMENT.addEventListener("change", function() {
-			localStorage.setItem(storageKey, ELEMENT.value);
+			CONFIG.setVar(storageKey, ELEMENT.value);
+
+			CONFIG.saveVars();
 
 			if (typeof onchangeCallback === "function") {
 				onchangeCallback(ELEMENT.value);
