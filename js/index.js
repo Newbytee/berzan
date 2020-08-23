@@ -78,6 +78,9 @@ function ConfigManager() {
 					default:
 						return false;
 				}
+			default:
+				console.warn("No validation routine for var " + varName + "!");
+				break;
 		}
 	}
 
