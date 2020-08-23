@@ -690,10 +690,6 @@ function getNeatClassGUIDsObject(untidyObject) {
 	return neatObject;
 }
 
-function getSettingsObj() {
-	return JSON.parse(localStorage.getItem(SETTINGS_KEY));
-}
-
 function setupSettings() {
 	MODULES.load("settings", function() {
 		setupSettings();

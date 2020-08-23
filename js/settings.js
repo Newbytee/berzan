@@ -127,10 +127,6 @@ async function deleteCaches() {
 	}
 }
 
-function saveSettingsObj(object) {
-	localStorage.setItem(SETTINGS_KEY, JSON.stringify(object));
-}
-
 async function resetPreferences() {
 	if (confirm("Är du säker att du vill återställa dina inställningar?")) {
 		sessionStorage.clear();
