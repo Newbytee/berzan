@@ -117,9 +117,7 @@ function ConfigManager() {
 		const switchoverTime = this.getVar("switchoverTime");
 
 		if (!this.validateVar("switchoverTime", switchoverTime)) {
-			this.setVar("switchoverTime", {
-				time: "00:00"
-			});
+			this.setVar("switchoverTime", "00:00");
 		}
 	}
 }
@@ -333,7 +331,7 @@ function updateDateObject() {
 	const switchoverTime = CONFIG.getVar("switchoverTime");
 
 	const NOW_DATE = new Date();
-	const DATE_AND_TIME_ARR = switchoverTime.time.split(":");
+	const DATE_AND_TIME_ARR = switchoverTime.split(":");
 
 	DATE.setHours(NOW_DATE.getHours() + parseInt(DATE_AND_TIME_ARR[0]));
 	DATE.setMinutes(NOW_DATE.getMinutes() + parseInt(DATE_AND_TIME_ARR[1]));
