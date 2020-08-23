@@ -67,10 +67,10 @@ function saveDefaultClass(evnt) {
 	evnt.preventDefault();
 	const CLASS_TEXT = evnt.target[0].value;
 	if (CLASS_TEXT.length > 0) {
-		localStorage.setItem("defaultClass", CLASS_TEXT);
+		CONFIG.setVar("defaultClass", CLASS_TEXT);
 		showSnackbar(CLASS_TEXT + " sparad som standardklass");
 	} else {
-		localStorage.removeItem("defaultClass");
+		CONFIG.deleteVar("defaultClass");
 		showSnackbar("Standardklass borttagen");
 	}
 }

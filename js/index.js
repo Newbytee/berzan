@@ -61,6 +61,10 @@ function ConfigManager() {
 
 	this.validateVar = function(varName, value) {
 		switch (varName) {
+			case "defaultClass":
+				const defaultClassType = typeof value;
+				return defaultClassType === "string" ||
+					defaultClassType === "undefined";
 			case "theme":
 				return value === "light" || value === "dark";
 			case "slideoutSide":
@@ -445,11 +449,13 @@ function setupNeoschedule() {
 			INPUT_FIELDS[i].value = sessionStorage.getItem("inputField" + i);
 	}
 
+	const defaultClass = CONFIG.getVar("defaultClass");
+
 	if (
-		localStorage.getItem("defaultClass") &&
+		defaultClass &&
 		INPUT_FIELDS[1].value.length === 0
 	) {
-		INPUT_FIELDS[1].value = localStorage.getItem("defaultClass");
+		INPUT_FIELDS[1].value = defaultClass;
 	}
 
 	if (isMobile) {
@@ -507,8 +513,8 @@ function handleRenderRequest(form) {
 			}
 			removeScheduleStatusText(SCHEDULE_MOUNT);
 			renderSchedule(scheduleJSON, SCHEDULE_MOUNT);
-			if (!localStorage.getItem("defaultClass")) {
-				localStorage.setItem("defaultClass", form[1].value);
+			if (!CONFIG.getVar("defaultClass")) {
+				CONFIG.setVar("defaultClass", form[1].value);
 			}
 		})
 		.catch(error => {
