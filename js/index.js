@@ -56,6 +56,10 @@ function ConfigManager() {
 		switch (varName) {
 			case "theme":
 				return value === "light" || value === "dark";
+			case "slideoutSide":
+				return value === "left" || value === "right";
+			case "startPage":
+				return value === "schedule" || value === "lunch";
 			case "switchoverTime":
 				const switchoverTime = this.getVar("switchoverTime");
 				const switchoverTimeType = typeof switchoverTime;
@@ -82,6 +86,18 @@ function ConfigManager() {
 
 		if (!this.validateVar("theme", currentTheme)) {
 			this.setVar("theme", "light");
+		}
+
+		const slideoutSide = this.getVar("slideoutSide");
+
+		if (!this.validateVar("slideoutSide", slideoutSide)) {
+			this.setVar("slideoutSide", "left");
+		}
+
+		const startPage = this.getVar("startPage");
+
+		if (!this.validateVar("startPage", startPage)) {
+			this.setVar("startPage", "schedule")
 		}
 
 		const switchoverTime = this.getVar("switchoverTime");
@@ -173,7 +189,7 @@ function init() {
 	if (sessionStorage.getItem("currentTab")) {
 		loadPage(parseInt(sessionStorage.getItem("currentTab")));
 	} else {
-		switch (localStorage.getItem("startPage")) {
+		switch (CONFIG.getVar("startPage")) {
 			case "schedule":
 				loadPage(0);
 				break;
@@ -262,7 +278,7 @@ function createSlideout() {
 	if (window["Slideout"]) {
 		const slideoutMenu = document.getElementById("hiddenMenu");
 		const hamburgerMenu = document.getElementById("hamburgerSvg");
-		if (localStorage.getItem("slideoutSide") === null || localStorage.getItem("slideoutSide") === "left") {
+		if (CONFIG.getVar("slideoutSide") === "left") {
 			slideoutMenu.classList.remove("slideout-menu-right");
 			hamburgerMenu.style.removeProperty("right");
 			hamburgerMenu.style.left = "5%";
