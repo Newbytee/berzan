@@ -572,7 +572,7 @@ function intoText(obj) {
 	TEXT.style.left = (obj.x - scheduleMarginLeft).toString() + "px";
 	TEXT.style.top = (obj.y + scheduleMarginTop).toString() + "px";
 	TEXT.textContent = obj.text;
-	if (/\d+:\d+/.test(obj.text)) {
+	if (TIMESTAMP_PATTERN.test(obj.text)) {
 		TEXT.style.lineHeight = "1.3";
 		TEXT.style.marginLeft = "0.15em";
 	}
