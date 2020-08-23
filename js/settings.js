@@ -134,16 +134,17 @@ function saveSettingsObj(object) {
 	localStorage.setItem(SETTINGS_KEY, JSON.stringify(object));
 }
 
-function resetPreferences() {
+async function resetPreferences() {
 	if (confirm("Är du säker att du vill återställa dina inställningar?")) {
 		sessionStorage.clear();
 		localStorage.clear();
 		if ("serviceWorker" in navigator) {
-			navigator.serviceWorker.getRegistrations().then(function(registrations) {
-				for (let i = 0; i < registrations.length; i++) {
-					registrations[i].unregister();
-				}
-			});
+			const registrations =
+				await navigator.serviceWorker.getRegistrations()
+
+			for (let i = 0; i < registrations.length; i++) {
+				registrations[i].unregister();
+			}
 		}
 		reloadPage();
 	}
