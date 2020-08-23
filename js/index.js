@@ -42,6 +42,10 @@ function ConfigManager() {
 		this.saveVars();
 	});
 
+	this.deleteVar = function(varName) {
+		delete this.config[varName];
+	}
+
 	this.getVar = function(varName) {
 		return this.config[varName];
 	}
