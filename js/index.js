@@ -532,7 +532,6 @@ function removeScheduleStatusText(scheduleMount) {
 
 function renderSchedule(scheduleJSONString, scheduleMount) {
 	const SCHEDULE_CONTAINER = document.createElement("DIV");
-	console.log(scheduleJSONString);
 	const SCHEDULE_JSON = JSON.parse(scheduleJSONString.data.timetableJson);
 	const BOXES = SCHEDULE_JSON.boxList;
 	const TEXTS = SCHEDULE_JSON.textList;
