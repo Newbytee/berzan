@@ -7,8 +7,10 @@ function setupSettings() {
 	const DELETE_CACHES_BUTTON = document.getElementById("deleteCaches");
 	const SWITCH_DAY_TIME_FORM = document.getElementById("switchDayTimeForm");
 
-	if (typeof localStorage.getItem("defaultClass") === "string")
-		DEFAULT_CLASS_FORM[0].value = localStorage.getItem("defaultClass");
+	const defaultClass = CONFIG.getVar("defaultClass");
+
+	if (typeof defaultClass === "string")
+		DEFAULT_CLASS_FORM[0].value = defaultClass;
 
 	setupRadio(
 		CHANGE_STARTPAGE_RADIO,
