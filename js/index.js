@@ -137,14 +137,6 @@ function init() {
 
 	CONFIG.validateVars();
 
-	if (localStorage.getItem(SETTINGS_KEY) === null)
-		localStorage.setItem(SETTINGS_KEY,
-			JSON.stringify({
-				theme: "light",
-				switchoverTime: "00:00"
-			})
-		);
-
 	updateDateObject();
 	createSlideout();
 	checkDeviceType(); // Check orientation fails if slideout hasn't been created, please keep them this order
