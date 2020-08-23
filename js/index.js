@@ -38,13 +38,16 @@ function ConfigManager() {
 		this.config = {};
 	}
 
+	window.addEventListener("beforeunload", () => {
+		this.saveVars();
+	});
+
 	this.getVar = function(varName) {
 		return this.config[varName];
 	}
 
 	this.setVar = function(varName, value) {
 		this.config[varName] = value;
-		this.saveVars();
 	}
 
 	this.saveVars = function() {

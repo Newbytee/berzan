@@ -108,8 +108,6 @@ function setupRadio(elementsCollection, storageKey, onchangeCallback) {
 		ELEMENT.addEventListener("change", function() {
 			CONFIG.setVar(storageKey, ELEMENT.value);
 
-			CONFIG.saveVars();
-
 			if (typeof onchangeCallback === "function") {
 				onchangeCallback(ELEMENT.value);
 			}
