@@ -81,13 +81,8 @@ function saveDefaultClass(evnt) {
 
 function saveDayTimeSwitch(evnt) {
 	evnt.preventDefault();
-	const SETTINGS = getSettingsObj();
 
-	SETTINGS.switchoverTime.type = "global";
-	SETTINGS.switchoverTime.values.all = evnt.target[0].value;
-
-	saveSettingsObj(SETTINGS);
-	updateDateObject();
+	CONFIG.setVar("switchoverTime", evnt.target[0].value);
 }
 
 function setupRadio(elementsCollection, storageKey, onchangeCallback) {
