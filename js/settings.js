@@ -12,6 +12,8 @@ function setupSettings() {
 	if (typeof defaultClass === "string")
 		DEFAULT_CLASS_FORM[0].value = defaultClass;
 
+	SWITCH_DAY_TIME_FORM[0].value = CONFIG.getVar("switchoverTime");
+
 	setupRadio(
 		CHANGE_STARTPAGE_RADIO,
 		"startPage",
