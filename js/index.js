@@ -212,7 +212,7 @@ function init() {
 		}
 	}
 
-	APIURL = localStorage.getItem("APIURLOverride") || DEFAULT_API_URL;
+	APIURL = sessionStorage.getItem("APIURLOverride") || DEFAULT_API_URL;
 
 	if (location.hostname === "berzan.netlify.com")
 		document.getElementById("identity").textContent += " (Canary)";
