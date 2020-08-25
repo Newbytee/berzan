@@ -69,6 +69,8 @@ function ConfigManager() {
 				return value === "light" || value === "dark";
 			case "slideoutSide":
 				return value === "left" || value === "right";
+			case "slideoutWarnDisable":
+				return value === "on" || value === "off";
 			case "startPage":
 				return value === "schedule" || value === "lunch";
 			case "switchoverTime":
@@ -106,6 +108,12 @@ function ConfigManager() {
 
 		if (!this.validateVar("slideoutSide", slideoutSide)) {
 			this.setVar("slideoutSide", "left");
+		}
+
+		const slideoutWarnDisable = this.getVar("slideoutWarnDisable");
+
+		if (!this.validateVar("slideoutWarnDisable")) {
+			this.setVar("slideoutWarnDisable", "off");
 		}
 
 		const startPage = this.getVar("startPage");
@@ -305,7 +313,7 @@ function createSlideout() {
 			});
 		}
 	} else {
-		if (localStorage.getItem("slideoutWarnDisable") !== "on")
+		if (CONFIG.getVar("slideoutWarnDisable") !== "on")
 			alert("Din webbläsare tycks blockera Slideout.js, ett bibliotek Berzan.js använder. Berzan.js bör fungera ändå, men vissa saker lär vara trasiga. Testa att stäng av din adblocker (eller liknande) och se om problemet kvarstår.");
 		document.getElementById("hiddenMenu").style.display = "none";
 		slideout = { close() {} }
