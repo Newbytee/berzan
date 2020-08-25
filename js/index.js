@@ -51,7 +51,7 @@ function ConfigManager() {
 		this.config[varName] = value;
 	}
 
-	this.saveVars = function() {
+	this.saveVars = () => {
 		const configString = JSON.stringify(this.config);
 		localStorage.setItem(SETTINGS_KEY, configString);
 	}
