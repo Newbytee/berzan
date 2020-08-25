@@ -112,7 +112,7 @@ function ConfigManager() {
 
 		const slideoutWarnDisable = this.getVar("slideoutWarnDisable");
 
-		if (!this.validateVar("slideoutWarnDisable")) {
+		if (!this.validateVar("slideoutWarnDisable", slideoutWarnDisable)) {
 			this.setVar("slideoutWarnDisable", "off");
 		}
 
