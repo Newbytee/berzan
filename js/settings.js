@@ -131,6 +131,7 @@ async function resetPreferences() {
 	if (confirm("Är du säker att du vill återställa dina inställningar?")) {
 		sessionStorage.clear();
 		localStorage.clear();
+		window.removeEventListener("beforeunload", CONFIG.saveVars);
 		if ("serviceWorker" in navigator) {
 			const registrations =
 				await navigator.serviceWorker.getRegistrations()

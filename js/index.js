@@ -39,10 +39,6 @@ function ConfigManager() {
 		this.config = {};
 	}
 
-	window.addEventListener("beforeunload", () => {
-		this.saveVars();
-	});
-
 	this.deleteVar = function(varName) {
 		delete this.config[varName];
 	}
@@ -59,6 +55,8 @@ function ConfigManager() {
 		const configString = JSON.stringify(this.config);
 		localStorage.setItem(SETTINGS_KEY, configString);
 	}
+
+	window.addEventListener("beforeunload", this.saveVars);
 
 	this.validateVar = function(varName, value) {
 		switch (varName) {
