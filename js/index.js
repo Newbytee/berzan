@@ -5,7 +5,8 @@ Date.prototype.getWeek = function() {
 	return Math.ceil((((this - ONEJAN) / 86400000) + ONEJAN.getDay() + 1) / 7);
 };
 
-const DEFAULT_API_URL = "http://198.143.181.71:8080/skola24/v0/";
+const DEFAULT_API_URL = "http://198.143.181.71:8080/";
+const SCHEDULE_API_PREFIX = "skola24/v0/";
 const BERZAN_UNIT_GUID = "ODUzZGRmNmMtYzdiNy1mZTA3LThlMTctNzIyNDY2Mjk1Y2I2";
 const SETTINGS_KEY = "berzanjsConfig";
 const TIMESTAMP_PATTERN = /\d+:\d+/;
@@ -590,32 +591,39 @@ function intoText(obj) {
 }
 
 function getScheduleJSON(className, week, weekDay) {
-	return new Promise((resolve, reject) => {
-		getClassGUIDByName(className)
-			.then(classGUID => {
-				APIFetch("schema", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json"
-					},
-					body: "{\"unit_guid\":\"" + BERZAN_UNIT_GUID +
-					"\",\"selection_guid\":\"" + classGUID +
-					"\",\"width\":" + parseInt(scheduleWidth) +
-					",\"height\":" + parseInt(scheduleHeight) +
-					",\"black_and_white\":" + true.toString() +
-					",\"week\":" + parseInt(week) +
-					",\"day\":" + parseInt(weekDay) + "}"
-				}).then(scheduleResp => {
-						return scheduleResp.json();
-					})
-					.then(scheduleJSON => {
-						resolve(scheduleJSON);
-					})
-					.catch(error => {
-						reject(error);
-					});
+	return new Promise(async (resolve, reject) => {
+		const [
+			renderKeyResp,
+			classGUID
+		] = await Promise.all([
+			fetchRenderKeyFromAPI(),
+			getClassGUIDByName(className)
+		]);
+
+		const renderKey = renderKeyResp.data.key;
+
+		APIFetch(SCHEDULE_API_PREFIX + "schedule", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: "{\"render_key\":\"" + renderKey +
+				"\",\"unit_guid\":\"" + BERZAN_UNIT_GUID +
+				"\",\"selection_signature\":\"" + classGUID +
+				"\",\"width\":" + parseInt(scheduleWidth) +
+				",\"height\":" + parseInt(scheduleHeight) +
+				",\"black_and_white\":" + true.toString() +
+				",\"week\":" + parseInt(week) +
+				",\"day\":" + parseInt(weekDay) + "}"
+			}).then(scheduleResp => {
+				return scheduleResp.json();
 			})
-			.catch(error => reject(error));
+			.then(scheduleJSON => {
+				resolve(scheduleJSON);
+			})
+			.catch(error => {
+				reject(error);
+			});
 	});
 }
 
@@ -670,7 +678,14 @@ async function getAllClassGUIDs() {
 }
 
 function fetchClassGUIDsFromAPI() {
-	return APIFetch("klasser")
+	return APIFetch(SCHEDULE_API_PREFIX + "classes")
+		.then(response => {
+			return response.json();
+		});
+}
+
+function fetchRenderKeyFromAPI() {
+	return APIFetch(SCHEDULE_API_PREFIX + "render-key")
 		.then(response => {
 			return response.json();
 		});
