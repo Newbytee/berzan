@@ -4,6 +4,8 @@ function setupSettings() {
 	const CHANGE_SLIDEOUT_SIDE_RADIO = document.getElementsByClassName("slideoutSidePicker");
 	const SLIDEOUT_FAIL_RADIO = document.getElementsByClassName("slideoutBehaviourPicker");
 	const STYLE_RADIO = document.getElementsByClassName("stylePicker");
+	const SCHEDULE_COLOUR_MODE_RADIO =
+		document.getElementsByClassName("scheduleColourModePicker");
 	const DELETE_CACHES_BUTTON = document.getElementById("deleteCaches");
 	const SWITCH_DAY_TIME_FORM = document.getElementById("switchDayTimeForm");
 
@@ -53,6 +55,10 @@ function setupSettings() {
 		STYLE_RADIO,
 		"theme"
 	);
+	setupRadio(
+		SCHEDULE_COLOUR_MODE_RADIO,
+		"scheduleColourMode"
+	)
 
 	SWITCH_DAY_TIME_FORM
 		.addEventListener("submit", saveDayTimeSwitch);

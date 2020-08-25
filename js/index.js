@@ -66,6 +66,8 @@ function ConfigManager() {
 					defaultClassType === "undefined";
 			case "theme":
 				return value === "light" || value === "dark";
+			case "scheduleColourMode":
+				return value === "colourful" || value === "blackAndWhite";
 			case "slideoutSide":
 				return value === "left" || value === "right";
 			case "slideoutWarnDisable":
@@ -101,6 +103,12 @@ function ConfigManager() {
 
 		if (!this.validateVar("theme", currentTheme)) {
 			this.setVar("theme", "light");
+		}
+
+		const scheduleColourMode = this.getVar("scheduleColourMode");
+
+		if (!this.validateVar("scheduleColourMode", scheduleColourMode)) {
+			this.setVar("scheduleColourMode", "colourful");
 		}
 
 		const slideoutSide = this.getVar("slideoutSide");
@@ -610,7 +618,7 @@ function getScheduleJSON(className, week, weekDay) {
 				"\",\"selection_signature\":\"" + classGUID +
 				"\",\"width\":" + parseInt(scheduleWidth) +
 				",\"height\":" + parseInt(scheduleHeight) +
-				",\"black_and_white\":" + true.toString() +
+				",\"black_and_white\":" + getScheduleColourMode() +
 				",\"week\":" + parseInt(week) +
 				",\"day\":" + parseInt(weekDay) + "}"
 			}).then(scheduleResp => {
@@ -623,6 +631,10 @@ function getScheduleJSON(className, week, weekDay) {
 				reject(error);
 			});
 	});
+}
+
+function getScheduleColourMode() {
+	return (CONFIG.getVar("scheduleColourMode") === "blackAndWhite").toString();
 }
 
 function getClassGUIDByName(className, retried) {
