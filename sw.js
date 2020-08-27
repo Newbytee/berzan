@@ -65,8 +65,7 @@ self.addEventListener("fetch", function(evnt){
 						if (
 							!response ||
 							response.status !== 200 ||
-							(response.type !== "basic" &&
-							response.type !== "cors")
+							response.type !== "basic"
 						) {
 							return response;
 						}
@@ -105,4 +104,3 @@ async function refreshCacheEntry(request, clientID) {
 			//caches.match(request)
 		})
 }
-
