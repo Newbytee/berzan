@@ -5,7 +5,7 @@ Date.prototype.getWeek = function() {
 	return Math.ceil((((this - ONEJAN) / 86400000) + ONEJAN.getDay() + 1) / 7);
 };
 
-const DEFAULT_API_URL = "http://198.143.181.71:8080/";
+const DEFAULT_API_URL = "https://eduprox.tn.dedyn.io/";
 const SCHEDULE_API_PREFIX = "skola24/v0/";
 const BERZAN_UNIT_GUID = "ODUzZGRmNmMtYzdiNy1mZTA3LThlMTctNzIyNDY2Mjk1Y2I2";
 const SETTINGS_KEY = "berzanjsConfig";
