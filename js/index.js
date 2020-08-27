@@ -179,20 +179,7 @@ function init() {
 		) changeTab(TAB_INDEX);
 	});
 
-	window.onresize = function() {
-		checkDeviceType();
-
-		if (sessionStorage.getItem("currentView") === "neoschedule") {
-			const INPUT_FORM = document.getElementById("scheduleInputForm");
-			if (scheduleResizeTimer !== null) {
-				window.clearTimeout(scheduleResizeTimer);
-			}
-			scheduleResizeTimer = window.setTimeout(function() {
-				updateNeoscheduleVars();
-				handleRenderRequest(INPUT_FORM);
-			}, 150);
-		}
-	};
+	window.onresize = resizeNeoschedule;
 
 	for (let i = 0; i < NAVIGATION_BUTTONS.length; i++) {
 		NAVIGATION_BUTTONS[i].addEventListener("click", function() {
@@ -352,6 +339,21 @@ function updateDateObject() {
 	DATE.setMinutes(NOW_DATE.getMinutes() + parseInt(DATE_AND_TIME_ARR[1]));
 }
 
+function resizeNeoschedule() {
+	checkDeviceType();
+
+	if (sessionStorage.getItem("currentView") === "neoschedule") {
+		const INPUT_FORM = document.getElementById("scheduleInputForm");
+		if (scheduleResizeTimer !== null) {
+			window.clearTimeout(scheduleResizeTimer);
+		}
+		scheduleResizeTimer = window.setTimeout(function() {
+			updateNeoscheduleVars();
+			handleRenderRequest(INPUT_FORM);
+		}, 150);
+	}
+}
+
 function updateNeoscheduleVars() {
 	if (sessionStorage.getItem("currentView") === "neoschedule") {
 		const NAV_HEIGHT = document.getElementsByTagName("nav")[0].offsetHeight;
@@ -361,9 +363,10 @@ function updateNeoscheduleVars() {
 
 		// -1 is needed to not produce scollbars for some reason
 		scheduleWidth = INPUT_FORM.offsetWidth - 1;
-		scheduleHeight = window.innerHeight - MAIN_WRAPPER_HEIGHT - NAV_HEIGHT - OFFSET - 1;
+		scheduleHeight = window.innerHeight - NAV_HEIGHT - OFFSET -
+			INPUT_FORM.offsetHeight - 6;
 		scheduleMarginLeft = (INPUT_FORM.offsetWidth - window.innerWidth) / 2;
-		scheduleMarginTop = MAIN_WRAPPER_HEIGHT + NAV_HEIGHT + OFFSET;
+		scheduleMarginTop = INPUT_FORM.offsetHeight + NAV_HEIGHT + OFFSET + 5;
 	}
 }
 
