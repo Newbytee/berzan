@@ -53,7 +53,8 @@ function setupSettings() {
 	);
 	setupRadio(
 		STYLE_RADIO,
-		"theme"
+		"theme",
+		applyTheme
 	);
 	setupRadio(
 		SCHEDULE_COLOUR_MODE_RADIO,
@@ -89,6 +90,14 @@ function saveDayTimeSwitch(evnt) {
 	evnt.preventDefault();
 
 	CONFIG.setVar("switchoverTime", evnt.target[0].value);
+}
+
+function applyTheme() {
+	if (CONFIG.getVar("theme") === "dark") {
+		applyDarkTheme();
+	} else {
+		document.documentElement.removeAttribute("style");
+	}
 }
 
 function setupRadio(elementsCollection, storageKey, onchangeCallback) {

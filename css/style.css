@@ -279,8 +279,8 @@ nav, .mobileNavButton, #schedule, #wrapper {
 .field {
 	transition: 0.5s;
 	height: 30px;
-	color: #000;
-	background-color: #FFF;
+	color: var(--normal-text-colour);
+	background-color: var(--global-bg-colour);
 	padding: 4px 6px;
 	margin: 0;
 	border: 1px solid #7A7A7A;
@@ -442,8 +442,9 @@ nav, .mobileNavButton, #schedule, #wrapper {
   position: relative;
   z-index: 1;
   will-change: transform;
-  background-color: var(--slideout-bg-colour); /* A background-color is required */
+  background-color: var(--global-bg-colour); /* A background-color is required */
   min-height: 100vh;
+  transition: 0.5s;
 }
 
 .slideout-open,

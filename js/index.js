@@ -161,6 +161,10 @@ function init() {
 
 	CONFIG.validateVars();
 
+	if (CONFIG.getVar("theme") === "dark") {
+		applyDarkTheme();
+	}
+
 	updateDateObject();
 	createSlideout();
 	checkDeviceType(); // Check orientation fails if slideout hasn't been created, please keep them this order
@@ -269,6 +273,12 @@ function AJAXRequest(URL) {
 
 function APIFetch(query, options = {}) {
 	return fetch(APIURL + query, options);
+}
+
+function applyDarkTheme() {
+	document.documentElement.style.setProperty("--normal-text-colour", "#FFF");
+	document.documentElement.style.setProperty("--global-bg-colour", "#000");
+	document.documentElement.style.setProperty("--invert-bg-colour", "#FFF");
 }
 
 function changeTab(tabIndex) {
