@@ -43,7 +43,6 @@ body {
 	line-height: 1.5;
 	color: var(--normal-text-colour);
 	text-align: left;
-	background-color: var(--global-bg-colour);
 	width: 100%;
 	height: 100%;
 	user-select: none;
