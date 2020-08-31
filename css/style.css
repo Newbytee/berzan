@@ -287,6 +287,11 @@ nav, .mobileNavButton, #schedule, #wrapper {
 	line-height: normal;
 }
 
+.field[type="time"] {
+	width: 7.5em;
+	max-width: unset;
+}
+
 .scheduleElement {
 	position: absolute;
 	z-index: -1;
