@@ -611,13 +611,19 @@ function intoText(obj) {
 
 function getScheduleJSON(className, week, weekDay) {
 	return new Promise(async (resolve, reject) => {
-		const [
-			renderKeyResp,
-			classGUID
-		] = await Promise.all([
-			fetchRenderKeyFromAPI(),
-			getClassGUIDByName(className)
-		]);
+		let renderKeyResp, classGUID;
+
+		try {
+			const resp = await Promise.all([
+				fetchRenderKeyFromAPI(),
+				getClassGUIDByName(className)
+			]);
+
+			renderKeyResp = resp[0];
+			classGUID = resp[1];
+		} catch (error) {
+			return reject(error);
+		}
 
 		const renderKey = renderKeyResp.data.key;
 
