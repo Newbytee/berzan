@@ -166,7 +166,6 @@ function init() {
 		applyDarkTheme();
 	}
 
-	updateDateObject();
 	createSlideout();
 	checkDeviceType(); // Check orientation fails if slideout hasn't been created, please keep them this order
 
@@ -340,16 +339,6 @@ function showSnackbar(text) {
 	});
 }
 
-function updateDateObject() {
-	const switchoverTime = CONFIG.getVar("switchoverTime");
-
-	const NOW_DATE = new Date();
-	const DATE_AND_TIME_ARR = switchoverTime.split(":");
-
-	DATE.setHours(NOW_DATE.getHours() + parseInt(DATE_AND_TIME_ARR[0]));
-	DATE.setMinutes(NOW_DATE.getMinutes() + parseInt(DATE_AND_TIME_ARR[1]));
-}
-
 function resizeNeoschedule() {
 	checkDeviceType();
 
@@ -490,10 +479,33 @@ function setupNeoschedule() {
 
 	if (isMobile) {
 		SUBMIT_BUTTON.textContent = "Visa";
-		if (DATE.getDay() < 6) {
-			DAY_DROPDOWN.selectedIndex = DATE.getDay() === 0 ? 1 : DATE.getDay();
+
+		const currentDay = DATE.getDay();
+
+		if (currentDay < 6) {
+			DAY_DROPDOWN.selectedIndex = currentDay === 0 ? 1 : currentDay;
 		} else {
 			DAY_DROPDOWN.selectedIndex = 1;
+		}
+
+		const [
+			switchoverHourString,
+			switchoverMinuteString
+		] = CONFIG.getVar("switchoverTime").split(":");
+
+		const switchoverHour = parseInt(switchoverHourString);
+		const switchoverMinute = parseInt(switchoverMinuteString);
+
+		const currentHour = DATE.getHours();
+
+		if (
+			!((switchoverHour === currentHour &&
+			switchoverMinute >= DATE.getMinutes()) ||
+			switchoverHour > currentHour) &&
+			currentDay !== 0 &&
+			currentDay !== 6
+		) {
+			DAY_DROPDOWN.selectedIndex++;
 		}
 	} else {
 		SUBMIT_BUTTON.textContent = "Visa schema";
