@@ -18,6 +18,7 @@ const CONFIG = new ConfigManager();
 const MODULES = new ModuleManager();
 let allowKeyNav = true;
 let scheduleResizeTimer = null;
+let scheduleInit = false;
 let scheduleWidth;
 let scheduleHeight;
 let scheduleMarginLeft;
@@ -359,7 +360,9 @@ function resizeNeoschedule() {
 		}
 		scheduleResizeTimer = window.setTimeout(function() {
 			updateNeoscheduleVars();
-			handleRenderRequest(INPUT_FORM);
+			if (scheduleInit) {
+				handleRenderRequest(INPUT_FORM);
+			}
 		}, 150);
 	}
 }
@@ -469,6 +472,7 @@ function setupNeoschedule() {
 	const SUBMIT_BUTTON = SCHEDULE_INPUT_FORM[2];
 	const DAY_DROPDOWN = SCHEDULE_INPUT_FORM[3];
 	sessionStorage.setItem("inputField0", DATE.getWeek().toString());
+	scheduleInit = false;
 
 	for (let i = 0; i < INPUT_FIELDS.length; i++) {
 		if (sessionStorage.getItem("inputField" + i))
@@ -514,15 +518,22 @@ function setupNeoschedule() {
 		handleRenderRequest(SCHEDULE_INPUT_FORM);
 	});
 	DAY_DROPDOWN.addEventListener("change", function() {
-		handleRenderRequest(SCHEDULE_INPUT_FORM);
+		renderIfReasonable(SCHEDULE_INPUT_FORM);
 	});
 	INPUT_FIELDS[0].addEventListener("change", function() {
-		handleRenderRequest(SCHEDULE_INPUT_FORM);
+		renderIfReasonable(SCHEDULE_INPUT_FORM);
 	});
+}
+
+function renderIfReasonable(inputForm) {
+	if (inputForm[1].value.length !== 0) {
+		handleRenderRequest(inputForm);
+	}
 }
 
 function handleRenderRequest(form) {
 	const SCHEDULE_MOUNT = document.getElementById("scheduleMount");
+	scheduleInit = true;
 
 	while (SCHEDULE_MOUNT.firstChild) {
 		SCHEDULE_MOUNT.firstChild.remove();
