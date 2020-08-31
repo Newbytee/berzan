@@ -220,7 +220,7 @@ function init() {
 
 	APIURL = sessionStorage.getItem("APIURLOverride") || DEFAULT_API_URL;
 
-	if (location.hostname === "berzan.netlify.com")
+	if (location.hostname === "berzan.netlify.app")
 		document.getElementById("identity").textContent += " (Canary)";
 
 	SPLASH_SCREEN.style.opacity = "0";
