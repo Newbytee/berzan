@@ -488,10 +488,12 @@ function setupNeoschedule() {
 			DAY_DROPDOWN.selectedIndex = 1;
 		}
 
+		const switchoverTime = CONFIG.getVar("switchoverTime");
+
 		const [
 			switchoverHourString,
 			switchoverMinuteString
-		] = CONFIG.getVar("switchoverTime").split(":");
+		] = switchoverTime.split(":");
 
 		const switchoverHour = parseInt(switchoverHourString);
 		const switchoverMinute = parseInt(switchoverMinuteString);
@@ -499,7 +501,8 @@ function setupNeoschedule() {
 		const currentHour = DATE.getHours();
 
 		if (
-			!((switchoverHour === currentHour &&
+			!(switchoverTime === "00:00" ||
+			(switchoverHour === currentHour &&
 			switchoverMinute >= DATE.getMinutes()) ||
 			switchoverHour > currentHour) &&
 			currentDay !== 0 &&
