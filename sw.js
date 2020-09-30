@@ -1,6 +1,6 @@
 "use strict";
 
-const APP_CACHE = "berzanjs-app-cache-v1.2";
+const APP_CACHE = "berzanjs-app-cache-v1.2.1a";
 const CONTENT_CACHE = "berzanjs-schedule-cache-v1";
 const URLS_TO_CACHE = [
 	"/",
