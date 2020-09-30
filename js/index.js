@@ -637,21 +637,34 @@ function intoText(obj) {
 
 function getScheduleJSON(className, week, weekDay) {
 	return new Promise(async (resolve, reject) => {
-		let renderKeyResp, classGUID;
+		let renderKeyResp;
+		let selectionSignatureResp;
 
 		try {
 			const resp = await Promise.all([
 				fetchRenderKeyFromAPI(),
-				getClassGUIDByName(className)
+				fetchSignatureFromAPI(className)
 			]);
 
 			renderKeyResp = resp[0];
-			classGUID = resp[1];
+			selectionSignatureResp = resp[1];
 		} catch (error) {
 			return reject(error);
 		}
 
 		const renderKey = renderKeyResp.data.key;
+		const selectionSignature = selectionSignatureResp.data.signature;
+
+		const springAutumnSwitchoverWeek = 25;
+		const currentYear = DATE.getFullYear();
+		const selectedYear =
+			DATE.getWeek() > springAutumnSwitchoverWeek &&
+			week < springAutumnSwitchoverWeek ?
+			currentYear + 1 : currentYear;
+		// I'll explain myself:
+		// If we're in Autumn term, add one year to current year if requesting
+		// schedule for Spring term. I did it this way since you probably don't
+		// want to see last year's Spring term during Autumn term.
 
 		APIFetch(SCHEDULE_API_PREFIX + "schedule", {
 			method: "POST",
@@ -660,10 +673,11 @@ function getScheduleJSON(className, week, weekDay) {
 			},
 			body: "{\"render_key\":\"" + renderKey +
 				"\",\"unit_guid\":\"" + BERZAN_UNIT_GUID +
-				"\",\"selection_signature\":\"" + classGUID +
+				"\",\"selection_signature\":\"" + selectionSignature +
 				"\",\"width\":" + parseInt(scheduleWidth) +
 				",\"height\":" + parseInt(scheduleHeight) +
 				",\"black_and_white\":" + getScheduleColourMode() +
+				",\"year\":" + selectedYear +
 				",\"week\":" + parseInt(week) +
 				",\"day\":" + parseInt(weekDay) + "}"
 			}).then(scheduleResp => {
@@ -744,6 +758,19 @@ function fetchRenderKeyFromAPI() {
 		.then(response => {
 			return response.json();
 		});
+}
+
+function fetchSignatureFromAPI(to_sign) {
+	return APIFetch(SCHEDULE_API_PREFIX + "signature", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: "\"" + to_sign + "\""
+	})
+	.then(response => {
+		return response.json();
+	});
 }
 
 function rebuildClassGUIDCache() {
