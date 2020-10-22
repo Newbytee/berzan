@@ -563,7 +563,6 @@ function handleRenderRequest(form) {
 	getScheduleJSON(form[1].value, form[0].value, form[3].selectedIndex)
 		.then(scheduleJSON => {
 			if (scheduleJSON.data.timetableJson === null) {
-				// FIXME: actually display error message
 				const message = scheduleJSON.validation[0].message;
 				setScheduleStatusText(SCHEDULE_MOUNT, message);
 				return;
