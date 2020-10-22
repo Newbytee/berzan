@@ -470,11 +470,15 @@ function setupNeoschedule() {
 
 	const defaultClass = CONFIG.getVar("defaultClass");
 
-	if (
-		defaultClass &&
-		INPUT_FIELDS[1].value.length === 0
-	) {
+	if (defaultClass && INPUT_FIELDS[1].value.length === 0) {
 		INPUT_FIELDS[1].value = defaultClass;
+	} else {
+		const scheduleMount = document.getElementById("scheduleMount");
+		updateNeoscheduleVars();
+		setScheduleStatusText(
+			scheduleMount,
+			"Välj klass för att visa ditt schema"
+		);
 	}
 
 	if (isMobile) {
