@@ -1,12 +1,12 @@
 # Berzan.js
 ## Introduction
+
 Berzan.js is a specialised frontend for Skola24's schedule viewer and
  skolmaten.se's lunch viewer.
 
-It is currently perpetually developed, with features being added and bugs fixed
- as I find the motivation and inspiration to. The goal is to make it work across
- as many devices as well as possible while maintaining its stability, speed, and
- features.
+As I don't have a lot of use for this personally any more I primarily fix bugs
+ and add features per request. I do, however, intend to keep it functioning as
+ long as there is interest in it doing so.
 
 ## Features 
 
@@ -37,6 +37,7 @@ Code used for proxying API calls: https://gitlab.com/Newbyte/eduprox
   * This was a branch I used when working on improving the broken hackjob that was my old service worker implementation.
 
 ## Third party code used
+
 * Slideout.js
 * Bootstrap's Reboot was used as base for the stylesheet.
 
