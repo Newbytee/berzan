@@ -23,6 +23,7 @@ let scheduleWidth;
 let scheduleHeight;
 let scheduleMarginLeft;
 let scheduleMarginTop;
+let storedRenderKey = null;
 let isMobile;
 let slideout;
 let APIURL;
@@ -641,23 +642,30 @@ function intoText(obj) {
 
 function getScheduleJSON(className, week, weekDay) {
 	return new Promise(async (resolve, reject) => {
-		let renderKeyResp;
-		let selectionSignatureResp;
+		const noStoredKey = storedRenderKey === null;
+		let renderKey;
+		let selectionSignature;
+
+		const requests = [ fetchSignatureFromAPI(className) ];
+
+		if (noStoredKey) {
+			requests.push(fetchRenderKeyFromAPI());
+		}
 
 		try {
-			const resp = await Promise.all([
-				fetchRenderKeyFromAPI(),
-				fetchSignatureFromAPI(className)
-			]);
+			const resp = await Promise.all(requests);
 
-			renderKeyResp = resp[0];
-			selectionSignatureResp = resp[1];
+			selectionSignature = resp[0].data.signature;
+
+			if (noStoredKey) {
+				renderKey = resp[1].data.key;
+				storeRenderKey(renderKey);
+			} else {
+				renderKey = storedRenderKey;
+			}
 		} catch (error) {
 			return reject(error);
 		}
-
-		const renderKey = renderKeyResp.data.key;
-		const selectionSignature = selectionSignatureResp.data.signature;
 
 		const springAutumnSwitchoverWeek = 25;
 		const currentYear = DATE.getFullYear();
@@ -694,6 +702,14 @@ function getScheduleJSON(className, week, weekDay) {
 				reject(error);
 			});
 	});
+}
+
+function storeRenderKey(renderKey) {
+	storedRenderKey = renderKey;
+
+	setTimeout(function() {
+		storedRenderKey = null;
+	}, 5000);
 }
 
 function getScheduleColourMode() {
