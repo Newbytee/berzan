@@ -700,63 +700,6 @@ function getScheduleColourMode() {
 	return (CONFIG.getVar("scheduleColourMode") === "blackAndWhite").toString();
 }
 
-function getClassGUIDByName(className, retried) {
-	return new Promise((resolve, reject) => {
-		className = className.toLowerCase();
-
-		getAllClassGUIDs()
-			.then(classGUIDs => {
-				if (classGUIDs.hasOwnProperty(className)) {
-					resolve(classGUIDs[className]);
-				} else {
-					if (retried !== true) {
-						rebuildClassGUIDCache()
-							.then(() => {
-								getClassGUIDByName(className, true)
-									.then(newClassGUID => resolve(newClassGUID))
-									.catch(error => reject(error));
-							});
-					} else {
-						reject("Klassen hittades inte :(");
-					}
-				}
-			})
-	});
-}
-
-async function getAllClassGUIDs() {
-	const CLASSES = localStorage.getItem("classGUIDs");
-
-	if (typeof CLASSES === "string") {
-		let classGUIDObj;
-
-		try {
-			classGUIDObj = JSON.parse(CLASSES);
-		} catch (error) {
-			console.log("Class GUID cache invalid, rebuilding …");
-			await rebuildClassGUIDCache();
-			return await getAllClassGUIDs();
-		}
-
-		if (typeof classGUIDObj === "object") {
-			return new Promise(resolve => resolve(classGUIDObj));
-		} else {
-			await rebuildClassGUIDCache();
-			return await getAllClassGUIDs();
-		}
-	} else {
-		await rebuildClassGUIDCache();
-		return await getAllClassGUIDs();
-	}
-}
-
-function fetchClassGUIDsFromAPI() {
-	return APIFetch(SCHEDULE_API_PREFIX + "classes")
-		.then(response => {
-			return response.json();
-		});
-}
-
 function fetchRenderKeyFromAPI() {
 	return APIFetch(SCHEDULE_API_PREFIX + "render-key")
 		.then(response => {
@@ -775,28 +718,6 @@ function fetchSignatureFromAPI(to_sign) {
 	.then(response => {
 		return response.json();
 	});
-}
-
-function rebuildClassGUIDCache() {
-	return new Promise(resolve => {
-		fetchClassGUIDsFromAPI()
-			.then(class_GUIDs => {
-				const NEAT_CLASS_GUIDS = getNeatClassGUIDsObject(class_GUIDs);
-				localStorage.setItem("classGUIDs", JSON.stringify(NEAT_CLASS_GUIDS));
-				resolve();
-			});
-	});
-}
-
-function getNeatClassGUIDsObject(untidyObject) {
-	const untidyGroups = untidyObject.data.classes;
-	const neatObject = {};
-
-	for (let i = 0; i < untidyGroups.length; i++) {
-		neatObject[untidyGroups[i].groupName.toLowerCase()] = untidyGroups[i].groupGuid;
-	}
-
-	return neatObject;
 }
 
 function setupSettings() {
