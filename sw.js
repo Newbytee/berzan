@@ -17,7 +17,11 @@ const URLS_TO_CACHE = [
 	"https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.js"
 ];
 
+let refreshing = false;
+
 self.addEventListener("install", function(evnt) {
+	skipWaiting();
+
 	evnt.waitUntil(
 		caches.open(APP_CACHE)
 			.then(function(cache) {
@@ -89,6 +93,16 @@ self.addEventListener("fetch", function(evnt){
 				);
 			})
 	);
+});
+
+self.addEventListener("controllerchange", () => {
+	if (refreshing) {
+		return; // Prevent infinite refresh loops
+	}
+
+	refreshing = true;
+
+	window.location.reload();
 });
 
 async function refreshCacheEntry(request, clientID) {
