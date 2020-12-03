@@ -18,7 +18,7 @@ As I don't have a lot of use for this personally any more I primarily fix bugs
 
 ## Related sources
 
-Code used for proxying API calls: https://gitlab.com/Newbyte/eduprox
+Code used for proxying API calls: https://gitlab.com/libredu/eduprox
 
 ## Guide to branches 
 
