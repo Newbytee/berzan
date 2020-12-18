@@ -685,6 +685,8 @@ function getScheduleJSON(className, week, weekDay) {
 		// schedule for Spring term. I did it this way since you probably don't
 		// want to see last year's Spring term during Autumn term.
 
+		console.assert(renderKey !== null, "Render key was null");
+
 		APIFetch(SCHEDULE_API_PREFIX + "schedule", {
 			method: "POST",
 			headers: {
