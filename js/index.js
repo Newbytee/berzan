@@ -561,7 +561,15 @@ function handleRenderRequest(form) {
 
 	setScheduleStatusText(SCHEDULE_MOUNT, "Laddar…");
 
-	getScheduleJSON(form[1].value, form[0].value, form[3].selectedIndex)
+	const className = form[1].value;
+
+	if (className.length === 0) {
+		showSnackbar("Välj en klass först");
+		removeScheduleStatusText(SCHEDULE_MOUNT);
+		return;
+	}
+
+	getScheduleJSON(className, form[0].value, form[3].selectedIndex)
 		.then(scheduleJSON => {
 			if (scheduleJSON.data.timetableJson === null) {
 				const message = scheduleJSON.validation[0].message;
