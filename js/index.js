@@ -650,13 +650,12 @@ function intoText(obj) {
 
 function getScheduleJSON(className, week, weekDay) {
 	return new Promise(async (resolve, reject) => {
-		const noStoredKey = storedRenderKey === null;
 		let renderKey;
 		let selectionSignature;
 
 		const requests = [ fetchSignatureFromAPI(className) ];
 
-		if (noStoredKey) {
+		if (storedRenderKey === null) {
 			requests.push(fetchRenderKeyFromAPI());
 		}
 
@@ -665,7 +664,7 @@ function getScheduleJSON(className, week, weekDay) {
 
 			selectionSignature = resp[0].data.signature;
 
-			if (noStoredKey) {
+			if (storedRenderKey === null) {
 				renderKey = resp[1].data.key;
 				storeRenderKey(renderKey);
 			} else {
