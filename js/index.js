@@ -584,7 +584,7 @@ function handleRenderRequest(form) {
 		})
 		.catch(error => {
 			removeScheduleStatusText(SCHEDULE_MOUNT);
-			showSnackbar(error);
+			setScheduleStatusText(SCHEDULE_MOUNT, error);
 		});
 }
 
