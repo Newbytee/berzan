@@ -12,6 +12,7 @@ const DEFAULT_API_URL = "https://eduprox.vt.dedyn.io/";
 const SCHEDULE_API_PREFIX = "skola24/v0/";
 const BERZAN_UNIT_GUID = "ODUzZGRmNmMtYzdiNy1mZTA3LThlMTctNzIyNDY2Mjk1Y2I2";
 const SETTINGS_KEY = "berzanjsConfig";
+const SVG_XMLNS = "http://www.w3.org/2000/svg";
 const TIMESTAMP_PATTERN = /\d+:\d+/;
 const NAVIGATION_BUTTONS = document.getElementsByClassName("navButton");
 const MOBILE_NAV_BUTTONS = document.getElementsByClassName("mobileNavButton");
@@ -594,6 +595,7 @@ function handleRenderRequest(form) {
 function setScheduleStatusText(scheduleMount, text) {
 	scheduleMount.style.height = scheduleHeight + "px";
 	scheduleMount.style.lineHeight = scheduleHeight * 0.8 + "px";
+	scheduleMount.style.fontSize = "2.5em";
 	scheduleMount.style.fontWeight = "lighter";
 	scheduleMount.textContent = text;
 }
@@ -603,52 +605,80 @@ function removeScheduleStatusText(scheduleMount) {
 	scheduleMount.removeAttribute("style");
 }
 
-function renderSchedule(scheduleJSONString, scheduleMount) {
-	const SCHEDULE_CONTAINER = document.createElement("DIV");
-	const SCHEDULE_JSON = JSON.parse(scheduleJSONString.data.timetableJson);
-	const BOXES = SCHEDULE_JSON.boxList;
-	const TEXTS = SCHEDULE_JSON.textList;
+function renderSchedule(scheduleJsonString, scheduleMount) {
+	const scheduleJson = scheduleJsonString.data;
 
-	for (let i = 0; i < BOXES.length; i++) {
-		const BOX = intoBox(BOXES[i]);
-		SCHEDULE_CONTAINER.appendChild(BOX);
+	const scheduleSvg = document.createElementNS(SVG_XMLNS, "svg");
+	scheduleSvg.setAttributeNS(null, "viewBox", "0 0 " + scheduleWidth + " " + scheduleHeight);
+	scheduleSvg.setAttributeNS(null, "shape-rendering", "crispEdges");
+	scheduleSvg.setAttributeNS(null, "width", scheduleWidth);
+	scheduleSvg.setAttributeNS(null, "height", scheduleHeight);
+
+	const boxes = scheduleJson.boxList;
+	const lines = scheduleJson.lineList;
+	const texts = scheduleJson.textList;
+
+	for (let i = 0; i < boxes.length; i++) {
+		const box = intoBox(boxes[i]);
+		scheduleSvg.appendChild(box);
 	}
 
-	for (let i = 0; i < TEXTS.length; i++) {
-		const TEXT = intoText(TEXTS[i]);
-		SCHEDULE_CONTAINER.appendChild(TEXT);
+	for (let i = 0; i < lines.length; i++) {
+		const line = intoLine(lines[i]);
+		scheduleSvg.appendChild(line);
 	}
 
-	scheduleMount.appendChild(SCHEDULE_CONTAINER);
+	for (let i = 0; i < texts.length; i++) {
+		const text = intoText(texts[i]);
+		scheduleSvg.appendChild(text);
+	}
+
+	scheduleMount.appendChild(scheduleSvg);
 }
 
 function intoBox(obj) {
-	const BOX = document.createElement("DIV");
-	BOX.classList.add("scheduleElement");
-	BOX.style.boxSizing = "content-box";
-	BOX.style.backgroundColor = obj.bcolor;
-	BOX.style.color = obj.fcolor;
-	BOX.style.height = obj.height.toString() + "px";
-	BOX.style.width = obj.width.toString() + "px";
-	BOX.style.left = (obj.x - scheduleMarginLeft).toString() + "px";
-	BOX.style.top = (obj.y + scheduleMarginTop).toString() + "px";
-	BOX.style.border = "1px solid rgb(0, 0, 0)";
-	return BOX;
+	const box = document.createElementNS(SVG_XMLNS, "rect");
+	box.style.fill = obj.bColor;
+	box.style.stroke = obj.fColor;
+	box.setAttributeNS(null, "height", obj.height);
+	box.setAttributeNS(null, "width", obj.width);
+	box.setAttributeNS(null, "x", obj.x);
+	box.setAttributeNS(null, "y", obj.y);
+	return box;
+}
+
+function intoLine(obj) {
+	const line = document.createElementNS(SVG_XMLNS, "line");
+	line.setAttributeNS(null, "x1", obj.p1x);
+	line.setAttributeNS(null, "x2", obj.p2x);
+	line.setAttributeNS(null, "y1", obj.p1y);
+	line.setAttributeNS(null, "y2", obj.p2y);
+	line.setAttributeNS(null, "stroke", obj.color);
+	return line;
 }
 
 function intoText(obj) {
-	const TEXT = document.createElement("SPAN");
-	TEXT.classList.add("scheduleElement");
-	TEXT.style.color = obj.fcolor;
-	TEXT.style.fontSize = obj.fontsize.toString() + "px";
-	TEXT.style.left = (obj.x - scheduleMarginLeft).toString() + "px";
-	TEXT.style.top = (obj.y + scheduleMarginTop).toString() + "px";
-	TEXT.textContent = obj.text;
-	if (TIMESTAMP_PATTERN.test(obj.text)) {
-		TEXT.style.lineHeight = "1.6";
-		TEXT.style.marginLeft = "0.25em";
+	const text = document.createElementNS(SVG_XMLNS, "text");
+	text.style.fontSize = obj.fontsize + "px";
+	text.style.fontFamily = "Open Sans";
+	text.style.fill = obj.fColor;
+	text.style.pointerEvents = "none";
+	text.setAttributeNS(null, "x", obj.x + 1);
+	text.setAttributeNS(null, "y", obj.y + 14);
+	text.textContent = obj.text;
+	if (obj.bold) {
+		text.style.fontWeight = "bold";
 	}
-	return TEXT;
+	if (obj.italic) {
+		text.style.fontStyle = "italic";
+	}
+	/*
+	if (TIMESTAMP_PATTERN.test(obj.text)) {
+		text.style.lineheight = "1.6";
+		text.style.marginLeft = "0.25em";
+	}
+	*/
+	return text;
 }
 
 function getScheduleJSON(className, week, weekDay) {
