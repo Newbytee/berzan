@@ -1,8 +1,11 @@
 "use strict";
 
 Date.prototype.getWeek = function() {
-	const ONEJAN = new Date(this.getFullYear(), 0, 1);
-	return Math.ceil((((this - ONEJAN) / 86400000) + ONEJAN.getDay() + 1) / 7);
+	// Taken from https://stackoverflow.com/a/6117889
+	const date = new Date(Date.UTC(this.getFullYear(), this.getMonth(), this.getDate()));
+	date.setUTCDate(date.getUTCDate() + 4 - (date.getUTCDay() || 7));
+	const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+	return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
 };
 
 const DEFAULT_API_URL = "https://eduprox.vt.dedyn.io/";
