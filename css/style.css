@@ -292,11 +292,6 @@ nav, .mobileNavButton, #schedule, #wrapper {
 	max-width: unset;
 }
 
-.scheduleElement {
-	position: absolute;
-	z-index: -1;
-}
-
 #identity {
 	padding-top: 8px;
 	font-size: 30px;
@@ -360,7 +355,6 @@ nav, .mobileNavButton, #schedule, #wrapper {
 
 #scheduleMount {
 	text-align: center;
-	font-size: 2.5em;
 	color: #222222;
 }
 
