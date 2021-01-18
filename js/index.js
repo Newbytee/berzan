@@ -673,12 +673,6 @@ function intoText(obj) {
 	if (obj.italic) {
 		text.style.fontStyle = "italic";
 	}
-	/*
-	if (TIMESTAMP_PATTERN.test(obj.text)) {
-		text.style.lineheight = "1.6";
-		text.style.marginLeft = "0.25em";
-	}
-	*/
 	return text;
 }
 
