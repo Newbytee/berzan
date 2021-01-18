@@ -575,9 +575,9 @@ function handleRenderRequest(form) {
 
 	getScheduleJSON(className, form[0].value, form[3].selectedIndex)
 		.then(scheduleJSON => {
-			if (scheduleJSON.data.timetableJson === null) {
+			if (scheduleJSON.validation.length !== 0) {
 				const message = scheduleJSON.validation[0].message;
-				setScheduleStatusText(SCHEDULE_MOUNT, message);
+				setScheduleStatusText(SCHEDULE_MOUNT, "Något gick snett: " + message);
 				return;
 			}
 			removeScheduleStatusText(SCHEDULE_MOUNT);
