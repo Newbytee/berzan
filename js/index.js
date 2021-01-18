@@ -663,6 +663,7 @@ function intoText(obj) {
 	text.style.fontFamily = "Open Sans";
 	text.style.fill = obj.fColor;
 	text.style.pointerEvents = "none";
+	// Why is it necessary to add these arbitary numbers? Ask Skola24
 	text.setAttributeNS(null, "x", obj.x + 1);
 	text.setAttributeNS(null, "y", obj.y + 14);
 	text.textContent = obj.text;
