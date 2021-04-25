@@ -8,7 +8,7 @@ Date.prototype.getWeek = function() {
 	return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
 };
 
-const DEFAULT_API_URL = "https://eduprox.k11m1.eu/";
+const DEFAULT_API_URL = "https://eduprox.vt.dedyn.io/";
 const SCHEDULE_API_PREFIX = "skola24/v0/";
 const BERZAN_UNIT_GUID = "ODUzZGRmNmMtYzdiNy1mZTA3LThlMTctNzIyNDY2Mjk1Y2I2";
 const SETTINGS_KEY = "berzanjsConfig";
@@ -704,12 +704,10 @@ function getScheduleJSON(className, week, weekDay) {
 
 		const springAutumnSwitchoverWeek = 25;
 		const currentYear = DATE.getFullYear();
-		const selectedYear = 2018;
-		/*
+		const selectedYear =
 			DATE.getWeek() > springAutumnSwitchoverWeek &&
 			week < springAutumnSwitchoverWeek ?
 			currentYear + 1 : currentYear;
-			*/
 		// I'll explain myself:
 		// If we're in Autumn term, add one year to current year if requesting
 		// schedule for Spring term. I did it this way since you probably don't
