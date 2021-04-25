@@ -8,7 +8,7 @@ Date.prototype.getWeek = function() {
 	return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
 };
 
-const DEFAULT_API_URL = "https://eduprox.vt.dedyn.io/";
+const DEFAULT_API_URL = "https://eduprox.k11m1.eu/";
 const SCHEDULE_API_PREFIX = "skola24/v0/";
 const BERZAN_UNIT_GUID = "ODUzZGRmNmMtYzdiNy1mZTA3LThlMTctNzIyNDY2Mjk1Y2I2";
 const SETTINGS_KEY = "berzanjsConfig";
