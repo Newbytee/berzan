@@ -12,7 +12,6 @@ As I don't have a lot of use for this personally any more I primarily fix bugs
 
 * Schedule viewer
 * Lunch viewer 
-* Offline viewing of schedule (and soon lunch)
 * Ability to set default class for schedule viewer
 * User interface adapts to whatever device you're using
 
